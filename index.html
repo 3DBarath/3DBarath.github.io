@@ -3,77 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3DBarath - Android Developer Portfolio</title>
-  <meta name="description" content="Portfolio of 3DBarath, a passionate Android Developer specializing in Kotlin Multiplatform and modern native apps.">
+  <title>Barath — Android Engineer</title>
+  <meta name="description" content="Portfolio of Barath, Android Engineer specializing in mobile architecture and Kotlin Multiplatform.">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
   <style>
-    /* Page specific styles */
     .hero-section {
+      min-height: calc(100vh - 120px);
       display: flex;
-      align-items: center;
-      min-height: calc(100vh - 80px);
-      padding: 4rem 0;
-    }
-    .hero-content {
-      flex: 1;
-      padding-right: 2rem;
-    }
-    .hero-img {
-      flex: 1;
-      display: flex;
+      flex-direction: column;
       justify-content: center;
-    }
-    .hero-img img {
-      max-width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
-      animation: float 6s ease-in-out infinite;
+      padding-bottom: 5rem;
     }
     .hero-title {
-      font-size: 4rem;
-      margin-bottom: 1rem;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 2rem;
+      max-width: 900px;
     }
     .hero-title span {
-      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #777777;
     }
     .hero-subtitle {
-      font-size: 1.5rem;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
       color: var(--text-secondary);
-      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-bottom: 3rem;
+      font-weight: 400;
+      line-height: 1.5;
     }
-    .cta-buttons {
+    .hero-actions {
       display: flex;
       gap: 1rem;
     }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0px); }
-    }
-    @media (max-width: 900px) {
-      .hero-section {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-content {
-        padding-right: 0;
-        margin-bottom: 3rem;
-      }
-      .cta-buttons {
-        justify-content: center;
-      }
+    /* Simple orbital glow for background depth */
+    .glow-orb {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
+      top: -100px;
+      right: -200px;
+      z-index: -1;
+      border-radius: 50%;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
 
+  <div class="glow-orb"></div>
+
   <header>
     <div class="container">
       <nav>
-        <a href="index.html" class="logo">3D<span>Barath</span></a>
+        <a href="index.html" class="logo">Barath.</a>
         <ul class="nav-links">
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -83,7 +70,6 @@
         <div class="menu-toggle">
           <span></span>
           <span></span>
-          <span></span>
         </div>
       </nav>
     </div>
@@ -91,26 +77,21 @@
 
   <main>
     <section class="hero-section container">
-      <div class="hero-content animate-on-scroll">
-        <span class="section-subtitle">Welcome to my space</span>
-        <h1 class="hero-title">I'm <span>Barath</span>.<br>Android Developer</h1>
-        <p class="hero-subtitle">Crafting robust, high-performance mobile applications using Kotlin & Jetpack Compose. Bridging native performance with beautiful modern UIs.</p>
-        <div class="cta-buttons">
-          <a href="projects.html" class="btn btn-primary">View Projects</a>
-          <a href="contact.html" class="btn btn-outline">Let's Connect</a>
+      <div class="animate-up">
+        <h1 class="hero-title">
+          Android Engineer.<br>
+          <span>Crafting native scaleable experiences.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Specializing in Kotlin Multiplatform, clean architecture, and highly performant UI engineering for modern mobile applications.
+        </p>
+        <div class="hero-actions">
+          <a href="projects.html" class="btn btn-primary">Discover Work</a>
+          <a href="contact.html" class="btn btn-outline">Get in Touch</a>
         </div>
-      </div>
-      <div class="hero-img animate-on-scroll">
-        <img src="assets/images/hero_bg.png" alt="Android Development Abstract Mockup">
       </div>
     </section>
   </main>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 3DBarath. All rights reserved.</p>
-    </div>
-  </footer>
 
 </body>
 </html>

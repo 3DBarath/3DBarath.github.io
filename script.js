@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (menuToggle) {
     menuToggle.addEventListener('click', () => {
       navLinks.classList.toggle('nav-active');
-      // Optional: animate hamburger into an X
-      menuToggle.classList.toggle('active');
     });
   }
 
@@ -22,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Scroll Animation using Intersection Observer
-  const scrollElements = document.querySelectorAll('.animate-on-scroll');
+  // Scroll Animation using Intersection Observer - Adjusted for a sleeker, slower fade-up
+  const scrollElements = document.querySelectorAll('.animate-up');
 
   const elementInView = (el, dividend = 1) => {
     const elementTop = el.getBoundingClientRect().top;
@@ -36,14 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleScrollAnimation = () => {
     scrollElements.forEach((el) => {
-      if (elementInView(el, 1.25)) {
+      if (elementInView(el, 1.1)) {
         displayScrollElement(el);
       }
     })
   }
 
-  // Initial check on load
-  handleScrollAnimation();
+  // Initial check on load with a slight delay for hero section elements
+  setTimeout(() => {
+    handleScrollAnimation();
+  }, 100);
 
   // Check on scroll
   window.addEventListener('scroll', () => {

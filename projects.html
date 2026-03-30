@@ -3,83 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects - 3DBarath</title>
-  <meta name="description" content="View the Android app portfolio of 3DBarath, including AITrivia, GCESHostel, ConnectLnx, and more.">
+  <title>Projects — Barath</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
   <style>
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+    .projects-header {
+      font-size: 3rem;
+      letter-spacing: -0.04em;
       margin-bottom: 4rem;
     }
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
     .project-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      overflow: hidden;
+      padding: 3rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       transition: var(--transition);
       display: flex;
       flex-direction: column;
+      justify-content: center;
     }
     .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      border-color: var(--secondary-color);
-    }
-    .project-img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      object-position: top;
-      border-bottom: 1px solid var(--glass-border);
-    }
-    .project-placeholder {
-      width: 100%;
-      height: 250px;
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(0, 255, 204, 0.1));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: var(--glass-border);
-      border-bottom: 1px solid var(--glass-border);
-    }
-    .project-info {
-      padding: 1.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
+      background: #141414;
+      border-color: #333333;
     }
     .project-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
     }
     .project-desc {
       color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
     }
-    .project-tags {
+    .project-meta {
       display: flex;
-      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: #bbbbbb;
+    }
+    .project-meta span {
+      background: #1a1a1a;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      border: 1px solid #2a2a2a;
+    }
+    .project-link {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-primary);
     }
-    .project-tag {
-      font-size: 0.75rem;
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      background: rgba(0, 255, 204, 0.1);
-      color: var(--primary-color);
-      border: 1px solid rgba(0, 255, 204, 0.2);
+    .project-link::after {
+      content: '→';
+      transition: transform 0.2s;
     }
-    .view-btn {
-      align-self: flex-start;
-      margin-top: auto;
+    .project-link:hover::after {
+      transform: translateX(4px);
     }
   </style>
 </head>
@@ -88,7 +77,7 @@
   <header>
     <div class="container">
       <nav>
-        <a href="index.html" class="logo">3D<span>Barath</span></a>
+        <a href="index.html" class="logo">Barath.</a>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -98,111 +87,71 @@
         <div class="menu-toggle">
           <span></span>
           <span></span>
-          <span></span>
         </div>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <span class="section-subtitle" style="text-align: center; margin-top: 2rem;">Showcase</span>
-    <h2 class="section-title">Selected Projects</h2>
-    
-    <div class="projects-grid">
-      <!-- Project 1 -->
-      <div class="project-card animate-on-scroll">
-        <img src="assets/images/ai_trivia.png" alt="AITrivia Mockup" class="project-img">
-        <div class="project-info">
-          <h3 class="project-title">AITrivia</h3>
-          <p class="project-desc">A highly engaging Trivia application built for Android. Utilizes AI generated questions with metallic and neon-themed modern interface components to immerse users in competitive trivia challenges.</p>
-          <div class="project-tags">
-            <span class="project-tag">Android</span>
-            <span class="project-tag">Kotlin</span>
-            <span class="project-tag">AI Integration</span>
-          </div>
-          <a href="#" class="btn btn-outline view-btn">View Details</a>
-        </div>
-      </div>
+    <div class="animate-up">
+      <h1 class="projects-header">Selected Work.</h1>
 
-      <!-- Project 2 -->
-      <div class="project-card animate-on-scroll">
-        <img src="assets/images/gces_hostel.png" alt="GCESHostel Mockup" class="project-img">
-        <div class="project-info">
-          <h3 class="project-title">GCESHostel</h3>
-          <p class="project-desc">A comprehensive hostel management system designed with Jetpack Compose. Includes a fully functional administrative dashboard, dark theme interface, and intricate multi-module project architecture.</p>
-          <div class="project-tags">
-            <span class="project-tag">Jetpack Compose</span>
-            <span class="project-tag">Hilt</span>
-            <span class="project-tag">Clean Architecture</span>
+      <div class="project-grid">
+        
+        <!-- Project Item -->
+        <article class="project-card">
+          <h2 class="project-title">AITrivia</h2>
+          <p class="project-desc">A highly scalable Android trivia application utilizing AI generation. Featuring metallic minimal UI constraints and offline-first capabilities.</p>
+          <div class="project-meta">
+            <span>Kotlin</span>
+            <span>AI Gen</span>
+            <span>Room</span>
           </div>
-          <a href="#" class="btn btn-outline view-btn">View Details</a>
-        </div>
-      </div>
+          <a href="#" class="project-link">View Repository</a>
+        </article>
 
-      <!-- Project 3 -->
-      <div class="project-card animate-on-scroll">
-        <!-- Reusing hero background as an abstract representation for ConnectLnx KMP -->
-        <img src="assets/images/hero_bg.png" alt="ConnectLnx Mockup" class="project-img">
-        <div class="project-info">
-          <h3 class="project-title">ConnectLnx / KMP</h3>
-          <p class="project-desc">A powerful multiplatform application bridging connectivity utilities. Built specifically demonstrating advanced usage of Kotlin Multiplatform to easily share networking logic and UI models.</p>
-          <div class="project-tags">
-            <span class="project-tag">KMP</span>
-            <span class="project-tag">KotlinX Coroutines</span>
-            <span class="project-tag">Multi-module</span>
+        <!-- Project Item -->
+        <article class="project-card">
+          <h2 class="project-title">GCESHostel</h2>
+          <p class="project-desc">Production-grade hostel administration client. Designed entirely in Jetpack Compose, relying heavily on Hilt Dagger pipelines and highly declarative UI patterns.</p>
+          <div class="project-meta">
+            <span>Jetpack Compose</span>
+            <span>Hilt</span>
+            <span>Retrofit</span>
           </div>
-          <a href="#" class="btn btn-outline view-btn">View Details</a>
-        </div>
-      </div>
-      
-      <!-- Project 4 -->
-      <div class="project-card animate-on-scroll">
-        <div class="project-placeholder">🧠</div>
-        <div class="project-info">
-          <h3 class="project-title">BloodLine</h3>
-          <p class="project-desc">A native Android app aimed at community blood donation. Emphasizes swift, responsive UI updates and reliable local/remote state management algorithms during emergencies.</p>
-          <div class="project-tags">
-            <span class="project-tag">Android UI</span>
-            <span class="project-tag">Java/Kotlin</span>
-          </div>
-          <a href="#" class="btn btn-outline view-btn">View Details</a>
-        </div>
-      </div>
+          <a href="#" class="project-link">View Repository</a>
+        </article>
 
-      <!-- Project 5 -->
-      <div class="project-card animate-on-scroll">
-        <div class="project-placeholder">💸</div>
-        <div class="project-info">
-          <h3 class="project-title">SmartExpenseTracker</h3>
-          <p class="project-desc">Personal finance manager app allowing intuitive entry of expense logs. Uses local Room database features and vivid charting components to help users visualize financial trends easily.</p>
-          <div class="project-tags">
-            <span class="project-tag">Room DB</span>
-            <span class="project-tag">Jetpack Compose</span>
+        <!-- Project Item -->
+        <article class="project-card">
+          <h2 class="project-title">ConnectLnx / KMP</h2>
+          <p class="project-desc">A connectivity utility module engineered as a Kotlin Multiplatform project. Demonstrates sophisticated shared bridging between core domain data and presentation layers.</p>
+          <div class="project-meta">
+            <span>Kotlin Multiplatform</span>
+            <span>Ktor</span>
+            <span>Coroutines</span>
           </div>
-          <a href="#" class="btn btn-outline view-btn">View Details</a>
-        </div>
-      </div>
+          <a href="#" class="project-link">View Repository</a>
+        </article>
 
-      <!-- Project 6 -->
-      <div class="project-card animate-on-scroll">
-        <div class="project-placeholder">📱</div>
-        <div class="project-info">
-          <h3 class="project-title">Cally</h3>
-          <p class="project-desc">Seamless utility application built native for Android focusing on communication flows and integrating deeply with telecom system permissions seamlessly.</p>
-          <div class="project-tags">
-            <span class="project-tag">Android SDK</span>
-            <span class="project-tag">Services</span>
+        <!-- Project Item -->
+        <article class="project-card">
+          <h2 class="project-title">SmartExpenseTracker</h2>
+          <p class="project-desc">Sophisticated finance management tooling utilizing deep Android local persistence and optimized chart rendering algorithms.</p>
+          <div class="project-meta">
+            <span>Room DB</span>
+            <span>Compose UI</span>
           </div>
-          <a href="#" class="btn btn-outline view-btn">View Details</a>
-        </div>
-      </div>
+          <a href="#" class="project-link">View Repository</a>
+        </article>
 
+      </div>
     </div>
   </main>
 
   <footer>
     <div class="container">
-      <p>&copy; 2026 3DBarath. All rights reserved.</p>
+      <p>&copy; 2026 Barath.</p>
     </div>
   </footer>
 
