@@ -1,97 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Barath — Android Engineer</title>
-  <meta name="description" content="Portfolio of Barath, Android Engineer specializing in mobile architecture and Kotlin Multiplatform.">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <style>
-    .hero-section {
-      min-height: calc(100vh - 120px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-bottom: 5rem;
-    }
-    .hero-title {
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.05em;
-      font-weight: 500;
-      color: #ffffff;
-      margin-bottom: 2rem;
-      max-width: 900px;
-    }
-    .hero-title span {
-      color: #777777;
-    }
-    .hero-subtitle {
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin-bottom: 3rem;
-      font-weight: 400;
-      line-height: 1.5;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-    }
-    /* Simple orbital glow for background depth */
-    .glow-orb {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
-      top: -100px;
-      right: -200px;
-      z-index: -1;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barath | Software Engineer & Founder of Aztrox Inc.</title>
+    <meta name="description" content="Specializing in Native Android, Kotlin Multiplatform, and Secure System Architecture. Founder of Aztrox Inc.">
+    <link rel="stylesheet" href="dist/output.css">
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-brand-dark text-brand-text">
 
-  <div class="glow-orb"></div>
-
-  <header>
-    <div class="container">
-      <nav>
-        <a href="index.html" class="logo">Barath.</a>
-        <ul class="nav-links">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <div class="menu-toggle">
-          <span></span>
-          <span></span>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/5">
+        <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tight">Barath<span class="text-brand-accent">.</span></a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-brand-muted">
+                <a href="#projects" class="hover:text-brand-text transition-colors">Projects</a>
+                <a href="#research" class="hover:text-brand-text transition-colors">Research</a>
+                <a href="#contact" class="hover:text-brand-text transition-colors">Contact</a>
+            </div>
         </div>
-      </nav>
-    </div>
-  </header>
+    </nav>
 
-  <main>
-    <section class="hero-section container">
-      <div class="animate-up">
-        <h1 class="hero-title">
-          Android Engineer.<br>
-          <span>Crafting native scaleable experiences.</span>
-        </h1>
-        <p class="hero-subtitle">
-          Specializing in Kotlin Multiplatform, clean architecture, and highly performant UI engineering for modern mobile applications.
-        </p>
-        <div class="hero-actions">
-          <a href="projects.html" class="btn btn-primary">Discover Work</a>
-          <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-20">
+            <div class="max-w-4xl text-center animate-fade-in-up">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+                    Barath | Software Engineer & <br class="hidden md:block">
+                    <span class="text-brand-accent">Founder of Aztrox Inc.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-brand-muted mb-10 max-w-2xl mx-auto font-medium">
+                    Specializing in Native Android, Kotlin Multiplatform, and Secure System Architecture.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-16">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="resume.pdf" class="btn btn-outline" target="_blank">View Resume</a>
+                </div>
+
+                <!-- Tech Stack Banner -->
+                <div class="mt-12 opacity-50">
+                    <p class="text-xs uppercase tracking-widest font-semibold mb-6">Core Technologies</p>
+                    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 grayscale hover:grayscale-0 transition-all duration-500">
+                        <span class="text-sm font-bold border border-white/10 px-3 py-1 rounded">Kotlin</span>
+                        <span class="text-sm font-bold border border-white/10 px-3 py-1 rounded">Jetpack Compose</span>
+                        <span class="text-sm font-bold border border-white/10 px-3 py-1 rounded">KMP</span>
+                        <span class="text-sm font-bold border border-white/10 px-3 py-1 rounded">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Grid -->
+        <section id="projects" class="py-32 px-6 container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">Featured Projects</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- ConnectLnx -->
+                <div class="card flex flex-col h-full bg-brand-surface border border-white/5 rounded-2xl p-6 transition-all duration-300 hover:border-brand-accent/50 group">
+                    <div class="h-48 bg-white/5 rounded-xl mb-6 overflow-hidden relative">
+                         <img src="assets/connectlnx.png" alt="ConnectLnx Preview" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">ConnectLnx</h3>
+                    <p class="text-brand-muted text-sm mb-6 flex-grow">
+                        A high-performance cross-platform file transfer utility designed for seamless Linux and Android interaction. Built with Kotlin Multiplatform.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-[10px] uppercase tracking-wider font-bold bg-white/5 px-2 py-1 rounded text-brand-muted">KMP</span>
+                        <span class="text-[10px] uppercase tracking-wider font-bold bg-white/5 px-2 py-1 rounded text-brand-muted">Native Android</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="/connectlnx" class="text-xs font-bold text-brand-accent hover:underline">View Project</a>
+                        <a href="https://play.google.com/store/apps/details?id=org.barath.connectlnxkmp" target="_blank" class="text-xs font-bold text-brand-accent hover:underline">Play Store</a>
+                    </div>
+                </div>
+
+                <!-- GCESHostel -->
+                <div class="card flex flex-col h-full bg-brand-surface border border-white/5 rounded-2xl p-6 transition-all duration-300 hover:border-brand-accent/50 group">
+                    <div class="h-48 bg-white/5 rounded-xl mb-6 overflow-hidden relative">
+                         <img src="assets/gceshostel.png" alt="GCESHostel Preview" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">GCESHostel</h3>
+                    <p class="text-brand-muted text-sm mb-6 flex-grow">
+                        Comprehensive hostel management system with robust architectural patterns. Features backend integration and real-time data handling.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-[10px] uppercase tracking-wider font-bold bg-white/5 px-2 py-1 rounded text-brand-muted">Compose</span>
+                        <span class="text-[10px] uppercase tracking-wider font-bold bg-white/5 px-2 py-1 rounded text-brand-muted">Hilt</span>
+                        <span class="text-[10px] uppercase tracking-wider font-bold bg-white/5 px-2 py-1 rounded text-brand-muted">Retrofit</span>
+                    </div>
+                    <div class="pt-auto flex gap-4">
+                        <a href="/gceshostel" class="text-xs font-bold text-brand-accent hover:underline">View Project</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.barath.gceshostel" target="_blank" class="text-xs font-bold text-brand-accent hover:underline">Play Store</a>
+                    </div>
+                </div>
+
+                <!-- Smart Expense Tracker -->
+                <div class="card flex flex-col h-full bg-brand-surface border border-white/5 rounded-2xl p-6 transition-all duration-300 hover:border-brand-accent/50 group">
+                    <div class="h-48 bg-white/5 rounded-xl mb-6 overflow-hidden relative">
+                         <img src="assets/smart-expense-tracker.png" alt="Smart Expense Tracker Preview" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Expense Tracker</h3>
+                    <p class="text-brand-muted text-sm mb-6 flex-grow">
+                        Privacy-focused financial tracking app with sophisticated UI/UX and efficient local database management using Room.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-[10px] uppercase tracking-wider font-bold bg-white/5 px-2 py-1 rounded text-brand-muted">Room DB</span>
+                        <span class="text-[10px] uppercase tracking-wider font-bold bg-white/5 px-2 py-1 rounded text-brand-muted">Modern UI</span>
+                    </div>
+                    <div class="pt-auto">
+                        <a href="/smart-expense-tracker" class="text-xs font-bold text-brand-accent hover:underline">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Engineering & Security Research -->
+        <section id="research" class="py-32 px-6 bg-brand-surface/30">
+            <div class="container mx-auto max-w-4xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Security & Architecture Research</h2>
+                    <p class="text-brand-muted font-medium">Deep dives into system internals and security audits.</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <a href="#" class="block p-8 border border-white/5 rounded-2xl hover:border-brand-accent/20 hover:bg-white/5 transition-all">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">Capture The Flag (CTF) Solutions</h3>
+                                <p class="text-sm text-brand-muted">Documentation of various CTF challenge resolutions focusing on Reverse Engineering and Web Security.</p>
+                            </div>
+                            <span class="text-brand-accent text-sm font-bold uppercase tracking-widest">Read More</span>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="block p-8 border border-white/5 rounded-2xl hover:border-brand-accent/20 hover:bg-white/5 transition-all">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">Man-in-the-Middle (MitM) Attacks</h3>
+                                <p class="text-sm text-brand-muted">Detailed research into intercepting and analyzing network traffic in secure environments.</p>
+                            </div>
+                            <span class="text-brand-accent text-sm font-bold uppercase tracking-widest">Read More</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="block p-8 border border-white/5 rounded-2xl hover:border-brand-accent/20 hover:bg-white/5 transition-all">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">IDOR Vulnerability Report</h3>
+                                <p class="text-sm text-brand-muted">Executive summary of Insecure Direct Object Reference vulnerabilities found in production systems.</p>
+                            </div>
+                            <span class="text-brand-accent text-sm font-bold uppercase tracking-widest">Read More</span>
+                        </div>
+                    </a>
+
+                    <div class="p-8 border border-white/5 rounded-2xl bg-white/5">
+                        <h3 class="text-lg font-bold mb-2">Clean Architecture Implementation</h3>
+                        <p class="text-sm text-brand-muted italic">Applying SOLID principles and Uncle Bob's Clean Architecture patterns to scalable mobile and backend systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- About & Contact Footer -->
+    <footer id="contact" class="py-24 px-6 border-t border-white/5">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                <div>
+                    <h2 class="text-2xl font-bold mb-6">About Me</h2>
+                    <p class="text-brand-muted max-w-md leading-relaxed mb-8">
+                        I am a Software Engineer focused on high-performance code and system reliability. My expertise spans native mobile development and secure architectures. I believe in continuous learning and pushing the boundaries of what's possible with code.
+                    </p>
+                    <div class="flex space-x-6 grayscale opacity-80">
+                         <a href="https://github.com/3DBarath" target="_blank" class="hover:opacity-100 transition-opacity">GitHub</a>
+                         <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" class="hover:opacity-100 transition-opacity">LinkedIn</a>
+                         <a href="https://play.google.com/store/apps/dev?id=7528651467040217859" target="_blank" class="hover:opacity-100 transition-opacity">Play Store</a>
+                    </div>
+                </div>
+                <div class="flex flex-col items-start md:items-end md:text-right">
+                    <h2 class="text-2xl font-bold mb-6">Get in Touch</h2>
+                    <p class="text-brand-muted mb-4 leading-relaxed">
+                        Looking for a senior engineer for native Android or KMP projects? Let's talk.
+                    </p>
+                    <a href="mailto:3dbarath@gmail.com" class="text-2xl md:text-3xl font-bold text-white hover:text-brand-accent transition-colors underline decoration-brand-accent/30 underline-offset-8">3dbarath@gmail.com</a>
+                </div>
+            </div>
+            
+            <div class="mt-24 pt-8 border-t border-white/5 text-center text-xs text-brand-muted uppercase tracking-widest">
+                &copy; 2026 Barath | Aztrox Inc. Built with Tailwind & Bun.
+            </div>
         </div>
-      </div>
-    </section>
-  </main>
+    </footer>
 
 </body>
 </html>
