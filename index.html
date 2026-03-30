@@ -1,3 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  head
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3DBarath - Android Developer Portfolio</title>
+  <meta name="description" content="Portfolio of 3DBarath, a passionate Android Developer specializing in Kotlin Multiplatform and modern native apps.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <style>
+    /* Page specific styles */
+    .hero-section {
+      display: flex;
+      align-items: center;
+      min-height: calc(100vh - 80px);
+      padding: 4rem 0;
+    }
+    .hero-content {
+      flex: 1;
+      padding-right: 2rem;
+    }
+    .hero-img {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-img img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+      animation: float 6s ease-in-out infinite;
+    }
+    .hero-title {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .hero-title span {
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    @media (max-width: 900px) {
+      .hero-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-content {
+        padding-right: 0;
+        margin-bottom: 3rem;
+      }
+      .cta-buttons {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">3D<span>Barath</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section container">
+      <div class="hero-content animate-on-scroll">
+        <span class="section-subtitle">Welcome to my space</span>
+        <h1 class="hero-title">I'm <span>Barath</span>.<br>Android Developer</h1>
+        <p class="hero-subtitle">Crafting robust, high-performance mobile applications using Kotlin & Jetpack Compose. Bridging native performance with beautiful modern UIs.</p>
+        <div class="cta-buttons">
+          <a href="projects.html" class="btn btn-primary">View Projects</a>
+          <a href="contact.html" class="btn btn-outline">Let's Connect</a>
+        </div>
+      </div>
+      <div class="hero-img animate-on-scroll">
+        <img src="assets/images/hero_bg.png" alt="Android Development Abstract Mockup">
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 3DBarath. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

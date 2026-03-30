@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me - 3DBarath</title>
+  <meta name="description" content="Learn more about 3DBarath, Android Developer skills, and background.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <style>
+    .about-section {
+      margin-bottom: 4rem;
+    }
+    .about-text {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--text-secondary);
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .skill-card {
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 15px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+    .skill-card:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 255, 204, 0.2);
+    }
+    .skill-card h4 {
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">3D<span>Barath</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="about-section animate-on-scroll">
+      <span class="section-subtitle">Who I Am</span>
+      <h2 class="section-title">About Me</h2>
+      <div class="glass-card">
+        <p class="about-text">
+          I am a dedicated Android Developer passionate about building exceptional digital experiences. Through clean architecture, scalable code, and a deep understanding of the Kotlin ecosystem, I turn complex problems into intuitive, user-friendly mobile applications.
+        </p>
+        <p class="about-text">
+          My primary focus is on modern Android development paradigms, leveraging tools like Jetpack Compose, Coroutines, and MVVM / MVI architectures. I am also continuously exploring cross-platform solutions via Kotlin Multiplatform (KMP) to deliver code sharing without compromising on native performance.
+        </p>
+      </div>
+
+      <h3 style="margin-top: 4rem; text-align: center; font-family: var(--font-heading);">Core Technical Skills</h3>
+      <div class="skills-grid">
+        <div class="skill-card animate-on-scroll">
+          <h4>Kotlin</h4>
+          <p>Advanced Coroutines, Flows</p>
+        </div>
+        <div class="skill-card animate-on-scroll">
+          <h4>Jetpack Compose</h4>
+          <p>Declarative UI Design</p>
+        </div>
+        <div class="skill-card animate-on-scroll">
+          <h4>KMP</h4>
+          <p>Kotlin Multiplatform</p>
+        </div>
+        <div class="skill-card animate-on-scroll">
+          <h4>Architecture</h4>
+          <p>MVVM, MVI, Clean Arch</p>
+        </div>
+        <div class="skill-card animate-on-scroll">
+          <h4>Java</h4>
+          <p>Legacy systems, Android SDK</p>
+        </div>
+        <div class="skill-card animate-on-scroll">
+          <h4>Dagger & Hilt</h4>
+          <p>Dependency Injection</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 3DBarath. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
