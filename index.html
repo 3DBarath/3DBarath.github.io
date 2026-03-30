@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barath | Android Engineer & Founder of Aztrox Inc.</title>
     <meta name="description" content="Specializing in Native Android, Kotlin Multiplatform, and Secure System Architecture. Founder of Aztrox Inc.">
-    <link rel="stylesheet" href="dist/output.css">
+    <!-- Link to root output.css for maximum reliability -->
+    <link rel="stylesheet" href="output.css">
     <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,20 +20,25 @@
     <!-- High-Contrast Minimalist Background Texture -->
     <div class="noise-bg"></div>
 
-    <!-- Navigation -->
+    <!-- Navigation - Updated to match Reference Screen Layout -->
     <nav class="fixed top-0 w-full z-50 bg-brand-dark/50 backdrop-blur-xl border-b border-white/5">
-        <div class="container mx-auto px-8 h-16 flex items-center justify-between">
+        <div class="container mx-auto px-8 md:px-16 h-20 flex items-center justify-between">
             <a href="./" class="text-xl font-bold tracking-tighter">Barath<span class="text-brand-muted">.</span></a>
-            <div class="hidden md:flex items-center space-x-10 text-xs font-bold uppercase tracking-widest text-brand-muted">
+            <div class="hidden md:flex items-center space-x-12 text-[10px] font-bold uppercase tracking-widest text-brand-muted">
+                <a href="./" class="hover:text-brand-accent transition-colors">Home</a>
                 <a href="#projects" class="hover:text-brand-accent transition-colors">Projects</a>
                 <a href="#research" class="hover:text-brand-accent transition-colors">Research</a>
                 <a href="#contact" class="hover:text-brand-accent transition-colors">Contact</a>
+            </div>
+            <!-- Simple Mobile Toggle -->
+            <div class="md:hidden text-brand-muted">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- Hero Section - Matching Reference Image -->
+        <!-- Hero Section - Matching Reference Image Layout -->
         <section class="min-h-screen flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 pt-20">
             <div class="max-w-[1200px] animate-reveal">
                 <h1 class="hero-title">
@@ -51,9 +57,9 @@
                 </div>
 
                 <!-- Tech Stack Banner - Minimalist -->
-                <div class="mt-24 grayscale brightness-50 hover:brightness-100 transition-all duration-700">
-                    <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-muted mb-8">System Stack</p>
-                    <div class="flex flex-wrap items-center gap-x-12 gap-y-6 text-sm font-bold opacity-30">
+                <div class="mt-24 grayscale group">
+                    <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-muted mb-8 group-hover:text-white transition-colors">System Stack</p>
+                    <div class="flex flex-wrap items-center gap-x-12 gap-y-6 text-[10px] font-bold opacity-30">
                         <span>KOTLIN</span>
                         <span>COMPOSE</span>
                         <span>KMP</span>
@@ -63,17 +69,17 @@
             </div>
         </section>
 
-        <!-- Featured Projects - Clean Minimalism -->
+        <!-- Featured Projects -->
         <section id="projects" class="py-48 px-8 md:px-16 container mx-auto">
             <div class="flex justify-between items-end mb-24 border-b border-white/5 pb-12">
                 <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Featured Projects</h2>
-                <span class="text-xs uppercase tracking-widest text-brand-muted font-bold">Selection 2026</span>
+                <span class="text-xs uppercase tracking-widest text-brand-muted font-bold">2026 Archive</span>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                 <!-- ConnectLnx -->
                 <div class="card group">
-                    <div class="h-64 bg-white/5 rounded-xl mb-10 overflow-hidden relative border border-white/5">
+                    <div class="aspect-video bg-white/5 rounded-xl mb-10 overflow-hidden relative border border-white/5">
                          <img src="assets/connectlnx.png" alt="ConnectLnx" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700">
                     </div>
                     <h3 class="text-2xl font-bold mb-4 tracking-tighter">ConnectLnx</h3>
@@ -82,13 +88,13 @@
                     </p>
                     <div class="flex gap-6 items-center">
                         <a href="connectlnx/" class="text-xs font-bold uppercase tracking-widest hover:text-white transition-colors underline decoration-white/20 underline-offset-8">Explore</a>
-                        <a href="https://play.google.com/store/apps/details?id=org.barath.connectlnxkmp" target="_blank" class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-white">Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=org.barath.connectlnxkmp" target="_blank" class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-white transition-colors">Store</a>
                     </div>
                 </div>
 
                 <!-- GCESHostel -->
                 <div class="card group">
-                    <div class="h-64 bg-white/5 rounded-xl mb-10 overflow-hidden relative border border-white/5">
+                    <div class="aspect-video bg-white/5 rounded-xl mb-10 overflow-hidden relative border border-white/5">
                          <img src="assets/gceshostel.png" alt="GCESHostel" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700">
                     </div>
                     <h3 class="text-2xl font-bold mb-4 tracking-tighter">GCESHostel</h3>
@@ -97,13 +103,13 @@
                     </p>
                     <div class="flex gap-6 items-center">
                         <a href="gceshostel/" class="text-xs font-bold uppercase tracking-widest hover:text-white transition-colors underline decoration-white/20 underline-offset-8">Explore</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.barath.gceshostel" target="_blank" class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-white">Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.barath.gceshostel" target="_blank" class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-white transition-colors">Store</a>
                     </div>
                 </div>
 
                 <!-- Smart Expense Tracker -->
                 <div class="card group">
-                    <div class="h-64 bg-white/5 rounded-xl mb-10 overflow-hidden relative border border-white/5">
+                    <div class="aspect-video bg-white/5 rounded-xl mb-10 overflow-hidden relative border border-white/5">
                          <img src="assets/smart-expense-tracker.png" alt="Expense Tracker" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700">
                     </div>
                     <h3 class="text-2xl font-bold mb-4 tracking-tighter">Smart Expense Tracker</h3>
@@ -117,42 +123,32 @@
             </div>
         </section>
 
-        <!-- Engineering Write-ups - Matrix/Code Minimalist Style -->
-        <section id="research" class="py-48 px-8 bg-[#030303] border-y border-white/5">
+        <!-- Engineering Research -->
+        <section id="research" class="py-48 px-8 bg-[#020202] border-y border-white/5">
             <div class="container mx-auto max-w-4xl">
                 <div class="mb-32">
-                    <span class="text-brand-muted text-xs uppercase tracking-[0.4em] font-bold block mb-4">Systems & Security</span>
-                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Engineering Research</h2>
+                    <span class="text-brand-muted text-xs uppercase tracking-[0.4em] font-bold block mb-4">Security Research</span>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Engineering Write-ups</h2>
                 </div>
                 
                 <div class="space-y-1">
                     <a href="#" class="group block py-12 border-b border-white/5">
-                        <div class="flex justify-between items-center group-hover:translate-x-2 transition-transform duration-500">
+                        <div class="flex justify-between items-center group-hover:translate-x-4 transition-transform duration-500">
                             <div>
-                                <span class="text-xs text-brand-muted mb-2 block font-mono">01 RESEARCH / MITM</span>
-                                <h3 class="text-xl md:text-2xl font-bold group-hover:text-white">Man-in-the-Middle Network Research</h3>
+                                <span class="text-xs text-brand-muted mb-2 block font-mono tracking-widest">CHAPTER 01</span>
+                                <h3 class="text-xl md:text-3xl font-bold group-hover:text-white">IDOR Vulnerability Production Audits</h3>
                             </div>
-                            <svg class="w-6 h-6 transform -rotate-45 opacity-0 group-hover:opacity-100 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <svg class="w-6 h-6 transform -rotate-45 text-brand-muted group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </div>
                     </a>
                     
                     <a href="#" class="group block py-12 border-b border-white/5">
-                        <div class="flex justify-between items-center group-hover:translate-x-2 transition-transform duration-500">
+                        <div class="flex justify-between items-center group-hover:translate-x-4 transition-transform duration-500">
                             <div>
-                                <span class="text-xs text-brand-muted mb-2 block font-mono">02 SECURITY / IDOR</span>
-                                <h3 class="text-xl md:text-2xl font-bold group-hover:text-white">IDOR Vulnerability Production Audits</h3>
+                                <span class="text-xs text-brand-muted mb-2 block font-mono tracking-widest">CHAPTER 02</span>
+                                <h3 class="text-xl md:text-3xl font-bold group-hover:text-white">Clean Architecture implementation notes</h3>
                             </div>
-                            <svg class="w-6 h-6 transform -rotate-45 opacity-0 group-hover:opacity-100 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </div>
-                    </a>
-
-                    <a href="#" class="group block py-12 border-b border-white/5">
-                        <div class="flex justify-between items-center group-hover:translate-x-2 transition-transform duration-500">
-                            <div>
-                                <span class="text-xs text-brand-muted mb-2 block font-mono">03 ARCHITECTURE / CLEAN</span>
-                                <h3 class="text-xl md:text-2xl font-bold group-hover:text-white">Scalable Clean Architecture Implementation</h3>
-                            </div>
-                            <svg class="w-6 h-6 transform -rotate-45 opacity-0 group-hover:opacity-100 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <svg class="w-6 h-6 transform -rotate-45 text-brand-muted group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </div>
                     </a>
                 </div>
@@ -160,25 +156,25 @@
         </section>
     </main>
 
-    <!-- Footer - Professional Deep Black -->
+    <!-- Footer -->
     <footer id="contact" class="py-48 px-8 border-t border-white/5">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-32">
                 <div>
-                    <h2 class="text-3xl font-bold mb-10 tracking-tighter">About</h2>
+                    <h2 class="text-4xl font-bold mb-12 tracking-tighter">About</h2>
                     <p class="text-brand-muted max-w-md leading-relaxed text-lg">
                         Senior Engineer focusing on native high-performance Android, KMP platforms, and secure system architectures. Founder of Aztrox Inc.
                     </p>
-                    <div class="flex space-x-10 mt-16 text-xs font-bold uppercase tracking-widest text-brand-muted">
-                         <a href="https://github.com/3DBarath" target="_blank" class="hover:text-white transition-colors">GitHub</a>
-                         <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
-                         <a href="resume.pdf" target="_blank" class="hover:text-white transition-colors">Resume</a>
+                    <div class="flex space-x-12 mt-16 text-[10px] font-bold uppercase tracking-widest text-brand-muted">
+                         <a href="https://github.com/3DBarath" target="_blank" class="hover:text-white transition-colors underline-offset-4 hover:underline">GitHub</a>
+                         <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" class="hover:text-white transition-colors underline-offset-4 hover:underline">LinkedIn</a>
+                         <a href="resume.pdf" target="_blank" class="hover:text-white transition-colors underline-offset-4 hover:underline">Resume</a>
                     </div>
                 </div>
                 <div class="flex flex-col items-start md:items-end">
-                    <h2 class="text-3xl font-bold mb-10 tracking-tighter">Contact</h2>
-                    <a href="mailto:3dbarath@gmail.com" class="text-3xl md:text-5xl font-bold text-white hover:text-white/80 transition-opacity underline-offset-[16px] underline decoration-white/10">3dbarath@gmail.com</a>
-                    <p class="text-brand-muted mt-12 text-xs uppercase tracking-widest font-bold">&copy; 2026 Barath | Aztrox Inc.</p>
+                    <h2 class="text-4xl font-bold mb-12 tracking-tighter">Contact</h2>
+                    <a href="mailto:3dbarath@gmail.com" class="text-3xl md:text-6xl font-bold text-white hover:text-white/80 transition-opacity underline-offset-[16px] underline decoration-white/10">3dbarath@gmail.com</a>
+                    <p class="text-brand-muted mt-24 text-[10px] uppercase tracking-widest font-bold">&copy; 2026 Barath | Aztrox Inc.</p>
                 </div>
             </div>
         </div>
