@@ -84,6 +84,28 @@
   transition-delay: calc(var(--stagger-index, 0) * 100ms);
 }
 
+/* Mobile Menu Transitions */
+.mobile-menu-active {
+  overflow: hidden;
+}
+
+#mobile-menu {
+  @apply fixed inset-0 z-[60] bg-brand-dark/95 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)];
+  clip-path: circle(0% at top right);
+}
+
+#mobile-menu.active {
+  clip-path: circle(150% at top right);
+}
+
+.mobile-nav-link {
+  @apply text-4xl font-bold tracking-tighter opacity-0 translate-y-4 transition-all duration-500 ease-out;
+}
+
+#mobile-menu.active .mobile-nav-link {
+  @apply opacity-100 translate-y-0;
+}
+
 /* Typography styles matching the screenshot */
 .hero-title {
   @apply text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] -ml-1;
