@@ -41,6 +41,11 @@
   "description": "Android Engineer specializing in Kotlin Multiplatform, Jetpack Compose, and secure architecture."
 }
 </script>
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-theme');
+        }
+    </script>
 </head>
 
 <body class="bg-brand-dark text-brand-accent overflow-x-hidden selection:bg-white selection:text-black">
@@ -59,8 +64,18 @@
                 <a href="#research" class="hover:text-brand-accent transition-colors">Research</a>
                 <a href="#contact" class="hover:text-brand-accent transition-colors">Contact</a>
             </div>
-            <!-- Simple Mobile Toggle -->
-            <div class="md:hidden text-brand-muted">
+            <!-- Theme Toggle -->
+            <div class="flex items-center">
+                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none" aria-label="Toggle Theme">
+                    <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+                <!-- Simple Mobile Toggle -->
+                <div class="md:hidden text-brand-muted ml-4">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
                     </path>
@@ -257,6 +272,30 @@
         </div>
     </footer>
 
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function updateIcons() {
+            if (document.documentElement.classList.contains('light-theme')) {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        updateIcons();
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light-theme');
+            const isLight = document.documentElement.classList.contains('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            updateIcons();
+        });
+    </script>
 </body>
 
 </html>
