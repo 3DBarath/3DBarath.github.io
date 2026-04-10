@@ -43,7 +43,15 @@
     @apply border border-brand-accent/20 text-brand-accent hover:bg-brand-accent/10 active:scale-95 px-8 py-4;
   }
   .card {
-     @apply bg-brand-surface/40 backdrop-blur-md border border-brand-accent/10 rounded-2xl p-8 transition-all duration-500 hover:border-brand-accent/30 hover:scale-[1.01];
+     @apply bg-brand-surface/40 backdrop-blur-md border border-brand-accent/10 rounded-2xl p-8 transition-all duration-500 hover:border-brand-accent/30 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-accent/5;
+  }
+
+  .card img {
+    @apply transition-transform duration-700 ease-out;
+  }
+
+  .card:hover img {
+    @apply scale-110;
   }
   
   .glass-panel {
@@ -56,6 +64,24 @@
     opacity: 0.035;
     filter: saturate(0);
   }
+}
+
+/* Micro-interactions & Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+[data-stagger] {
+  transition-delay: calc(var(--stagger-index, 0) * 100ms);
 }
 
 /* Typography styles matching the screenshot */

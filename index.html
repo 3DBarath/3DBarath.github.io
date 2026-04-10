@@ -86,7 +86,7 @@
 
     <main>
         <!-- Hero Section - Matching Reference Image Layout -->
-        <section class="min-h-screen flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 pt-20">
+        <section class="min-h-screen flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 pt-20 animate-reveal">
             <div class="max-w-[1200px] animate-reveal">
                 <h1 class="hero-title">
                     Android Engineer.
@@ -295,6 +295,25 @@
             const isLight = document.documentElement.classList.contains('light-theme');
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
             updateIcons();
+        });
+
+        // Intersection Observer for Reveal on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
         });
     </script>
 </body>

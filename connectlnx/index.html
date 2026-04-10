@@ -99,7 +99,7 @@
                     <a href="https://play.google.com/store/apps/details?id=org.barath.connectlnxkmp" target="_blank" class="btn btn-primary w-full md:w-auto">Get on Play Store</a>
                 </div>
                 
-                <div class="relative animate-reveal delay-200">
+                <div class="relative reveal-on-scroll">
                     <img src="../assets/connectlnx.png" alt="ConnectLnx" class="relative rounded-2xl border border-brand-accent/20 shadow-2xl">
                 </div>
             </div>
@@ -133,6 +133,23 @@
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
             updateIcons();
         });
+
+        // Intersection Observer for Reveal on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
