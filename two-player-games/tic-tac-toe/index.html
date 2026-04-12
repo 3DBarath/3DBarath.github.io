@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe | Duo Play — Barath</title>
+    <meta name="description" content="A premium 2-player Tic-Tac-Toe experience. Modern UI, smooth animations, and minimalist design.">
+    <link rel="stylesheet" href="../../output.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-theme');
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-brand-accent overflow-hidden">
+    <div class="noise-bg"></div>
+
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b animate-reveal">
+        <div class="container mx-auto px-8 h-16 flex items-center justify-between">
+            <a href="../" class="text-xl font-bold tracking-tighter hover:text-brand-muted transition-colors">&larr; Duo Play</a>
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest">
+                    <span id="player-x-score" class="text-brand-accent">Player X: 0</span>
+                    <span class="text-brand-muted">/</span>
+                    <span id="player-o-score" class="text-brand-muted">Player O: 0</span>
+                </div>
+                <button id="reset-btn" class="text-[10px] font-bold uppercase tracking-widest hover:text-brand-accent transition-colors">Reset</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="h-screen flex flex-col items-center justify-center px-8 relative">
+        <div id="status" class="mb-12 text-xs uppercase tracking-[0.5em] font-bold text-brand-muted animate-reveal" style="animation-delay: 100ms;">
+            Player X's Turn
+        </div>
+
+        <div id="game-board" class="game-board animate-reveal" style="animation-delay: 200ms;">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <!-- Winning Line Visual -->
+        <svg id="winning-svg" class="absolute pointer-events-none inset-0 w-full h-full z-10 opacity-0 transition-opacity duration-500">
+            <line id="winning-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--brand-accent)" stroke-width="2" stroke-linecap="round" />
+        </svg>
+
+        <div id="winner-overlay" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-brand-dark/80 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-700">
+            <h2 id="winner-text" class="text-6xl md:text-8xl font-bold mb-12 tracking-tighter">X Wins!</h2>
+            <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
