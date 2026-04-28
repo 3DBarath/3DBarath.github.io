@@ -161,3 +161,18 @@ section {
     display: inline-block;
     white-space: pre;
 }
+
+/* Ticker Styles */
+.ticker-wrapper {
+    mask-image: linear-gradient(to right, transparent, #fff 15%, #fff 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #fff 15%, #fff 85%, transparent);
+    @apply py-4;
+}
+
+.ticker-content {
+    opacity: 0.6;
+}
+
+.ticker-content span {
+    @apply hover:text-brand-accent transition-colors duration-300;
+}

@@ -120,7 +120,7 @@ function initHeroAnimations() {
     ).join('');
 
     // 2. Clean reveal for Subtitle
-    gsap.set(['.sub-description', '.hero-section .btn', '.ticker-wrapper', subtitle], { opacity: 0, y: 30 });
+    gsap.set(['.sub-description', '.hero-section .btn', subtitle], { opacity: 0, y: 30 });
 
     const tl = gsap.timeline();
 
@@ -160,14 +160,20 @@ function initHeroAnimations() {
  * Infinite Logo Ticker
  */
 function initTicker() {
-    const ticker = document.querySelector('.ticker-content');
-    if (!ticker) return;
+    const tickers = document.querySelectorAll('.ticker-content');
+    if (tickers.length === 0) return;
 
-    gsap.to(ticker, {
-        xPercent: -50, // Move half (since it's duplicated)
-        repeat: -1,
-        duration: 30,
-        ease: "none"
+    tickers.forEach(ticker => {
+        // Ensure parent wrapper is visible (in case hero animation didn't run)
+        const wrapper = ticker.closest('.ticker-wrapper');
+        if (wrapper) gsap.set(wrapper, { opacity: 1 });
+
+        gsap.to(ticker, {
+            xPercent: -50,
+            repeat: -1,
+            duration: 30,
+            ease: "none"
+        });
     });
 }
 
