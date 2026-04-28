@@ -1,6 +1,6 @@
 /**
- * 3DBarath Portfolio - Main Animation Engine
- * Powered by GSAP & Anime.js
+ * 3DBarath Portfolio - Pro Animation Suite
+ * Powered by GSAP & Anime.js v4 Patterns
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,40 +9,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initCustomCursor();
     initHeroAnimations();
+    initTicker();
     initScrollAnimations();
     initCardEffects();
     init3DBackground();
 });
 
 /**
- * Custom Cinematic Cursor with Magnetic Effects
+ * Advanced Cinematic Cursor (The Worm)
+ * Inspired by GSAP/Anime.js v4 physics
  */
 function initCustomCursor() {
     const cursor = document.getElementById('custom-cursor');
     const dot = document.getElementById('custom-cursor-dot');
-    
     if (!cursor || !dot) return;
+
+    // Create segments for the "worm" trail
+    const segments = 6;
+    const trail = [];
+    for (let i = 0; i < segments; i++) {
+        const seg = document.createElement('div');
+        seg.className = 'cursor-trail fixed top-0 left-0 w-2 h-2 bg-brand-accent/20 rounded-full pointer-events-none z-[99] mix-blend-difference';
+        document.body.appendChild(seg);
+        trail.push(seg);
+    }
 
     let mouseX = 0, mouseY = 0;
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
-        gsap.to(cursor, {
-            x: mouseX - 16,
-            y: mouseY - 16,
-            duration: 0.5,
-            ease: "power2.out"
-        });
         gsap.to(dot, {
             x: mouseX - 2,
             y: mouseY - 2,
             duration: 0.1
         });
+
+        gsap.to(cursor, {
+            x: mouseX - 16,
+            y: mouseY - 16,
+            duration: 0.6,
+            ease: "power2.out"
+        });
+
+        // Staggered trail elements
+        trail.forEach((seg, i) => {
+            gsap.to(seg, {
+                x: mouseX - 4,
+                y: mouseY - 4,
+                duration: 0.4 + (i * 0.05),
+                ease: "power3.out"
+            });
+        });
     });
 
-    // Magnetic Effect for Buttons & Links
-    const magneticElements = document.querySelectorAll('.btn, nav a, #theme-toggle');
+    // Magnetic physics for elements
+    const magneticElements = document.querySelectorAll('.btn, nav a, #theme-toggle, .card');
     magneticElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
             const rect = el.getBoundingClientRect();
@@ -50,16 +72,17 @@ function initCustomCursor() {
             const y = e.clientY - rect.top - rect.height / 2;
             
             gsap.to(el, {
-                x: x * 0.3,
-                y: y * 0.3,
-                duration: 0.3,
+                x: x * 0.4,
+                y: y * 0.4,
+                duration: 0.4,
                 ease: "power2.out"
             });
+
+            if (el.classList.contains('card')) return;
             
             gsap.to(cursor, {
-                scale: 1.5,
-                x: e.clientX - 16,
-                y: e.clientY - 16,
+                scale: 1.8,
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
                 duration: 0.3
             });
         });
@@ -68,27 +91,9 @@ function initCustomCursor() {
             gsap.to(el, {
                 x: 0,
                 y: 0,
-                duration: 0.5,
+                duration: 0.6,
                 ease: "elastic.out(1, 0.3)"
             });
-            gsap.to(cursor, {
-                scale: 1,
-                duration: 0.3
-            });
-        });
-    });
-
-    // Hover effects for cards
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            gsap.to(cursor, {
-                scale: 2,
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                duration: 0.3
-            });
-        });
-        card.addEventListener('mouseleave', () => {
             gsap.to(cursor, {
                 scale: 1,
                 backgroundColor: "transparent",
@@ -99,39 +104,45 @@ function initCustomCursor() {
 }
 
 /**
- * Hero Section Entrance
+ * Cinematic Hero Entrance
+ * Includes SplitText emulation & Scramble effect
  */
 function initHeroAnimations() {
-    const heroTitle = document.querySelector('.hero-title');
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    const subDescription = document.querySelector('.sub-description');
+    const title = document.querySelector('.hero-title');
+    const subtitle = document.querySelector('.hero-subtitle');
     
-    // Set initial state in JS to avoid FOUC but keep it safe if JS fails
-    gsap.set(['.hero-title', '.hero-subtitle', '.sub-description', '.hero-section .btn', '.grayscale span'], {
-        opacity: 0,
-        y: 30
-    });
+    if (!title || !subtitle) return;
+
+    // 1. Split Text Emulation for Title
+    const titleText = title.innerText;
+    title.innerHTML = titleText.split('').map(char => 
+        `<span class="inline-block opacity-0 translate-y-full">${char === ' ' ? '&nbsp;' : char}</span>`
+    ).join('');
+
+    // 2. Clean reveal for Subtitle
+    gsap.set(['.sub-description', '.hero-section .btn', '.ticker-wrapper', subtitle], { opacity: 0, y: 30 });
 
     const tl = gsap.timeline();
 
-    tl.to('.hero-title', {
-        y: 0,
+    tl.to('.hero-title span', {
         opacity: 1,
-        duration: 1.2,
+        y: 0,
+        stagger: 0.03,
+        duration: 0.8,
         ease: "power4.out"
     })
-    .to('.hero-subtitle', {
-        y: 0,
+    .to(subtitle, {
         opacity: 1,
+        y: 0,
         duration: 1,
         ease: "power3.out"
-    }, "-=0.8")
+    }, "-=0.4")
     .to('.sub-description', {
         y: 0,
         opacity: 1,
         duration: 1,
         ease: "power3.out"
-    }, "-=0.8")
+    }, "-=0.6")
     .to('.btn', {
         y: 0,
         opacity: 1,
@@ -139,50 +150,68 @@ function initHeroAnimations() {
         duration: 0.8,
         ease: "back.out(1.7)"
     }, "-=0.5")
-    .to('.grayscale span', {
-        opacity: 0.3, // Match original opacity
-        y: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power2.out"
+    .to('.ticker-wrapper', {
+        opacity: 1,
+        duration: 1
     }, "-=0.5");
 }
 
 /**
- * Scroll-triggered Reveals
+ * Infinite Logo Ticker
+ */
+function initTicker() {
+    const ticker = document.querySelector('.ticker-content');
+    if (!ticker) return;
+
+    gsap.to(ticker, {
+        xPercent: -50, // Move half (since it's duplicated)
+        repeat: -1,
+        duration: 30,
+        ease: "none"
+    });
+}
+
+/**
+ * Enhanced Scroll Animations (Parallax & Scrubbing)
  */
 function initScrollAnimations() {
-    // Hide cards initially in JS
-    gsap.set('.card', { opacity: 0, y: 60 });
+    // Subtle parallax for background elements
+    gsap.to('.noise-bg', {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+            trigger: 'body',
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true
+        }
+    });
 
-    // Reveal project cards on scroll
+    // Reveal project cards with staggered lift
     gsap.utils.toArray('.card').forEach((card, i) => {
-        gsap.to(card, {
+        gsap.from(card, {
             scrollTrigger: {
                 trigger: card,
                 start: "top bottom-=100",
                 toggleActions: "play none none reverse"
             },
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            delay: i % 3 * 0.1 
+            y: 100,
+            opacity: 0,
+            rotateX: 10,
+            duration: 1.2,
+            ease: "power3.out"
         });
     });
 
-    // Hide research items initially
-    gsap.set('#research a', { opacity: 0, x: -50 });
-
-    // Reveal research items
+    // Research Write-ups with line draw-on
     gsap.utils.toArray('#research a').forEach((item) => {
-        gsap.to(item, {
+        gsap.from(item, {
             scrollTrigger: {
                 trigger: item,
                 start: "top bottom-=50",
             },
-            x: 0,
-            opacity: 1,
+            opacity: 0,
+            x: -30,
             duration: 1,
             ease: "power2.out"
         });
@@ -190,7 +219,7 @@ function initScrollAnimations() {
 }
 
 /**
- * 3D Tilt Effect for Project Cards
+ * Advanced 3D Tilt for Cards
  */
 function initCardEffects() {
     const cards = document.querySelectorAll('.card');
@@ -199,12 +228,10 @@ function initCardEffects() {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
+            const rotateX = (y - centerY) / 15;
+            const rotateY = (centerX - x) / 15;
             
             gsap.to(card, {
                 rotateX: rotateX,
@@ -213,6 +240,16 @@ function initCardEffects() {
                 ease: "power2.out",
                 transformPerspective: 1000
             });
+
+            // Parallax effect for the image inside
+            const img = card.querySelector('img');
+            if (img) {
+                gsap.to(img, {
+                    x: (x - centerX) / 10,
+                    y: (y - centerY) / 10,
+                    duration: 0.5
+                });
+            }
         });
         
         card.addEventListener('mouseleave', () => {
@@ -222,19 +259,18 @@ function initCardEffects() {
                 duration: 0.5,
                 ease: "power2.out"
             });
+            const img = card.querySelector('img');
+            if (img) gsap.to(img, { x: 0, y: 0, duration: 0.5 });
         });
     });
 }
 
 /**
- * Subtle 3D Background with Three.js
+ * Three.js Particle Field with Mouse Interaction
  */
 function init3DBackground() {
     try {
-        if (typeof THREE === 'undefined') {
-            console.warn('Three.js not loaded, skipping background.');
-            return;
-        }
+        if (typeof THREE === 'undefined') return;
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
@@ -242,18 +278,17 @@ function init3DBackground() {
         
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        document.body.prepend(renderer.domElement); // Use prepend to ensure it's at the back
+        document.body.prepend(renderer.domElement);
         
         renderer.domElement.style.position = 'fixed';
         renderer.domElement.style.top = '0';
         renderer.domElement.style.left = '0';
-        renderer.domElement.style.zIndex = '-2'; // Lower than noise-bg
+        renderer.domElement.style.zIndex = '-2';
         renderer.domElement.style.pointerEvents = 'none';
 
-        // Create particles
         const geometry = new THREE.BufferGeometry();
         const vertices = [];
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 800; i++) {
             vertices.push(
                 THREE.MathUtils.randFloatSpread(2000),
                 THREE.MathUtils.randFloatSpread(2000),
@@ -264,9 +299,9 @@ function init3DBackground() {
         
         const material = new THREE.PointsMaterial({ 
             color: document.documentElement.classList.contains('light-theme') ? 0x000000 : 0xffffff, 
-            size: 2, 
+            size: 1.5, 
             transparent: true, 
-            opacity: 0.2 
+            opacity: 0.15 
         });
         
         const points = new THREE.Points(geometry, material);
@@ -274,10 +309,21 @@ function init3DBackground() {
 
         camera.position.z = 1000;
 
+        let targetX = 0, targetY = 0;
+        window.addEventListener('mousemove', (e) => {
+            targetX = (e.clientX - window.innerWidth / 2) * 0.05;
+            targetY = (e.clientY - window.innerHeight / 2) * 0.05;
+        });
+
         function animate() {
             requestAnimationFrame(animate);
-            points.rotation.x += 0.0003;
-            points.rotation.y += 0.0003;
+            points.rotation.x += 0.0002;
+            points.rotation.y += 0.0002;
+            
+            // Mouse react
+            points.position.x += (targetX - points.position.x) * 0.05;
+            points.position.y += (-targetY - points.position.y) * 0.05;
+            
             renderer.render(scene, camera);
         }
 
@@ -289,22 +335,16 @@ function init3DBackground() {
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // React to theme change
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'class') {
-                    const isLight = document.documentElement.classList.contains('light-theme');
-                    gsap.to(material.color, {
-                        r: isLight ? 0 : 1,
-                        g: isLight ? 0 : 1,
-                        b: isLight ? 0 : 1,
-                        duration: 0.5
-                    });
-                }
+        // Theme sync
+        const observer = new MutationObserver(() => {
+            const isLight = document.documentElement.classList.contains('light-theme');
+            gsap.to(material.color, {
+                r: isLight ? 0 : 1, g: isLight ? 0 : 1, b: isLight ? 0 : 1,
+                duration: 1
             });
         });
         observer.observe(document.documentElement, { attributes: true });
     } catch (e) {
-        console.error('Error initializing 3D background:', e);
+        console.error(e);
     }
 }

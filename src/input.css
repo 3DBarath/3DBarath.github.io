@@ -66,26 +66,39 @@
   }
 }
 
-/* Custom Cursor Tweaks */
+/* Custom Cursor & Trails */
 #custom-cursor, #custom-cursor-dot {
     transition: transform 0.1s ease-out, opacity 0.3s ease-in-out;
 }
 
+.cursor-trail {
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
 .light-theme #custom-cursor, 
-.light-theme #custom-cursor-dot {
+.light-theme #custom-cursor-dot,
+.light-theme .cursor-trail {
     border-color: #000;
     background-color: transparent;
 }
 
-.light-theme #custom-cursor-dot {
+.light-theme #custom-cursor-dot,
+.light-theme .cursor-trail {
     background-color: #000;
+}
+
+/* Ticker Styles */
+.ticker-wrapper {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 /* Refined Transitions */
 .card {
      @apply bg-brand-surface/40 backdrop-blur-md border border-brand-accent/10 rounded-2xl p-8 transition-colors duration-500 hover:border-brand-accent/30;
      transform-style: preserve-3d;
-     will-change: transform;
+     perspective: 1000px;
 }
 
 .card img {
@@ -143,3 +156,8 @@ section {
     z-index: 10;
 }
 
+/* Hero Typography Refinement */
+.hero-title span {
+    display: inline-block;
+    white-space: pre;
+}

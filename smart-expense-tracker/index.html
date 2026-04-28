@@ -26,7 +26,15 @@
     <nav class="fixed top-0 w-full z-50 glass-panel border-b">
         <div class="container mx-auto px-8 h-16 flex items-center justify-between">
             <a href="../" class="text-xl font-bold tracking-tighter hover:text-brand-muted transition-colors">&larr; Barath</a>
-                <!-- Mobile Toggle -->
+            <div class="flex items-center">
+                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none" aria-label="Toggle Theme">
+                    <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
                 <button id="mobile-menu-toggle" class="md:hidden text-brand-muted hover:text-brand-accent transition-colors ml-4 focus:outline-none" aria-label="Open Menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -93,6 +101,17 @@
         &copy; 2026 Barath | Systems Engineering
     </footer>
 
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 border border-brand-accent rounded-full pointer-events-none z-[100] mix-blend-difference transition-transform duration-100 ease-out hidden md:block"></div>
+    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-1 h-1 bg-brand-accent rounded-full pointer-events-none z-[100] mix-blend-difference hidden md:block"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.162.0/three.min.js"></script>
+    <script src="../src/main.js" type="module"></script>
+
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const sunIcon = document.getElementById('sun-icon');
@@ -136,23 +155,6 @@
                 document.documentElement.classList.remove('mobile-menu-active');
             });
         });
-
-        // Intersection Observer for Reveal on Scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
