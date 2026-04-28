@@ -63,8 +63,8 @@ function initCustomCursor() {
         });
     });
 
-    // Magnetic physics for elements
-    const magneticElements = document.querySelectorAll('.btn, nav a, #theme-toggle, .card');
+    // Magnetic physics for elements (Buttons, Nav, Toggle)
+    const magneticElements = document.querySelectorAll('.btn, nav a, #theme-toggle');
     magneticElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
             const rect = el.getBoundingClientRect();
@@ -230,8 +230,8 @@ function initCardEffects() {
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 15;
-            const rotateY = (centerX - x) / 15;
+            const rotateX = (y - centerY) / 25; // Softened from 15
+            const rotateY = (centerX - x) / 25; // Softened from 15
             
             gsap.to(card, {
                 rotateX: rotateX,
