@@ -66,22 +66,40 @@
   }
 }
 
-/* Micro-interactions & Reveal Animations */
+/* Custom Cursor Tweaks */
+#custom-cursor, #custom-cursor-dot {
+    transition: transform 0.1s ease-out, opacity 0.3s ease-in-out;
+}
+
+.light-theme #custom-cursor, 
+.light-theme #custom-cursor-dot {
+    border-color: #000;
+    background-color: transparent;
+}
+
+.light-theme #custom-cursor-dot {
+    background-color: #000;
+}
+
+/* Refined Transitions */
+.card {
+     @apply bg-brand-surface/40 backdrop-blur-md border border-brand-accent/10 rounded-2xl p-8 transition-colors duration-500 hover:border-brand-accent/30;
+     transform-style: preserve-3d;
+     will-change: transform;
+}
+
+.card img {
+    @apply transition-transform duration-700 ease-out;
+    pointer-events: none;
+}
+
+/* Hide original reveal animations to let GSAP handle it */
 .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(40px);
-  pointer-events: none;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
-.reveal-on-scroll.revealed {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-[data-stagger] {
-  transition-delay: calc(var(--stagger-index, 0) * 100ms);
+.animate-reveal {
+    opacity: 1; 
 }
 
 /* Mobile Menu Transitions */
@@ -119,18 +137,9 @@
   @apply text-lg md:text-xl text-brand-muted max-w-2xl leading-relaxed mt-10;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-reveal {
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Section Rhythm */
+section {
+    position: relative;
+    z-index: 10;
 }
 
