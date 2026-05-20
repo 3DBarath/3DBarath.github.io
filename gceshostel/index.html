@@ -57,11 +57,9 @@
         <a href="../" class="mobile-nav-link" style="transition-delay: 100ms;">Home</a>
         <a href="../#projects" class="mobile-nav-link" style="transition-delay: 150ms;">Projects</a>
         <a href="../#research" class="mobile-nav-link" style="transition-delay: 200ms;">Research</a>
-        <a href="../resume.pdf" class="mobile-nav-link text-brand-accent" style="transition-delay: 250ms;">Resume</a>
+        <a href="../resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link text-brand-accent" style="transition-delay: 250ms;">Resume</a>
         <a href="../#contact" class="mobile-nav-link" style="transition-delay: 300ms;">Contact</a>
     </div>
-        </div>
-    </nav>
 
     <main class="pt-48 px-8 pb-48">
         <div class="container mx-auto max-w-6xl">
@@ -119,7 +117,110 @@
                 </div>
                 
                 <div class="relative reveal-on-scroll card p-0 overflow-hidden">
-                    <img src="../assets/gceshostel.png" alt="GCESHostel" class="relative w-full h-auto">
+                    <img src="../assets/hostelapp/hostel_1.jpg" alt="GCESHostel Dashboard" class="relative w-full h-auto">
+                </div>
+            </div>
+
+            <!-- Expanded Screenshots Gallery -->
+            <div class="mt-32 pt-24 border-t border-brand-accent/10">
+                <div class="mb-16">
+                    <h2 class="text-3xl font-bold tracking-tighter mb-4">Application Interface Walkthrough</h2>
+                    <p class="text-brand-muted text-sm max-w-lg leading-relaxed">
+                        A detailed look into the Jetpack Compose Android client, displaying real-time rooms management, occupancy metrics, mess administration, and user settings.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Hostel 1 (Main Dashboard) -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 1;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_1.jpg" alt="Hostel Dashboard (Light & Dark Theme)" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Hostel Dashboard (Light & Dark Theme)</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">Overview of room occupancy statistics and pending hostel fees, with full dark theme support.</p>
+                        </div>
+                    </div>
+                    <!-- Hostel 2 -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 2;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_2.jpg" alt="Student Profile" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Student Profile</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">User profile interface displaying personal details, department info, and logout option.</p>
+                        </div>
+                    </div>
+                    <!-- Hostel 3 -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 3;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_3.jpg" alt="Attendance & Meal Planner" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Hostel Attendance</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">Check-in and check-out tracking for students with interactive status switcher and meal planner.</p>
+                        </div>
+                    </div>
+                    <!-- Hostel 4 -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 4;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_4.jpg" alt="Daily Mess Menu" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Daily Mess Menu</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">Interactive day-by-day weekly food menu display, fully styled for dark mode.</p>
+                        </div>
+                    </div>
+                    <!-- Hostel 5 -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 5;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_5.jpg" alt="Daily Food Feedback" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Daily Food Feedback</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">Interface for students to rate meals, leave quick comments, and submit detailed food reviews.</p>
+                        </div>
+                    </div>
+                    <!-- Hostel 6 -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 6;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_6.jpg" alt="Weekly Food Analytics" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Weekly Food Analytics</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">Analytics dashboard displaying student ratings, review metrics, and food performance tracking.</p>
+                        </div>
+                    </div>
+                    <!-- Hostel 7 -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 7;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_7.jpg" alt="Light Theme Interface" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Light Theme (Sky Blue)</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">A clean, bright interface styled with pleasant sky blue accents for standard daytime use.</p>
+                        </div>
+                    </div>
+                    <!-- Hostel 8 -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 8;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_8.jpg" alt="Rose Theme Interface" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Rose Theme (Blossom Pink)</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">A warm, custom rose-accented layout offering a gentle and modern styling choice.</p>
+                        </div>
+                    </div>
+                    <!-- Hostel 9 -->
+                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 9;">
+                        <div class="aspect-[9/16] bg-brand-accent/5 overflow-hidden">
+                            <img src="../assets/hostelapp/hostel_9.jpg" alt="Dark Theme Interface" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-brand-accent/5">
+                            <h4 class="text-md font-bold mb-1">Dark Theme (Midnight Maroon)</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">A premium dark maroon interface optimized for comfortable viewing in low-light environments.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

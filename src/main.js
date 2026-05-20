@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initCardEffects();
     init3DBackground();
+    initEmailCopy();
 });
 
 /**
@@ -34,10 +35,20 @@ function initCustomCursor() {
         trail.push(seg);
     }
 
+    // Hide custom cursor initially
+    gsap.set([cursor, dot, ...trail], { opacity: 0 });
+
     let mouseX = 0, mouseY = 0;
+    let hasMoved = false;
+
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
+        
+        if (!hasMoved) {
+            hasMoved = true;
+            gsap.to([cursor, dot, ...trail], { opacity: 1, duration: 0.3 });
+        }
         
         gsap.to(dot, {
             x: mouseX - 2,
@@ -61,6 +72,15 @@ function initCustomCursor() {
                 ease: "power3.out"
             });
         });
+    });
+
+    document.addEventListener('mouseleave', () => {
+        gsap.to([cursor, dot, ...trail], { opacity: 0, duration: 0.3 });
+        hasMoved = false;
+    });
+
+    document.addEventListener('mouseenter', () => {
+        hasMoved = false;
     });
 
     // Magnetic physics for elements (Buttons, Nav, Toggle)
@@ -353,4 +373,30 @@ function init3DBackground() {
     } catch (e) {
         console.error(e);
     }
+}
+
+/**
+ * Interactive Contact Email Copy to Clipboard
+ */
+function initEmailCopy() {
+    const copyBtn = document.getElementById('copy-email-btn');
+    const tooltip = document.getElementById('copy-tooltip');
+    if (!copyBtn || !tooltip) return;
+
+    copyBtn.addEventListener('click', () => {
+        const email = 'barathjack77@gmail.com';
+        navigator.clipboard.writeText(email).then(() => {
+            // Trigger animation on tooltip
+            tooltip.classList.remove('opacity-0', 'translate-y-1', 'pointer-events-none');
+            tooltip.classList.add('opacity-100', 'translate-y-0');
+            
+            // Revert after 2 seconds
+            setTimeout(() => {
+                tooltip.classList.remove('opacity-100', 'translate-y-0');
+                tooltip.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy email: ', err);
+        });
+    });
 }

@@ -82,7 +82,7 @@
         <a href="../" class="mobile-nav-link" style="transition-delay: 100ms;">Home</a>
         <a href="../#projects" class="mobile-nav-link" style="transition-delay: 150ms;">Projects</a>
         <a href="../#research" class="mobile-nav-link" style="transition-delay: 200ms;">Research</a>
-        <a href="../resume.pdf" class="mobile-nav-link text-brand-accent" style="transition-delay: 250ms;">Resume</a>
+        <a href="../resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link text-brand-accent" style="transition-delay: 250ms;">Resume</a>
         <a href="../#contact" class="mobile-nav-link" style="transition-delay: 300ms;">Contact</a>
     </div>
 
@@ -144,8 +144,27 @@
                     </div>
                 </div>
                 
-                <div class="relative reveal-on-scroll card p-0 overflow-hidden">
-                    <img src="../assets/connectlnx.png" alt="ConnectLnx" class="relative w-full h-auto">
+                <div class="animate-reveal flex items-center gap-4">
+                    <!-- Send Interface Screenshot -->
+                    <div class="relative reveal-on-scroll card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl group flex-1">
+                        <img src="../assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Send Interface" class="relative w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute bottom-4 left-4 glass-panel border border-brand-accent/20 px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider text-brand-accent backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            Send Interface
+                        </div>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="flex-shrink-0 text-brand-muted">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </div>
+                    <!-- Receive Interface Screenshot -->
+                    <div class="relative reveal-on-scroll card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl group flex-1">
+                        <img src="../assets/connectlnx/connectlnx_receive.jpg" alt="ConnectLnx Receive Interface" class="relative w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute bottom-4 left-4 glass-panel border border-brand-accent/20 px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider text-brand-accent backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            Receive Interface
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
