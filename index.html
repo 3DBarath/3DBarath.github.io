@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Barath | Android Engineer">
-<meta property="og:description" content="Android Engineer specializing in Kotlin Multiplatform, Jetpack Compose, and secure architecture.">
-<meta property="og:url" content="https://3dbarath.github.io/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Barath | Android Engineer">
+    <meta property="og:description" content="Android Engineer specializing in Kotlin Multiplatform, Jetpack Compose, and secure architecture.">
+    <meta property="og:url" content="https://3dbarath.github.io/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Barath | Android Engineer & Founder of Aztrox Inc.</title>
     <link rel="canonical" href="https://3dbarath.github.io/">
     <meta name="description"
@@ -19,29 +19,33 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
     <link rel="apple-touch-icon" href="assets/favicon-192.png">
-    <!-- Inter Font -->
+    
+    <!-- Premium Fonts: Plus Jakarta Sans, Space Grotesk, and JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
         }
     </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Barath",
-  "jobTitle": "Android Engineer",
-  "url": "https://3dbarath.github.io/",
-  "sameAs": [
-    "https://github.com/3DBarath",
-    "https://www.linkedin.com/in/3dbarath/"
-  ],
-  "description": "Android Engineer specializing in Kotlin Multiplatform, Jetpack Compose, and secure architecture."
-}
-</script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Barath",
+      "jobTitle": "Android Engineer",
+      "url": "https://3dbarath.github.io/",
+      "sameAs": [
+        "https://github.com/3DBarath",
+        "https://www.linkedin.com/in/3dbarath/"
+      ],
+      "description": "Android Engineer specializing in Kotlin Multiplatform, Jetpack Compose, and secure architecture."
+    }
+    </script>
     <script>
         if (localStorage.getItem('theme') === 'light') {
             document.documentElement.classList.add('light-theme');
@@ -53,17 +57,20 @@
 
     <!-- High-Contrast Minimalist Background Texture -->
     <div class="noise-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="glow-spotlight" id="glow-spotlight"></div>
 
-    <!-- Navigation - Updated to match Reference Screen Layout -->
-    <nav class="fixed top-0 w-full z-50 glass-panel border-b">
-        <div class="container mx-auto px-8 md:px-16 h-20 flex items-center justify-between">
-            <a href="./" class="text-xl font-bold tracking-tighter">Barath<span class="text-brand-muted">.</span></a>
-            <div
-                class="hidden md:flex items-center space-x-12  uppercase tracking-widest text-brand-muted">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur">
+        <div class="container mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+            <a href="./" class="text-xl font-bold font-display tracking-tight hover:opacity-85 transition-opacity">
+                Barath<span class="text-emerald-accent font-black">.</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8 uppercase tracking-widest text-[11px] font-bold text-brand-muted">
                 <a href="./" class="hover:text-brand-accent transition-colors">Home</a>
                 <a href="#projects" class="hover:text-brand-accent transition-colors">Projects</a>
                 <a href="#research" class="hover:text-brand-accent transition-colors">Research</a>
-                <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:opacity-80 transition-opacity flex items-center gap-2">
+                <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:text-emerald-accent transition-colors flex items-center gap-1.5">
                     Resume
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -71,25 +78,25 @@
                 </a>
                 <a href="#contact" class="hover:text-brand-accent transition-colors">Contact</a>
             </div>
-            <!-- Theme Toggle -->
-            <div class="flex items-center">
-                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none" aria-label="Toggle Theme">
-                    <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+            
+            <!-- Theme & Social Toggles -->
+            <div class="flex items-center space-x-1">
+                <button id="theme-toggle" class="p-2.5 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Toggle Theme">
+                    <svg id="sun-icon" class="w-4.5 h-4.5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
                     </svg>
-                    <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    <svg id="moon-icon" class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-                <a href="https://github.com/3DBarath" target="_blank" class="p-2 text-brand-muted hover:text-brand-accent transition-colors ml-2" aria-label="GitHub">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <a href="https://github.com/3DBarath" target="_blank" class="p-2.5 text-brand-muted hover:text-brand-accent transition-colors" aria-label="GitHub">
+                    <svg class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 4.943 0 3.841-2.337 4.687-4.565 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.481C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
                     </svg>
                 </a>
-                <!-- Mobile Toggle -->
-                <button id="mobile-menu-toggle" class="md:hidden text-brand-muted hover:text-brand-accent transition-colors ml-4 focus:outline-none" aria-label="Open Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                <button id="mobile-menu-toggle" class="md:hidden text-brand-muted hover:text-brand-accent transition-colors p-2.5 focus:outline-none cursor-pointer" aria-label="Open Menu">
+                    <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
             </div>
@@ -97,292 +104,392 @@
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="flex flex-col justify-center px-12 space-y-10">
-        <button id="mobile-menu-close" class="absolute top-8 right-8 p-4 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none" aria-label="Close Menu">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    <div id="mobile-menu" class="flex flex-col justify-center px-12 space-y-8">
+        <button id="mobile-menu-close" class="absolute top-8 right-8 p-4 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Close Menu">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
         <a href="./" class="mobile-nav-link" style="transition-delay: 100ms;">Home</a>
         <a href="#projects" class="mobile-nav-link" style="transition-delay: 150ms;">Projects</a>
         <a href="#research" class="mobile-nav-link" style="transition-delay: 200ms;">Research</a>
-        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link text-brand-accent" style="transition-delay: 250ms;">Resume</a>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link text-emerald-accent" style="transition-delay: 250ms;">Resume</a>
         <a href="#contact" class="mobile-nav-link" style="transition-delay: 300ms;">Contact</a>
-        <div class="pt-12 border-t border-brand-accent/10 flex gap-8 mobile-nav-link" style="transition-delay: 350ms;">
+        <div class="pt-8 border-t border-brand-border flex gap-8 mobile-nav-link" style="transition-delay: 350ms;">
             <a href="https://github.com/3DBarath" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors">GitHub</a>
             <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors">LinkedIn</a>
         </div>
     </div>
 
     <main>
-        <!-- Hero Section - Matching Reference Image Layout -->
-        <section class="min-h-screen flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 pt-20 animate-reveal">
-            <div class="max-w-[1200px] animate-reveal">
-                <h1 class="hero-title">
-                    Android Engineer.
-                </h1>
-                <h1 class="hero-subtitle">
-                    Crafting native scaleable experiences.
-                </h1>
-                <p class="sub-description">
-                    Specializing in Kotlin Multiplatform, clean architecture, and highly performant UI engineering for
-                    modern mobile applications.
-                </p>
-
-                <div class="flex flex-wrap items-center gap-8 mt-16">
-                    <div class="flex items-center gap-6">
-                        <a href="#projects" class="btn btn-primary">Discover Work</a>
-                        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Review Resume</a>
-                    </div>
-                    <div class="flex items-center gap-8 pl-4 border-l border-brand-accent/10">
-                        <a href="https://github.com/3DBarath" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors" aria-label="GitHub">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 4.943 0 3.841-2.337 4.687-4.565 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.481C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-                            </svg>
-                        </a>
-                        <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors" aria-label="LinkedIn">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z M2 9h4v12H2z M4 2a2 2 0 110 4 2 2 0 010-4z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Tech Stack Ticker - Advanced GSAP -->
-                <div class="mt-24 grayscale group overflow-hidden border-t border-brand-accent/5 pt-12">
-                    <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-muted mb-8 group-hover:text-brand-accent transition-colors">
-                        System Stack</p>
-                    <div class="ticker-wrapper relative flex overflow-hidden min-h-[60px] items-center">
-                        <div class="ticker-content flex items-center gap-x-24  whitespace-nowrap">
-                            <span>KOTLIN</span>
-                            <span>JETPACK COMPOSE</span>
-                            <span>KOTLIN MULTIPLATFORM</span>
-                            <span>LINUX KERNEL</span>
-                            <span>ANDROID SDK</span>
-                            <span>COROUTINES</span>
-                            <span>DAGGER HILT</span>
-                            <span>CLEAN ARCHITECTURE</span>
-                            <!-- Duplicate for seamless loop -->
-                            <span>KOTLIN</span>
-                            <span>JETPACK COMPOSE</span>
-                            <span>KOTLIN MULTIPLATFORM</span>
-                            <span>LINUX KERNEL</span>
-                            <span>ANDROID SDK</span>
-                            <span>COROUTINES</span>
-                            <span>DAGGER HILT</span>
-                            <span>CLEAN ARCHITECTURE</span>
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 lg:px-24 pt-28 pb-16">
+            <div class="container mx-auto max-w-[1240px]">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                    
+                    <!-- Left: Main Typography Header -->
+                    <div class="lg:col-span-7 flex flex-col items-start text-left">
+                        <div class="mb-6 reveal-on-scroll">
+                            <span class="status-badge">
+                                <span class="status-pulse"></span>
+                                Available for Core Engineering
+                            </span>
+                        </div>
+                        
+                        <h1 class="hero-title reveal-on-scroll">
+                            Android<br>Engineer<span class="text-emerald-accent">.</span>
+                        </h1>
+                        <h2 class="hero-subtitle reveal-on-scroll">
+                            Systems & Native UI.
+                        </h2>
+                        
+                        <p class="text-brand-muted text-base md:text-lg max-w-xl leading-relaxed mb-8 reveal-on-scroll">
+                            Specializing in Kotlin Multiplatform, native performance tuning, Jetpack Compose architectures, and security-hardened mobile client systems.
+                        </p>
+                        
+                        <div class="flex flex-wrap items-center gap-4 mt-2 reveal-on-scroll">
+                            <a href="#projects" class="btn btn-primary">
+                                Explore Work
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 13l-7 7-7-7m14-6l-7 7-7-7" />
+                                </svg>
+                            </a>
+                            <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                                View Resume
+                            </a>
+                            <div class="flex items-center space-x-4 pl-4 border-l border-brand-border h-8">
+                                <a href="https://github.com/3DBarath" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors" aria-label="GitHub">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 4.943 0 3.841-2.337 4.687-4.565 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.481C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors" aria-label="LinkedIn">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z M2 9h4v12H2z M4 2a2 2 0 110 4 2 2 0 010-4z" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Right: Kotlin IDE Simulation Mockup -->
+                    <div class="lg:col-span-5 w-full reveal-on-scroll">
+                        <div class="code-window">
+                            <!-- Window Controls -->
+                            <div class="flex items-center justify-between pb-4 mb-4 border-b border-brand-border">
+                                <div class="flex space-x-1.5">
+                                    <span class="code-dot bg-[#ff5f56]"></span>
+                                    <span class="code-dot bg-[#ffbd2e]"></span>
+                                    <span class="code-dot bg-[#27c93f]"></span>
+                                </div>
+                                <span class="text-[10px] text-brand-muted font-mono tracking-tight">KmpSocketEngine.kt</span>
+                            </div>
+                            
+                            <!-- Kotlin Code Content -->
+                            <pre class="leading-relaxed text-[11px] overflow-x-auto"><span class="token-comment">// Native Multiplatform Sockets Engine</span>
+<span class="token-keyword">package</span> org.barath.connectlnx.core
+
+<span class="token-keyword">import</span> kotlinx.coroutines.flow.Flow
+<span class="token-keyword">import</span> kotlinx.coroutines.Dispatchers
+
+<span class="token-keyword">object</span> <span class="token-class">KmpSocketEngine</span> {
+    <span class="token-keyword">private val</span> context = Dispatchers.IO
+    
+    <span class="token-keyword">fun</span> <span class="token-function">init</span>(port: <span class="token-type">Int</span>): <span class="token-type">Boolean</span> {
+        <span class="token-keyword">return</span> try {
+            bindNativeSocket(port)
+            <span class="token-keyword">true</span>
+        } <span class="token-keyword">catch</span> (e: <span class="token-type">Exception</span>) {
+            logError(e)
+            <span class="token-keyword">false</span>
+        }
+    }
+
+    <span class="token-keyword">external fun</span> <span class="token-function">bindNativeSocket</span>(p: <span class="token-type">Int</span>)
+}</pre>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
 
-        <!-- Featured Projects -->
-        <section id="projects" class="py-48 px-8 md:px-16 container mx-auto">
-            <div class="flex justify-between items-end mb-24 border-b border-brand-accent/10 pb-12">
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Featured Projects</h2>
-                <span class="text-xs uppercase tracking-widest text-brand-muted font-bold">2026 Archive</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                <!-- ConnectLnx -->
-                <div class="card group relative reveal-on-scroll" style="--stagger-index: 1;">
-                    <a href="connectlnx/" class="block">
-                        <div class="w-full bg-brand-accent/5 rounded-xl mb-10 overflow-hidden relative border border-brand-accent/10" style="height:224px">
-                            <img src="assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx"
-                                class="absolute inset-0 w-full h-full object-cover object-top">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 tracking-tighter group-hover:text-brand-accent transition-colors">
-                            ConnectLnx</h3>
-                    </a>
-                    <p class="text-brand-muted text-sm mb-10 leading-relaxed max-w-xs">
-                        High-performance cross-platform file transfer utility. KMP core with native Android/Linux
-                        integration.
-                    </p>
-                    <div class="flex gap-6 items-center">
-                        <a href="connectlnx/"
-                            class="text-xs font-bold uppercase tracking-widest hover:text-brand-accent transition-colors underline decoration-brand-accent/20 underline-offset-8">Explore</a>
-                        <a href="https://connectlnx.web.app/" target="_blank"
-                            class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-brand-accent transition-colors">Web</a>
-                        <a href="https://play.google.com/store/apps/details?id=org.barath.connectlnxkmp" target="_blank"
-                            class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-brand-accent transition-colors">Store</a>
-                    </div>
-                </div>
-
-                <!-- GCESHostel -->
-                <div class="card group relative reveal-on-scroll" style="--stagger-index: 2;">
-                    <a href="gceshostel/" class="block">
-                        <div class="w-full bg-brand-accent/5 rounded-xl mb-10 overflow-hidden relative border border-brand-accent/10" style="height:224px">
-                            <img src="assets/hostelapp/hostel_1.jpg" alt="GCESHostel"
-                                class="absolute inset-0 w-full h-full object-cover object-top">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 tracking-tighter group-hover:text-brand-accent transition-colors">
-                            GCESHostel</h3>
-                    </a>
-                    <p class="text-brand-muted text-sm mb-10 leading-relaxed max-w-xs">
-                        Full-stack management system. Android Compose Frontend & Spring Boot REST API layer.
-                    </p>
-                    <div class="flex gap-6 items-center">
-                        <a href="gceshostel/"
-                            class="text-xs font-bold uppercase tracking-widest hover:text-brand-accent transition-colors underline decoration-brand-accent/20 underline-offset-8">Explore</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.barath.gceshostel" target="_blank"
-                            class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-brand-accent transition-colors">Store</a>
-                    </div>
-                </div>
-
-                <!-- Smart Expense Tracker -->
-                <div class="card group relative reveal-on-scroll" style="--stagger-index: 3;">
-                    <a href="smart-expense-tracker/" class="block">
-                        <div class="w-full bg-brand-accent/5 rounded-xl mb-10 overflow-hidden relative border border-brand-accent/10" style="height:224px">
-                            <img src="assets/smart-expense-tracker.png" alt="Expense Tracker"
-                                class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 tracking-tighter group-hover:text-brand-accent transition-colors">
-                            Smart Expense Tracker</h3>
-                    </a>
-                    <p class="text-brand-muted text-sm mb-10 leading-relaxed max-w-xs">
-                        Privacy-focused financial dashboard with sophisticated UI/UX and Room local SQL storage.
-                    </p>
-                    <div class="flex gap-6 items-center">
-                        <a href="smart-expense-tracker/"
-                            class="text-xs font-bold uppercase tracking-widest hover:text-brand-accent transition-colors underline decoration-brand-accent/20 underline-offset-8">Explore</a>
-                    </div>
-                </div>
-
-                <!-- Duo Play -->
-                <div class="card group relative reveal-on-scroll" style="--stagger-index: 4;">
-                    <a href="two-player-games/" class="block">
-                        <div class="w-full bg-brand-accent/5 rounded-xl mb-10 overflow-hidden relative border border-brand-accent/10" style="height:224px">
-                            <img src="assets/two-player-games.png" alt="Two Player Games"
-                                class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 tracking-tighter group-hover:text-brand-accent transition-colors">
-                            Duo Play</h3>
-                    </a>
-                    <p class="text-brand-muted text-sm mb-10 leading-relaxed max-w-xs">
-                        A premium collection of minimalist 2-player games. Starting with a polished Tic-Tac-Toe experience.
-                    </p>
-                    <div class="flex gap-6 items-center">
-                        <a href="two-player-games/"
-                            class="text-xs font-bold uppercase tracking-widest hover:text-brand-accent transition-colors underline decoration-brand-accent/20 underline-offset-8">Explore</a>
-                        <a href="two-player-games/privacy-policy.html"
-                            class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-brand-accent transition-colors">Privacy</a>
-                    </div>
-                </div>
-
-                <!-- Ultimate Chess -->
-                <div class="card group relative reveal-on-scroll" style="--stagger-index: 5;">
-                    <a href="chessgame/" class="block">
-                        <div class="w-full bg-brand-accent/5 rounded-xl mb-10 overflow-hidden relative border border-brand-accent/10" style="height:224px">
-                            <img src="assets/chessgame.png" alt="Chessgame"
-                                class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 tracking-tighter group-hover:text-brand-accent transition-colors">
-                            Ultimate Chess</h3>
-                    </a>
-                    <p class="text-brand-muted text-sm mb-10 leading-relaxed max-w-xs">
-                        A dynamic chess experience built with rigorous mathematical logic and Godot performance.
-                    </p>
-                    <div class="flex gap-6 items-center">
-                        <a href="chessgame/"
-                            class="text-xs font-bold uppercase tracking-widest hover:text-brand-accent transition-colors underline decoration-brand-accent/20 underline-offset-8">Explore</a>
-                        <a href="chessgame/privacy-policy.html"
-                            class="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-brand-accent transition-colors">Privacy</a>
-                    </div>
+        <!-- Tech Stack Ticker -->
+        <section class="w-full overflow-hidden">
+            <div class="ticker-wrapper">
+                <div class="ticker-content">
+                    <span>Kotlin 2.1</span>
+                    <span>•</span>
+                    <span>Jetpack Compose</span>
+                    <span>•</span>
+                    <span>Kotlin Multiplatform</span>
+                    <span>•</span>
+                    <span>Linux Kernel</span>
+                    <span>•</span>
+                    <span>Android SDK</span>
+                    <span>•</span>
+                    <span>Coroutines & Flow</span>
+                    <span>•</span>
+                    <span>Dagger Hilt & Koin</span>
+                    <span>•</span>
+                    <span>Clean Architecture</span>
+                    <!-- Duplicate loop -->
+                    <span>Kotlin 2.1</span>
+                    <span>•</span>
+                    <span>Jetpack Compose</span>
+                    <span>•</span>
+                    <span>Kotlin Multiplatform</span>
+                    <span>•</span>
+                    <span>Linux Kernel</span>
+                    <span>•</span>
+                    <span>Android SDK</span>
+                    <span>•</span>
+                    <span>Coroutines & Flow</span>
+                    <span>•</span>
+                    <span>Dagger Hilt & Koin</span>
+                    <span>•</span>
+                    <span>Clean Architecture</span>
                 </div>
             </div>
         </section>
 
-        <!-- Engineering Research -->
-        <section id="research" class="py-48 px-8 bg-brand-surface border-y border-brand-accent/10">
-            <div class="container mx-auto max-w-4xl">
-                <div class="mb-32">
-                    <span class="text-brand-muted text-xs uppercase tracking-[0.4em] font-bold block mb-4">Security
-                        Research</span>
-                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Engineering Write-ups</h2>
+        <!-- Bento Grid Projects Section -->
+        <section id="projects" class="py-32 px-6 md:px-12 container mx-auto max-w-[1240px]">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-brand-border pb-8">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-emerald-accent font-mono font-bold block mb-2">Portfolio</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Featured Projects</h2>
+                </div>
+                <span class="text-xs font-mono text-brand-muted tracking-wider mt-4 md:mt-0 bg-brand-surface/80 border border-brand-border px-3 py-1.5 rounded-md">2026 Archive</span>
+            </div>
+
+            <!-- Bento Container -->
+            <div class="bento-grid">
+                
+                <!-- Card 1: ConnectLnx (col-4, row-2) -->
+                <div class="bento-card bento-col-4 bento-row-2 group reveal-on-scroll relative">
+                    <div class="flex flex-col md:flex-row gap-6 h-full justify-between">
+                        <div class="flex flex-col justify-between md:w-1/2 z-10">
+                            <div>
+                                <div class="flex flex-wrap gap-1.5 mb-3">
+                                    <span class="tech-badge">KMP Core</span>
+                                    <span class="tech-badge">Sockets</span>
+                                </div>
+                                <h3 class="text-2xl font-bold tracking-tight mb-2 group-hover:text-emerald-accent transition-colors">ConnectLnx</h3>
+                                <p class="text-brand-muted text-xs leading-relaxed mb-6">
+                                    High-performance cross-platform file transfer tool. Implements KMP system architecture with native Android, Linux sockets layer, and Jetpack Compose.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-4 items-center text-xs font-mono font-bold">
+                                <a href="connectlnx/" class="primary-project-link text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-4">Explore</a>
+                                <a href="https://connectlnx.web.app/" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors">Web</a>
+                                <a href="https://play.google.com/store/apps/details?id=org.barath.connectlnxkmp" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors">PlayStore</a>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 h-full flex items-center justify-center">
+                            <div class="bento-image-container w-full h-full">
+                                <img src="assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Showcase" class="object-cover w-full h-full">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="space-y-1">
-                    <a href="#" class="group block py-12 border-b border-brand-accent/10 reveal-on-scroll" style="--stagger-index: 1;">
-                        <div
-                            class="flex justify-between items-center group-hover:translate-x-4 transition-transform duration-500">
-                            <div>
-                                <span class="text-xs text-brand-muted mb-2 block font-mono tracking-widest">CHAPTER
-                                    01</span>
-                                <h3 class="text-xl md:text-3xl font-bold group-hover:text-brand-accent">IDOR Vulnerability
-                                    Production Audits</h3>
+                <!-- Card 2: GCESHostel (col-2, row-2) -->
+                <div class="bento-card bento-col-2 bento-row-2 group reveal-on-scroll relative">
+                    <div class="flex flex-col justify-between h-full z-10">
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-3">
+                                <span class="tech-badge">Compose</span>
+                                <span class="tech-badge">Spring REST</span>
                             </div>
-                            <svg class="w-6 h-6 transform -rotate-45 text-brand-muted group-hover:text-brand-accent transition-colors"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
+                            <h3 class="text-xl font-bold tracking-tight mb-2 group-hover:text-emerald-accent transition-colors">GCESHostel</h3>
+                            <p class="text-brand-muted text-xs leading-relaxed">
+                                Full-stack management system with Compose frontend UI, clean model mapping, and robust REST APIs.
+                            </p>
+                        </div>
+                        <div class="my-4 bento-image-container h-32">
+                            <img src="assets/hostelapp/hostel_1.jpg" alt="GCESHostel App" class="object-cover w-full h-full">
+                        </div>
+                        <div class="flex gap-4 items-center text-xs font-mono font-bold">
+                            <a href="gceshostel/" class="primary-project-link text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-4">Explore</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.barath.gceshostel" target="_blank" class="text-brand-muted hover:text-brand-accent transition-colors">PlayStore</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Smart Expense Tracker (col-3, row-2) -->
+                <div class="bento-card bento-col-3 bento-row-2 group reveal-on-scroll relative">
+                    <div class="flex flex-col justify-between h-full z-10">
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-3">
+                                <span class="tech-badge">SQLite Room</span>
+                                <span class="tech-badge">Local-First</span>
+                            </div>
+                            <h3 class="text-xl font-bold tracking-tight mb-2 group-hover:text-emerald-accent transition-colors">Smart Expense Tracker</h3>
+                            <p class="text-brand-muted text-xs leading-relaxed">
+                                Privacy-centric offline finance dashboard. Uses Room local DB, encrypted caches, and smooth charts.
+                            </p>
+                        </div>
+                        <div class="my-4 bento-image-container h-32">
+                            <img src="assets/smart-expense-tracker.png" alt="Smart Expense Tracker" class="object-cover w-full h-full">
+                        </div>
+                        <div class="flex gap-4 items-center text-xs font-mono font-bold">
+                            <a href="smart-expense-tracker/" class="primary-project-link text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-4">Explore</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Ultimate Chess (col-3, row-2) -->
+                <div class="bento-card bento-col-3 bento-row-2 group reveal-on-scroll relative">
+                    <div class="flex flex-col justify-between h-full z-10">
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-3">
+                                <span class="tech-badge">Godot Engine</span>
+                                <span class="tech-badge">Math Logic</span>
+                            </div>
+                            <h3 class="text-xl font-bold tracking-tight mb-2 group-hover:text-emerald-accent transition-colors">Ultimate Chess</h3>
+                            <p class="text-brand-muted text-xs leading-relaxed">
+                                Dynamic, high-performance offline chess game backed by solid move verification and local engines.
+                            </p>
+                        </div>
+                        <div class="my-4 bento-image-container h-32">
+                            <img src="assets/chessgame.png" alt="Ultimate Chess game" class="object-cover w-full h-full">
+                        </div>
+                        <div class="flex gap-4 items-center text-xs font-mono font-bold">
+                            <a href="chessgame/" class="primary-project-link text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-4">Explore</a>
+                            <a href="chessgame/privacy-policy.html" class="text-brand-muted hover:text-brand-accent transition-colors">Privacy</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Duo Play (col-6, row-1) -->
+                <div class="bento-card bento-col-6 bento-row-1 group reveal-on-scroll relative">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 h-full z-10">
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-2">
+                                <span class="tech-badge">2-Player Games</span>
+                                <span class="tech-badge">UI/UX</span>
+                            </div>
+                            <h3 class="text-xl font-bold tracking-tight group-hover:text-emerald-accent transition-colors">Duo Play</h3>
+                            <p class="text-brand-muted text-xs max-w-xl">
+                                A suite of local-multiplayer arcade mini-games featuring minimalist controls and ultra-responsive layout physics.
+                            </p>
+                        </div>
+                        <div class="flex gap-4 items-center text-xs font-mono font-bold shrink-0">
+                            <a href="two-player-games/" class="primary-project-link text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-4">Launch Game Hub</a>
+                            <a href="two-player-games/privacy-policy.html" class="text-brand-muted hover:text-brand-accent transition-colors">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Engineering Research Journal Section -->
+        <section id="research" class="py-32 px-6 md:px-12 border-t border-brand-border bg-brand-surface/20">
+            <div class="container mx-auto max-w-[860px]">
+                <div class="mb-20 text-center md:text-left">
+                    <span class="text-xs font-mono uppercase tracking-[0.4em] text-emerald-accent font-bold block mb-2">Security & Architecture</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Engineering Write-ups</h2>
+                </div>
+
+                <div class="space-y-0.5">
+                    <!-- Article 1 -->
+                    <a href="#" class="journal-item group reveal-on-scroll">
+                        <div class="journal-hover-bg"></div>
+                        <div class="journal-content">
+                            <div>
+                                <span class="text-[10px] text-emerald-accent font-mono font-bold tracking-widest block mb-2.5">CHAPTER 01</span>
+                                <h3 class="text-xl md:text-2xl font-bold group-hover:text-emerald-accent transition-colors">IDOR Vulnerability Production Audits</h3>
+                                <p class="text-brand-muted text-xs mt-2 max-w-2xl leading-relaxed">
+                                    Deep dive into broken object level authorization vectors in mobile client-server endpoints, highlighting detection scripts and patch methods.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-4 shrink-0 mt-4 md:mt-0">
+                                <span class="text-[10px] font-mono text-brand-muted tracking-wider bg-brand-surface/85 border border-brand-border px-2.5 py-1 rounded">6 min read</span>
+                                <div class="w-10 h-10 rounded-full border border-brand-border group-hover:border-brand-accent flex items-center justify-center transition-colors">
+                                    <svg class="w-4 h-4 transform -rotate-45 text-brand-muted group-hover:text-brand-accent transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                     </a>
 
-                    <a href="#" class="group block py-12 border-b border-brand-accent/10 reveal-on-scroll" style="--stagger-index: 2;">
-                        <div
-                            class="flex justify-between items-center group-hover:translate-x-4 transition-transform duration-500">
+                    <!-- Article 2 -->
+                    <a href="#" class="journal-item group reveal-on-scroll">
+                        <div class="journal-hover-bg"></div>
+                        <div class="journal-content">
                             <div>
-                                <span class="text-xs text-brand-muted mb-2 block font-mono tracking-widest">CHAPTER
-                                    02</span>
-                                <h3 class="text-xl md:text-3xl font-bold group-hover:text-brand-accent">Clean Architecture
-                                    implementation notes</h3>
+                                <span class="text-[10px] text-emerald-accent font-mono font-bold tracking-widest block mb-2.5">CHAPTER 02</span>
+                                <h3 class="text-xl md:text-2xl font-bold group-hover:text-emerald-accent transition-colors">Clean Architecture Implementation Notes</h3>
+                                <p class="text-brand-muted text-xs mt-2 max-w-2xl leading-relaxed">
+                                    Strategic separation of domain and data layers in complex multiplatform modules, utilizing Flow, decoupled entities, and clean repositories.
+                                </p>
                             </div>
-                            <svg class="w-6 h-6 transform -rotate-45 text-brand-muted group-hover:text-brand-accent transition-colors"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
+                            <div class="flex items-center gap-4 shrink-0 mt-4 md:mt-0">
+                                <span class="text-[10px] font-mono text-brand-muted tracking-wider bg-brand-surface/85 border border-brand-border px-2.5 py-1 rounded">12 min read</span>
+                                <div class="w-10 h-10 rounded-full border border-brand-border group-hover:border-brand-accent flex items-center justify-center transition-colors">
+                                    <svg class="w-4 h-4 transform -rotate-45 text-brand-muted group-hover:text-brand-accent transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                     </a>
                 </div>
-
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer id="contact" class="py-48 px-8 border-t border-brand-accent/10">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-32">
-                <div>
-                    <h2 class="text-4xl font-bold mb-12 tracking-tighter">About</h2>
-                    <p class="text-brand-muted max-w-md leading-relaxed text-lg">
-                        Senior Engineer focusing on native high-performance Android, KMP platforms, and secure system
-                        architectures. Founder of Aztrox Inc.
-                    </p>
-                    <div class="flex space-x-12 mt-16 text-[11px] font-bold uppercase tracking-widest">
-                        <a href="https://github.com/3DBarath" target="_blank"
-                            class="text-brand-accent hover:opacity-70 transition-opacity underline-offset-4 underline decoration-brand-accent/20">GitHub</a>
-                        <a href="https://www.linkedin.com/in/3dbarath/" target="_blank"
-                            class="text-brand-accent hover:opacity-70 transition-opacity underline-offset-4 underline decoration-brand-accent/20">LinkedIn</a>
-                        <a href="resume.pdf" target="_blank" rel="noopener noreferrer"
-                            class="text-brand-accent hover:opacity-70 transition-opacity underline-offset-4 underline decoration-brand-accent/20">Resume</a>
+    <!-- Footer / Contact -->
+    <footer id="contact" class="py-32 px-6 md:px-12 border-t border-brand-border bg-brand-dark">
+        <div class="container mx-auto max-w-[1100px]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+                
+                <!-- About Grid -->
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-3xl font-extrabold tracking-tight mb-6">About</h2>
+                        <p class="text-brand-muted text-sm leading-relaxed max-w-md">
+                            Senior Android Systems Engineer focusing on native high-performance mobile clients, Kotlin Multiplatform systems, and secure application environments. Founder of Aztrox Inc.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-6 mt-10 text-[10px] font-mono font-bold tracking-widest uppercase">
+                        <a href="https://github.com/3DBarath" target="_blank" class="text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-4">GitHub</a>
+                        <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" class="text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-4">LinkedIn</a>
+                        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-4">Resume</a>
                     </div>
                 </div>
-                <div class="flex flex-col items-start md:items-end">
-                    <h2 class="text-4xl font-bold mb-12 tracking-tighter">Contact</h2>
-                    <div class="flex items-center gap-4 relative group">
-                        <a href="mailto:barathjack77@gmail.com"
-                            class="text-xl md:text-3xl font-bold text-brand-accent hover:opacity-80 transition-opacity underline-offset-[16px] underline decoration-brand-accent/20">barathjack77@gmail.com</a>
-                        <button id="copy-email-btn" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Copy email address" title="Copy to clipboard">
-                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                            </svg>
-                        </button>
-                        <span id="copy-tooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 bg-brand-surface border border-brand-accent/20 text-brand-accent text-xs px-3 py-1.5 rounded opacity-0 pointer-events-none transition-all duration-300 transform translate-y-1">Copied!</span>
+                
+                <!-- Contact Grid -->
+                <div class="flex flex-col justify-between items-start md:items-end">
+                    <div class="w-full flex flex-col items-start md:items-end">
+                        <h2 class="text-3xl font-extrabold tracking-tight mb-6">Contact</h2>
+                        <div class="flex items-center gap-2.5 relative group w-full justify-start md:justify-end">
+                            <a href="mailto:barathjack77@gmail.com" class="text-lg sm:text-2xl lg:text-3xl font-bold text-brand-accent hover:text-emerald-accent transition-colors underline decoration-brand-border underline-offset-8">
+                                barathjack77@gmail.com
+                            </a>
+                            <button id="copy-email-btn" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Copy email address" title="Copy to clipboard">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                </svg>
+                            </button>
+                            <span id="copy-tooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 bg-brand-surface border border-brand-border text-brand-accent text-xs px-3 py-1.5 rounded-md opacity-0 pointer-events-none transition-all duration-300 transform translate-y-1 z-50">Copied!</span>
+                        </div>
                     </div>
-                    <p class="text-brand-muted mt-24 text-[10px] uppercase tracking-widest font-bold">&copy; 2026 Barath
-                        | Aztrox Inc.</p>
+                    <div class="mt-16 md:mt-24 text-left md:text-right">
+                        <p class="text-brand-muted text-[10px] font-mono tracking-widest font-bold uppercase">&copy; 2026 Barath | Aztrox Inc.</p>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </footer>
 
-    <!-- Custom Cursor -->
-    <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 border border-brand-accent rounded-full pointer-events-none z-[100] mix-blend-difference transition-transform duration-100 ease-out hidden md:block"></div>
-    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-1 h-1 bg-brand-accent rounded-full pointer-events-none z-[100] mix-blend-difference hidden md:block"></div>
+    <!-- Custom Cursor elements -->
+    <div id="custom-cursor"></div>
+    <div id="custom-cursor-dot"></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -435,24 +542,27 @@
             });
         });
 
-        // Intersection Observer for Reveal on Scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Spotlight Mouse Effect (Slowly moves towards cursor)
+        const spotlight = document.getElementById('glow-spotlight');
+        if (spotlight) {
+            let sX = window.innerWidth / 2;
+            let sY = window.innerHeight / 2;
+            let targetSX = sX;
+            let targetSY = sY;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target);
-                }
+            window.addEventListener('mousemove', (e) => {
+                targetSX = e.clientX + window.scrollX;
+                targetSY = e.clientY + window.scrollY;
             });
-        }, observerOptions);
 
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-        });
+            function updateSpotlight() {
+                sX += (targetSX - sX) * 0.08;
+                sY += (targetSY - sY) * 0.08;
+                spotlight.style.transform = `translate3d(${sX - 250}px, ${sY - 250}px, 0)`;
+                requestAnimationFrame(updateSpotlight);
+            }
+            updateSpotlight();
+        }
     </script>
 </body>
 

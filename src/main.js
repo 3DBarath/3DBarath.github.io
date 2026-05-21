@@ -1,6 +1,6 @@
 /**
- * 3DBarath Portfolio - Pro Animation Suite
- * Powered by GSAP & Anime.js v4 Patterns
+ * 3DBarath Portfolio - Premium Animation Suite
+ * Powered by GSAP & Three.js
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,20 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Advanced Cinematic Cursor (The Worm)
- * Inspired by GSAP/Anime.js v4 physics
+ * GPU-Accelerated Custom Cursor (LERP Interpolated for Peak Performance)
  */
 function initCustomCursor() {
     const cursor = document.getElementById('custom-cursor');
     const dot = document.getElementById('custom-cursor-dot');
     if (!cursor || !dot) return;
 
-    // Create segments for the "worm" trail
-    const segments = 6;
+    // Create segments for trail
+    const segmentsCount = 4;
     const trail = [];
-    for (let i = 0; i < segments; i++) {
+    for (let i = 0; i < segmentsCount; i++) {
         const seg = document.createElement('div');
-        seg.className = 'cursor-trail fixed top-0 left-0 w-2 h-2 bg-brand-accent/20 rounded-full pointer-events-none z-[99] mix-blend-difference';
+        seg.className = 'cursor-trail fixed top-0 left-0 w-1.5 h-1.5 bg-brand-accent/20 rounded-full pointer-events-none z-[99] mix-blend-difference';
+        seg.style.willChange = 'transform';
         document.body.appendChild(seg);
         trail.push(seg);
     }
@@ -39,7 +39,16 @@ function initCustomCursor() {
     gsap.set([cursor, dot, ...trail], { opacity: 0 });
 
     let mouseX = 0, mouseY = 0;
+    let dotX = 0, dotY = 0;
+    let cursorX = 0, cursorY = 0;
     let hasMoved = false;
+    let isHovering = false;
+
+    // Trail elements LERP tracking
+    const trailPositions = [];
+    for (let i = 0; i < segmentsCount; i++) {
+        trailPositions.push({ x: 0, y: 0 });
+    }
 
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -47,31 +56,17 @@ function initCustomCursor() {
         
         if (!hasMoved) {
             hasMoved = true;
+            // Snaps positions initially to avoid slide-in from top-left
+            dotX = mouseX;
+            dotY = mouseY;
+            cursorX = mouseX;
+            cursorY = mouseY;
+            trailPositions.forEach(pos => {
+                pos.x = mouseX;
+                pos.y = mouseY;
+            });
             gsap.to([cursor, dot, ...trail], { opacity: 1, duration: 0.3 });
         }
-        
-        gsap.to(dot, {
-            x: mouseX - 2,
-            y: mouseY - 2,
-            duration: 0.1
-        });
-
-        gsap.to(cursor, {
-            x: mouseX - 16,
-            y: mouseY - 16,
-            duration: 0.6,
-            ease: "power2.out"
-        });
-
-        // Staggered trail elements
-        trail.forEach((seg, i) => {
-            gsap.to(seg, {
-                x: mouseX - 4,
-                y: mouseY - 4,
-                duration: 0.4 + (i * 0.05),
-                ease: "power3.out"
-            });
-        });
     });
 
     document.addEventListener('mouseleave', () => {
@@ -79,131 +74,163 @@ function initCustomCursor() {
         hasMoved = false;
     });
 
-    document.addEventListener('mouseenter', () => {
-        hasMoved = false;
-    });
+    // High performance LERP render loop running on requestAnimationFrame
+    function updateCursor() {
+        if (hasMoved) {
+            // Lerp dot
+            dotX += (mouseX - dotX) * 0.35;
+            dotY += (mouseY - dotY) * 0.35;
+            dot.style.transform = `translate3d(${dotX - 3}px, ${dotY - 3}px, 0)`;
 
-    // Magnetic physics for elements (Buttons, Nav, Toggle)
-    const magneticElements = document.querySelectorAll('.btn, nav a, #theme-toggle');
-    magneticElements.forEach(el => {
+            // Lerp outer halo
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.transform = `translate3d(${cursorX - 16}px, ${cursorY - 16}px, 0)`;
+
+            // Lerp trail (only active when not hovering over buttons to keep it clean)
+            if (!isHovering) {
+                let prevX = mouseX;
+                let prevY = mouseY;
+                trail.forEach((seg, i) => {
+                    const pos = trailPositions[i];
+                    pos.x += (prevX - pos.x) * (0.24 - i * 0.04);
+                    pos.y += (prevY - pos.y) * (0.24 - i * 0.04);
+                    seg.style.transform = `translate3d(${pos.x - 3}px, ${pos.y - 3}px, 0)`;
+                    prevX = pos.x;
+                    prevY = pos.y;
+                });
+            }
+        }
+        requestAnimationFrame(updateCursor);
+    }
+    requestAnimationFrame(updateCursor);
+
+    // Magnetic interaction on buttons, links, and cards
+    const interactives = document.querySelectorAll('a, button, .bento-card, #theme-toggle');
+    interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            isHovering = true;
+            gsap.to(cursor, {
+                scale: 1.8,
+                borderColor: 'var(--color-emerald-accent)',
+                backgroundColor: 'rgba(16, 185, 129, 0.08)',
+                duration: 0.3,
+                ease: "power2.out"
+            });
+            gsap.to(dot, {
+                scale: 0,
+                duration: 0.2
+            });
+            gsap.to(trail, {
+                opacity: 0,
+                scale: 0,
+                duration: 0.2
+            });
+        });
+
+        el.addEventListener('mouseleave', () => {
+            isHovering = false;
+            gsap.to(cursor, {
+                scale: 1,
+                borderColor: 'var(--brand-accent)',
+                backgroundColor: 'transparent',
+                duration: 0.3,
+                ease: "power2.out"
+            });
+            gsap.to(dot, {
+                scale: 1,
+                duration: 0.2
+            });
+            gsap.to(trail, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.2
+            });
+        });
+
+        // Slight magnetic pull on hover (only for standard interactive buttons, not cards/writeups/emails)
         el.addEventListener('mousemove', (e) => {
+            if (el.classList.contains('bento-card') || 
+                el.classList.contains('journal-item') || 
+                el.getAttribute('href')?.startsWith('mailto:')) return;
+            
             const rect = el.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
             
             gsap.to(el, {
-                x: x * 0.4,
-                y: y * 0.4,
-                duration: 0.4,
+                x: x * 0.25,
+                y: y * 0.25,
+                duration: 0.3,
                 ease: "power2.out"
-            });
-
-            if (el.classList.contains('card')) return;
-            
-            gsap.to(cursor, {
-                scale: 1.8,
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                duration: 0.3
             });
         });
 
         el.addEventListener('mouseleave', () => {
+            if (el.classList.contains('bento-card') || 
+                el.classList.contains('journal-item') || 
+                el.getAttribute('href')?.startsWith('mailto:')) return;
             gsap.to(el, {
                 x: 0,
                 y: 0,
-                duration: 0.6,
+                duration: 0.5,
                 ease: "elastic.out(1, 0.3)"
-            });
-            gsap.to(cursor, {
-                scale: 1,
-                backgroundColor: "transparent",
-                duration: 0.3
             });
         });
     });
 }
 
 /**
- * Cinematic Hero Entrance
- * Includes SplitText emulation & Scramble effect
+ * Premium Hero Entrance Animation
  */
 function initHeroAnimations() {
-    const title = document.querySelector('.hero-title');
-    const subtitle = document.querySelector('.hero-subtitle');
-    
-    if (!title || !subtitle) return;
+    const elementsToReveal = document.querySelectorAll('#hero .reveal-on-scroll');
+    if (elementsToReveal.length === 0) return;
 
-    // 1. Split Text Emulation for Title
-    const titleText = title.innerText;
-    title.innerHTML = titleText.split('').map(char => 
-        `<span class="inline-block opacity-0 translate-y-full">${char === ' ' ? '&nbsp;' : char}</span>`
-    ).join('');
-
-    // 2. Clean reveal for Subtitle
-    gsap.set(['.sub-description', '.hero-section .btn', subtitle], { opacity: 0, y: 30 });
+    // Reset initial states
+    gsap.set(elementsToReveal, { opacity: 0, y: 40 });
 
     const tl = gsap.timeline();
 
-    tl.to('.hero-title span', {
+    tl.to(elementsToReveal, {
         opacity: 1,
         y: 0,
-        stagger: 0.03,
-        duration: 0.8,
+        stagger: 0.1,
+        duration: 1.2,
         ease: "power4.out"
-    })
-    .to(subtitle, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out"
-    }, "-=0.4")
-    .to('.sub-description', {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out"
-    }, "-=0.6")
-    .to('.btn', {
-        y: 0,
-        opacity: 1,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: "back.out(1.7)"
-    }, "-=0.5")
-    .to('.ticker-wrapper', {
-        opacity: 1,
-        duration: 1
-    }, "-=0.5");
+    });
 }
 
 /**
- * Infinite Logo Ticker
+ * Infinite Logo Ticker Animation
  */
 function initTicker() {
     const tickers = document.querySelectorAll('.ticker-content');
     if (tickers.length === 0) return;
 
     tickers.forEach(ticker => {
-        // Ensure parent wrapper is visible (in case hero animation didn't run)
+        // Ensure wrapper is visible
         const wrapper = ticker.closest('.ticker-wrapper');
         if (wrapper) gsap.set(wrapper, { opacity: 1 });
 
+        // Smooth continuous loop
         gsap.to(ticker, {
             xPercent: -50,
             repeat: -1,
-            duration: 30,
+            duration: 25,
             ease: "none"
         });
     });
 }
 
 /**
- * Enhanced Scroll Animations (Parallax & Scrubbing)
+ * Enhanced Scroll Animations (Optimized for performance)
  */
 function initScrollAnimations() {
-    // Subtle parallax for background elements
-    gsap.to('.noise-bg', {
-        yPercent: 20,
+    // Parallax background grid movement (Uses Translate3d via GSAP for GPU support)
+    gsap.to('.grid-overlay', {
+        yPercent: 12,
+        force3D: true,
         ease: "none",
         scrollTrigger: {
             trigger: 'body',
@@ -213,67 +240,94 @@ function initScrollAnimations() {
         }
     });
 
-    // Reveal project cards with staggered lift
-    gsap.utils.toArray('.card').forEach((card, i) => {
+    // Staggered reveal for bento grid cards (Runs once and destroys trigger for garbage cleanup)
+    const bentoCards = gsap.utils.toArray('.bento-card');
+    bentoCards.forEach((card) => {
         gsap.from(card, {
             scrollTrigger: {
                 trigger: card,
-                start: "top bottom-=100",
-                toggleActions: "play none none reverse"
+                start: "top bottom-=80",
+                once: true
             },
-            y: 100,
+            y: 60,
             opacity: 0,
-            rotateX: 10,
-            duration: 1.2,
+            force3D: true,
+            duration: 1,
             ease: "power3.out"
         });
     });
 
-    // Research Write-ups with line draw-on
-    gsap.utils.toArray('#research a').forEach((item) => {
+    // Staggered reveal for journal/research items
+    const journalItems = gsap.utils.toArray('.journal-item');
+    journalItems.forEach((item) => {
         gsap.from(item, {
             scrollTrigger: {
                 trigger: item,
                 start: "top bottom-=50",
+                once: true
             },
             opacity: 0,
-            x: -30,
-            duration: 1,
+            x: -20,
+            force3D: true,
+            duration: 0.8,
             ease: "power2.out"
         });
     });
 }
 
 /**
- * Advanced 3D Tilt for Cards
+ * 3D Parallax Tilt for Bento Cards (Optimized with force3D)
  */
 function initCardEffects() {
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.bento-card');
     cards.forEach(card => {
+        const mainLink = card.querySelector('.primary-project-link');
+        if (mainLink) {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (e) => {
+                const clickedLink = e.target.closest('a');
+                if (clickedLink) {
+                    // Let any direct links (Explore, Web, PlayStore) click naturally
+                    return;
+                }
+                
+                // Handle keyboard modifiers for tab opening
+                if (e.metaKey || e.ctrlKey || e.button === 1) {
+                    window.open(mainLink.href, '_blank');
+                } else {
+                    mainLink.click();
+                }
+            });
+        }
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 25; // Softened from 15
-            const rotateY = (centerX - x) / 25; // Softened from 15
+            
+            // Subtle rotation ratios
+            const rotateX = (y - centerY) / 25;
+            const rotateY = (centerX - x) / 25;
             
             gsap.to(card, {
                 rotateX: rotateX,
                 rotateY: rotateY,
-                duration: 0.5,
+                duration: 0.4,
                 ease: "power2.out",
+                force3D: true,
                 transformPerspective: 1000
             });
 
-            // Parallax effect for the image inside
-            const img = card.querySelector('img');
+            // Parallel shifts inside
+            const img = card.querySelector('.bento-image-container img');
             if (img) {
                 gsap.to(img, {
-                    x: (x - centerX) / 10,
-                    y: (y - centerY) / 10,
-                    duration: 0.5
+                    x: (x - centerX) * 0.05,
+                    y: (y - centerY) * 0.05,
+                    force3D: true,
+                    duration: 0.4
                 });
             }
         });
@@ -283,72 +337,81 @@ function initCardEffects() {
                 rotateX: 0,
                 rotateY: 0,
                 duration: 0.5,
+                force3D: true,
                 ease: "power2.out"
             });
-            const img = card.querySelector('img');
-            if (img) gsap.to(img, { x: 0, y: 0, duration: 0.5 });
+            const img = card.querySelector('.bento-image-container img');
+            if (img) gsap.to(img, { x: 0, y: 0, force3D: true, duration: 0.5 });
         });
     });
 }
 
 /**
- * Three.js Particle Field with Mouse Interaction
+ * Elegant Three.js Particle Field (GPU-Accelerated Rotation - 60 FPS Locked)
  */
 function init3DBackground() {
     try {
         if (typeof THREE === 'undefined') return;
 
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 2000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false }); // Disable antialias for performance boost
         
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Caps pixel ratio to 1.5 for faster rendering
         document.body.prepend(renderer.domElement);
         
         renderer.domElement.style.position = 'fixed';
         renderer.domElement.style.top = '0';
         renderer.domElement.style.left = '0';
-        renderer.domElement.style.zIndex = '-2';
+        renderer.domElement.style.zIndex = '-3';
         renderer.domElement.style.pointerEvents = 'none';
 
+        const count = 400; // Reduced point count slightly for speed
         const geometry = new THREE.BufferGeometry();
-        const vertices = [];
-        for (let i = 0; i < 800; i++) {
-            vertices.push(
-                THREE.MathUtils.randFloatSpread(2000),
-                THREE.MathUtils.randFloatSpread(2000),
-                THREE.MathUtils.randFloatSpread(2000)
-            );
+        const positions = new Float32Array(count * 3);
+
+        for (let i = 0; i < count; i++) {
+            positions[i * 3] = THREE.MathUtils.randFloatSpread(1600);
+            positions[i * 3 + 1] = THREE.MathUtils.randFloatSpread(1000);
+            positions[i * 3 + 2] = THREE.MathUtils.randFloatSpread(1000);
         }
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
         
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const isLightTheme = document.documentElement.classList.contains('light-theme');
         const material = new THREE.PointsMaterial({ 
-            color: document.documentElement.classList.contains('light-theme') ? 0x000000 : 0xffffff, 
-            size: 1.5, 
+            color: isLightTheme ? 0x059669 : 0x10b981,
+            size: 2.2, 
             transparent: true, 
-            opacity: 0.15 
+            opacity: 0.18 
         });
         
         const points = new THREE.Points(geometry, material);
         scene.add(points);
 
-        camera.position.z = 1000;
+        camera.position.z = 800;
 
         let targetX = 0, targetY = 0;
         window.addEventListener('mousemove', (e) => {
-            targetX = (e.clientX - window.innerWidth / 2) * 0.05;
-            targetY = (e.clientY - window.innerHeight / 2) * 0.05;
+            targetX = (e.clientX - window.innerWidth / 2) * 0.04;
+            targetY = (e.clientY - window.innerHeight / 2) * 0.04;
         });
+
+        const clock = new THREE.Clock();
 
         function animate() {
             requestAnimationFrame(animate);
-            points.rotation.x += 0.0002;
-            points.rotation.y += 0.0002;
             
-            // Mouse react
-            points.position.x += (targetX - points.position.x) * 0.05;
-            points.position.y += (-targetY - points.position.y) * 0.05;
+            const time = clock.getElapsedTime();
+            
+            // Orbiting system (GPU rotation, extremely cheap, zero memory transfer)
+            points.rotation.y = time * 0.015;
+            points.rotation.x = time * 0.01;
+            
+            // Mouse ease response
+            points.position.x += (targetX - points.position.x) * 0.04;
+            points.position.y += (-targetY - points.position.y) * 0.04;
             
             renderer.render(scene, camera);
         }
@@ -361,22 +424,26 @@ function init3DBackground() {
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Theme sync
+        // Theme Mutation Sync
         const observer = new MutationObserver(() => {
             const isLight = document.documentElement.classList.contains('light-theme');
+            const targetColor = new THREE.Color(isLight ? 0x059669 : 0x10b981);
             gsap.to(material.color, {
-                r: isLight ? 0 : 1, g: isLight ? 0 : 1, b: isLight ? 0 : 1,
+                r: targetColor.r,
+                g: targetColor.g,
+                b: targetColor.b,
                 duration: 1
             });
+            material.opacity = isLight ? 0.22 : 0.18;
         });
         observer.observe(document.documentElement, { attributes: true });
     } catch (e) {
-        console.error(e);
+        console.error("Three.js setup failed: ", e);
     }
 }
 
 /**
- * Interactive Contact Email Copy to Clipboard
+ * Interactive Contact Email Copy to Clipboard (with success check)
  */
 function initEmailCopy() {
     const copyBtn = document.getElementById('copy-email-btn');
@@ -386,15 +453,21 @@ function initEmailCopy() {
     copyBtn.addEventListener('click', () => {
         const email = 'barathjack77@gmail.com';
         navigator.clipboard.writeText(email).then(() => {
-            // Trigger animation on tooltip
+            // Trigger feedback animations on tooltip
             tooltip.classList.remove('opacity-0', 'translate-y-1', 'pointer-events-none');
             tooltip.classList.add('opacity-100', 'translate-y-0');
             
-            // Revert after 2 seconds
+            // Add a subtle bounce and color change to copy icon
+            gsap.fromTo(copyBtn, 
+                { scale: 0.8, color: '#10b981' }, 
+                { scale: 1, color: 'var(--brand-accent)', duration: 0.6, ease: "elastic.out(1, 0.3)" }
+            );
+
+            // Revert tooltip after 2.5 seconds
             setTimeout(() => {
                 tooltip.classList.remove('opacity-100', 'translate-y-0');
                 tooltip.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
-            }, 2000);
+            }, 2500);
         }).catch(err => {
             console.error('Failed to copy email: ', err);
         });
