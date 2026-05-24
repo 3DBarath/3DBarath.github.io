@@ -307,9 +307,10 @@ function initCardEffects() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            // Subtle rotation ratios
-            const rotateX = (y - centerY) / 25;
-            const rotateY = (centerX - x) / 25;
+            // Normalize tilt using card dimensions to keep max tilt constant (6 deg) regardless of card size
+            const maxTilt = 6;
+            const rotateX = ((y - centerY) / centerY) * maxTilt;
+            const rotateY = ((centerX - x) / centerX) * maxTilt;
             
             gsap.to(card, {
                 rotateX: rotateX,
@@ -320,12 +321,13 @@ function initCardEffects() {
                 transformPerspective: 1000
             });
 
-            // Parallel shifts inside
+            // Normalize parallel shifts inside (max 8px shift)
             const img = card.querySelector('.bento-image-container img');
             if (img) {
+                const maxShift = 8;
                 gsap.to(img, {
-                    x: (x - centerX) * 0.05,
-                    y: (y - centerY) * 0.05,
+                    x: ((x - centerX) / centerX) * maxShift,
+                    y: ((y - centerY) / centerY) * maxShift,
                     force3D: true,
                     duration: 0.4
                 });
