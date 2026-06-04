@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCardEffects();
     init3DBackground();
     initEmailCopy();
+    initLightbox();
 });
 
 /**
@@ -473,5 +474,241 @@ function initEmailCopy() {
         }).catch(err => {
             console.error('Failed to copy email: ', err);
         });
+    });
+}
+
+/**
+ * Dynamic Lightbox Gallery with Boundary Check for Project Detail Pages
+ */
+function initLightbox() {
+    const isProjectPage = window.location.pathname.includes('/connectlnx/') || 
+                          window.location.pathname.includes('/gceshostel/') || 
+                          window.location.pathname.includes('/smart-expense-tracker/');
+                          
+    if (!isProjectPage) return;
+
+    // 1. Inject Lightbox CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        #lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 12, 0.94);
+            backdrop-filter: blur(12px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #lightbox-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 85%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #lightbox-image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            transform: scale(0.96);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #lightbox-overlay.active #lightbox-image {
+            transform: scale(1);
+        }
+        .lightbox-btn {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--brand-accent, #ffffff);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(8px);
+            user-select: none;
+            z-index: 10010;
+        }
+        .lightbox-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--color-emerald-accent, #10b981);
+            color: var(--color-emerald-accent, #10b981);
+            transform: scale(1.05);
+        }
+        .lightbox-btn.disabled {
+            opacity: 0.15;
+            pointer-events: none;
+            border-color: rgba(255, 255, 255, 0.04);
+        }
+        #lightbox-close {
+            top: -64px;
+            right: 0;
+        }
+        #lightbox-prev {
+            left: -80px;
+        }
+        #lightbox-next {
+            right: -80px;
+        }
+        @media (max-width: 992px) {
+            #lightbox-prev {
+                left: 12px;
+                bottom: -80px;
+                position: fixed;
+            }
+            #lightbox-next {
+                right: 12px;
+                bottom: -80px;
+                position: fixed;
+            }
+            #lightbox-close {
+                right: 12px;
+                top: 12px;
+                position: fixed;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 2. Inject Lightbox HTML Structure
+    const overlay = document.createElement('div');
+    overlay.id = 'lightbox-overlay';
+    overlay.innerHTML = `
+        <div id="lightbox-container">
+            <button id="lightbox-close" class="lightbox-btn" aria-label="Close Lightbox">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <button id="lightbox-prev" class="lightbox-btn" aria-label="Previous Image">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <img id="lightbox-image" src="" alt="Walkthrough screenshot">
+            <button id="lightbox-next" class="lightbox-btn" aria-label="Next Image">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const lightboxImg = document.getElementById('lightbox-image');
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+
+    // 3. Find unique target images (exclude favicon/logos)
+    const seenSrcs = new Set();
+    const images = Array.from(document.querySelectorAll('main img, .card img, .reveal-on-scroll img')).filter(img => {
+        if (!img.src || img.src.includes('favicon')) return false;
+        if (seenSrcs.has(img.src)) return false;
+        seenSrcs.add(img.src);
+        return true;
+    });
+
+    let currentIndex = -1;
+
+    function openLightbox(index) {
+        currentIndex = index;
+        updateImage();
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function updateImage() {
+        if (currentIndex < 0 || currentIndex >= images.length) return;
+        const targetImg = images[currentIndex];
+        lightboxImg.src = targetImg.src;
+        lightboxImg.alt = targetImg.alt || 'Project Screenshot';
+
+        // Boundary arrow states ("until hit wall")
+        if (currentIndex === 0) {
+            prevBtn.classList.add('disabled');
+        } else {
+            prevBtn.classList.remove('disabled');
+        }
+
+        if (currentIndex === images.length - 1) {
+            nextBtn.classList.add('disabled');
+        } else {
+            nextBtn.classList.remove('disabled');
+        }
+    }
+
+    function showPrev() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateImage();
+        }
+    }
+
+    function showNext() {
+        if (currentIndex < images.length - 1) {
+            currentIndex++;
+            updateImage();
+        }
+    }
+
+    // Attach click triggers
+    images.forEach((img, index) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openLightbox(index);
+        });
+    });
+
+    // Control triggers
+    closeBtn.addEventListener('click', closeLightbox);
+    
+    // Close on overlay backdrop click
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay || e.target === document.getElementById('lightbox-container')) {
+            closeLightbox();
+        }
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showPrev();
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showNext();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
     });
 }
