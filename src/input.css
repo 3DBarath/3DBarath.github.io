@@ -70,6 +70,9 @@
   .nav-blur {
     @apply bg-brand-dark/60 backdrop-blur-xl border-b border-brand-border;
   }
+  .glass-panel {
+    @apply bg-brand-surface/30 backdrop-blur-xl border-brand-border;
+  }
 
   /* Interactive Buttons */
   .btn {
