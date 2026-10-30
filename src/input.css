@@ -86,13 +86,6 @@
   }
   
   /* Ambient Grid Background */
-  .noise-bg {
-    @apply fixed inset-0 z-[-1] pointer-events-none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.02;
-    filter: saturate(0);
-  }
-
   .grid-overlay {
     @apply fixed inset-0 z-[-2] pointer-events-none;
     background-image: linear-gradient(var(--brand-border) 1px, transparent 1px),
@@ -103,30 +96,13 @@
     opacity: 0.75;
   }
 
-  /* Spotlight mouse overlay */
-  .glow-spotlight {
-    @apply absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none z-[1] mix-blend-screen filter blur-[80px] opacity-60 transition-opacity duration-500;
-    background: radial-gradient(circle, var(--brand-glow-primary) 0%, var(--brand-glow-secondary) 50%, transparent 100%);
-    will-change: transform;
-  }
-  
-  .light-theme .glow-spotlight {
-    @apply mix-blend-multiply opacity-40;
-  }
-
   /* Bento Grid Utilities */
   .bento-grid {
     @apply grid grid-cols-1 md:grid-cols-6 gap-6 auto-rows-[200px] md:auto-rows-[160px];
   }
 
   .bento-card {
-    @apply bg-brand-surface/40 backdrop-blur-md border border-brand-border rounded-2xl p-6 transition-all duration-500 overflow-hidden relative flex flex-col justify-between hover:border-brand-accent/30;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    will-change: transform;
-  }
-  .bento-card:hover {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 30px var(--brand-glow-primary);
+    @apply bg-brand-surface border border-brand-border rounded-2xl p-6 transition-all duration-300 overflow-hidden relative flex flex-col justify-between hover:border-brand-accent/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-accent/5;
   }
 
   .bento-col-1 { @apply md:col-span-1; }
@@ -146,7 +122,7 @@
     @apply relative w-full h-full min-h-[140px] rounded-xl overflow-hidden border border-brand-border bg-brand-dark/40;
   }
   .bento-image-container img {
-    @apply transition-transform duration-[800ms] ease-out object-cover w-full h-full object-top;
+    @apply transition-transform duration-500 ease-out object-cover w-full h-full object-top;
   }
   .bento-card:hover .bento-image-container img {
     @apply scale-105;
@@ -154,7 +130,7 @@
 
   /* Code IDE Simulation */
   .code-window {
-    @apply rounded-xl border border-brand-border bg-brand-code-bg/90 shadow-2xl p-5 font-mono text-xs overflow-x-auto relative w-full h-full backdrop-blur-lg;
+    @apply rounded-xl border border-brand-border bg-brand-code-bg/95 shadow-xl p-5 font-mono text-xs overflow-x-auto relative w-full h-full;
   }
   .code-dot {
     @apply w-3 h-3 rounded-full inline-block mr-1.5;
@@ -183,16 +159,6 @@
   .status-pulse::after {
     @apply content-[''] absolute inset-0 rounded-full bg-emerald-accent animate-ping opacity-75;
   }
-}
-
-/* Custom Cursor */
-#custom-cursor {
-  @apply fixed top-0 left-0 w-8 h-8 border border-brand-accent rounded-full pointer-events-none z-[100] hidden md:block mix-blend-difference;
-  will-change: transform;
-}
-#custom-cursor-dot {
-  @apply fixed top-0 left-0 w-1.5 h-1.5 bg-brand-accent rounded-full pointer-events-none z-[100] hidden md:block mix-blend-difference;
-  will-change: transform;
 }
 
 /* Ticker Loop */
