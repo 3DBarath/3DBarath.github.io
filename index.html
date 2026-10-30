@@ -542,26 +542,39 @@
             });
         });
 
-        // Spotlight Mouse Effect (Slowly moves towards cursor)
+        // Spotlight Mouse Effect (Optimized with idle-pause)
         const spotlight = document.getElementById('glow-spotlight');
         if (spotlight) {
             let sX = window.innerWidth / 2;
             let sY = window.innerHeight / 2;
             let targetSX = sX;
             let targetSY = sY;
+            let isMoving = false;
 
             window.addEventListener('mousemove', (e) => {
                 targetSX = e.clientX + window.scrollX;
                 targetSY = e.clientY + window.scrollY;
-            });
+                if (!isMoving) {
+                    isMoving = true;
+                    requestAnimationFrame(updateSpotlight);
+                }
+            }, { passive: true });
 
             function updateSpotlight() {
-                sX += (targetSX - sX) * 0.08;
-                sY += (targetSY - sY) * 0.08;
+                const dx = targetSX - sX;
+                const dy = targetSY - sY;
+                if (Math.abs(dx) < 0.2 && Math.abs(dy) < 0.2) {
+                    sX = targetSX;
+                    sY = targetSY;
+                    spotlight.style.transform = `translate3d(${sX - 250}px, ${sY - 250}px, 0)`;
+                    isMoving = false;
+                    return;
+                }
+                sX += dx * 0.08;
+                sY += dy * 0.08;
                 spotlight.style.transform = `translate3d(${sX - 250}px, ${sY - 250}px, 0)`;
                 requestAnimationFrame(updateSpotlight);
             }
-            updateSpotlight();
         }
     </script>
 </body>

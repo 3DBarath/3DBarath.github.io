@@ -257,7 +257,7 @@ function initScrollAnimations() {
 }
 
 /**
- * 3D Parallax Tilt for Bento Cards (Optimized with force3D)
+ * 3D Parallax Tilt for Bento Cards (Optimized with force3D and cached bounds)
  */
 function initCardEffects() {
     const cards = document.querySelectorAll('.bento-card');
@@ -281,8 +281,13 @@ function initCardEffects() {
             });
         }
 
+        let rect = null;
+        card.addEventListener('mouseenter', () => {
+            rect = card.getBoundingClientRect();
+        });
+
         card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
+            if (!rect) rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
@@ -296,10 +301,11 @@ function initCardEffects() {
             gsap.to(card, {
                 rotateX: rotateX,
                 rotateY: rotateY,
-                duration: 0.4,
+                duration: 0.3,
                 ease: "power2.out",
                 force3D: true,
-                transformPerspective: 1000
+                transformPerspective: 1000,
+                overwrite: "auto"
             });
 
             // Normalize parallel shifts inside (max 8px shift)
@@ -310,21 +316,24 @@ function initCardEffects() {
                     x: ((x - centerX) / centerX) * maxShift,
                     y: ((y - centerY) / centerY) * maxShift,
                     force3D: true,
-                    duration: 0.4
+                    duration: 0.3,
+                    overwrite: "auto"
                 });
             }
         });
         
         card.addEventListener('mouseleave', () => {
+            rect = null;
             gsap.to(card, {
                 rotateX: 0,
                 rotateY: 0,
-                duration: 0.5,
+                duration: 0.4,
                 force3D: true,
-                ease: "power2.out"
+                ease: "power2.out",
+                overwrite: "auto"
             });
             const img = card.querySelector('.bento-image-container img');
-            if (img) gsap.to(img, { x: 0, y: 0, force3D: true, duration: 0.5 });
+            if (img) gsap.to(img, { x: 0, y: 0, force3D: true, duration: 0.4, overwrite: "auto" });
         });
     });
 }
@@ -379,7 +388,7 @@ function init3DBackground() {
         window.addEventListener('mousemove', (e) => {
             targetX = (e.clientX - window.innerWidth / 2) * 0.04;
             targetY = (e.clientY - window.innerHeight / 2) * 0.04;
-        });
+        }, { passive: true });
 
         const clock = new THREE.Clock();
 
