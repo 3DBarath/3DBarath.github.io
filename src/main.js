@@ -25,31 +25,15 @@ function initCustomCursor() {
     const dot = document.getElementById('custom-cursor-dot');
     if (!cursor || !dot) return;
 
-    // Create segments for trail
-    const segmentsCount = 4;
-    const trail = [];
-    for (let i = 0; i < segmentsCount; i++) {
-        const seg = document.createElement('div');
-        seg.className = 'cursor-trail fixed top-0 left-0 w-1.5 h-1.5 bg-brand-accent/20 rounded-full pointer-events-none z-[99] mix-blend-difference';
-        seg.style.willChange = 'transform';
-        document.body.appendChild(seg);
-        trail.push(seg);
-    }
-
     // Hide custom cursor initially
-    gsap.set([cursor, dot, ...trail], { opacity: 0 });
+    gsap.set([cursor, dot], { opacity: 0 });
 
     let mouseX = 0, mouseY = 0;
     let dotX = 0, dotY = 0;
     let cursorX = 0, cursorY = 0;
     let hasMoved = false;
     let isHovering = false;
-
-    // Trail elements LERP tracking
-    const trailPositions = [];
-    for (let i = 0; i < segmentsCount; i++) {
-        trailPositions.push({ x: 0, y: 0 });
-    }
+    let isRafActive = false;
 
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -62,20 +46,21 @@ function initCustomCursor() {
             dotY = mouseY;
             cursorX = mouseX;
             cursorY = mouseY;
-            trailPositions.forEach(pos => {
-                pos.x = mouseX;
-                pos.y = mouseY;
-            });
-            gsap.to([cursor, dot, ...trail], { opacity: 1, duration: 0.3 });
+            gsap.to([cursor, dot], { opacity: 1, duration: 0.3 });
         }
-    });
+
+        if (!isRafActive) {
+            isRafActive = true;
+            requestAnimationFrame(updateCursor);
+        }
+    }, { passive: true });
 
     document.addEventListener('mouseleave', () => {
-        gsap.to([cursor, dot, ...trail], { opacity: 0, duration: 0.3 });
+        gsap.to([cursor, dot], { opacity: 0, duration: 0.3 });
         hasMoved = false;
     });
 
-    // High performance LERP render loop running on requestAnimationFrame
+    // High performance LERP render loop - pauses automatically when idle
     function updateCursor() {
         if (hasMoved) {
             // Lerp dot
@@ -84,27 +69,26 @@ function initCustomCursor() {
             dot.style.transform = `translate3d(${dotX - 3}px, ${dotY - 3}px, 0)`;
 
             // Lerp outer halo
-            cursorX += (mouseX - cursorX) * 0.15;
-            cursorY += (mouseY - cursorY) * 0.15;
+            cursorX += (mouseX - cursorX) * 0.18;
+            cursorY += (mouseY - cursorY) * 0.18;
             cursor.style.transform = `translate3d(${cursorX - 16}px, ${cursorY - 16}px, 0)`;
 
-            // Lerp trail (only active when not hovering over buttons to keep it clean)
-            if (!isHovering) {
-                let prevX = mouseX;
-                let prevY = mouseY;
-                trail.forEach((seg, i) => {
-                    const pos = trailPositions[i];
-                    pos.x += (prevX - pos.x) * (0.24 - i * 0.04);
-                    pos.y += (prevY - pos.y) * (0.24 - i * 0.04);
-                    seg.style.transform = `translate3d(${pos.x - 3}px, ${pos.y - 3}px, 0)`;
-                    prevX = pos.x;
-                    prevY = pos.y;
-                });
+            // If resting within sub-pixel threshold, snap and pause loop to free CPU/GPU
+            const dotDist = Math.abs(mouseX - dotX) + Math.abs(mouseY - dotY);
+            const cursorDist = Math.abs(mouseX - cursorX) + Math.abs(mouseY - cursorY);
+            if (dotDist < 0.1 && cursorDist < 0.1) {
+                dotX = mouseX;
+                dotY = mouseY;
+                cursorX = mouseX;
+                cursorY = mouseY;
+                dot.style.transform = `translate3d(${dotX - 3}px, ${dotY - 3}px, 0)`;
+                cursor.style.transform = `translate3d(${cursorX - 16}px, ${cursorY - 16}px, 0)`;
+                isRafActive = false;
+                return;
             }
         }
         requestAnimationFrame(updateCursor);
     }
-    requestAnimationFrame(updateCursor);
 
     // Magnetic interaction on buttons, links, and cards
     const interactives = document.querySelectorAll('a, button, .bento-card, #theme-toggle');
@@ -115,17 +99,14 @@ function initCustomCursor() {
                 scale: 1.8,
                 borderColor: 'var(--color-emerald-accent)',
                 backgroundColor: 'rgba(16, 185, 129, 0.08)',
-                duration: 0.3,
-                ease: "power2.out"
+                duration: 0.25,
+                ease: "power2.out",
+                overwrite: "auto"
             });
             gsap.to(dot, {
                 scale: 0,
-                duration: 0.2
-            });
-            gsap.to(trail, {
-                opacity: 0,
-                scale: 0,
-                duration: 0.2
+                duration: 0.2,
+                overwrite: "auto"
             });
         });
 
@@ -135,17 +116,14 @@ function initCustomCursor() {
                 scale: 1,
                 borderColor: 'var(--brand-accent)',
                 backgroundColor: 'transparent',
-                duration: 0.3,
-                ease: "power2.out"
+                duration: 0.25,
+                ease: "power2.out",
+                overwrite: "auto"
             });
             gsap.to(dot, {
                 scale: 1,
-                duration: 0.2
-            });
-            gsap.to(trail, {
-                opacity: 1,
-                scale: 1,
-                duration: 0.2
+                duration: 0.2,
+                overwrite: "auto"
             });
         });
 
@@ -163,7 +141,8 @@ function initCustomCursor() {
                 x: x * 0.25,
                 y: y * 0.25,
                 duration: 0.3,
-                ease: "power2.out"
+                ease: "power2.out",
+                overwrite: "auto"
             });
         });
 
@@ -175,7 +154,8 @@ function initCustomCursor() {
                 x: 0,
                 y: 0,
                 duration: 0.5,
-                ease: "elastic.out(1, 0.3)"
+                ease: "elastic.out(1, 0.3)",
+                overwrite: "auto"
             });
         });
     });

@@ -187,13 +187,12 @@
 
 /* Custom Cursor */
 #custom-cursor {
-  @apply fixed top-0 left-0 w-8 h-8 border border-brand-accent rounded-full pointer-events-none z-[100] transition-transform duration-100 ease-out hidden md:block mix-blend-difference;
+  @apply fixed top-0 left-0 w-8 h-8 border border-brand-accent rounded-full pointer-events-none z-[100] hidden md:block mix-blend-difference;
+  will-change: transform;
 }
 #custom-cursor-dot {
   @apply fixed top-0 left-0 w-1.5 h-1.5 bg-brand-accent rounded-full pointer-events-none z-[100] hidden md:block mix-blend-difference;
-}
-.cursor-trail {
-  @apply fixed top-0 left-0 w-1 h-1 bg-brand-accent/25 rounded-full pointer-events-none z-[99] hidden md:block mix-blend-difference;
+  will-change: transform;
 }
 
 /* Ticker Loop */
