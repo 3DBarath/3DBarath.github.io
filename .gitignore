@@ -34,3 +34,11 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 .DS_Store
 bun.lock
 package.json
+
+# Agent and temporary files
+.agents/
+.claude/
+.superpowers/
+scratch/
+skills-lock.json
+mockup.html
