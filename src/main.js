@@ -182,13 +182,21 @@ function initMobileMenu() {
   function openMenu() {
     mobileMenu.classList.remove('hidden');
     mobileMenu.classList.add('flex');
+    requestAnimationFrame(() => {
+      mobileMenu.classList.add('menu-open');
+    });
     menuToggle.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   }
 
   function closeMenu() {
-    mobileMenu.classList.add('hidden');
-    mobileMenu.classList.remove('flex');
+    mobileMenu.classList.remove('menu-open');
+    setTimeout(() => {
+      if (!mobileMenu.classList.contains('menu-open')) {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      }
+    }, 450);
     menuToggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
@@ -270,8 +278,7 @@ function initEmailCopy() {
 
       // Floating tooltip
       if (copyTooltip) {
-        copyTooltip.classList.remove('opacity-0', 'pointer-events-none');
-        copyTooltip.classList.add('opacity-100');
+        copyTooltip.classList.add('show');
       }
 
       if (resetTimeout) clearTimeout(resetTimeout);
@@ -285,8 +292,7 @@ function initEmailCopy() {
         }
         copyBtn.classList.remove('copied');
         if (copyTooltip) {
-          copyTooltip.classList.remove('opacity-100');
-          copyTooltip.classList.add('opacity-0', 'pointer-events-none');
+          copyTooltip.classList.remove('show');
         }
       }, 2000);
     } catch (err) {
@@ -307,30 +313,30 @@ function initLightbox() {
   if (!overlay) {
     overlay = document.createElement('div');
     overlay.id = 'site-lightbox';
-    overlay.className =
-      'fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 cursor-zoom-out';
+    overlay.className = 'site-lightbox-overlay';
     overlay.innerHTML = `
-      <div class="relative max-w-4xl max-h-[90vh] flex flex-col items-center">
-        <button id="lightbox-close-btn" class="absolute -top-10 right-0 text-white/80 hover:text-white text-sm font-mono p-2 cursor-pointer focus:outline-none" aria-label="Close image preview">Close &times;</button>
+      <div class="site-lightbox-content relative max-w-4xl max-h-[90vh] flex flex-col items-center">
+        <button id="lightbox-close-btn" class="absolute -top-10 right-0 text-white/80 hover:text-white text-sm font-mono p-2 cursor-pointer focus:outline-none transition-colors" aria-label="Close image preview">Close &times;</button>
         <img id="lightbox-img" src="" alt="Enlarged preview" class="max-w-full max-h-[82vh] rounded-lg border border-white/10 shadow-2xl object-contain">
         <p id="lightbox-caption" class="text-xs text-white/70 font-mono mt-3 text-center"></p>
       </div>
     `;
     document.body.appendChild(overlay);
 
+    function closeLightbox() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
     overlay.addEventListener('click', (e) => {
       if (e.target.id !== 'lightbox-img') {
-        overlay.classList.add('hidden');
-        overlay.classList.remove('flex');
-        document.body.style.overflow = '';
+        closeLightbox();
       }
     });
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
-        overlay.classList.add('hidden');
-        overlay.classList.remove('flex');
-        document.body.style.overflow = '';
+      if (e.key === 'Escape' && overlay.classList.contains('active')) {
+        closeLightbox();
       }
     });
   }
@@ -344,8 +350,7 @@ function initLightbox() {
       const targetCaption = document.getElementById('lightbox-caption');
       if (targetImg) targetImg.src = src;
       if (targetCaption) targetCaption.textContent = caption;
-      overlay.classList.remove('hidden');
-      overlay.classList.add('flex');
+      overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
   });

@@ -202,31 +202,56 @@
 
   /* Linear-style Card Surfaces */
   .project-card {
-    @apply bg-brand-surface border border-brand-border rounded-xl p-6 sm:p-7 transition-colors duration-150 flex flex-col justify-between hover:border-brand-border-hover;
+    @apply bg-brand-surface border border-brand-border rounded-xl p-6 sm:p-7 flex flex-col justify-between;
+    transition: border-color 0.48s cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 0.48s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .project-card:hover {
+    border-color: var(--brand-border-hover);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.25);
   }
 
   /* Technical Badges */
   .tech-badge {
     @apply inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono tracking-tight border border-brand-border bg-brand-dark/40 text-brand-accent/90;
+    transition: border-color 0.35s ease, background-color 0.35s ease;
   }
 
   /* Highlight Metrics */
   .metric-box {
-    @apply p-4 rounded-lg bg-brand-surface border border-brand-border flex flex-col justify-between transition-colors hover:border-brand-border-hover;
+    @apply p-4 rounded-lg bg-brand-surface border border-brand-border flex flex-col justify-between;
+    transition: transform 0.48s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.48s cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 0.48s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .metric-box:hover {
+    transform: translateY(-3px);
+    border-color: var(--brand-border-hover);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.25);
+  }
+  .light-theme .metric-box:hover {
+    box-shadow: 0 8px 20px -6px rgba(15, 23, 42, 0.08);
   }
 
   /* Interactive Project Image Box */
   .project-image-box {
-    @apply relative w-full h-64 sm:h-72 lg:h-80 max-h-[320px] rounded-lg overflow-hidden border border-brand-border bg-brand-code-bg/60 flex items-center justify-center p-3 cursor-zoom-in transition-colors hover:border-brand-border-hover;
+    @apply relative w-full h-64 sm:h-72 lg:h-80 max-h-[320px] rounded-lg overflow-hidden border border-brand-border bg-brand-code-bg/60 flex items-center justify-center p-3 cursor-zoom-in;
+    transition: border-color 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+                background-color 0.45s ease;
+  }
+  .project-image-box:hover {
+    border-color: var(--brand-border-hover);
   }
   .project-image-box img {
-    @apply max-h-full w-auto max-w-full object-contain rounded-md shadow-md transition-transform duration-300;
+    @apply max-h-full w-auto max-w-full object-contain rounded-md shadow-md;
+    transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .project-image-box:hover img {
-    transform: scale(1.03);
+    transform: scale(1.025);
   }
   .project-image-box .zoom-indicator {
-    @apply absolute top-3 right-3 p-1.5 rounded-md bg-brand-dark/75 backdrop-blur-md border border-brand-border text-brand-muted opacity-0 transition-opacity duration-200 pointer-events-none;
+    @apply absolute top-3 right-3 p-1.5 rounded-md bg-brand-dark/75 backdrop-blur-md border border-brand-border text-brand-muted opacity-0 pointer-events-none;
+    transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .project-image-box:hover .zoom-indicator {
     opacity: 1;
@@ -234,7 +259,23 @@
 
   /* Case study row */
   .case-study-row {
-    @apply border-b border-brand-border py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 transition-colors hover:bg-brand-surface/40 px-3 -mx-3 rounded-lg;
+    @apply border-b border-brand-border py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 px-3 -mx-3 rounded-lg;
+    transition: background-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .case-study-row:hover {
+    background-color: var(--brand-surface-hover);
+    transform: translateX(4px);
+  }
+  .case-study-row a {
+    transition: color 0.3s ease;
+  }
+  .case-study-row a span.arrow {
+    display: inline-block;
+    transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .case-study-row:hover a span.arrow {
+    transform: translateX(4px);
   }
 
   /* Subpage / Inner Screen Compatibility */
@@ -409,6 +450,79 @@
 
 .nav-link.nav-link-active {
   color: var(--nav-pill-text) !important;
+}
+
+/* Copied Tooltip Bubble with milky float */
+#copy-tooltip {
+  transform: translate3d(-50%, 8px, 0) scale(0.85);
+  opacity: 0;
+  transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+#copy-tooltip.show {
+  transform: translate3d(-50%, 0, 0) scale(1);
+  opacity: 1;
+}
+
+/* Lightbox Milky Bloom Modal */
+.site-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  cursor: zoom-out;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.site-lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.site-lightbox-content {
+  transform: scale(0.92);
+  opacity: 0;
+  transition: transform 0.48s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.site-lightbox-overlay.active .site-lightbox-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Back to Top floating link */
+.top-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.3s ease;
+}
+.top-link span.arrow {
+  display: inline-block;
+  transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.top-link:hover span.arrow {
+  transform: translateY(-3px);
+}
+
+/* Mobile Navigation Drawer with milky fade */
+#mobile-menu {
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+#mobile-menu.menu-open {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 /* Scroll reveal helper */

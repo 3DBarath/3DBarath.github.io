@@ -20,26 +20,29 @@
     </script>
 </head>
 <body class="bg-brand-dark text-brand-accent overflow-x-hidden">
-    <div class="noise-bg"></div>
 
-    <nav class="fixed top-0 w-full z-50 glass-panel border-b">
-        <div class="container mx-auto px-8 h-16 flex items-center justify-between">
-            <a href="../" class="text-xl font-bold tracking-tighter hover:text-brand-muted transition-colors">&larr; Barath</a>
-            <div class="flex items-center gap-6">
-                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none" aria-label="Toggle Theme">
-                    <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full z-40 nav-blur">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-2 font-display font-semibold text-base tracking-tight hover:text-brand-accent transition-colors" aria-label="Back to Portfolio">
+                <span class="text-emerald-accent">&larr;</span>
+                <span>Barath</span>
+            </a>
+            <div class="flex items-center space-x-3">
+                <a href="privacy-policy.html" class="text-xs font-mono text-brand-muted hover:text-brand-accent transition-colors">Privacy</a>
+                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus-visible:outline-2 focus-visible:outline-emerald-accent cursor-pointer rounded-md" aria-label="Toggle Theme">
+                    <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
                     </svg>
-                    <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-                <a href="privacy-policy.html" class="text-[10px] font-bold uppercase tracking-widest text-brand-muted hover:text-brand-accent transition-colors">Privacy</a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="pt-48 px-8 pb-48">
+    <main class="pt-28 md:pt-32 px-6 sm:px-8 pb-32">
         <div class="container mx-auto max-w-6xl">
             <div class="mb-24">
                 <span class="text-brand-muted font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block font-mono animate-reveal">EXPERIENCE 04 / GAME HUB</span>
@@ -112,44 +115,11 @@
         </div>
     </main>
 
-    <footer class="py-24 border-t border-brand-accent/10 text-center text-[10px] text-brand-muted uppercase tracking-[0.4em] font-bold">
-        &copy; 2026 Barath | Duo Play Systems
+    <footer class="py-16 border-t border-brand-border text-center text-xs font-mono text-brand-muted">
+        &copy; 2026 Barath &middot; Systems & Android Engineering
     </footer>
 
-    <!-- Custom Cursor -->
-    <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 border border-brand-accent rounded-full pointer-events-none z-[100] mix-blend-difference transition-transform duration-100 ease-out hidden md:block"></div>
-    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-1 h-1 bg-brand-accent rounded-full pointer-events-none z-[100] mix-blend-difference hidden md:block"></div>
-
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.162.0/three.min.js"></script>
-    <script src="../src/main.js" type="module"></script>
-
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
-
-        function updateIcons() {
-            if (document.documentElement.classList.contains('light-theme')) {
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            } else {
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            }
-        }
-
-        updateIcons();
-
-        themeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('light-theme');
-            const isLight = document.documentElement.classList.contains('light-theme');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            updateIcons();
-        });
-    </script>
+    <script src="../src/main.js"></script>
 </body>
 </html>
