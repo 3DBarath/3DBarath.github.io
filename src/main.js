@@ -97,24 +97,6 @@ function initNavPill() {
   let currentLink = null;
   let isNavActive = false;
 
-  function moveTo(link, instant = false) {
-    if (!link) return;
-    const { offsetLeft, offsetTop, offsetWidth, offsetHeight } = link;
-
-    if (instant) {
-      pill.classList.add('no-transition');
-    }
-
-    pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0)`;
-    pill.style.width = `${offsetWidth}px`;
-    pill.style.height = `${offsetHeight}px`;
-
-    if (instant) {
-      void pill.offsetWidth;
-      pill.classList.remove('no-transition');
-    }
-  }
-
   function handleEnter(link) {
     const isFirst = !isNavActive;
     isNavActive = true;
@@ -125,16 +107,40 @@ function initNavPill() {
     currentLink = link;
     currentLink.classList.add('nav-link-active');
 
-    moveTo(link, isFirst);
-    pill.style.opacity = '1';
+    const { offsetLeft, offsetTop, offsetWidth, offsetHeight } = link;
+
+    if (isFirst) {
+      // First hover: snap instantly to link position at scale(0)
+      pill.classList.add('no-transition');
+      pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(0)`;
+      pill.style.width = `${offsetWidth}px`;
+      pill.style.height = `${offsetHeight}px`;
+      pill.style.opacity = '0';
+      void pill.offsetWidth; // Force synchronous layout reflow
+      pill.classList.remove('no-transition');
+
+      // Expand smoothly from scale(0) to scale(1)
+      requestAnimationFrame(() => {
+        pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(1)`;
+        pill.style.opacity = '1';
+      });
+    } else {
+      // Subsequent hovers: smoothly glide across at scale(1)
+      pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(1)`;
+      pill.style.width = `${offsetWidth}px`;
+      pill.style.height = `${offsetHeight}px`;
+      pill.style.opacity = '1';
+    }
   }
 
   function handleLeave() {
-    pill.style.opacity = '0';
     if (currentLink) {
+      const { offsetLeft, offsetTop } = currentLink;
+      pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(0)`;
       currentLink.classList.remove('nav-link-active');
       currentLink = null;
     }
+    pill.style.opacity = '0';
     isNavActive = false;
   }
 
@@ -153,7 +159,13 @@ function initNavPill() {
 
   window.addEventListener('resize', () => {
     if (isNavActive && currentLink) {
-      moveTo(currentLink, true);
+      const { offsetLeft, offsetTop, offsetWidth, offsetHeight } = currentLink;
+      pill.classList.add('no-transition');
+      pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(1)`;
+      pill.style.width = `${offsetWidth}px`;
+      pill.style.height = `${offsetHeight}px`;
+      void pill.offsetWidth;
+      pill.classList.remove('no-transition');
     }
   });
 }
