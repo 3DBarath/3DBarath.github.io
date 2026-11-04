@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
+  initNavPill();
   initMobileMenu();
   initScrollObserver();
   initEmailCopy();
@@ -80,6 +81,71 @@ function initThemeToggle() {
         }
       );
     }).catch(() => {});
+  });
+}
+
+/**
+ * Shared Sliding Pill ("Magic Hover") Navigation Indicator
+ */
+function initNavPill() {
+  const nav = document.getElementById('desktop-nav');
+  const pill = document.getElementById('nav-pill');
+  if (!nav || !pill) return;
+
+  const links = nav.querySelectorAll('.nav-link');
+  let currentLink = null;
+  let isNavActive = false;
+
+  function moveTo(link, instant = false) {
+    if (!link) return;
+    const { offsetLeft, offsetTop, offsetWidth, offsetHeight } = link;
+
+    if (instant) {
+      pill.classList.add('no-transition');
+    }
+
+    pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0)`;
+    pill.style.width = `${offsetWidth}px`;
+    pill.style.height = `${offsetHeight}px`;
+
+    if (instant) {
+      void pill.offsetWidth;
+      pill.classList.remove('no-transition');
+    }
+  }
+
+  function handleEnter(link) {
+    const isFirst = !isNavActive;
+    isNavActive = true;
+    currentLink = link;
+
+    moveTo(link, isFirst);
+    pill.style.opacity = '1';
+  }
+
+  function handleLeave() {
+    pill.style.opacity = '0';
+    isNavActive = false;
+    currentLink = null;
+  }
+
+  links.forEach((link) => {
+    link.addEventListener('pointerenter', () => handleEnter(link));
+    link.addEventListener('focusin', () => handleEnter(link));
+  });
+
+  nav.addEventListener('pointerleave', handleLeave);
+
+  nav.addEventListener('focusout', (event) => {
+    if (!nav.contains(event.relatedTarget)) {
+      handleLeave();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (isNavActive && currentLink) {
+      moveTo(currentLink, true);
+    }
   });
 }
 
