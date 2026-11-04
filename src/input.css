@@ -17,11 +17,19 @@
   --accent-emerald-subtle: rgba(16, 185, 129, 0.12);
   --accent-indigo: #6366f1;
 
+  /* Jelly-Milk Viscous Spring Physics Tokens */
+  --ease-jelly: cubic-bezier(0.34, 1.45, 0.64, 1);
+  --ease-milk: cubic-bezier(0.22, 0.95, 0.3, 1.08);
+  --ease-squish: cubic-bezier(0.2, 0.8, 0.35, 1);
+
   /* Nav Pill Tokens (Pure White in Dark, Pure Black in Light) */
   --nav-pill-bg: #ffffff;
   --nav-pill-border: #ffffff;
-  --nav-pill-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
+  --nav-pill-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 16px rgba(255, 255, 255, 0.25);
   --nav-pill-text: #090a0f;
+
+  /* Milky Diffusion Shadows (Dark Theme) */
+  --milky-card-shadow: 0 20px 42px -12px rgba(0, 0, 0, 0.6), 0 0 24px -4px rgba(255, 255, 255, 0.05);
 
   /* Pure White Fill on Dark Theme */
   --btn-fill-hover: #ffffff;
@@ -52,8 +60,11 @@
   /* Nav Pill Tokens (Pure Black in Light) */
   --nav-pill-bg: #090a0f;
   --nav-pill-border: #090a0f;
-  --nav-pill-shadow: 0 4px 14px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --nav-pill-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), 0 0 12px rgba(0, 0, 0, 0.08);
   --nav-pill-text: #ffffff;
+
+  /* Milky Diffusion Shadows (Light Theme) */
+  --milky-card-shadow: 0 20px 42px -12px rgba(15, 23, 42, 0.1), 0 0 20px -2px rgba(15, 23, 42, 0.04);
 
   /* Pure Black Fill on Light Theme */
   --btn-fill-hover: #090a0f;
@@ -291,9 +302,11 @@ html.theme-toggle-active::view-transition-new(root) {
     color: var(--brand-accent);
     user-select: none;
     gap: 0.5rem;
-    transition: color 0.44s cubic-bezier(0.25, 1, 0.5, 1),
-                border-color 0.44s cubic-bezier(0.25, 1, 0.5, 1),
-                transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    transition: color 0.45s var(--ease-milk),
+                border-color 0.45s var(--ease-milk),
+                transform 0.45s var(--ease-jelly),
+                box-shadow 0.45s var(--ease-milk);
   }
 
   .btn:focus-visible {
@@ -301,7 +314,7 @@ html.theme-toggle-active::view-transition-new(root) {
     outline-offset: 2px;
   }
 
-  /* Expanding fill scaling from bottom center in element shape */
+  /* Expanding liquid fill scaling from bottom center in element shape */
   .btn::before {
     content: '';
     position: absolute;
@@ -310,7 +323,7 @@ html.theme-toggle-active::view-transition-new(root) {
     background-color: var(--btn-fill-hover);
     transform-origin: center bottom;
     transform: scale(0);
-    transition: transform 0.58s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.55s var(--ease-jelly);
     z-index: -1;
     pointer-events: none;
   }
@@ -322,10 +335,16 @@ html.theme-toggle-active::view-transition-new(root) {
   .btn:hover {
     color: var(--btn-fill-text);
     border-color: var(--btn-fill-hover);
+    transform: translateY(-2px) scale(1.025);
+    box-shadow: 0 10px 26px -6px rgba(0, 0, 0, 0.4), 0 0 16px -2px rgba(255, 255, 255, 0.12);
+  }
+  .light-theme .btn:hover {
+    box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.15), 0 0 12px -2px rgba(0, 0, 0, 0.06);
   }
 
   .btn:active {
-    transform: scale(0.98);
+    transform: translateY(0px) scale(0.95, 0.93);
+    transition-duration: 0.12s;
   }
 
   .btn-primary {
@@ -345,79 +364,117 @@ html.theme-toggle-active::view-transition-new(root) {
   /* Linear-style Card Surfaces */
   .project-card {
     @apply bg-brand-surface border border-brand-border rounded-xl p-6 sm:p-7 flex flex-col justify-between;
-    transition: border-color 0.48s cubic-bezier(0.25, 1, 0.5, 1),
-                box-shadow 0.48s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    transition: transform 0.5s var(--ease-milk),
+                border-color 0.5s var(--ease-milk),
+                box-shadow 0.5s var(--ease-milk);
   }
   .project-card:hover {
+    transform: translateY(-3px) scale(1.006);
     border-color: var(--brand-border-hover);
-    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--milky-card-shadow);
+  }
+  .project-card:active {
+    transform: translateY(-1px) scale(0.995);
+    transition-duration: 0.15s;
   }
 
-  /* Technical Badges */
+  /* Technical Badges with spring lift */
   .tech-badge {
     @apply inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono tracking-tight border border-brand-border bg-brand-dark/40 text-brand-accent/90;
-    transition: border-color 0.35s ease, background-color 0.35s ease;
+    cursor: default;
+    user-select: none;
+    will-change: transform;
+    transition: transform 0.35s var(--ease-jelly),
+                border-color 0.35s var(--ease-milk),
+                background-color 0.35s var(--ease-milk),
+                box-shadow 0.35s var(--ease-milk);
+  }
+  .tech-badge:hover {
+    transform: translateY(-1.5px) scale(1.06);
+    border-color: rgba(16, 185, 129, 0.4);
+    background-color: rgba(16, 185, 129, 0.08);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.3), 0 0 10px rgba(16, 185, 129, 0.18);
+  }
+  .tech-badge:active {
+    transform: translateY(0) scale(0.95);
+    transition-duration: 0.12s;
   }
 
   /* Highlight Metrics */
   .metric-box {
     @apply p-4 rounded-lg bg-brand-surface border border-brand-border flex flex-col justify-between;
-    transition: transform 0.48s cubic-bezier(0.25, 1, 0.5, 1),
-                border-color 0.48s cubic-bezier(0.25, 1, 0.5, 1),
-                box-shadow 0.48s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    transition: transform 0.45s var(--ease-jelly),
+                border-color 0.45s var(--ease-milk),
+                box-shadow 0.45s var(--ease-milk);
   }
   .metric-box:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.025);
     border-color: var(--brand-border-hover);
-    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.45), 0 0 16px -3px rgba(16, 185, 129, 0.18);
   }
   .light-theme .metric-box:hover {
-    box-shadow: 0 8px 20px -6px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 12px 28px -8px rgba(15, 23, 42, 0.12), 0 0 14px -3px rgba(5, 150, 105, 0.12);
+  }
+  .metric-box:active {
+    transform: translateY(-1px) scale(0.975);
+    transition-duration: 0.12s;
   }
 
   /* Interactive Project Image Box */
   .project-image-box {
     @apply relative w-full h-64 sm:h-72 lg:h-80 max-h-[320px] rounded-lg overflow-hidden border border-brand-border bg-brand-code-bg/60 flex items-center justify-center p-3 cursor-zoom-in;
-    transition: border-color 0.45s cubic-bezier(0.25, 1, 0.5, 1),
-                background-color 0.45s ease;
+    will-change: transform;
+    transition: border-color 0.45s var(--ease-milk),
+                background-color 0.45s ease,
+                transform 0.45s var(--ease-jelly),
+                box-shadow 0.45s var(--ease-milk);
   }
   .project-image-box:hover {
+    transform: translateY(-2px);
     border-color: var(--brand-border-hover);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.4);
   }
   .project-image-box img {
     @apply max-h-full w-auto max-w-full object-contain rounded-md shadow-md;
-    transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.7s var(--ease-milk), filter 0.5s ease;
   }
   .project-image-box:hover img {
-    transform: scale(1.025);
+    transform: scale(1.035);
   }
   .project-image-box .zoom-indicator {
     @apply absolute top-3 right-3 p-1.5 rounded-md bg-brand-dark/75 backdrop-blur-md border border-brand-border text-brand-muted opacity-0 pointer-events-none;
-    transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: opacity 0.35s var(--ease-milk);
   }
   .project-image-box:hover .zoom-indicator {
     opacity: 1;
   }
 
-  /* Case study row */
+  /* Case study row with smooth spring translation */
   .case-study-row {
     @apply border-b border-brand-border py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 px-3 -mx-3 rounded-lg;
-    transition: background-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
-                transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    transition: background-color 0.45s var(--ease-milk),
+                transform 0.45s var(--ease-jelly),
+                border-color 0.45s var(--ease-milk),
+                box-shadow 0.45s var(--ease-milk);
   }
   .case-study-row:hover {
     background-color: var(--brand-surface-hover);
-    transform: translateX(4px);
+    transform: translateX(6px) scale(1.008);
+    border-color: var(--brand-border-hover);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.35);
   }
   .case-study-row a {
     transition: color 0.3s ease;
   }
   .case-study-row a span.arrow {
     display: inline-block;
-    transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.45s var(--ease-jelly);
   }
   .case-study-row:hover a span.arrow {
-    transform: translateX(4px);
+    transform: translateX(5px) scale(1.18);
   }
 
   /* Subpage / Inner Screen Compatibility */
@@ -449,7 +506,7 @@ html.theme-toggle-active::view-transition-new(root) {
     display: flex !important;
   }
 
-  /* Interactive Email Pill */
+  /* Interactive Email Pill with jelly lift */
   .email-pill {
     position: relative;
     display: inline-flex;
@@ -461,12 +518,19 @@ html.theme-toggle-active::view-transition-new(root) {
     overflow: hidden;
     padding: 0.25rem 0.25rem 0.25rem 1rem;
     isolation: isolate;
-    transition: border-color 0.45s cubic-bezier(0.25, 1, 0.5, 1),
-                box-shadow 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    transition: transform 0.45s var(--ease-jelly),
+                border-color 0.45s var(--ease-milk),
+                box-shadow 0.45s var(--ease-milk);
   }
 
   .email-pill:hover {
+    transform: translateY(-2px) scale(1.015);
     border-color: var(--pill-fill-hover);
+    box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.45), 0 0 18px -2px rgba(255, 255, 255, 0.1);
+  }
+  .light-theme .email-pill:hover {
+    box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.12), 0 0 14px -2px rgba(0, 0, 0, 0.05);
   }
 
   /* Hover-colored background scaling from bottom center in element's exact shape */
@@ -477,7 +541,7 @@ html.theme-toggle-active::view-transition-new(root) {
     background-color: var(--pill-fill-hover);
     transform-origin: center bottom;
     transform: scale(0);
-    transition: transform 0.58s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.55s var(--ease-jelly);
     pointer-events: none;
     z-index: 1;
   }
@@ -499,14 +563,14 @@ html.theme-toggle-active::view-transition-new(root) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: color 0.44s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: color 0.44s var(--ease-milk);
   }
 
   .email-pill:hover .email-pill-label {
     color: var(--pill-hover-text);
   }
 
-  /* Copy button specifically */
+  /* Copy button specifically with jelly click bounce */
   .email-pill-copy-btn {
     position: relative;
     z-index: 2;
@@ -524,10 +588,12 @@ html.theme-toggle-active::view-transition-new(root) {
     cursor: pointer;
     outline: none;
     user-select: none;
-    transition: background-color 0.36s cubic-bezier(0.25, 1, 0.5, 1),
-                color 0.36s cubic-bezier(0.25, 1, 0.5, 1),
-                border-color 0.36s cubic-bezier(0.25, 1, 0.5, 1),
-                transform 0.18s ease;
+    will-change: transform;
+    transition: background-color 0.36s var(--ease-milk),
+                color 0.36s var(--ease-milk),
+                border-color 0.36s var(--ease-milk),
+                box-shadow 0.36s var(--ease-milk),
+                transform 0.35s var(--ease-jelly);
   }
 
   .email-pill:hover .email-pill-copy-btn {
@@ -544,15 +610,16 @@ html.theme-toggle-active::view-transition-new(root) {
     outline-offset: 1px;
   }
 
-  /* When hovering the copy button specifically: darker background and lighter text color */
   .email-pill-copy-btn:hover {
     background-color: var(--pill-copy-hover-bg) !important;
     color: var(--pill-copy-hover-text) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    transform: scale(1.08);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
   }
 
   .email-pill-copy-btn:active {
-    transform: scale(0.96);
+    transform: scale(0.92);
+    transition-duration: 0.12s;
   }
 
   .email-pill-copy-btn.copied {
@@ -560,7 +627,26 @@ html.theme-toggle-active::view-transition-new(root) {
   }
 }
 
-/* Magic Hover Sliding Nav Pill */
+/* Theme Toggle Button Micro-Animation */
+#theme-toggle {
+  will-change: transform;
+  transition: transform 0.45s var(--ease-jelly), color 0.3s ease;
+}
+#theme-toggle:hover {
+  transform: scale(1.18) rotate(10deg);
+}
+#theme-toggle:active {
+  transform: scale(0.86) rotate(-18deg);
+  transition-duration: 0.12s;
+}
+#theme-toggle svg {
+  transition: transform 0.55s var(--ease-jelly);
+}
+#theme-toggle:hover svg {
+  transform: scale(1.1);
+}
+
+/* Magic Hover Sliding Nav Pill with viscous jelly spring */
 .nav-pill {
   position: absolute;
   top: 0;
@@ -575,10 +661,10 @@ html.theme-toggle-active::view-transition-new(root) {
   transform-origin: center center;
   z-index: 0;
   will-change: transform, width, height, opacity;
-  transition: transform 460ms cubic-bezier(0.25, 1, 0.5, 1),
-              width 460ms cubic-bezier(0.25, 1, 0.5, 1),
-              height 460ms cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 280ms cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 440ms var(--ease-jelly),
+              width 400ms var(--ease-jelly),
+              height 400ms var(--ease-jelly),
+              opacity 240ms var(--ease-milk);
 }
 
 .nav-pill.no-transition {
@@ -586,22 +672,22 @@ html.theme-toggle-active::view-transition-new(root) {
 }
 
 .nav-link {
-  transition: color 0.32s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: color 0.32s var(--ease-milk);
 }
 
 .nav-link.nav-link-active {
   color: var(--nav-pill-text) !important;
 }
 
-/* Copied Tooltip Bubble with milky float */
+/* Copied Tooltip Bubble with elastic jelly bounce */
 #copy-tooltip {
-  transform: translate3d(-50%, 8px, 0) scale(0.85);
+  transform: translate3d(-50%, 8px, 0) scale(0.75);
   opacity: 0;
-  transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.45s var(--ease-jelly),
+              opacity 0.25s var(--ease-milk);
 }
 #copy-tooltip.show {
-  transform: translate3d(-50%, 0, 0) scale(1);
+  transform: translate3d(-50%, -4px, 0) scale(1.05);
   opacity: 1;
 }
 
@@ -627,17 +713,17 @@ html.theme-toggle-active::view-transition-new(root) {
   pointer-events: auto;
 }
 .site-lightbox-content {
-  transform: scale(0.92);
+  transform: scale(0.9);
   opacity: 0;
-  transition: transform 0.48s cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.52s var(--ease-jelly),
+              opacity 0.35s var(--ease-milk);
 }
 .site-lightbox-overlay.active .site-lightbox-content {
   transform: scale(1);
   opacity: 1;
 }
 
-/* Back to Top floating link */
+/* Back to Top floating link with spring jump */
 .top-link {
   display: inline-flex;
   align-items: center;
@@ -646,10 +732,29 @@ html.theme-toggle-active::view-transition-new(root) {
 }
 .top-link span.arrow {
   display: inline-block;
-  transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.45s var(--ease-jelly);
 }
 .top-link:hover span.arrow {
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.15);
+}
+
+/* Walkthrough Gallery Cards Jelly Lift */
+.reveal-on-scroll.card,
+.group.card {
+  will-change: transform;
+  transition: transform 0.5s var(--ease-milk),
+              border-color 0.45s var(--ease-milk),
+              box-shadow 0.5s var(--ease-milk);
+}
+.reveal-on-scroll.card:hover,
+.group.card:hover {
+  transform: translateY(-4px) scale(1.008);
+  box-shadow: var(--milky-card-shadow);
+}
+.reveal-on-scroll.card:active,
+.group.card:active {
+  transform: translateY(-1px) scale(0.992);
+  transition-duration: 0.12s;
 }
 
 /* Mobile Navigation Drawer with milky fade */
