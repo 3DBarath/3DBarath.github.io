@@ -17,10 +17,11 @@
   --accent-emerald-subtle: rgba(16, 185, 129, 0.12);
   --accent-indigo: #6366f1;
 
-  /* Magic Hover Nav Pill Tokens */
-  --nav-pill-bg: rgba(244, 244, 245, 0.06);
-  --nav-pill-border: rgba(244, 244, 245, 0.08);
-  --nav-pill-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  /* Magic Hover Nav Pill Tokens (Dark Theme: Solid White Pill, Black Text) */
+  --nav-pill-bg: #ffffff;
+  --nav-pill-border: #ffffff;
+  --nav-pill-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
+  --nav-pill-text: #090a0f;
 
   /* Rising Hover Fill Tokens (Dark Theme: White fill, Black text) */
   --btn-fill-hover: #ffffff;
@@ -48,10 +49,11 @@
   --accent-emerald-subtle: rgba(5, 150, 105, 0.08);
   --accent-indigo: #4f46e5;
 
-  /* Magic Hover Nav Pill Tokens */
-  --nav-pill-bg: rgba(15, 23, 42, 0.05);
-  --nav-pill-border: rgba(15, 23, 42, 0.08);
-  --nav-pill-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  /* Magic Hover Nav Pill Tokens (Light Theme: Solid Black Pill, White Text) */
+  --nav-pill-bg: #090a0f;
+  --nav-pill-border: #090a0f;
+  --nav-pill-shadow: 0 4px 14px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --nav-pill-text: #ffffff;
 
   /* Rising Hover Fill Tokens (Light Theme: Black fill, White text) */
   --btn-fill-hover: #090a0f;
@@ -157,21 +159,22 @@
     outline-offset: 2px;
   }
 
-  /* Expanding fill matching the element shape from bottom */
+  /* Expanding fill scaling from bottom center in element shape */
   .btn::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     background-color: var(--btn-fill-hover);
-    transform: translateY(100%);
+    transform-origin: center bottom;
+    transform: scale(0);
     transition: transform 0.48s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: -1;
     pointer-events: none;
   }
 
   .btn:hover::before {
-    transform: translateY(0);
+    transform: scale(1);
   }
 
   .btn:hover {
@@ -254,20 +257,21 @@
     border-color: var(--pill-fill-hover);
   }
 
-  /* Hover-colored background expanding from the bottom in element's exact shape */
+  /* Hover-colored background scaling from bottom center in element's exact shape */
   .email-pill-bg {
     position: absolute;
     inset: 0;
     border-radius: inherit;
     background-color: var(--pill-fill-hover);
-    transform: translateY(100%);
+    transform-origin: center bottom;
+    transform: scale(0);
     transition: transform 0.52s cubic-bezier(0.25, 1, 0.5, 1);
     pointer-events: none;
     z-index: 1;
   }
 
   .email-pill:hover .email-pill-bg {
-    transform: translateY(0);
+    transform: scale(1);
   }
 
   /* Label text color change */
@@ -351,21 +355,29 @@
   top: 0;
   left: 0;
   pointer-events: none;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   background-color: var(--nav-pill-bg);
   border: 1px solid var(--nav-pill-border);
   box-shadow: var(--nav-pill-shadow);
   opacity: 0;
   z-index: 0;
   will-change: transform, width, height, opacity;
-  transition: transform 220ms cubic-bezier(0.2, 0, 0, 1),
-              width 220ms cubic-bezier(0.2, 0, 0, 1),
-              height 220ms cubic-bezier(0.2, 0, 0, 1),
-              opacity 150ms cubic-bezier(0.2, 0, 0, 1);
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+              width 380ms cubic-bezier(0.16, 1, 0.3, 1),
+              height 380ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-pill.no-transition {
-  transition: opacity 150ms cubic-bezier(0.2, 0, 0, 1) !important;
+  transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.nav-link {
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link.nav-link-active {
+  color: var(--nav-pill-text) !important;
 }
 
 /* Scroll reveal helper */
@@ -385,7 +397,7 @@
   .btn::before,
   .email-pill-bg {
     transition: opacity 0.2s ease !important;
-    transform: translateY(0) !important;
+    transform: scale(1) !important;
     opacity: 0;
   }
   .btn:hover::before,

@@ -117,7 +117,12 @@ function initNavPill() {
   function handleEnter(link) {
     const isFirst = !isNavActive;
     isNavActive = true;
+
+    if (currentLink && currentLink !== link) {
+      currentLink.classList.remove('nav-link-active');
+    }
     currentLink = link;
+    currentLink.classList.add('nav-link-active');
 
     moveTo(link, isFirst);
     pill.style.opacity = '1';
@@ -125,8 +130,11 @@ function initNavPill() {
 
   function handleLeave() {
     pill.style.opacity = '0';
+    if (currentLink) {
+      currentLink.classList.remove('nav-link-active');
+      currentLink = null;
+    }
     isNavActive = false;
-    currentLink = null;
   }
 
   links.forEach((link) => {
