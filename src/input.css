@@ -3,34 +3,46 @@
 @source "../**/*.html";
 
 :root {
-  --brand-dark: #090a0d;       /* Deep matte slate */
-  --brand-accent: #f8fafc;     /* Clean off-white */
-  --brand-muted: #94a3b8;      /* Slate-400 */
-  --brand-surface: #12141a;    /* Refined surface card */
-  --brand-surface-hover: #171a22;
-  --brand-border: rgba(248, 250, 252, 0.08);
-  --brand-border-hover: rgba(248, 250, 252, 0.18);
-  --brand-code-bg: #0e1015;
+  --brand-dark: #090a0f;       /* Linear matte canvas */
+  --brand-accent: #f4f4f5;     /* Clean off-white zinc */
+  --brand-muted: #8e96a4;      /* Neutral zinc-slate */
+  --brand-surface: #111319;    /* Refined surface card */
+  --brand-surface-hover: #161821;
+  --brand-border: rgba(244, 244, 245, 0.08);
+  --brand-border-hover: rgba(244, 244, 245, 0.16);
+  --brand-code-bg: #0d0f14;
   
   /* Primary Accent: Emerald */
   --accent-emerald: #10b981;
   --accent-emerald-subtle: rgba(16, 185, 129, 0.12);
   --accent-indigo: #6366f1;
+
+  /* Email Pill Tokens */
+  --pill-bg: #111319;
+  --pill-hover-bg: #222634;
+  --pill-copy-hover-bg: #090a0f;
+  --pill-copy-hover-text: #ffffff;
 }
 
 .light-theme {
-  --brand-dark: #fafbfc;       /* Pristine light canvas */
-  --brand-accent: #0f172a;     /* Deep slate text */
-  --brand-muted: #475569;      /* Slate-600 */
+  --brand-dark: #fbfbfa;       /* Apple Notes warm paper canvas */
+  --brand-accent: #111827;     /* Deep slate text */
+  --brand-muted: #64748b;      /* Slate-500 */
   --brand-surface: #ffffff;    /* Pure white surface */
   --brand-surface-hover: #f8fafc;
-  --brand-border: rgba(15, 23, 42, 0.09);
-  --brand-border-hover: rgba(15, 23, 42, 0.22);
+  --brand-border: rgba(15, 23, 42, 0.08);
+  --brand-border-hover: rgba(15, 23, 42, 0.18);
   --brand-code-bg: #f1f5f9;
   
   --accent-emerald: #059669;
-  --accent-emerald-subtle: rgba(5, 150, 105, 0.1);
+  --accent-emerald-subtle: rgba(5, 150, 105, 0.08);
   --accent-indigo: #4f46e5;
+
+  /* Email Pill Tokens */
+  --pill-bg: #ffffff;
+  --pill-hover-bg: #e2e8f0;
+  --pill-copy-hover-bg: #0f172a;
+  --pill-copy-hover-text: #ffffff;
 }
 
 @theme {
@@ -46,9 +58,9 @@
   --color-emerald-subtle: var(--accent-emerald-subtle);
   --color-indigo-accent: var(--accent-indigo);
   
-  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 @layer base {
@@ -59,24 +71,46 @@
   
   body {
     @apply bg-brand-dark text-brand-accent font-sans antialiased selection:bg-emerald-accent selection:text-brand-dark;
-    transition: background-color 0.25s ease, color 0.25s ease;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-brand-accent;
+    @apply font-display tracking-tight text-brand-accent text-balance;
+  }
+
+  /* Monospace figures */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }
 
+/* Fast Unidirectional Circular View Transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-image-pair(root) {
+  isolation: isolate;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
 @layer components {
-  /* Navigation */
+  /* Navigation Blur */
   .nav-blur {
-    @apply bg-brand-dark/85 backdrop-blur-md border-b border-brand-border;
-    transition: background-color 0.25s ease, border-color 0.25s ease;
+    @apply bg-brand-dark/80 backdrop-blur-md border-b border-brand-border;
   }
 
   /* Interactive Buttons */
   .btn {
-    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold transition-all duration-200 tracking-tight text-sm gap-2 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-emerald-accent focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-150 tracking-tight text-xs sm:text-sm gap-2 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-emerald-accent focus-visible:outline-offset-2;
   }
   .btn-primary {
     @apply bg-brand-accent text-brand-dark hover:opacity-90 active:scale-[0.98];
@@ -85,43 +119,155 @@
     @apply border border-brand-border text-brand-accent hover:border-brand-border-hover hover:bg-brand-surface active:scale-[0.98];
   }
 
-  /* Card Surfaces */
+  /* Linear-style Card Surfaces */
   .project-card {
-    @apply bg-brand-surface border border-brand-border rounded-xl p-6 md:p-8 transition-all duration-200 flex flex-col justify-between hover:border-brand-border-hover;
+    @apply bg-brand-surface border border-brand-border rounded-xl p-6 sm:p-7 transition-colors duration-150 flex flex-col justify-between hover:border-brand-border-hover;
   }
 
   /* Technical Badges */
   .tech-badge {
-    @apply inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-mono font-medium tracking-tight border border-brand-border bg-brand-dark/40 text-brand-accent/90;
+    @apply inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono tracking-tight border border-brand-border bg-brand-dark/40 text-brand-accent/90;
   }
 
   /* Highlight Metrics */
   .metric-box {
-    @apply p-4 rounded-lg bg-brand-dark/50 border border-brand-border;
+    @apply p-4 rounded-lg bg-brand-surface border border-brand-border flex flex-col justify-between transition-colors hover:border-brand-border-hover;
   }
 
-  /* Project Image Container */
+  /* Interactive Project Image Box */
   .project-image-box {
-    @apply relative w-full rounded-lg overflow-hidden border border-brand-border bg-brand-dark/30;
+    @apply relative w-full rounded-lg overflow-hidden border border-brand-border bg-brand-dark/40 cursor-zoom-in;
   }
   .project-image-box img {
     @apply w-full h-full object-cover transition-transform duration-300;
   }
-  .project-card:hover .project-image-box img {
-    @apply scale-[1.02];
+  .project-image-box:hover img {
+    transform: scale(1.02);
+  }
+  .project-image-box .zoom-indicator {
+    @apply absolute top-3 right-3 p-1.5 rounded-md bg-brand-dark/75 backdrop-blur-md border border-brand-border text-brand-muted opacity-0 transition-opacity duration-200 pointer-events-none;
+  }
+  .project-image-box:hover .zoom-indicator {
+    opacity: 1;
   }
 
   /* Case study row */
   .case-study-row {
-    @apply border-b border-brand-border py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4 transition-colors hover:bg-brand-surface/40 px-3 -mx-3 rounded-lg;
+    @apply border-b border-brand-border py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 transition-colors hover:bg-brand-surface/40 px-3 -mx-3 rounded-lg;
+  }
+
+  /* Interactive Email Pill */
+  .email-pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    border-radius: 9999px;
+    background-color: var(--pill-bg);
+    border: 1px solid var(--brand-border);
+    overflow: hidden;
+    padding: 0.25rem 0.25rem 0.25rem 1rem;
+    isolation: isolate;
+    transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .email-pill:hover {
+    border-color: var(--brand-border-hover);
+  }
+
+  /* Hover-colored rounded background expanding from the bottom */
+  .email-pill-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background-color: var(--pill-hover-bg);
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .email-pill:hover .email-pill-bg {
+    transform: translateY(0);
+  }
+
+  /* Label text color change */
+  .email-pill-label {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--brand-muted);
+    text-decoration: none;
+    padding-right: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .email-pill:hover .email-pill-label {
+    color: var(--brand-accent);
+  }
+
+  /* Copy button specifically */
+  .email-pill-copy-btn {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--brand-muted);
+    background-color: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.15s ease;
+  }
+
+  .email-pill-copy-btn:focus-visible {
+    outline: 2px solid var(--accent-emerald);
+    outline-offset: 1px;
+  }
+
+  /* When hovering the copy button specifically: darker background and lighter text color */
+  .email-pill-copy-btn:hover {
+    background-color: var(--pill-copy-hover-bg);
+    color: var(--pill-copy-hover-text);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .light-theme .email-pill-copy-btn:hover {
+    border-color: rgba(15, 23, 42, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .email-pill-copy-btn:active {
+    transform: scale(0.96);
+  }
+
+  .email-pill-copy-btn.copied {
+    color: var(--accent-emerald) !important;
   }
 }
 
-/* Scroll reveal helper (native IntersectionObserver) */
+/* Scroll reveal helper */
 .reveal-init {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(12px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-visible {
@@ -131,6 +277,14 @@
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
+  .email-pill-bg {
+    transition: opacity 0.2s ease !important;
+    transform: translateY(0) !important;
+    opacity: 0;
+  }
+  .email-pill:hover .email-pill-bg {
+    opacity: 1;
+  }
   .reveal-init {
     opacity: 1 !important;
     transform: none !important;
