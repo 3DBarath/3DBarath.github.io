@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initLightbox();
 });
 
+// Initialize view transitions immediately for earliest event capture
+initPageTransitions();
+
 /**
  * Dark / Light Theme Manager
  */
@@ -62,6 +65,7 @@ function initThemeToggle() {
       Math.max(y, window.innerHeight - y)
     );
 
+    document.documentElement.classList.add('theme-toggle-active');
     const transition = document.startViewTransition(() => {
       performToggle();
     });
@@ -82,6 +86,10 @@ function initThemeToggle() {
         }
       );
     }).catch(() => {});
+
+    transition.finished.finally(() => {
+      document.documentElement.classList.remove('theme-toggle-active');
+    });
   });
 }
 
@@ -362,5 +370,135 @@ function initLightbox() {
         img.click();
       }
     });
+  });
+}
+
+/**
+ * Milky Page-to-Page Navigation Transitions
+ * Seamless cross-document transitions, shared hero container transforms & back-gesture handling
+ */
+function initPageTransitions() {
+  const supportsCrossDoc = 'onpagereveal' in window;
+
+  function syncArrival(vt) {
+    const navDir = sessionStorage.getItem('nav-direction');
+    if (navDir === 'back') {
+      document.documentElement.dataset.navDir = 'back';
+      if (vt?.types) {
+        try {
+          vt.types.add('page-back');
+        } catch (_) {}
+      }
+    } else {
+      document.documentElement.removeAttribute('data-nav-dir');
+    }
+
+    const activeProject = sessionStorage.getItem('active-project');
+    if (activeProject) {
+      const isHome = document.body?.dataset?.projectPage === 'home';
+      if (isHome) {
+        const homeImg = document.querySelector(`[data-project-hero="${activeProject}"]`);
+        if (homeImg) {
+          homeImg.style.viewTransitionName = 'hero-active';
+        }
+      }
+    }
+
+    setTimeout(() => {
+      document.documentElement.removeAttribute('data-nav-dir');
+      sessionStorage.removeItem('nav-direction');
+      sessionStorage.removeItem('active-project');
+      document.querySelectorAll('[style*="view-transition-name"]').forEach((el) => {
+        const page = document.body?.dataset?.projectPage;
+        if (page !== 'gceshostel' && page !== 'connectlnx') {
+          el.style.viewTransitionName = '';
+        }
+      });
+    }, 600);
+  }
+
+  if (supportsCrossDoc) {
+    window.addEventListener('pagereveal', (e) => {
+      syncArrival(e.viewTransition);
+    });
+
+    window.addEventListener('pageswap', () => {
+      const activeProject = sessionStorage.getItem('active-project');
+      if (activeProject && document.body?.dataset?.projectPage === 'home') {
+        const homeImg = document.querySelector(`[data-project-hero="${activeProject}"]`);
+        if (homeImg) {
+          homeImg.style.viewTransitionName = 'hero-active';
+        }
+      }
+    });
+  } else {
+    syncArrival(null);
+  }
+
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      document.documentElement.removeAttribute('data-nav-dir');
+      document.body.classList.remove('page-milky-fallback-exit');
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, window.location.href);
+    } catch {
+      return;
+    }
+    if (url.origin !== window.location.origin) return;
+
+    const linkText = link.textContent || '';
+    const isBack = href === '../' || href === './' || link.getAttribute('aria-label')?.includes('Back') || linkText.includes('←') || linkText.includes('&larr;');
+    const isProject = href.includes('gceshostel') || href.includes('connectlnx') || href.includes('smart-expense-tracker') || href.includes('chessgame') || href.includes('two-player-games');
+
+    if (isBack) {
+      sessionStorage.setItem('nav-direction', 'back');
+      document.documentElement.dataset.navDir = 'back';
+      const currentPage = document.body?.dataset?.projectPage;
+      if (currentPage && currentPage !== 'home') {
+        sessionStorage.setItem('active-project', currentPage);
+      }
+    } else if (isProject) {
+      sessionStorage.setItem('nav-direction', 'forward');
+      document.documentElement.removeAttribute('data-nav-dir');
+      let projectKey = '';
+      if (href.includes('gceshostel')) projectKey = 'gceshostel';
+      else if (href.includes('connectlnx')) projectKey = 'connectlnx';
+      else if (href.includes('smart-expense-tracker')) projectKey = 'smartexpense';
+      else if (href.includes('chessgame')) projectKey = 'chessgame';
+      else if (href.includes('two-player-games')) projectKey = 'two-player-games';
+
+      if (projectKey) {
+        sessionStorage.setItem('active-project', projectKey);
+        const card = link.closest('.project-card');
+        const cardImg = card?.querySelector(`[data-project-hero="${projectKey}"]`) ||
+                        document.querySelector(`[data-project-hero="${projectKey}"]`);
+        if (cardImg) {
+          cardImg.style.viewTransitionName = 'hero-active';
+        }
+      }
+    }
+
+    if (!supportsCrossDoc && !document.startViewTransition) {
+      e.preventDefault();
+      document.body.classList.add('page-milky-fallback-exit');
+      setTimeout(() => {
+        window.location.href = link.href;
+      }, 220);
+    }
   });
 }
