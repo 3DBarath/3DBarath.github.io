@@ -75,8 +75,9 @@ function initThemeToggle() {
           ]
         },
         {
-          duration: 280,
-          easing: 'cubic-bezier(0.2, 0, 0, 1)',
+          duration: 480,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          fill: 'both',
           pseudoElement: '::view-transition-new(root)'
         }
       );
