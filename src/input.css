@@ -121,15 +121,15 @@
 /* ==========================================================================
    Page-to-Page View Transitions (Milky Viscous Fluidity)
    ========================================================================== */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition {
+  background-color: var(--brand-dark);
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-
-  ::view-transition {
-    background-color: var(--brand-dark);
-  }
-
   /* Fixed Navigation Header stays pinned smoothly across all pages */
   header.nav-blur {
     view-transition-name: main-navbar;
