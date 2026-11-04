@@ -237,6 +237,35 @@
     @apply border-b border-brand-border py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 transition-colors hover:bg-brand-surface/40 px-3 -mx-3 rounded-lg;
   }
 
+  /* Subpage / Inner Screen Compatibility */
+  .glass-panel {
+    @apply bg-brand-dark/85 backdrop-blur-md border-b border-brand-border;
+  }
+  .light-theme .glass-panel {
+    @apply bg-brand-surface/90 border-b border-brand-border;
+  }
+  .card {
+    @apply bg-brand-surface border border-brand-border rounded-xl;
+  }
+  .noise-bg {
+    display: none !important;
+  }
+
+  /* Universal Mobile Menu Safety: never in flow, hidden by default unless explicitly activated */
+  #mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: var(--brand-dark);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    display: none !important;
+  }
+  #mobile-menu.active,
+  #mobile-menu.flex:not(.hidden) {
+    display: flex !important;
+  }
+
   /* Interactive Email Pill */
   .email-pill {
     position: relative;

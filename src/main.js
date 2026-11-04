@@ -75,8 +75,8 @@ function initThemeToggle() {
           ]
         },
         {
-          duration: 480,
-          easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          duration: 580,
+          easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
           fill: 'both',
           pseudoElement: '::view-transition-new(root)'
         }
@@ -192,6 +192,9 @@ function initMobileMenu() {
     menuToggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
+
+  // Ensure menu starts closed on all screens
+  closeMenu();
 
   menuToggle.addEventListener('click', openMenu);
   if (menuClose) menuClose.addEventListener('click', closeMenu);
