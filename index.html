@@ -23,7 +23,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <script type="application/ld+json">
     {
@@ -55,7 +55,7 @@
     </script>
 </head>
 
-<body class="bg-brand-dark text-brand-accent overflow-x-hidden">
+<body class="bg-brand-dark text-brand-accent overflow-x-hidden" data-project-page="home">
 
     <!-- Navigation -->
     <header class="fixed top-0 w-full z-40 nav-blur">
@@ -129,14 +129,14 @@
         <!-- Hero Section -->
         <section id="hero" class="mb-24 reveal-init">
             <div class="max-w-3xl">
-                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-2">
+                <h1 class="text-4xl sm:text-6xl font-semibold tracking-tight mb-3">
                     Barath B
                 </h1>
-                <p class="text-xl sm:text-2xl text-emerald-accent font-medium tracking-tight mb-6">
+                <p class="text-lg sm:text-xl text-emerald-accent font-medium mb-6">
                     Android &amp; Systems Engineer
                 </p>
 
-                <p class="text-base sm:text-lg text-brand-muted leading-relaxed mb-8 max-w-2xl">
+                <p class="text-base sm:text-[17px] text-brand-muted leading-relaxed mb-8 max-w-2xl">
                     I build complete client-server architectures, cross-platform socket engines, and production Android applications. Creator of GCES Hostel (1,200 daily active students with distributed midnight state transitions) and ConnectLnx.
                 </p>
 
@@ -156,19 +156,19 @@
             <!-- Factual Highlights Matrix -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 pt-8 border-t border-brand-border">
                 <div class="metric-box">
-                    <div class="text-2xl sm:text-3xl font-bold font-mono tabular-nums text-emerald-accent">1,200</div>
+                    <div class="text-2xl sm:text-3xl font-semibold font-mono tabular-nums text-emerald-accent">1,200</div>
                     <div class="text-xs text-brand-muted font-mono mt-1">Daily Active Users &bull; GCES Hostel</div>
                 </div>
                 <div class="metric-box">
-                    <div class="text-2xl sm:text-3xl font-bold font-mono tabular-nums text-brand-accent">4</div>
+                    <div class="text-2xl sm:text-3xl font-semibold font-mono tabular-nums text-brand-accent">4</div>
                     <div class="text-xs text-brand-muted font-mono mt-1">Platforms (Android, Linux, Windows, AUR)</div>
                 </div>
                 <div class="metric-box">
-                    <div class="text-2xl sm:text-3xl font-bold font-mono tabular-nums text-emerald-accent">37.7%</div>
+                    <div class="text-2xl sm:text-3xl font-semibold font-mono tabular-nums text-emerald-accent">37.7%</div>
                     <div class="text-xs text-brand-muted font-mono mt-1">Oracle Depth Ceiling (AI Research)</div>
                 </div>
                 <div class="metric-box">
-                    <div class="text-2xl sm:text-3xl font-bold font-mono tabular-nums text-brand-accent">6</div>
+                    <div class="text-2xl sm:text-3xl font-semibold font-mono tabular-nums text-brand-accent">6</div>
                     <div class="text-xs text-brand-muted font-mono mt-1">Automated Release Targets (CLI)</div>
                 </div>
             </div>
@@ -177,7 +177,7 @@
         <!-- Featured Projects Section -->
         <section id="projects" class="mb-28 scroll-mt-24">
             <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Projects</h2>
+                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Projects</h2>
             </div>
 
             <div class="space-y-8">
@@ -191,7 +191,7 @@
                                     <span class="tech-badge text-emerald-accent border-emerald-accent/30 bg-emerald-accent/10">1,200 Daily Active Users</span>
                                     <span class="tech-badge">Live on Google Play</span>
                                 </div>
-                                <h3 class="text-2xl font-bold tracking-tight mb-2">GCES Hostel Operations Platform</h3>
+                                <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2"><a href="gceshostel/" class="hover:text-emerald-accent transition-colors">GCES Hostel Operations Platform</a></h3>
                                 <p class="text-sm text-brand-muted leading-relaxed mb-4">
                                     Full-stack institutional operations platform deployed to 1,200 active residential students. Multi-module Clean Architecture separating <code class="text-emerald-accent font-mono text-xs">:app</code>, <code class="text-emerald-accent font-mono text-xs">:server</code>, and <code class="text-emerald-accent font-mono text-xs">:common</code>. Engineered a predictive meal engine using ShedLock distributed JDBC locks on PostgreSQL so midnight attendance resets remain atomic across backend nodes. Token bucket rate limiting preserves peak sub-100ms API latency.
                                 </p>
@@ -219,7 +219,7 @@
 
                         <div class="lg:col-span-5">
                             <div class="project-image-box">
-                                <img src="assets/hostelapp/hostel_1.jpg" alt="GCES Hostel Android Application Interface" data-lightbox loading="lazy">
+                                <img src="assets/hostelapp/hostel_1.jpg" alt="GCES Hostel Android Application Interface" data-lightbox loading="lazy" data-project-hero="gceshostel">
                                 <div class="zoom-indicator" aria-hidden="true">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
@@ -239,7 +239,7 @@
                                     <span class="tech-badge text-emerald-accent border-emerald-accent/30 bg-emerald-accent/10">Kotlin Multiplatform</span>
                                     <span class="tech-badge">Play Store, AUR & Windows</span>
                                 </div>
-                                <h3 class="text-2xl font-bold tracking-tight mb-2">ConnectLnx Multiplatform Transfer</h3>
+                                <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2"><a href="connectlnx/" class="hover:text-emerald-accent transition-colors">ConnectLnx Multiplatform Transfer</a></h3>
                                 <p class="text-sm text-brand-muted leading-relaxed mb-4">
                                     High-throughput local network file transfer utility sharing business logic across Android, Linux, and Windows. Designed a custom binary TCP protocol with parallel multi-socket streaming, multiplexing chunks across 5 concurrent sockets for maximum local network transfer rates. Features zero-configuration mDNS peer discovery with QR camera pairing fallback.
                                 </p>
@@ -266,7 +266,7 @@
 
                         <div class="lg:col-span-5">
                             <div class="project-image-box">
-                                <img src="assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Multiplatform Transfer Interface" data-lightbox loading="lazy">
+                                <img src="assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Multiplatform Transfer Interface" data-lightbox loading="lazy" data-project-hero="connectlnx">
                                 <div class="zoom-indicator" aria-hidden="true">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
@@ -284,7 +284,7 @@
                             <span class="tech-badge text-emerald-accent border-emerald-accent/30 bg-emerald-accent/10">Release Orchestration</span>
                             <span class="tech-badge">6 Target Platforms</span>
                         </div>
-                        <h3 class="text-xl sm:text-2xl font-bold tracking-tight mb-2">Aztrox Release CLI Orchestrator</h3>
+                        <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2">Aztrox Release CLI Orchestrator</h3>
                         <p class="text-sm text-brand-muted leading-relaxed mb-4 max-w-4xl">
                             Unified release CLI automating build, signing, and distribution across 3 live codebases and 6 deployment targets: Google Play, GitHub Releases, AUR, Render, HuggingFace Spaces, and Firebase. Features a LIFO atomic rollback registry that reverts version bumps, gradle properties, and git tags if any intermediate stage fails.
                         </p>
@@ -309,7 +309,7 @@
                                     <span class="tech-badge">Offline-First</span>
                                     <span class="tech-badge">Room & Canvas</span>
                                 </div>
-                                <h4 class="text-lg font-bold tracking-tight mb-2">Smart Expense Tracker</h4>
+                                <h4 class="text-base sm:text-lg font-semibold tracking-tight mb-2"><a href="smart-expense-tracker/" class="hover:text-emerald-accent transition-colors">Smart Expense Tracker</a></h4>
                                 <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
                                     Offline-first personal finance app. Interactive spending charts drawn on Jetpack Compose Canvas, Room database with reactive Flow queries, and background budget threshold notifications via WorkManager.
                                 </p>
@@ -327,7 +327,7 @@
                                     <span class="tech-badge">C++ GDExtension</span>
                                     <span class="tech-badge">Native Interop</span>
                                 </div>
-                                <h4 class="text-lg font-bold tracking-tight mb-2">Game Engines & Stockfish Interop</h4>
+                                <h4 class="text-base sm:text-lg font-semibold tracking-tight mb-2"><a href="chessgame/" class="hover:text-emerald-accent transition-colors">Game Engines & Stockfish Interop</a></h4>
                                 <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
                                     C++ GDExtension bindings integrating the Stockfish evaluation engine directly into Godot for high-speed local chess evaluation, alongside two-player local multiplayer arcade systems.
                                 </p>
@@ -346,13 +346,13 @@
         <!-- Experience Section -->
         <section id="experience" class="mb-28 scroll-mt-24">
             <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Experience</h2>
+                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Experience</h2>
             </div>
 
             <article class="project-card reveal-init">
                 <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-4">
                     <div>
-                        <h3 class="text-2xl font-bold tracking-tight">Thinkster Math</h3>
+                        <h3 class="text-xl sm:text-2xl font-semibold tracking-tight">Thinkster Math</h3>
                         <p class="text-sm font-mono text-emerald-accent mt-0.5">AI Systems & Automation Intern</p>
                     </div>
                     <div class="text-xs font-mono text-brand-muted">
@@ -403,7 +403,7 @@
         <!-- Research Section -->
         <section id="research" class="mb-28 scroll-mt-24">
             <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Research & Architecture</h2>
+                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Research & Architecture</h2>
             </div>
 
             <!-- Featured Study -->
@@ -413,7 +413,7 @@
                     <span class="text-xs font-mono text-brand-muted">PyTorch Evaluation Suite</span>
                 </div>
 
-                <h3 class="text-xl sm:text-2xl font-bold tracking-tight mb-2">
+                <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2">
                     How Deep Does a Next-Concept Model Need to Run?
                 </h3>
 
@@ -423,15 +423,15 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-brand-border">
                     <div class="metric-box">
-                        <div class="text-2xl font-bold font-mono tabular-nums text-emerald-accent">37.7%</div>
+                        <div class="text-2xl font-semibold font-mono tabular-nums text-emerald-accent">37.7%</div>
                         <div class="text-xs text-brand-muted font-mono mt-1">Oracle Depth Ceiling (XSum)</div>
                     </div>
                     <div class="metric-box">
-                        <div class="text-2xl font-bold font-mono tabular-nums text-brand-accent">1 in 8</div>
+                        <div class="text-2xl font-semibold font-mono tabular-nums text-brand-accent">1 in 8</div>
                         <div class="text-xs text-brand-muted font-mono mt-1">Passes Safely Saved (Unsupervised)</div>
                     </div>
                     <div class="metric-box">
-                        <div class="text-2xl font-bold font-mono tabular-nums text-emerald-accent">0.20</div>
+                        <div class="text-2xl font-semibold font-mono tabular-nums text-emerald-accent">0.20</div>
                         <div class="text-xs text-brand-muted font-mono mt-1">ROUGE-L Divergence Delta</div>
                     </div>
                 </div>
@@ -441,7 +441,7 @@
             <div class="space-y-3">
                 <div class="case-study-row">
                     <div>
-                        <h4 class="text-base sm:text-lg font-bold">Distributed Concurrency & Atomic Midnight Token Locks</h4>
+                        <h4 class="text-base sm:text-lg font-semibold">Distributed Concurrency & Atomic Midnight Token Locks</h4>
                         <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
                             How ShedLock distributed JDBC locks eliminate race conditions during midnight attendance resets across clustered backend nodes in GCES Hostel, while Bucket4j throttles requests to preserve sub-100ms API latency.
                         </p>
@@ -453,7 +453,7 @@
 
                 <div class="case-study-row">
                     <div>
-                        <h4 class="text-base sm:text-lg font-bold">Zero-Copy Parallel TCP Socket Streaming in Kotlin Multiplatform</h4>
+                        <h4 class="text-base sm:text-lg font-semibold">Zero-Copy Parallel TCP Socket Streaming in Kotlin Multiplatform</h4>
                         <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
                             Architectural breakdown of ConnectLnx: custom binary protocol multiplexing file chunks across 5 concurrent TCP connections using Java NIO SocketChannels and mDNS zero-configuration network discovery.
                         </p>
@@ -465,7 +465,7 @@
 
                 <div class="case-study-row">
                     <div>
-                        <h4 class="text-base sm:text-lg font-bold">Automated Multimodal QA Pipelines with Vision LLMs</h4>
+                        <h4 class="text-base sm:text-lg font-semibold">Automated Multimodal QA Pipelines with Vision LLMs</h4>
                         <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
                             Architecture of the automated evaluation pipeline built at Thinkster Math: unattended Selenium capture harnesses, prompt calibration for mathematical validity, and thread-safe batch execution.
                         </p>
@@ -480,12 +480,12 @@
         <!-- Technical Stack Section -->
         <section id="stack" class="mb-28 scroll-mt-24">
             <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Stack</h2>
+                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Stack</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 reveal-init">
                 <div class="project-card">
-                    <h3 class="text-sm font-bold font-mono text-emerald-accent mb-3">Mobile & Multiplatform</h3>
+                    <h3 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-accent mb-3">Mobile & Multiplatform</h3>
                     <div class="flex flex-wrap gap-1.5">
                         <span class="tech-badge">Kotlin</span>
                         <span class="tech-badge">Jetpack Compose</span>
@@ -500,7 +500,7 @@
                 </div>
 
                 <div class="project-card">
-                    <h3 class="text-sm font-bold font-mono text-emerald-accent mb-3">Backend & Distributed Systems</h3>
+                    <h3 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-accent mb-3">Backend & Distributed Systems</h3>
                     <div class="flex flex-wrap gap-1.5">
                         <span class="tech-badge">Spring Boot 3.5</span>
                         <span class="tech-badge">PostgreSQL</span>
@@ -515,7 +515,7 @@
                 </div>
 
                 <div class="project-card">
-                    <h3 class="text-sm font-bold font-mono text-emerald-accent mb-3">AI & Automation</h3>
+                    <h3 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-accent mb-3">AI & Automation</h3>
                     <div class="flex flex-wrap gap-1.5">
                         <span class="tech-badge">Python</span>
                         <span class="tech-badge">Selenium WebDriver</span>
@@ -530,7 +530,7 @@
                 </div>
 
                 <div class="project-card">
-                    <h3 class="text-sm font-bold font-mono text-emerald-accent mb-3">DevOps & Release Tooling</h3>
+                    <h3 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-accent mb-3">DevOps & Release Tooling</h3>
                     <div class="flex flex-wrap gap-1.5">
                         <span class="tech-badge">GitHub Actions CI/CD</span>
                         <span class="tech-badge">Fastlane</span>
@@ -548,7 +548,7 @@
         <!-- Education & Credentials -->
         <section id="education" class="mb-28 scroll-mt-24">
             <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Education</h2>
+                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Education</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 reveal-init">
@@ -558,7 +558,7 @@
                         <span class="tech-badge">B.E. Computer Science</span>
                         <span class="text-xs font-mono text-emerald-accent font-semibold">2023 – 2027</span>
                     </div>
-                    <h3 class="text-lg font-bold mb-1">Government College of Engineering, Srirangam</h3>
+                    <h3 class="text-lg font-semibold mb-1">Government College of Engineering, Srirangam</h3>
                     <p class="text-xs font-mono text-brand-muted mb-3">CGPA: 7.6 / 10.0 &bull; Trichy, India</p>
                     <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
                         Coursework: Operating Systems, Computer Networks, Object-Oriented Programming, Data Structures & Algorithms, Distributed Systems.
@@ -567,7 +567,7 @@
 
                 <!-- Verified Credentials -->
                 <div class="md:col-span-5 project-card">
-                    <h3 class="text-xs font-bold mb-3 font-mono text-brand-muted uppercase tracking-wider">Certifications</h3>
+                    <h3 class="text-xs font-semibold mb-3 font-mono text-brand-muted uppercase tracking-wider">Certifications</h3>
                     <ul class="space-y-2.5 text-xs sm:text-sm text-brand-muted">
                         <li class="flex items-center justify-between pb-2 border-b border-brand-border">
                             <span class="text-brand-accent font-medium">Mobile App Development using Kotlin</span>
@@ -591,7 +591,7 @@
             <div class="project-card p-6 sm:p-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <div>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Contact</h2>
+                        <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-2">Contact</h2>
                         <p class="text-sm text-brand-muted leading-relaxed mb-6">
                             Available for core Android, Kotlin Multiplatform, and systems engineering roles.
                         </p>
