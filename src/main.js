@@ -35,11 +35,51 @@ function initThemeToggle() {
 
   updateIcons();
 
-  themeToggle.addEventListener('click', () => {
-    document.documentElement.classList.toggle('light-theme');
-    const isLight = document.documentElement.classList.contains('light-theme');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    updateIcons();
+  themeToggle.addEventListener('click', (event) => {
+    const isAppearanceTransition =
+      document.startViewTransition &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const performToggle = () => {
+      document.documentElement.classList.toggle('light-theme');
+      const isLight = document.documentElement.classList.contains('light-theme');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateIcons();
+    };
+
+    if (!isAppearanceTransition) {
+      performToggle();
+      return;
+    }
+
+    const rect = themeToggle.getBoundingClientRect();
+    const x = event.clientX || (rect.left + rect.width / 2);
+    const y = event.clientY || (rect.top + rect.height / 2);
+
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      performToggle();
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`
+          ]
+        },
+        {
+          duration: 280,
+          easing: 'cubic-bezier(0.2, 0, 0, 1)',
+          pseudoElement: '::view-transition-new(root)'
+        }
+      );
+    }).catch(() => {});
   });
 }
 
@@ -114,20 +154,51 @@ function initScrollObserver() {
 function initEmailCopy() {
   const copyBtn = document.getElementById('copy-email-btn');
   const copyTooltip = document.getElementById('copy-tooltip');
+  const copyIcon = document.getElementById('copy-icon');
+  const checkIcon = document.getElementById('check-icon');
+  const copyBtnText = document.getElementById('copy-btn-text');
   if (!copyBtn) return;
 
-  copyBtn.addEventListener('click', async () => {
+  let resetTimeout = null;
+
+  copyBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const email = 'barathjack77@gmail.com';
     try {
       await navigator.clipboard.writeText(email);
+
+      // Icon & text feedback
+      if (copyIcon && checkIcon) {
+        copyIcon.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+      }
+      if (copyBtnText) {
+        copyBtnText.textContent = 'Copied!';
+      }
+      copyBtn.classList.add('copied');
+
+      // Floating tooltip
       if (copyTooltip) {
         copyTooltip.classList.remove('opacity-0', 'pointer-events-none');
         copyTooltip.classList.add('opacity-100');
-        setTimeout(() => {
+      }
+
+      if (resetTimeout) clearTimeout(resetTimeout);
+      resetTimeout = setTimeout(() => {
+        if (copyIcon && checkIcon) {
+          copyIcon.classList.remove('hidden');
+          checkIcon.classList.add('hidden');
+        }
+        if (copyBtnText) {
+          copyBtnText.textContent = 'Copy';
+        }
+        copyBtn.classList.remove('copied');
+        if (copyTooltip) {
           copyTooltip.classList.remove('opacity-100');
           copyTooltip.classList.add('opacity-0', 'pointer-events-none');
-        }, 2200);
-      }
+        }
+      }, 2000);
     } catch (err) {
       console.warn('Clipboard write failed, opening mailto:', err);
       window.location.href = `mailto:${email}`;
@@ -186,6 +257,15 @@ function initLightbox() {
       overlay.classList.remove('hidden');
       overlay.classList.add('flex');
       document.body.style.overflow = 'hidden';
+    });
+  });
+
+  document.querySelectorAll('.project-image-box').forEach((box) => {
+    box.addEventListener('click', (e) => {
+      const img = box.querySelector('img[data-lightbox]');
+      if (img && e.target !== img) {
+        img.click();
+      }
     });
   });
 }
