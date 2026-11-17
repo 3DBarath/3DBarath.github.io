@@ -5,12 +5,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initNavUnderline();
+  initScrollProgressAndSpy();
   initMobileMenu();
-  initScrollObserver();
+  preloadPortfolioFrames();
   initHeroArtifactStage();
+  initScrollytellingStage();
   initGallerySwitchers();
   initConnectLnxProtocolStepper();
   initExperienceTraceTabs();
+  initScrollObserver();
   initEmailCopy();
   initImageFallbacks();
   initLightbox();
@@ -119,6 +122,51 @@ function initNavUnderline() {
   });
 }
 
+function initScrollProgressAndSpy() {
+  const progressBar = document.getElementById('scroll-progress');
+  const navLinks = Array.from(document.querySelectorAll('#desktop-nav .nav-link'));
+  const sections = navLinks
+    .map((link) => {
+      const id = link.getAttribute('href')?.replace('#', '');
+      const el = id ? document.getElementById(id) : null;
+      return el ? { link, el } : null;
+    })
+    .filter(Boolean);
+
+  if (!progressBar && !sections.length) return;
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    if (progressBar) {
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const ratio = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+      progressBar.style.transform = `scaleX(${ratio.toFixed(4)})`;
+    }
+
+    if (sections.length) {
+      const marker = window.scrollY + 140;
+      let activeLink = null;
+      for (const item of sections) {
+        if (item.el.offsetTop <= marker) activeLink = item.link;
+      }
+      sections.forEach(({ link }) => link.classList.toggle('is-current', link === activeLink));
+    }
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+  update();
+}
+
 function initMobileMenu() {
   const menuToggle = document.getElementById('mobile-menu-toggle');
   const menuClose = document.getElementById('mobile-menu-close');
@@ -164,15 +212,15 @@ function initHeroArtifactStage() {
   const meta = {
     hostel: {
       caption: 'Kotlin · Jetpack Compose · Spring Boot 3.5 · PostgreSQL',
-      href: '#chapter-hostel',
+      href: '#work-hostel',
     },
     connectlnx: {
       caption: 'Kotlin Multiplatform · Java NIO · mDNS · ML Kit QR',
-      href: '#chapter-connectlnx',
+      href: '#work-connectlnx',
     },
     aztrox: {
       caption: 'Bash 5.3 · JDK 17 · fastlane · SQLite · gh · ShellCheck',
-      href: '#chapter-aztrox',
+      href: '#work-aztrox',
     },
   };
 
@@ -200,11 +248,291 @@ function initHeroArtifactStage() {
   });
 }
 
-function initGallerySwitchers() {
-  const buttons = document.querySelectorAll('[data-gallery-target]');
-  if (!buttons.length) return;
+const _decodedFrameCache = new Set();
 
-  buttons.forEach((btn) => {
+function preloadPortfolioFrames() {
+  const isHome = document.body?.getAttribute('data-project-page') === 'home';
+  const priorityUrls = isHome
+    ? [
+        'assets/hostelapp/hostel_1.jpg',
+        'assets/hostelapp/hostel_3.jpg',
+        'assets/hostelapp/hostel_4.jpg',
+        'assets/hostelapp/hostel_6.jpg',
+        'assets/connectlnx/connectlnx_send.jpg',
+        'assets/connectlnx/connectlnx_receive.jpg',
+        'assets/smartexpense/expense_1.jpg',
+        'assets/smartexpense/expense_3.jpg',
+        'assets/smartexpense/expense_4.jpg',
+      ]
+    : [];
+
+  const domUrls = Array.from(document.querySelectorAll('.hardware-screen img, [data-lightbox]')).map((img) =>
+    img.getAttribute('src')
+  );
+
+  const uniqueUrls = Array.from(new Set([...priorityUrls, ...domUrls])).filter(Boolean);
+
+  // Warm browser fetch + GPU bitmap decode immediately after initial paint
+  const warmAll = () => {
+    uniqueUrls.forEach((url) => {
+      if (_decodedFrameCache.has(url)) return;
+      _decodedFrameCache.add(url);
+      const preloader = new Image();
+      preloader.decoding = 'async';
+      preloader.src = url;
+      if (typeof preloader.decode === 'function') {
+        preloader.decode().catch(() => {});
+      }
+    });
+  };
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(warmAll, { timeout: 250 });
+  } else {
+    setTimeout(warmAll, 40);
+  }
+}
+
+const HOSTEL_LABELS = ['Dashboard', 'Weekly Menu', 'Food Analytics'];
+const EXPENSE_LABELS = ['Balance Ledger', 'Canvas Charts', 'Categories'];
+const CONNECTLNX_DESCRIPTIONS = [
+  'Zero-config mDNS peer discovery with ML Kit QR pairing fallback on restricted networks.',
+  'Compact binary frame negotiates metadata, SHA checksum headers, and chunk offsets.',
+  'Payload stripes across 5 concurrent Java NIO SocketChannels over local LAN.',
+];
+
+function activateFrameGroup(group, index) {
+  const idxStr = String(index);
+
+  document.querySelectorAll(`.hardware-screen[data-frame-group="${group}"]`).forEach((screen) => {
+    screen.querySelectorAll('img[data-frame-index]').forEach((img) => {
+      const match = img.getAttribute('data-frame-index') === idxStr;
+      img.classList.toggle('is-active-frame', match);
+    });
+  });
+
+  document.querySelectorAll(`[data-sync-group="${group}"][data-frame-index]`).forEach((btn) => {
+    const active = btn.getAttribute('data-frame-index') === idxStr;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-selected', String(active));
+  });
+
+  const kicker = document.getElementById('stage-kicker');
+  const activeStep = document.querySelector('.story-step.is-active-beat')?.getAttribute('data-story-step');
+  if (kicker && group === 'hostel' && activeStep === '01') {
+    kicker.textContent = `01 · GCES Hostel · ${HOSTEL_LABELS[index] || 'Dashboard'}`;
+  }
+  if (kicker && group === 'expense' && activeStep === '05') {
+    kicker.textContent = `05 · Smart Expense Tracker · ${EXPENSE_LABELS[index] || 'Balance Ledger'}`;
+  }
+}
+
+function activateConnectLnxStep(index) {
+  const idx = Math.max(0, Math.min(CONNECTLNX_DESCRIPTIONS.length - 1, Number(index) || 0));
+  const idxStr = String(idx);
+
+  document.querySelectorAll('[data-sync-group="connectlnx"][data-protocol-index]').forEach((btn) => {
+    const active = btn.getAttribute('data-protocol-index') === idxStr;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-selected', String(active));
+  });
+
+  document.querySelectorAll('[data-protocol-detail="connectlnx"]').forEach((detail) => {
+    if (detail.textContent.trim() === CONNECTLNX_DESCRIPTIONS[idx]) return;
+    detail.textContent = CONNECTLNX_DESCRIPTIONS[idx];
+    detail.classList.remove('stage-view-enter');
+    void detail.offsetWidth;
+    detail.classList.add('stage-view-enter');
+  });
+}
+
+function initScrollytellingStage() {
+  const steps = Array.from(document.querySelectorAll('[data-story-step]'));
+  const navButtons = Array.from(document.querySelectorAll('[data-story-nav]'));
+  const views = Array.from(document.querySelectorAll('[data-stage-view]'));
+  const stageWrap = document.getElementById('work-sticky-stage');
+  const subProgressBar = document.getElementById('stage-subprogress');
+  const kicker = document.getElementById('stage-kicker');
+  const caption = document.getElementById('stage-caption');
+  const link = document.getElementById('stage-link');
+  if (!steps.length || !views.length) return;
+
+  const meta = {
+    '01': {
+      kicker: '01 · GCES Hostel · Dashboard',
+      caption: 'Kotlin · Jetpack Compose · :app / :common / :server',
+      href: 'gceshostel/',
+      label: 'Open Case Study →',
+      display: 'flex',
+    },
+    '02': {
+      kicker: '02 · Production Scale · Midnight & Rush',
+      caption: 'Spring Boot 3.5 · ShedLock JDBC · Bucket4j · PostgreSQL',
+      href: 'gceshostel/',
+      label: 'Screens & Specs →',
+      display: 'grid',
+    },
+    '03': {
+      kicker: '03 · ConnectLnx · 5× Java NIO TCP',
+      caption: 'Kotlin Multiplatform · mDNS · ML Kit QR Pairing',
+      href: 'connectlnx/',
+      label: 'Technical Breakdown →',
+      display: 'flex',
+    },
+    '04': {
+      kicker: '04 · aztrox-release · 9 Products',
+      caption: 'Bash 5.3 · fastlane · SQLite history.db · LIFO Rollbacks',
+      href: '',
+      label: '',
+      display: 'block',
+    },
+    '05': {
+      kicker: '05 · Smart Expense Tracker · Balance Ledger',
+      caption: 'Room + Flow · Compose Canvas · WorkManager',
+      href: 'smart-expense-tracker/',
+      label: '11-Screen Walkthrough →',
+      display: 'flex',
+    },
+  };
+
+  let currentId = null;
+
+  function setStage(id) {
+    if (!id || id === currentId) return;
+    currentId = id;
+
+    steps.forEach((step) => {
+      step.classList.toggle('is-active-beat', step.getAttribute('data-story-step') === id);
+    });
+
+    navButtons.forEach((btn) => {
+      const active = btn.getAttribute('data-story-nav') === id;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', String(active));
+    });
+
+    views.forEach((view) => {
+      const match = view.getAttribute('data-stage-view') === id;
+      const mode = meta[id]?.display || 'flex';
+      view.classList.toggle('hidden', !match);
+      view.classList.remove('flex', 'grid', 'block', 'stage-view-enter');
+      if (match) {
+        view.classList.add(mode, 'stage-view-enter');
+      }
+    });
+
+    if (meta[id]) {
+      if (kicker) kicker.textContent = meta[id].kicker;
+      if (caption) caption.textContent = meta[id].caption;
+      if (link) {
+        link.classList.toggle('hidden', !meta[id].href);
+        if (meta[id].href) {
+          link.setAttribute('href', meta[id].href);
+          link.textContent = meta[id].label;
+        }
+      }
+    }
+  }
+
+  const lastSubBucket = {};
+
+  function activateSubStep(id, bucket) {
+    if (lastSubBucket[id] === bucket) return;
+    lastSubBucket[id] = bucket;
+
+    if (id === '01') activateFrameGroup('hostel', bucket);
+    if (id === '03') activateConnectLnxStep(bucket);
+    if (id === '05') activateFrameGroup('expense', bucket);
+  }
+
+  let ticking = false;
+  function updateByScroll() {
+    ticking = false;
+    const isDesktop = window.innerWidth >= 1024;
+    let focalY;
+
+    if (isDesktop) {
+      focalY = window.innerHeight * 0.42;
+    } else {
+      const stageBottom = stageWrap ? stageWrap.getBoundingClientRect().bottom : 290;
+      const readingSpace = Math.max(120, window.innerHeight - stageBottom);
+      focalY = stageBottom + Math.min(110, readingSpace * 0.30);
+    }
+
+    let closest = steps[0];
+    let closestDist = Infinity;
+
+    for (const step of steps) {
+      const rect = step.getBoundingClientRect();
+      const center = rect.top + rect.height * 0.35;
+      const dist = Math.abs(center - focalY);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closest = step;
+      }
+    }
+
+    if (closest) {
+      const id = closest.getAttribute('data-story-step');
+      setStage(id);
+
+      const rect = closest.getBoundingClientRect();
+      const progress = Math.min(0.999, Math.max(0, (focalY - rect.top) / Math.max(1, rect.height)));
+      if (subProgressBar) {
+        subProgressBar.style.transform = `scaleX(${progress.toFixed(3)})`;
+      }
+
+      if (id === '01' || id === '03' || id === '05') {
+        const bucket = progress < 0.34 ? 0 : progress < 0.67 ? 1 : 2;
+        activateSubStep(id, bucket);
+      }
+    }
+  }
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateByScroll);
+      }
+    },
+    { passive: true }
+  );
+
+  navButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-story-nav');
+      const targetStep = steps.find((s) => s.getAttribute('data-story-step') === id);
+      if (targetStep) {
+        const isDesktop = window.innerWidth >= 1024;
+        const clearance = isDesktop ? 104 : (stageWrap ? stageWrap.offsetHeight : 230) + 74;
+        const y = targetStep.getBoundingClientRect().top + window.scrollY - clearance;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        setStage(id);
+      }
+    });
+  });
+
+  setStage('01');
+  updateByScroll();
+  if (window.location.hash) {
+    requestAnimationFrame(updateByScroll);
+  }
+}
+
+function initGallerySwitchers() {
+  // Primary zero-latency synced layered switchers
+  document.querySelectorAll('[data-sync-group][data-frame-index]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const group = btn.getAttribute('data-sync-group');
+      const idx = Number(btn.getAttribute('data-frame-index') || 0);
+      if (group) activateFrameGroup(group, idx);
+    });
+  });
+
+  // Legacy fallback for subpages if any use data-gallery-target
+  document.querySelectorAll('[data-gallery-target]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const target = btn.getAttribute('data-gallery-target');
       const imgSrc = btn.getAttribute('data-img');
@@ -212,66 +540,96 @@ function initGallerySwitchers() {
       if (!target || !imgSrc) return;
 
       const stageImg = document.getElementById(`${target}-stage-img`);
-      if (stageImg) {
+      if (stageImg && stageImg.getAttribute('src') !== imgSrc) {
         stageImg.src = imgSrc;
         if (imgAlt) stageImg.alt = imgAlt;
         stageImg.closest('[data-img-container]')?.classList.remove('img-fallback-active');
       }
 
-      document
-        .querySelectorAll(`[data-gallery-target="${target}"]`)
-        .forEach((sibling) => {
-          sibling.classList.toggle('is-active', sibling === btn);
-        });
+      document.querySelectorAll(`[data-gallery-target="${target}"]`).forEach((sibling) => {
+        sibling.classList.toggle('is-active', sibling === btn);
+      });
     });
   });
 }
 
 function initConnectLnxProtocolStepper() {
-  const buttons = document.querySelectorAll('[data-protocol-step]');
-  const detail = document.getElementById('protocol-step-detail');
-  if (!buttons.length || !detail) return;
-
-  const descriptions = {
-    discovery:
-      'Zero-config mDNS peer discovery with ML Kit QR pairing fallback on restricted networks.',
-    handshake:
-      'Compact binary frame negotiates metadata, SHA checksum headers, and chunk offsets.',
-    multiplex:
-      'Payload stripes across 5 concurrent Java NIO SocketChannels over local LAN.',
-  };
-
-  buttons.forEach((btn) => {
+  document.querySelectorAll('[data-sync-group="connectlnx"][data-protocol-index]').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const key = btn.getAttribute('data-protocol-step');
-      if (!key || !descriptions[key]) return;
-
-      buttons.forEach((b) => b.classList.toggle('is-active', b === btn));
-      detail.textContent = descriptions[key];
+      const idx = Number(btn.getAttribute('data-protocol-index') || 0);
+      activateConnectLnxStep(idx);
     });
   });
 }
 
 function initExperienceTraceTabs() {
-  const tabs = document.querySelectorAll('[data-exp-tab]');
-  const panels = document.querySelectorAll('[data-exp-panel]');
+  const tabs = Array.from(document.querySelectorAll('[data-exp-tab]'));
+  const panels = Array.from(document.querySelectorAll('[data-exp-panel]'));
   if (!tabs.length || !panels.length) return;
 
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-exp-tab');
+  function selectExpTab(tab) {
+    const target = tab.getAttribute('data-exp-tab');
 
-      tabs.forEach((t) => {
-        const active = t === tab;
-        t.classList.toggle('is-active', active);
-        t.setAttribute('aria-selected', String(active));
-      });
-
-      panels.forEach((panel) => {
-        panel.classList.toggle('hidden', panel.getAttribute('data-exp-panel') !== target);
-      });
+    tabs.forEach((t) => {
+      const active = t === tab;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', String(active));
     });
+
+    panels.forEach((panel) => {
+      const match = panel.getAttribute('data-exp-panel') === target;
+      panel.classList.toggle('hidden', !match);
+      panel.classList.remove('stage-view-enter');
+      if (match) {
+        void panel.offsetWidth;
+        panel.classList.add('stage-view-enter');
+      }
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => selectExpTab(tab));
   });
+
+  const runway = document.getElementById('experience-runway');
+  const stickyEl = document.getElementById('experience-sticky');
+  const expProgress = document.getElementById('exp-subprogress');
+  if (!runway || !stickyEl) return;
+
+  let lastExpBucket = 0;
+  let ticking = false;
+
+  const updateExpScroll = () => {
+    ticking = false;
+    const rRect = runway.getBoundingClientRect();
+    const stickyTop = window.innerWidth >= 1024 ? 112 : 80;
+    const travel = Math.max(1, runway.offsetHeight - stickyEl.offsetHeight);
+    const progress = Math.min(0.999, Math.max(0, (stickyTop - rRect.top) / travel));
+
+    if (expProgress) {
+      expProgress.style.transform = `scaleX(${progress.toFixed(3)})`;
+    }
+
+    const bucket = progress < 0.33 ? 0 : progress < 0.66 ? 1 : 2;
+
+    if (bucket !== lastExpBucket) {
+      lastExpBucket = bucket;
+      const targetTab = tabs[bucket];
+      if (targetTab) selectExpTab(targetTab);
+    }
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateExpScroll);
+      }
+    },
+    { passive: true }
+  );
+  updateExpScroll();
 }
 
 function initScrollObserver() {
