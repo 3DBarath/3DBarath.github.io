@@ -1,186 +1,124 @@
 /**
- * 3DBarath Portfolio - Clean, Zero-Dependency Script
- * Native IntersectionObserver, accessible controls, smooth theme switching
+ * Barath B — Obsidian & White-Milk Portfolio Script
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
-  initNavPill();
+  initNavUnderline();
   initMobileMenu();
   initScrollObserver();
+  initHeroArtifactStage();
+  initGallerySwitchers();
+  initConnectLnxProtocolStepper();
+  initExperienceTraceTabs();
   initEmailCopy();
+  initImageFallbacks();
   initLightbox();
 });
 
-// Initialize view transitions immediately for earliest event capture
 initPageTransitions();
 
-/**
- * Dark / Light Theme Manager
- */
 function initThemeToggle() {
-  const themeToggle = document.getElementById('theme-toggle');
-  const sunIcon = document.getElementById('sun-icon');
-  const moonIcon = document.getElementById('moon-icon');
-  if (!themeToggle) return;
+  const buttons = document.querySelectorAll('#theme-toggle, [data-theme-switch]');
+  if (!buttons.length) return;
 
-  function updateIcons() {
+  function syncThemeUI() {
     const isLight = document.documentElement.classList.contains('light-theme');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const label = document.getElementById('theme-label');
+
     if (sunIcon && moonIcon) {
-      if (isLight) {
-        sunIcon.classList.remove('hidden');
-        moonIcon.classList.add('hidden');
-      } else {
-        sunIcon.classList.add('hidden');
-        moonIcon.classList.remove('hidden');
+      sunIcon.classList.toggle('hidden', isLight);
+      moonIcon.classList.toggle('hidden', !isLight);
+    }
+    if (label) {
+      label.textContent = isLight ? 'Dark mode' : 'Light mode';
+    }
+  }
+
+  syncThemeUI();
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const canTransition = Boolean(document.startViewTransition) && !reducedMotion;
+
+      const performToggle = () => {
+        document.documentElement.classList.toggle('light-theme');
+        const isLight = document.documentElement.classList.contains('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        syncThemeUI();
+      };
+
+      if (!canTransition) {
+        performToggle();
+        return;
       }
-    }
-  }
 
-  updateIcons();
-
-  themeToggle.addEventListener('click', (event) => {
-    const isAppearanceTransition =
-      document.startViewTransition &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const performToggle = () => {
-      document.documentElement.classList.toggle('light-theme');
-      const isLight = document.documentElement.classList.contains('light-theme');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      updateIcons();
-    };
-
-    if (!isAppearanceTransition) {
-      performToggle();
-      return;
-    }
-
-    const rect = themeToggle.getBoundingClientRect();
-    const x = event.clientX || (rect.left + rect.width / 2);
-    const y = event.clientY || (rect.top + rect.height / 2);
-
-    const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    );
-
-    document.documentElement.classList.add('theme-toggle-active');
-    const transition = document.startViewTransition(() => {
-      performToggle();
-    });
-
-    transition.ready.then(() => {
-      document.documentElement.animate(
-        {
-          clipPath: [
-            `circle(0px at ${x}px ${y}px)`,
-            `circle(${endRadius}px at ${x}px ${y}px)`
-          ]
-        },
-        {
-          duration: 580,
-          easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
-          fill: 'both',
-          pseudoElement: '::view-transition-new(root)'
-        }
+      const rect = btn.getBoundingClientRect();
+      const x = event.clientX || rect.left + rect.width / 2;
+      const y = event.clientY || rect.top + rect.height / 2;
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
       );
-    }).catch(() => {});
 
-    transition.finished.finally(() => {
-      document.documentElement.classList.remove('theme-toggle-active');
+      document.documentElement.classList.add('theme-toggle-active');
+      const transition = document.startViewTransition(performToggle);
+
+      transition.ready
+        .then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`,
+              ],
+            },
+            {
+              duration: 460,
+              easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+              fill: 'both',
+              pseudoElement: '::view-transition-new(root)',
+            }
+          );
+        })
+        .catch(() => {});
+
+      transition.finished.finally(() => {
+        document.documentElement.classList.remove('theme-toggle-active');
+      });
     });
   });
 }
 
-/**
- * Shared Sliding Pill ("Magic Hover") Navigation Indicator
- */
-function initNavPill() {
+function initNavUnderline() {
   const nav = document.getElementById('desktop-nav');
-  const pill = document.getElementById('nav-pill');
-  if (!nav || !pill) return;
+  const bar = document.getElementById('nav-underline');
+  if (!nav || !bar) return;
 
-  const links = nav.querySelectorAll('.nav-link');
-  let currentLink = null;
-  let isNavActive = false;
-
-  function handleEnter(link) {
-    const isFirst = !isNavActive;
-    isNavActive = true;
-
-    if (currentLink && currentLink !== link) {
-      currentLink.classList.remove('nav-link-active');
-    }
-    currentLink = link;
-    currentLink.classList.add('nav-link-active');
-
-    const { offsetLeft, offsetTop, offsetWidth, offsetHeight } = link;
-
-    if (isFirst) {
-      // First hover: snap instantly to link position at scale(0)
-      pill.classList.add('no-transition');
-      pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(0)`;
-      pill.style.width = `${offsetWidth}px`;
-      pill.style.height = `${offsetHeight}px`;
-      pill.style.opacity = '0';
-      void pill.offsetWidth; // Force synchronous layout reflow
-      pill.classList.remove('no-transition');
-
-      // Expand smoothly from scale(0) to scale(1)
-      requestAnimationFrame(() => {
-        pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(1)`;
-        pill.style.opacity = '1';
-      });
-    } else {
-      // Subsequent hovers: smoothly glide across at scale(1)
-      pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(1)`;
-      pill.style.width = `${offsetWidth}px`;
-      pill.style.height = `${offsetHeight}px`;
-      pill.style.opacity = '1';
-    }
-  }
-
-  function handleLeave() {
-    if (currentLink) {
-      const { offsetLeft, offsetTop } = currentLink;
-      pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(0)`;
-      currentLink.classList.remove('nav-link-active');
-      currentLink = null;
-    }
-    pill.style.opacity = '0';
-    isNavActive = false;
-  }
-
-  links.forEach((link) => {
-    link.addEventListener('pointerenter', () => handleEnter(link));
-    link.addEventListener('focusin', () => handleEnter(link));
+  nav.querySelectorAll('.nav-link').forEach((link) => {
+    const moveBar = () => {
+      bar.style.width = `${link.offsetWidth}px`;
+      bar.style.transform = `translate3d(${link.offsetLeft}px, 0, 0)`;
+      bar.style.opacity = '1';
+    };
+    link.addEventListener('pointerenter', moveBar);
+    link.addEventListener('focusin', moveBar);
   });
 
-  nav.addEventListener('pointerleave', handleLeave);
-
-  nav.addEventListener('focusout', (event) => {
-    if (!nav.contains(event.relatedTarget)) {
-      handleLeave();
-    }
+  nav.addEventListener('pointerleave', () => {
+    bar.style.opacity = '0';
   });
 
-  window.addEventListener('resize', () => {
-    if (isNavActive && currentLink) {
-      const { offsetLeft, offsetTop, offsetWidth, offsetHeight } = currentLink;
-      pill.classList.add('no-transition');
-      pill.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0) scale(1)`;
-      pill.style.width = `${offsetWidth}px`;
-      pill.style.height = `${offsetHeight}px`;
-      void pill.offsetWidth;
-      pill.classList.remove('no-transition');
+  nav.addEventListener('focusout', (e) => {
+    if (!nav.contains(e.relatedTarget)) {
+      bar.style.opacity = '0';
     }
   });
 }
 
-/**
- * Mobile Navigation Drawer
- */
 function initMobileMenu() {
   const menuToggle = document.getElementById('mobile-menu-toggle');
   const menuClose = document.getElementById('mobile-menu-close');
@@ -188,30 +126,20 @@ function initMobileMenu() {
   if (!menuToggle || !mobileMenu) return;
 
   function openMenu() {
-    mobileMenu.classList.remove('hidden');
-    mobileMenu.classList.add('flex');
-    requestAnimationFrame(() => {
-      mobileMenu.classList.add('menu-open');
-    });
+    mobileMenu.classList.add('menu-open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
     menuToggle.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   }
 
   function closeMenu() {
     mobileMenu.classList.remove('menu-open');
-    setTimeout(() => {
-      if (!mobileMenu.classList.contains('menu-open')) {
-        mobileMenu.classList.add('hidden');
-        mobileMenu.classList.remove('flex');
-      }
-    }, 450);
+    mobileMenu.setAttribute('aria-hidden', 'true');
     menuToggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
 
-  // Ensure menu starts closed on all screens
   closeMenu();
-
   menuToggle.addEventListener('click', openMenu);
   if (menuClose) menuClose.addEventListener('click', closeMenu);
 
@@ -220,21 +148,140 @@ function initMobileMenu() {
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('menu-open')) {
       closeMenu();
     }
   });
 }
 
-/**
- * Native Intersection Observer for Content Reveals
- */
+function initHeroArtifactStage() {
+  const tabs = document.querySelectorAll('[data-hero-tab]');
+  const panels = document.querySelectorAll('[data-hero-panel]');
+  const caption = document.getElementById('hero-stage-caption');
+  const link = document.getElementById('hero-stage-link');
+  if (!tabs.length || !panels.length) return;
+
+  const meta = {
+    hostel: {
+      caption: 'Kotlin · Jetpack Compose · Spring Boot 3.5 · PostgreSQL',
+      href: '#chapter-hostel',
+    },
+    connectlnx: {
+      caption: 'Kotlin Multiplatform · Java NIO · mDNS · ML Kit QR',
+      href: '#chapter-connectlnx',
+    },
+    aztrox: {
+      caption: 'Bash 5.3 · JDK 17 · fastlane · SQLite · gh · ShellCheck',
+      href: '#chapter-aztrox',
+    },
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-hero-tab');
+
+      tabs.forEach((t) => {
+        const active = t === tab;
+        t.classList.toggle('is-active', active);
+        t.setAttribute('aria-selected', String(active));
+      });
+
+      panels.forEach((panel) => {
+        const match = panel.getAttribute('data-hero-panel') === target;
+        panel.classList.toggle('hidden', !match);
+        panel.classList.toggle('flex', match);
+      });
+
+      if (target && meta[target]) {
+        if (caption) caption.textContent = meta[target].caption;
+        if (link) link.setAttribute('href', meta[target].href);
+      }
+    });
+  });
+}
+
+function initGallerySwitchers() {
+  const buttons = document.querySelectorAll('[data-gallery-target]');
+  if (!buttons.length) return;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-gallery-target');
+      const imgSrc = btn.getAttribute('data-img');
+      const imgAlt = btn.getAttribute('data-alt');
+      if (!target || !imgSrc) return;
+
+      const stageImg = document.getElementById(`${target}-stage-img`);
+      if (stageImg) {
+        stageImg.src = imgSrc;
+        if (imgAlt) stageImg.alt = imgAlt;
+        stageImg.closest('[data-img-container]')?.classList.remove('img-fallback-active');
+      }
+
+      document
+        .querySelectorAll(`[data-gallery-target="${target}"]`)
+        .forEach((sibling) => {
+          sibling.classList.toggle('is-active', sibling === btn);
+        });
+    });
+  });
+}
+
+function initConnectLnxProtocolStepper() {
+  const buttons = document.querySelectorAll('[data-protocol-step]');
+  const detail = document.getElementById('protocol-step-detail');
+  if (!buttons.length || !detail) return;
+
+  const descriptions = {
+    discovery:
+      'Zero-config mDNS peer discovery with ML Kit QR pairing fallback on restricted networks.',
+    handshake:
+      'Compact binary frame negotiates metadata, SHA checksum headers, and chunk offsets.',
+    multiplex:
+      'Payload stripes across 5 concurrent Java NIO SocketChannels over local LAN.',
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.getAttribute('data-protocol-step');
+      if (!key || !descriptions[key]) return;
+
+      buttons.forEach((b) => b.classList.toggle('is-active', b === btn));
+      detail.textContent = descriptions[key];
+    });
+  });
+}
+
+function initExperienceTraceTabs() {
+  const tabs = document.querySelectorAll('[data-exp-tab]');
+  const panels = document.querySelectorAll('[data-exp-panel]');
+  if (!tabs.length || !panels.length) return;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-exp-tab');
+
+      tabs.forEach((t) => {
+        const active = t === tab;
+        t.classList.toggle('is-active', active);
+        t.setAttribute('aria-selected', String(active));
+      });
+
+      panels.forEach((panel) => {
+        panel.classList.toggle('hidden', panel.getAttribute('data-exp-panel') !== target);
+      });
+    });
+  });
+}
+
 function initScrollObserver() {
   const revealElements = document.querySelectorAll('.reveal-init');
   if (!revealElements.length) return;
 
-  // If user prefers reduced motion, show immediately
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    !('IntersectionObserver' in window)
+  ) {
     revealElements.forEach((el) => el.classList.add('reveal-visible'));
     return;
   }
@@ -248,71 +295,47 @@ function initScrollObserver() {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
   );
 
   revealElements.forEach((el) => observer.observe(el));
 }
 
-/**
- * Interactive Email Copy to Clipboard
- */
 function initEmailCopy() {
   const copyBtn = document.getElementById('copy-email-btn');
-  const copyTooltip = document.getElementById('copy-tooltip');
-  const copyIcon = document.getElementById('copy-icon');
-  const checkIcon = document.getElementById('check-icon');
   const copyBtnText = document.getElementById('copy-btn-text');
+  const liveStatus = document.getElementById('copy-live-status');
   if (!copyBtn) return;
 
   let resetTimeout = null;
+  const email = 'barathjack77@gmail.com';
 
-  copyBtn.addEventListener('click', async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const email = 'barathjack77@gmail.com';
+  copyBtn.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(email);
-
-      // Icon & text feedback
-      if (copyIcon && checkIcon) {
-        copyIcon.classList.add('hidden');
-        checkIcon.classList.remove('hidden');
-      }
-      if (copyBtnText) {
-        copyBtnText.textContent = 'Copied!';
-      }
-      copyBtn.classList.add('copied');
-
-      // Floating tooltip
-      if (copyTooltip) {
-        copyTooltip.classList.add('show');
-      }
+      if (copyBtnText) copyBtnText.textContent = 'Copied';
+      if (liveStatus) liveStatus.style.opacity = '1';
 
       if (resetTimeout) clearTimeout(resetTimeout);
       resetTimeout = setTimeout(() => {
-        if (copyIcon && checkIcon) {
-          copyIcon.classList.remove('hidden');
-          checkIcon.classList.add('hidden');
-        }
-        if (copyBtnText) {
-          copyBtnText.textContent = 'Copy';
-        }
-        copyBtn.classList.remove('copied');
-        if (copyTooltip) {
-          copyTooltip.classList.remove('show');
-        }
-      }, 2000);
-    } catch (err) {
-      console.warn('Clipboard write failed, opening mailto:', err);
+        if (copyBtnText) copyBtnText.textContent = 'Copy Email';
+        if (liveStatus) liveStatus.style.opacity = '0';
+      }, 2200);
+    } catch {
       window.location.href = `mailto:${email}`;
     }
   });
 }
 
-/**
- * Clean Lightbox for Project Screenshots
- */
+function initImageFallbacks() {
+  document.querySelectorAll('img').forEach((img) => {
+    img.addEventListener('error', () => {
+      const box = img.closest('[data-img-container]');
+      if (box) box.classList.add('img-fallback-active');
+    });
+  });
+}
+
 function initLightbox() {
   const images = document.querySelectorAll('[data-lightbox]');
   if (!images.length) return;
@@ -324,9 +347,9 @@ function initLightbox() {
     overlay.className = 'site-lightbox-overlay';
     overlay.innerHTML = `
       <div class="site-lightbox-content relative max-w-4xl max-h-[90vh] flex flex-col items-center">
-        <button id="lightbox-close-btn" class="absolute -top-10 right-0 text-white/80 hover:text-white text-sm font-mono p-2 cursor-pointer focus:outline-none transition-colors" aria-label="Close image preview">Close &times;</button>
-        <img id="lightbox-img" src="" alt="Enlarged preview" class="max-w-full max-h-[82vh] rounded-lg border border-white/10 shadow-2xl object-contain">
-        <p id="lightbox-caption" class="text-xs text-white/70 font-mono mt-3 text-center"></p>
+        <button id="lightbox-close-btn" type="button" class="absolute -top-10 right-0 text-white/85 hover:text-white text-sm font-mono p-2 cursor-pointer transition-colors" aria-label="Close preview">Close &times;</button>
+        <img id="lightbox-img" src="" alt="Enlarged project preview" referrerpolicy="no-referrer" class="max-w-full max-h-[82vh] rounded-xl border border-white/15 shadow-2xl object-contain">
+        <p id="lightbox-caption" class="text-xs text-white/75 font-mono mt-3 text-center max-w-xl"></p>
       </div>
     `;
     document.body.appendChild(overlay);
@@ -337,9 +360,7 @@ function initLightbox() {
     }
 
     overlay.addEventListener('click', (e) => {
-      if (e.target.id !== 'lightbox-img') {
-        closeLightbox();
-      }
+      if (e.target.id !== 'lightbox-img') closeLightbox();
     });
 
     window.addEventListener('keydown', (e) => {
@@ -350,7 +371,6 @@ function initLightbox() {
   }
 
   images.forEach((img) => {
-    img.style.cursor = 'zoom-in';
     img.addEventListener('click', () => {
       const src = img.getAttribute('data-large') || img.src;
       const caption = img.alt || '';
@@ -362,143 +382,22 @@ function initLightbox() {
       document.body.style.overflow = 'hidden';
     });
   });
-
-  document.querySelectorAll('.project-image-box').forEach((box) => {
-    box.addEventListener('click', (e) => {
-      const img = box.querySelector('img[data-lightbox]');
-      if (img && e.target !== img) {
-        img.click();
-      }
-    });
-  });
 }
 
-/**
- * Milky Page-to-Page Navigation Transitions
- * Seamless cross-document transitions, shared hero container transforms & back-gesture handling
- */
 function initPageTransitions() {
-  const supportsCrossDoc = 'onpagereveal' in window;
-
-  function syncArrival(vt) {
-    const navDir = sessionStorage.getItem('nav-direction');
-    if (navDir === 'back') {
-      document.documentElement.dataset.navDir = 'back';
-      if (vt?.types) {
-        try {
-          vt.types.add('page-back');
-        } catch (_) {}
-      }
-    } else {
-      document.documentElement.removeAttribute('data-nav-dir');
-    }
-
-    const activeProject = sessionStorage.getItem('active-project');
-    if (activeProject) {
-      const isHome = document.body?.dataset?.projectPage === 'home';
-      if (isHome) {
-        const homeImg = document.querySelector(`[data-project-hero="${activeProject}"]`);
-        if (homeImg) {
-          homeImg.style.viewTransitionName = 'hero-active';
-        }
-      }
-    }
-
-    setTimeout(() => {
-      document.documentElement.removeAttribute('data-nav-dir');
-      sessionStorage.removeItem('nav-direction');
-      sessionStorage.removeItem('active-project');
-      document.querySelectorAll('[style*="view-transition-name"]').forEach((el) => {
-        const page = document.body?.dataset?.projectPage;
-        if (page !== 'gceshostel' && page !== 'connectlnx') {
-          el.style.viewTransitionName = '';
-        }
-      });
-    }, 600);
-  }
-
-  if (supportsCrossDoc) {
-    window.addEventListener('pagereveal', (e) => {
-      syncArrival(e.viewTransition);
-    });
-
-    window.addEventListener('pageswap', () => {
-      const activeProject = sessionStorage.getItem('active-project');
-      if (activeProject && document.body?.dataset?.projectPage === 'home') {
-        const homeImg = document.querySelector(`[data-project-hero="${activeProject}"]`);
-        if (homeImg) {
-          homeImg.style.viewTransitionName = 'hero-active';
-        }
-      }
-    });
-  } else {
-    syncArrival(null);
-  }
-
-  window.addEventListener('pageshow', (e) => {
-    if (e.persisted) {
-      document.documentElement.removeAttribute('data-nav-dir');
-      document.body.classList.remove('page-milky-fallback-exit');
-    }
-  });
-
   document.addEventListener('click', (e) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-
     const link = e.target.closest('a');
     if (!link) return;
-
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') {
       return;
     }
 
-    let url;
-    try {
-      url = new URL(link.href, window.location.href);
-    } catch {
-      return;
-    }
-    if (url.origin !== window.location.origin) return;
-
-    const linkText = link.textContent || '';
-    const isBack = href === '../' || href === './' || link.getAttribute('aria-label')?.includes('Back') || linkText.includes('←') || linkText.includes('&larr;');
-    const isProject = href.includes('gceshostel') || href.includes('connectlnx') || href.includes('smart-expense-tracker') || href.includes('chessgame') || href.includes('two-player-games');
-
-    if (isBack) {
-      sessionStorage.setItem('nav-direction', 'back');
-      document.documentElement.dataset.navDir = 'back';
-      const currentPage = document.body?.dataset?.projectPage;
-      if (currentPage && currentPage !== 'home') {
-        sessionStorage.setItem('active-project', currentPage);
-      }
-    } else if (isProject) {
-      sessionStorage.setItem('nav-direction', 'forward');
-      document.documentElement.removeAttribute('data-nav-dir');
-      let projectKey = '';
-      if (href.includes('gceshostel')) projectKey = 'gceshostel';
-      else if (href.includes('connectlnx')) projectKey = 'connectlnx';
-      else if (href.includes('smart-expense-tracker')) projectKey = 'smartexpense';
-      else if (href.includes('chessgame')) projectKey = 'chessgame';
-      else if (href.includes('two-player-games')) projectKey = 'two-player-games';
-
-      if (projectKey) {
-        sessionStorage.setItem('active-project', projectKey);
-        const card = link.closest('.project-card');
-        const cardImg = card?.querySelector(`[data-project-hero="${projectKey}"]`) ||
-                        document.querySelector(`[data-project-hero="${projectKey}"]`);
-        if (cardImg) {
-          cardImg.style.viewTransitionName = 'hero-active';
-        }
-      }
-    }
-
-    if (!supportsCrossDoc && !document.startViewTransition) {
-      e.preventDefault();
-      document.body.classList.add('page-milky-fallback-exit');
-      setTimeout(() => {
-        window.location.href = link.href;
-      }, 220);
+    const projectKeys = ['gceshostel', 'connectlnx', 'smart-expense-tracker', 'chessgame', 'two-player-games'];
+    const matched = projectKeys.find((k) => href.includes(k));
+    if (matched) {
+      sessionStorage.setItem('active-project', matched);
     }
   });
 }

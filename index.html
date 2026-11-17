@@ -4,27 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Barath B | Android & Systems Engineer">
-    <meta property="og:description" content="Android and Systems Engineer specializing in Kotlin Multiplatform, Jetpack Compose, distributed Spring Boot backends, and AI research.">
+    <title>Barath B — Android &amp; Systems Engineer</title>
+    <meta name="description"
+        content="Barath B — Android and Systems Engineer. Creator of GCES Hostel (1,200 DAU), ConnectLnx (KMP multi-socket transfer), and Aztrox Release CLI.">
+    <meta property="og:title" content="Barath B — Android &amp; Systems Engineer">
+    <meta property="og:description"
+        content="Android apps, multi-socket Kotlin Multiplatform utilities, distributed PostgreSQL backends, and AI research.">
     <meta property="og:url" content="https://3dbarath.github.io/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Barath B | Android & Systems Engineer</title>
     <link rel="canonical" href="https://3dbarath.github.io/">
-    <meta name="description"
-        content="Android and Systems Engineer specializing in Kotlin Multiplatform, Jetpack Compose, distributed Spring Boot backends, and AI automation. Founder of Aztrox Inc. B.E. CSE at GCE Srirangam ('27).">
-    
-    <link rel="stylesheet" href="output.css?v=6">
+
+    <link rel="stylesheet" href="output.css?v=9">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
     <link rel="apple-touch-icon" href="assets/favicon-192.png">
-    
-    <!-- Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -48,6 +49,7 @@
       "description": "Android and Systems Engineer building production mobile apps, cross-platform Kotlin engines, distributed backends, and AI research."
     }
     </script>
+
     <script>
         if (localStorage.getItem('theme') === 'light') {
             document.documentElement.classList.add('light-theme');
@@ -55,598 +57,757 @@
     </script>
 </head>
 
-<body class="bg-brand-dark text-brand-accent overflow-x-hidden" data-project-page="home">
+<body class="bg-canvas text-ink overflow-x-hidden" data-project-page="home">
 
-    <!-- Navigation -->
-    <header class="fixed top-0 w-full z-40 nav-blur">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="./" class="flex items-center gap-2.5 font-display font-semibold text-base tracking-tight hover:opacity-85 transition-opacity" aria-label="Home">
-                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span>Barath B</span>
+    <!-- Strict 3-Zone Top Bar -->
+    <header class="site-header fixed top-0 inset-x-0 z-40">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+            <a href="./" class="font-display font-bold text-lg tracking-tight text-ink whitespace-nowrap shrink-0">
+                Barath B
             </a>
 
-            <!-- Desktop Nav Links -->
-            <nav id="desktop-nav" class="relative hidden md:flex items-center gap-1 text-xs font-mono tracking-wider text-brand-muted" aria-label="Main Navigation">
-                <div id="nav-pill" class="nav-pill" aria-hidden="true"></div>
-                <a href="#projects" class="nav-link relative z-10 px-3.5 py-2.5 rounded-lg hover:text-brand-accent transition-colors">Projects</a>
-                <a href="#experience" class="nav-link relative z-10 px-3.5 py-2.5 rounded-lg hover:text-brand-accent transition-colors">Experience</a>
-                <a href="#research" class="nav-link relative z-10 px-3.5 py-2.5 rounded-lg hover:text-brand-accent transition-colors">Research</a>
-                <a href="#stack" class="nav-link relative z-10 px-3.5 py-2.5 rounded-lg hover:text-brand-accent transition-colors">Stack</a>
-                <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link relative z-10 px-3.5 py-2.5 rounded-lg text-brand-accent hover:text-brand-accent transition-colors inline-flex items-center gap-1">
-                    Resume
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </a>
-                <a href="#contact" class="nav-link relative z-10 px-3.5 py-2.5 rounded-lg hover:text-brand-accent transition-colors">Contact</a>
+            <nav id="desktop-nav" class="relative hidden md:flex items-center gap-7 h-full text-sm font-medium text-ink-secondary" aria-label="Main Navigation">
+                <div id="nav-underline" class="nav-underline-bar" aria-hidden="true"></div>
+                <a href="#work" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Work</a>
+                <a href="#experience" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Experience</a>
+                <a href="#research" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Research</a>
+                <a href="#stack" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Stack</a>
+                <a href="#contact" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Contact</a>
             </nav>
 
-            <!-- Actions -->
-            <div class="flex items-center space-x-2">
-                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus-visible:outline-2 focus-visible:outline-emerald-accent cursor-pointer rounded-md" aria-label="Toggle Theme">
-                    <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <div class="flex items-center gap-2.5 shrink-0">
+                <button id="theme-toggle" data-theme-switch type="button"
+                    class="btn-outline p-2 text-ink-secondary hover:text-milk-ink whitespace-nowrap shrink-0"
+                    aria-label="Toggle Light or Dark Theme" title="Toggle theme">
+                    <svg id="sun-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
                     </svg>
-                    <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg id="moon-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-                <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="p-2 text-brand-muted hover:text-brand-accent transition-colors hidden sm:inline-block" aria-label="GitHub Profile">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 4.943 0 3.841-2.337 4.687-4.565 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.481C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-                    </svg>
+                <a href="resume.pdf" target="_blank" rel="noopener noreferrer"
+                    class="btn-primary text-xs py-2 px-4 whitespace-nowrap shrink-0">
+                    Resume PDF
                 </a>
-                <button id="mobile-menu-toggle" class="md:hidden p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Open Navigation Menu" aria-expanded="false">
+                <button id="mobile-menu-toggle"
+                    class="md:hidden p-2.5 -mr-2 text-ink-secondary hover:text-ink cursor-pointer rounded-md"
+                    aria-label="Open Navigation Menu" aria-expanded="false">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-brand-dark/98 backdrop-blur-xl hidden flex-col justify-center px-8 space-y-6">
-        <button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Close Navigation Menu">
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="flex-col justify-center px-8 space-y-6" aria-hidden="true">
+        <button id="mobile-menu-close"
+            class="absolute top-5 right-6 p-2.5 text-ink-secondary hover:text-ink cursor-pointer"
+            aria-label="Close Navigation Menu">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <a href="#projects" class="text-2xl font-display font-bold text-brand-accent hover:text-emerald-accent transition-colors">Projects</a>
-        <a href="#experience" class="text-2xl font-display font-bold text-brand-accent hover:text-emerald-accent transition-colors">Experience</a>
-        <a href="#research" class="text-2xl font-display font-bold text-brand-accent hover:text-emerald-accent transition-colors">Research</a>
-        <a href="#stack" class="text-2xl font-display font-bold text-brand-accent hover:text-emerald-accent transition-colors">Stack</a>
-        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-2xl font-display font-bold text-emerald-accent">Resume (PDF)</a>
-        <a href="#contact" class="text-2xl font-display font-bold text-brand-accent hover:text-emerald-accent transition-colors">Contact</a>
-        <div class="pt-6 border-t border-brand-border flex gap-6 text-sm font-mono text-brand-muted">
-            <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent">GitHub</a>
-            <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent">LinkedIn</a>
+        <a href="#work" class="text-2xl font-display font-bold text-ink">Work</a>
+        <a href="#experience" class="text-2xl font-display font-bold text-ink">Experience</a>
+        <a href="#research" class="text-2xl font-display font-bold text-ink">Research</a>
+        <a href="#stack" class="text-2xl font-display font-bold text-ink">Stack</a>
+        <a href="#contact" class="text-2xl font-display font-bold text-ink">Contact</a>
+        <div class="pt-6 border-t border-hairline flex items-center justify-between">
+            <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-sm font-mono font-semibold text-ink">Resume PDF &nearr;</a>
+            <button type="button" data-theme-switch class="btn-outline text-xs py-2 px-3">
+                Switch Theme
+            </button>
         </div>
     </div>
 
-    <main class="max-w-6xl mx-auto px-6 pt-28 sm:pt-32 pb-24">
-        
-        <!-- Hero Section -->
-        <section id="hero" class="mb-24 reveal-init">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl sm:text-6xl font-semibold tracking-tight mb-3">
-                    Barath B
-                </h1>
-                <p class="text-lg sm:text-xl text-emerald-accent font-medium mb-6">
-                    Android &amp; Systems Engineer
-                </p>
+    <main class="max-w-6xl mx-auto px-6 pt-24 sm:pt-28 pb-20">
 
-                <p class="text-base sm:text-[17px] text-brand-muted leading-relaxed mb-8 max-w-2xl">
-                    I build complete client-server architectures, cross-platform socket engines, and production Android applications. Creator of GCES Hostel (1,200 daily active students with distributed midnight state transitions) and ConnectLnx.
-                </p>
-
-                <div class="flex flex-wrap items-center gap-3">
-                    <a href="#projects" class="btn btn-primary">
-                        View Projects
-                    </a>
-                    <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                        Resume (PDF)
-                    </a>
-                    <a href="#contact" class="btn btn-outline">
-                        Contact
-                    </a>
+        <!-- ================================================================
+             HERO
+             ================================================================ -->
+        <section id="hero" class="mb-14">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-5 mb-8 border-b border-hairline">
+                <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-ink-muted">
+                    <span>Android &amp; Systems Engineer</span>
+                    <span aria-hidden="true">&middot;</span>
+                    <span>GCE Srirangam &rsquo;27</span>
+                    <span aria-hidden="true">&middot;</span>
+                    <span>Trichy, India</span>
                 </div>
             </div>
 
-            <!-- Factual Highlights Matrix -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 pt-8 border-t border-brand-border">
-                <div class="metric-box">
-                    <div class="text-2xl sm:text-3xl font-semibold font-mono tabular-nums text-emerald-accent">1,200</div>
-                    <div class="text-xs text-brand-muted font-mono mt-1">Daily Active Users &bull; GCES Hostel</div>
-                </div>
-                <div class="metric-box">
-                    <div class="text-2xl sm:text-3xl font-semibold font-mono tabular-nums text-brand-accent">4</div>
-                    <div class="text-xs text-brand-muted font-mono mt-1">Platforms (Android, Linux, Windows, AUR)</div>
-                </div>
-                <div class="metric-box">
-                    <div class="text-2xl sm:text-3xl font-semibold font-mono tabular-nums text-emerald-accent">37.7%</div>
-                    <div class="text-xs text-brand-muted font-mono mt-1">Oracle Depth Ceiling (AI Research)</div>
-                </div>
-                <div class="metric-box">
-                    <div class="text-2xl sm:text-3xl font-semibold font-mono tabular-nums text-brand-accent">6</div>
-                    <div class="text-xs text-brand-muted font-mono mt-1">Automated Release Targets (CLI)</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Projects Section -->
-        <section id="projects" class="mb-28 scroll-mt-24">
-            <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Projects</h2>
-            </div>
-
-            <div class="space-y-8">
-                
-                <!-- Project 1: GCES Hostel -->
-                <article class="project-card reveal-init">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        <div class="lg:col-span-7 flex flex-col justify-between h-full">
-                            <div>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="tech-badge text-emerald-accent border-emerald-accent/30 bg-emerald-accent/10">1,200 Daily Active Users</span>
-                                    <span class="tech-badge">Live on Google Play</span>
-                                </div>
-                                <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2"><a href="gceshostel/" class="hover:text-emerald-accent transition-colors">GCES Hostel Operations Platform</a></h3>
-                                <p class="text-sm text-brand-muted leading-relaxed mb-4">
-                                    Full-stack institutional operations platform deployed to 1,200 active residential students. Multi-module Clean Architecture separating <code class="text-emerald-accent font-mono text-xs">:app</code>, <code class="text-emerald-accent font-mono text-xs">:server</code>, and <code class="text-emerald-accent font-mono text-xs">:common</code>. Engineered a predictive meal engine using ShedLock distributed JDBC locks on PostgreSQL so midnight attendance resets remain atomic across backend nodes. Token bucket rate limiting preserves peak sub-100ms API latency.
-                                </p>
-                                
-                                <div class="flex flex-wrap gap-1.5 mb-6">
-                                    <span class="tech-badge">Kotlin</span>
-                                    <span class="tech-badge">Jetpack Compose</span>
-                                    <span class="tech-badge">Spring Boot 3.5</span>
-                                    <span class="tech-badge">PostgreSQL</span>
-                                    <span class="tech-badge">ShedLock</span>
-                                    <span class="tech-badge">Bucket4j</span>
-                                    <span class="tech-badge">JWT Auth</span>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap items-center gap-4 text-xs font-mono font-semibold pt-4 border-t border-brand-border">
-                                <a href="gceshostel/" class="text-brand-accent hover:text-emerald-accent transition-colors inline-flex items-center gap-1.5">
-                                    <span>Architecture Specs &rarr;</span>
-                                </a>
-                                <a href="https://play.google.com/store/apps/details?id=com.barath.gceshostel" target="_blank" rel="noopener noreferrer" class="text-brand-muted hover:text-brand-accent transition-colors">
-                                    Google Play &nearr;
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-5">
-                            <div class="project-image-box">
-                                <img src="assets/hostelapp/hostel_1.jpg" alt="GCES Hostel Android Application Interface" data-lightbox loading="lazy" data-project-hero="gceshostel">
-                                <div class="zoom-indicator" aria-hidden="true">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 2: ConnectLnx -->
-                <article class="project-card reveal-init">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        <div class="lg:col-span-7 flex flex-col justify-between h-full">
-                            <div>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="tech-badge text-emerald-accent border-emerald-accent/30 bg-emerald-accent/10">Kotlin Multiplatform</span>
-                                    <span class="tech-badge">Play Store, AUR & Windows</span>
-                                </div>
-                                <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2"><a href="connectlnx/" class="hover:text-emerald-accent transition-colors">ConnectLnx Multiplatform Transfer</a></h3>
-                                <p class="text-sm text-brand-muted leading-relaxed mb-4">
-                                    High-throughput local network file transfer utility sharing business logic across Android, Linux, and Windows. Designed a custom binary TCP protocol with parallel multi-socket streaming, multiplexing chunks across 5 concurrent sockets for maximum local network transfer rates. Features zero-configuration mDNS peer discovery with QR camera pairing fallback.
-                                </p>
-                                
-                                <div class="flex flex-wrap gap-1.5 mb-6">
-                                    <span class="tech-badge">Kotlin Multiplatform</span>
-                                    <span class="tech-badge">Compose Multiplatform</span>
-                                    <span class="tech-badge">Java NIO Sockets</span>
-                                    <span class="tech-badge">mDNS</span>
-                                    <span class="tech-badge">Ktor</span>
-                                    <span class="tech-badge">ML Kit QR</span>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap items-center gap-4 text-xs font-mono font-semibold pt-4 border-t border-brand-border">
-                                <a href="connectlnx/" class="text-brand-accent hover:text-emerald-accent transition-colors inline-flex items-center gap-1.5">
-                                    <span>Technical Breakdown &rarr;</span>
-                                </a>
-                                <a href="https://github.com/3dbarath/ConnectLnx" target="_blank" rel="noopener noreferrer" class="text-brand-muted hover:text-brand-accent transition-colors">
-                                    GitHub &nearr;
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-5">
-                            <div class="project-image-box">
-                                <img src="assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Multiplatform Transfer Interface" data-lightbox loading="lazy" data-project-hero="connectlnx">
-                                <div class="zoom-indicator" aria-hidden="true">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 3: Aztrox Release CLI -->
-                <article class="project-card reveal-init">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+                <!-- Left: Ultra-Scannable Intro -->
+                <div class="lg:col-span-6 flex flex-col justify-between py-1">
                     <div>
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <span class="tech-badge text-emerald-accent border-emerald-accent/30 bg-emerald-accent/10">Release Orchestration</span>
-                            <span class="tech-badge">6 Target Platforms</span>
-                        </div>
-                        <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2">Aztrox Release CLI Orchestrator</h3>
-                        <p class="text-sm text-brand-muted leading-relaxed mb-4 max-w-4xl">
-                            Unified release CLI automating build, signing, and distribution across 3 live codebases and 6 deployment targets: Google Play, GitHub Releases, AUR, Render, HuggingFace Spaces, and Firebase. Features a LIFO atomic rollback registry that reverts version bumps, gradle properties, and git tags if any intermediate stage fails.
+                        <h1 class="text-4xl sm:text-5xl lg:text-[3.25rem] font-display font-bold leading-[1.08] tracking-tight mb-5 text-balance">
+                            I build production Android apps and distributed backends.
+                        </h1>
+                        <p class="text-base text-ink-secondary leading-relaxed max-w-lg mb-8">
+                            Creator of <strong class="text-ink font-semibold">GCES Hostel</strong> (1,200 daily users) and <strong class="text-ink font-semibold">ConnectLnx</strong> (5-socket KMP LAN transfer). Former AI Systems Intern at <strong class="text-ink font-semibold">Thinkster Math</strong>.
                         </p>
-                        
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="tech-badge">Bash</span>
-                            <span class="tech-badge">SQLite</span>
-                            <span class="tech-badge">Fastlane</span>
-                            <span class="tech-badge">GitHub Actions</span>
-                            <span class="tech-badge">jarsigner</span>
-                            <span class="tech-badge">ADB</span>
+
+                        <div class="flex flex-wrap items-center gap-3">
+                            <a href="#work" class="btn-primary">
+                                View Projects
+                            </a>
+                            <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline">
+                                Resume (PDF)
+                            </a>
+                            <a href="#contact" class="btn-outline">
+                                Contact
+                            </a>
                         </div>
                     </div>
-                </article>
 
-                <!-- Secondary Projects Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                    <article class="project-card reveal-init">
-                        <div class="flex flex-col justify-between h-full">
-                            <div>
-                                <div class="flex flex-wrap gap-2 mb-2">
-                                    <span class="tech-badge">Offline-First</span>
-                                    <span class="tech-badge">Room & Canvas</span>
-                                </div>
-                                <h4 class="text-base sm:text-lg font-semibold tracking-tight mb-2"><a href="smart-expense-tracker/" class="hover:text-emerald-accent transition-colors">Smart Expense Tracker</a></h4>
-                                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
-                                    Offline-first personal finance app. Interactive spending charts drawn on Jetpack Compose Canvas, Room database with reactive Flow queries, and background budget threshold notifications via WorkManager.
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-3 text-xs font-mono font-semibold pt-3 border-t border-brand-border">
-                                <a href="smart-expense-tracker/" class="text-brand-accent hover:text-emerald-accent transition-colors">Project Details &rarr;</a>
-                            </div>
+                    <div class="mt-10 pt-5 border-t border-hairline flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-ink-muted">
+                        <span>Open to Android, KMP &amp; Backend roles</span>
+                        <div class="flex items-center gap-5">
+                            <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">GitHub &nearr;</a>
+                            <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">LinkedIn &nearr;</a>
                         </div>
-                    </article>
-
-                    <article class="project-card reveal-init">
-                        <div class="flex flex-col justify-between h-full">
-                            <div>
-                                <div class="flex flex-wrap gap-2 mb-2">
-                                    <span class="tech-badge">C++ GDExtension</span>
-                                    <span class="tech-badge">Native Interop</span>
-                                </div>
-                                <h4 class="text-base sm:text-lg font-semibold tracking-tight mb-2"><a href="chessgame/" class="hover:text-emerald-accent transition-colors">Game Engines & Stockfish Interop</a></h4>
-                                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">
-                                    C++ GDExtension bindings integrating the Stockfish evaluation engine directly into Godot for high-speed local chess evaluation, alongside two-player local multiplayer arcade systems.
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-4 text-xs font-mono font-semibold pt-3 border-t border-brand-border">
-                                <a href="chessgame/" class="text-brand-muted hover:text-brand-accent transition-colors">Chess Engine &rarr;</a>
-                                <a href="two-player-games/" class="text-brand-muted hover:text-brand-accent transition-colors">Arcade Suite &rarr;</a>
-                            </div>
-                        </div>
-                    </article>
+                    </div>
                 </div>
 
+                <!-- Right: Compact Interactive Phone Preview -->
+                <div class="lg:col-span-6 flex flex-col">
+                    <div class="monograph-frame p-5 h-full flex flex-col justify-between">
+                        <div class="flex flex-wrap items-center justify-between gap-3 pb-3.5 border-b border-hairline">
+                            <span class="text-xs font-mono text-ink-muted">Live Artifacts</span>
+                            <div class="segmented-track" role="tablist" aria-label="Featured projects preview">
+                                <button type="button" role="tab" aria-selected="true" data-hero-tab="hostel" class="segmented-tab is-active">
+                                    GCES Hostel
+                                </button>
+                                <button type="button" role="tab" aria-selected="false" data-hero-tab="connectlnx" class="segmented-tab">
+                                    ConnectLnx
+                                </button>
+                                <button type="button" role="tab" aria-selected="false" data-hero-tab="aztrox" class="segmented-tab">
+                                    Aztrox CLI
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 1: GCES Hostel -->
+                        <div data-hero-panel="hostel" class="py-4 flex-1 flex flex-col justify-between gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center flex-1">
+                                <div class="sm:col-span-5 flex justify-center">
+                                    <div class="hardware-phone w-40 cursor-zoom-in" data-img-container>
+                                        <div class="hardware-screen">
+                                            <span class="hardware-camera" aria-hidden="true"></span>
+                                            <span class="hardware-glare" aria-hidden="true"></span>
+                                            <img src="assets/hostelapp/hostel_1.jpg"
+                                                alt="GCES Hostel Android dashboard screen"
+                                                data-lightbox data-project-hero="gceshostel"
+                                                referrerpolicy="no-referrer">
+                                            <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface-subtle">
+                                                GCES Hostel
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sm:col-span-7 space-y-3">
+                                    <div class="text-xs font-mono text-ink-muted">1,200 DAU &middot; Google Play</div>
+                                    <div class="bg-surface-subtle border border-hairline rounded-lg p-3.5 space-y-2.5 text-xs">
+                                        <div class="font-display font-semibold text-sm text-ink">GCES Hostel Platform</div>
+                                        <div class="space-y-1.5 font-mono text-[11px] tabular-nums">
+                                            <div class="flex justify-between gap-3 py-1 border-b border-hairline">
+                                                <span class="text-ink-muted">Modules</span>
+                                                <span class="text-ink">:app &middot; :common &middot; :server</span>
+                                            </div>
+                                            <div class="flex justify-between gap-3 py-1 border-b border-hairline">
+                                                <span class="text-ink-muted">Cron Lock</span>
+                                                <span class="text-ink">ShedLock JDBC</span>
+                                            </div>
+                                            <div class="flex justify-between gap-3 pt-1">
+                                                <span class="text-ink-muted">API Latency</span>
+                                                <span class="text-ink">Bucket4j &lt;100ms</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel 2: ConnectLnx -->
+                        <div data-hero-panel="connectlnx" class="py-4 flex-1 hidden flex-col justify-between gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center flex-1">
+                                <div class="sm:col-span-5 flex justify-center">
+                                    <div class="hardware-phone w-40 cursor-zoom-in" data-img-container>
+                                        <div class="hardware-screen">
+                                            <span class="hardware-camera" aria-hidden="true"></span>
+                                            <span class="hardware-glare" aria-hidden="true"></span>
+                                            <img src="assets/connectlnx/connectlnx_send.jpg"
+                                                alt="ConnectLnx Android send interface"
+                                                data-lightbox data-project-hero="connectlnx"
+                                                referrerpolicy="no-referrer">
+                                            <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface-subtle">
+                                                ConnectLnx
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sm:col-span-7 space-y-3">
+                                    <div class="text-xs font-mono text-ink-muted">Android &middot; Arch AUR &middot; Windows</div>
+                                    <div class="bg-surface-subtle border border-hairline rounded-lg p-3.5 space-y-2.5 text-xs">
+                                        <div class="font-display font-semibold text-sm text-ink">ConnectLnx Transfer</div>
+                                        <div class="space-y-1.5 font-mono text-[11px] tabular-nums">
+                                            <div class="flex justify-between gap-3 py-1 border-b border-hairline">
+                                                <span class="text-ink-muted">Shared Core</span>
+                                                <span class="text-ink">Kotlin Multiplatform</span>
+                                            </div>
+                                            <div class="flex justify-between gap-3 py-1 border-b border-hairline">
+                                                <span class="text-ink-muted">Transport</span>
+                                                <span class="text-ink">5&times; Java NIO TCP</span>
+                                            </div>
+                                            <div class="flex justify-between gap-3 pt-1">
+                                                <span class="text-ink-muted">Discovery</span>
+                                                <span class="text-ink">mDNS + ML Kit QR</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel 3: Aztrox Release CLI -->
+                        <div data-hero-panel="aztrox" class="py-4 flex-1 hidden flex-col justify-between gap-4">
+                            <div class="bg-surface-subtle border border-hairline rounded-lg p-4 space-y-2.5 font-mono text-xs my-auto">
+                                <div class="flex items-center justify-between pb-2 border-b border-hairline">
+                                    <span class="text-ink-muted">aztrox-release</span>
+                                    <span class="text-ink font-semibold">9 Products &middot; 4 Surfaces</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-[11px] text-ink-secondary">
+                                    <div>Play Store (fastlane)</div>
+                                    <div>GitHub + Arch AUR</div>
+                                    <div>Firebase Hosting</div>
+                                    <div>Render &amp; HF Spaces</div>
+                                    <div>SQLite history.db</div>
+                                    <div>Telegram remote run</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3.5 border-t border-hairline flex items-center justify-between gap-4 text-xs text-ink-muted">
+                            <span id="hero-stage-caption" class="font-mono truncate">Kotlin &middot; Jetpack Compose &middot; Spring Boot 3.5 &middot; PostgreSQL</span>
+                            <a id="hero-stage-link" href="#chapter-hostel" class="editorial-link font-semibold text-ink whitespace-nowrap shrink-0">
+                                Inspect &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4-Column Proof Strip -->
+            <div class="mt-10 py-5 border-y border-hairline grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div>
+                    <div class="text-2xl sm:text-3xl font-display font-bold font-mono tabular-nums text-ink">1,200</div>
+                    <div class="text-xs text-ink-muted mt-0.5">Daily active users &middot; GCES Hostel</div>
+                </div>
+                <div>
+                    <div class="text-2xl sm:text-3xl font-display font-bold font-mono tabular-nums text-ink">5&times; TCP</div>
+                    <div class="text-xs text-ink-muted mt-0.5">Parallel NIO sockets &middot; ConnectLnx</div>
+                </div>
+                <div>
+                    <div class="text-2xl sm:text-3xl font-display font-bold font-mono tabular-nums text-ink">37.7%</div>
+                    <div class="text-xs text-ink-muted mt-0.5">Oracle depth ceiling &middot; XSum</div>
+                </div>
+                <div>
+                    <div class="text-2xl sm:text-3xl font-display font-bold font-mono tabular-nums text-ink">9 Products</div>
+                    <div class="text-xs text-ink-muted mt-0.5">4 release surfaces &middot; aztrox-release</div>
+                </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="mb-28 scroll-mt-24">
-            <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Experience</h2>
+        <!-- ================================================================
+             PROJECTS (SCANNABLE CASE STUDIES)
+             ================================================================ -->
+        <section id="work" class="mb-24 scroll-mt-24 space-y-16">
+
+            <div class="pb-3 border-b border-hairline flex items-baseline justify-between gap-4">
+                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Projects</h2>
+                <span class="text-xs font-mono text-ink-muted">2024 &ndash; 2026</span>
             </div>
 
-            <article class="project-card reveal-init">
-                <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-4">
-                    <div>
-                        <h3 class="text-xl sm:text-2xl font-semibold tracking-tight">Thinkster Math</h3>
-                        <p class="text-sm font-mono text-emerald-accent mt-0.5">AI Systems & Automation Intern</p>
+            <!-- 01: GCES Hostel -->
+            <article id="chapter-hostel" class="scroll-mt-24 reveal-init">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-5">
+                        <div class="text-xs font-mono text-ink-muted">
+                            01 &middot; 1,200 Daily Active Users &middot; Live on Google Play
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl sm:text-3xl font-display font-bold tracking-tight mb-2">
+                                <a href="gceshostel/" class="hover:opacity-75 transition-opacity">GCES Hostel Operations Platform</a>
+                            </h3>
+                            <p class="text-sm sm:text-base text-ink-secondary">
+                                Replaced paper hostel registers with an Android + Spring Boot system tracking daily attendance and predictive mess counts for 1,200 students.
+                            </p>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-ink-secondary border-y border-hairline py-4">
+                            <li><strong class="text-ink font-semibold">Clean Architecture:</strong> Multi-module separation across <code class="font-mono text-xs text-ink">:app</code>, <code class="font-mono text-xs text-ink">:common</code>, and <code class="font-mono text-xs text-ink">:server</code>.</li>
+                            <li><strong class="text-ink font-semibold">Midnight Atomicity:</strong> ShedLock JDBC locks prevent duplicate 00:00 resets across nodes.</li>
+                            <li><strong class="text-ink font-semibold">Sub-100ms API:</strong> Bucket4j token buckets protect PostgreSQL during meal rush spikes.</li>
+                        </ul>
+
+                        <p class="text-xs font-mono text-ink-muted">
+                            Kotlin &middot; Jetpack Compose &middot; Spring Boot 3.5 &middot; PostgreSQL &middot; ShedLock &middot; Bucket4j &middot; JWT
+                        </p>
+
+                        <div class="flex flex-wrap items-center gap-3">
+                            <a href="gceshostel/" class="btn-primary text-xs">
+                                Screens &amp; Specs &rarr;
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=com.barath.gceshostel" target="_blank"
+                                rel="noopener noreferrer" class="btn-outline text-xs">
+                                Google Play &nearr;
+                            </a>
+                        </div>
                     </div>
-                    <div class="text-xs font-mono text-brand-muted">
-                        <span>May 2026 – Jun 2026</span>
-                        <span class="mx-1.5">•</span>
-                        <span>Remote (USA)</span>
-                    </div>
-                </div>
 
-                <p class="text-sm text-brand-muted leading-relaxed mb-5">
-                    Engineered an unattended AI worksheet automation and analytics verification platform, replacing manual QA workflows across student mathematics curricula.
-                </p>
+                    <div class="lg:col-span-5">
+                        <div class="device-well p-5 flex flex-col items-center">
+                            <div class="hardware-phone w-52 mb-4 cursor-zoom-in" data-img-container>
+                                <div class="hardware-screen">
+                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                    <img id="hostel-stage-img" src="assets/hostelapp/hostel_1.jpg"
+                                        alt="GCES Hostel Dashboard screen"
+                                        data-lightbox referrerpolicy="no-referrer">
+                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">
+                                        GCES Hostel
+                                    </div>
+                                </div>
+                            </div>
 
-                <ul class="space-y-2.5 text-sm text-brand-muted mb-6">
-                    <li class="flex items-start gap-2.5">
-                        <span class="text-emerald-accent font-bold mt-0.5">•</span>
-                        <span>Constructed an unattended Selenium WebDriver automation harness managing authenticated sessions, live question rendering, and telemetry capture.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="text-emerald-accent font-bold mt-0.5">•</span>
-                        <span>Implemented multimodal LLM vision evaluation pipelines over rendered question frames to verify mathematical proof validity, validate answer keys, and detect rendering defects.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="text-emerald-accent font-bold mt-0.5">•</span>
-                        <span>Refined prompt contracts to enforce deterministic outputs across complex visual layouts, minimizing false-positive inspection flags.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="text-emerald-accent font-bold mt-0.5">•</span>
-                        <span>Built a Flask analytics reporting service backed by MongoDB with structured output classifications and dynamic filtering.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="text-emerald-accent font-bold mt-0.5">•</span>
-                        <span>Architected a thread-safe execution harness using shared state locks to run multiple parallel worksheet batches without deadlocks.</span>
-                    </li>
-                </ul>
-
-                <div class="flex flex-wrap gap-1.5 pt-4 border-t border-brand-border">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Selenium WebDriver</span>
-                    <span class="tech-badge">LLM Vision APIs</span>
-                    <span class="tech-badge">MongoDB</span>
-                    <span class="tech-badge">Flask</span>
-                    <span class="tech-badge">REST APIs</span>
-                </div>
-            </article>
-        </section>
-
-        <!-- Research Section -->
-        <section id="research" class="mb-28 scroll-mt-24">
-            <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Research & Architecture</h2>
-            </div>
-
-            <!-- Featured Study -->
-            <article class="project-card mb-8 reveal-init">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                    <span class="tech-badge text-emerald-accent border-emerald-accent/30 bg-emerald-accent/10">Authored Research</span>
-                    <span class="text-xs font-mono text-brand-muted">PyTorch Evaluation Suite</span>
-                </div>
-
-                <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2">
-                    How Deep Does a Next-Concept Model Need to Run?
-                </h3>
-
-                <p class="text-sm text-brand-muted leading-relaxed mb-6">
-                    Next-concept language models synthesize sequences through a fixed ladder of K coarse-to-fine parallel passes. In this research, we formulate the oracle depth ceiling: the exact proportion of passes an optimal selector with perfect foresight can safely omit at parity quality. Across benchmarks, we measure a 37.7% redundant pass ceiling on XSum summarisation (replicating at 39.3% and 37.6% across validation splits). We also design an unsupervised entity saturation early-exit criterion capturing one-third of the theoretical ceiling with negligible ROUGE-L divergence.
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-brand-border">
-                    <div class="metric-box">
-                        <div class="text-2xl font-semibold font-mono tabular-nums text-emerald-accent">37.7%</div>
-                        <div class="text-xs text-brand-muted font-mono mt-1">Oracle Depth Ceiling (XSum)</div>
-                    </div>
-                    <div class="metric-box">
-                        <div class="text-2xl font-semibold font-mono tabular-nums text-brand-accent">1 in 8</div>
-                        <div class="text-xs text-brand-muted font-mono mt-1">Passes Safely Saved (Unsupervised)</div>
-                    </div>
-                    <div class="metric-box">
-                        <div class="text-2xl font-semibold font-mono tabular-nums text-emerald-accent">0.20</div>
-                        <div class="text-xs text-brand-muted font-mono mt-1">ROUGE-L Divergence Delta</div>
+                            <div class="segmented-track flex-wrap justify-center bg-surface" role="tablist" aria-label="GCES Hostel screen switcher">
+                                <button type="button" data-gallery-target="hostel" data-img="assets/hostelapp/hostel_1.jpg" data-alt="GCES Hostel Dashboard screen" class="segmented-tab is-active">Dashboard</button>
+                                <button type="button" data-gallery-target="hostel" data-img="assets/hostelapp/hostel_3.jpg" data-alt="GCES Hostel Attendance & Meal Planner" class="segmented-tab">Attendance</button>
+                                <button type="button" data-gallery-target="hostel" data-img="assets/hostelapp/hostel_4.jpg" data-alt="GCES Hostel Weekly Mess Menu" class="segmented-tab">Menu</button>
+                                <button type="button" data-gallery-target="hostel" data-img="assets/hostelapp/hostel_6.jpg" data-alt="GCES Hostel Weekly Food Analytics" class="segmented-tab">Analytics</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </article>
 
-            <!-- Architecture Breakdowns (No arbitrary Case Study 01 labels) -->
-            <div class="space-y-3">
-                <div class="case-study-row">
-                    <div>
-                        <h4 class="text-base sm:text-lg font-semibold">Distributed Concurrency & Atomic Midnight Token Locks</h4>
-                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
-                            How ShedLock distributed JDBC locks eliminate race conditions during midnight attendance resets across clustered backend nodes in GCES Hostel, while Bucket4j throttles requests to preserve sub-100ms API latency.
-                        </p>
-                    </div>
-                    <a href="gceshostel/" class="text-xs font-mono text-brand-accent hover:text-emerald-accent shrink-0 inline-flex items-center gap-1">
-                        <span>View Specs</span> <span class="arrow">&rarr;</span>
-                    </a>
-                </div>
+            <!-- 02: ConnectLnx -->
+            <article id="chapter-connectlnx" class="scroll-mt-24 pt-14 border-t border-hairline reveal-init">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <div class="lg:col-span-6 order-2 lg:order-1">
+                        <div class="device-well p-5">
+                            <div class="grid grid-cols-[1fr_auto_1fr] gap-3 items-center mb-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="hardware-phone w-full max-w-[162px] cursor-zoom-in" data-img-container>
+                                        <div class="hardware-screen">
+                                            <span class="hardware-camera" aria-hidden="true"></span>
+                                            <span class="hardware-glare" aria-hidden="true"></span>
+                                            <img src="assets/connectlnx/connectlnx_send.jpg"
+                                                alt="ConnectLnx Send interface"
+                                                data-lightbox referrerpolicy="no-referrer">
+                                            <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">
+                                                Sender
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="text-[11px] font-mono text-ink-muted mt-2">Send</span>
+                                </div>
 
-                <div class="case-study-row">
-                    <div>
-                        <h4 class="text-base sm:text-lg font-semibold">Zero-Copy Parallel TCP Socket Streaming in Kotlin Multiplatform</h4>
-                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
-                            Architectural breakdown of ConnectLnx: custom binary protocol multiplexing file chunks across 5 concurrent TCP connections using Java NIO SocketChannels and mDNS zero-configuration network discovery.
-                        </p>
-                    </div>
-                    <a href="connectlnx/" class="text-xs font-mono text-brand-accent hover:text-emerald-accent shrink-0 inline-flex items-center gap-1">
-                        <span>View Specs</span> <span class="arrow">&rarr;</span>
-                    </a>
-                </div>
+                                <div class="w-10 sm:w-12 flex flex-col items-center gap-1" aria-hidden="true">
+                                    <span class="text-[10px] font-mono text-ink-muted">5&times;TCP</span>
+                                    <div class="packet-bridge w-full"><div class="packet-pulse"></div></div>
+                                </div>
 
-                <div class="case-study-row">
-                    <div>
-                        <h4 class="text-base sm:text-lg font-semibold">Automated Multimodal QA Pipelines with Vision LLMs</h4>
-                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
-                            Architecture of the automated evaluation pipeline built at Thinkster Math: unattended Selenium capture harnesses, prompt calibration for mathematical validity, and thread-safe batch execution.
+                                <div class="flex flex-col items-center">
+                                    <div class="hardware-phone w-full max-w-[162px] cursor-zoom-in" data-img-container>
+                                        <div class="hardware-screen">
+                                            <span class="hardware-camera" aria-hidden="true"></span>
+                                            <span class="hardware-glare" aria-hidden="true"></span>
+                                            <img src="assets/connectlnx/connectlnx_receive.jpg"
+                                                alt="ConnectLnx Receive QR interface"
+                                                data-lightbox referrerpolicy="no-referrer">
+                                            <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">
+                                                Receiver
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="text-[11px] font-mono text-ink-muted mt-2">Receive</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-surface border border-hairline rounded-lg p-3.5">
+                                <div class="segmented-track flex-wrap mb-2.5" role="tablist" aria-label="ConnectLnx protocol steps">
+                                    <button type="button" data-protocol-step="discovery" class="segmented-tab is-active">1. mDNS / QR</button>
+                                    <button type="button" data-protocol-step="handshake" class="segmented-tab">2. Binary Header</button>
+                                    <button type="button" data-protocol-step="multiplex" class="segmented-tab">3. 5&times; Stream</button>
+                                </div>
+                                <p id="protocol-step-detail" class="text-xs text-ink-secondary">
+                                    Zero-config mDNS peer discovery with ML Kit QR pairing fallback on restricted networks.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 order-1 lg:order-2 space-y-5">
+                        <div class="text-xs font-mono text-ink-muted">
+                            02 &middot; Kotlin Multiplatform &middot; Play Store, Arch AUR &amp; Windows
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl sm:text-3xl font-display font-bold tracking-tight mb-2">
+                                <a href="connectlnx/" class="hover:opacity-75 transition-opacity">ConnectLnx Multiplatform Transfer</a>
+                            </h3>
+                            <p class="text-sm sm:text-base text-ink-secondary">
+                                High-speed local file transfer between Linux, Windows, and Android &mdash; zero cloud relays, zero cables.
+                            </p>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-ink-secondary border-y border-hairline py-4">
+                            <li><strong class="text-ink font-semibold">Shared KMP Core:</strong> Business logic and UI shared via Kotlin &amp; Compose Multiplatform.</li>
+                            <li><strong class="text-ink font-semibold">5-Socket Striping:</strong> Custom binary TCP protocol multiplexing chunks over Java NIO.</li>
+                            <li><strong class="text-ink font-semibold">Auto Discovery:</strong> Local mDNS broadcasting with camera QR pairing fallback.</li>
+                        </ul>
+
+                        <p class="text-xs font-mono text-ink-muted">
+                            Kotlin Multiplatform &middot; Compose Multiplatform &middot; Java NIO &middot; mDNS &middot; Ktor &middot; ML Kit
+                        </p>
+
+                        <div class="flex flex-wrap items-center gap-3">
+                            <a href="connectlnx/" class="btn-primary text-xs">
+                                Technical Breakdown &rarr;
+                            </a>
+                            <a href="https://github.com/3dbarath/ConnectLnx" target="_blank" rel="noopener noreferrer"
+                                class="btn-outline text-xs">
+                                GitHub &nearr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 03: aztrox-release Unified Release CLI -->
+            <article id="chapter-aztrox" class="scroll-mt-24 pt-14 border-t border-hairline reveal-init">
+                <div class="monograph-frame p-6 sm:p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        <div class="lg:col-span-6 space-y-4">
+                            <div class="text-xs font-mono text-ink-muted">03 &middot; Unified Release CLI &middot; 9 Products</div>
+                            <h3 class="text-2xl font-display font-bold tracking-tight">aztrox-release</h3>
+                            <p class="text-sm text-ink-secondary">
+                                Local Bash 5.3 CI/CD engine that builds, signs, and ships 9 products across 4 distribution surfaces from one entry point.
+                            </p>
+                            <ul class="space-y-1.5 text-sm text-ink-secondary pt-2 border-t border-hairline">
+                                <li><strong class="text-ink font-semibold">Shared Core:</strong> <code class="font-mono text-xs text-ink">lib/</code> owns Play Store conflict checks, SQLite <code class="font-mono text-xs text-ink">history.db</code>, and LIFO rollbacks; thin <code class="font-mono text-xs text-ink">projects/*/release.sh</code> drivers stay DRY.</li>
+                                <li><strong class="text-ink font-semibold">Safety Gates:</strong> Auto-bumps past Play <code class="font-mono text-xs text-ink">versionCode</code> conflicts, checks keystore expiry, and resumes failed runs.</li>
+                                <li><strong class="text-ink font-semibold">Dev Loop:</strong> <code class="font-mono text-xs text-ink">run</code> installs via ADB, <code class="font-mono text-xs text-ink">remote run</code> ships APKs to Telegram, <code class="font-mono text-xs text-ink">dashboard --watch</code> monitors live.</li>
+                            </ul>
+                            <p class="text-xs font-mono text-ink-muted pt-1">
+                                Bash 5.3 &middot; JDK 17 jarsigner &middot; fastlane &middot; SQLite &middot; gh &middot; ShellCheck
+                            </p>
+                        </div>
+
+                        <div class="lg:col-span-6 bg-surface-subtle border border-hairline rounded-xl p-5 space-y-4 font-mono text-xs">
+                            <div class="flex items-center justify-between pb-3 border-b border-hairline">
+                                <span class="text-ink font-semibold">Distribution Surfaces</span>
+                                <span class="text-ink-muted">CachyOS / Arch</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]">
+                                <div class="p-3 rounded-lg bg-surface border border-hairline">
+                                    <div class="text-ink font-semibold">Google Play</div>
+                                    <div class="text-ink-muted mt-1">fastlane supply + Android Publisher Ruby API</div>
+                                </div>
+                                <div class="p-3 rounded-lg bg-surface border border-hairline">
+                                    <div class="text-ink font-semibold">GitHub + Arch AUR</div>
+                                    <div class="text-ink-muted mt-1">.deb / .msi releases &amp; PKGBUILD .SRCINFO</div>
+                                </div>
+                                <div class="p-3 rounded-lg bg-surface border border-hairline">
+                                    <div class="text-ink font-semibold">Firebase Hosting</div>
+                                    <div class="text-ink-muted mt-1">Versioned ConnectLnx web deploys</div>
+                                </div>
+                                <div class="p-3 rounded-lg bg-surface border border-hairline">
+                                    <div class="text-ink font-semibold">Render &amp; HF Spaces</div>
+                                    <div class="text-ink-muted mt-1">Fat JAR deploy hooks + health probes</div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 border-t border-hairline flex flex-wrap justify-between gap-2 text-[11px] text-ink-muted">
+                                <span>Logs: Chart.js HTML + notify-send</span>
+                                <span>TUI: fzf &middot; gum &middot; glow</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 04: Smart Expense Tracker + Stockfish & Duo Play -->
+            <div class="pt-14 border-t border-hairline grid grid-cols-1 lg:grid-cols-2 gap-10 reveal-init">
+                <!-- Smart Expense Tracker -->
+                <article class="flex flex-col justify-between space-y-5">
+                    <div class="space-y-2.5">
+                        <div class="text-xs font-mono text-ink-muted">04A &middot; Offline-First Android &middot; Room &amp; Canvas</div>
+                        <h3 class="text-2xl font-display font-bold tracking-tight">
+                            <a href="smart-expense-tracker/" class="hover:opacity-75 transition-opacity">Smart Expense Tracker</a>
+                        </h3>
+                        <p class="text-sm text-ink-secondary">
+                            Local-only finance app with Compose Canvas charts, reactive Room Flow queries, and WorkManager budget alerts.
                         </p>
                     </div>
-                    <a href="#experience" class="text-xs font-mono text-brand-accent hover:text-emerald-accent shrink-0 inline-flex items-center gap-1">
-                        <span>View Details</span> <span class="arrow">&rarr;</span>
-                    </a>
-                </div>
+
+                    <div class="device-well p-5 flex flex-col sm:flex-row items-center gap-5">
+                        <div class="hardware-phone w-36 shrink-0 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img id="expense-stage-img" src="assets/smartexpense/expense_1.jpg"
+                                    alt="Smart Expense Tracker Balance Ledger dashboard"
+                                    data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">
+                                    Expense Tracker
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col justify-between gap-4 w-full">
+                            <div class="segmented-track flex-wrap bg-surface self-start" role="tablist" aria-label="Smart Expense views">
+                                <button type="button" data-gallery-target="expense" data-img="assets/smartexpense/expense_1.jpg" data-alt="Smart Expense Tracker Balance Ledger dashboard" class="segmented-tab is-active">Balance Ledger</button>
+                                <button type="button" data-gallery-target="expense" data-img="assets/smartexpense/expense_3.jpg" data-alt="Smart Expense Tracker Compose Canvas analytics" class="segmented-tab">Canvas Charts</button>
+                                <button type="button" data-gallery-target="expense" data-img="assets/smartexpense/expense_4.jpg" data-alt="Smart Expense Tracker Category Breakdown" class="segmented-tab">Categories</button>
+                            </div>
+
+                            <div class="space-y-1.5 text-xs text-ink-secondary font-mono tabular-nums">
+                                <div class="flex justify-between py-1 border-b border-hairline">
+                                    <span>Persistence</span>
+                                    <span class="text-ink font-semibold">Room + Flow</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-hairline">
+                                    <span>Charts</span>
+                                    <span class="text-ink font-semibold">Compose Canvas</span>
+                                </div>
+                                <div class="flex justify-between py-1">
+                                    <span>Alerts</span>
+                                    <span class="text-ink font-semibold">WorkManager</span>
+                                </div>
+                            </div>
+
+                            <a href="smart-expense-tracker/" class="btn-outline text-xs self-start">
+                                11-Screen Walkthrough &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Game Engines & Stockfish Interop (Clean, No Playable XO) -->
+                <article class="flex flex-col justify-between space-y-5">
+                    <div class="space-y-2.5">
+                        <div class="text-xs font-mono text-ink-muted">04B &middot; C++ GDExtension &middot; Godot Engine</div>
+                        <h3 class="text-2xl font-display font-bold tracking-tight">
+                            <a href="chessgame/" class="hover:opacity-75 transition-opacity">Stockfish Interop &amp; Arcade Suite</a>
+                        </h3>
+                        <p class="text-sm text-ink-secondary">
+                            C++ GDExtension bindings running the Stockfish chess engine natively inside Godot at 60fps, alongside local multiplayer games.
+                        </p>
+                    </div>
+
+                    <div class="device-well p-5 flex flex-col sm:flex-row items-center gap-5">
+                        <!-- Clean Architectural Chess Eval Frame -->
+                        <div class="w-40 h-40 shrink-0 rounded-xl border border-hairline bg-surface p-3 flex flex-col justify-between" aria-label="Stockfish board preview">
+                            <div class="grid grid-cols-8 grid-rows-8 w-full h-full border border-hairline rounded overflow-hidden font-mono text-[9px] font-bold">
+                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle flex items-center justify-center text-ink">k</div><div></div>
+                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
+                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
+                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div class="bg-milk/20 flex items-center justify-center text-ink">q</div><div class="bg-surface-subtle"></div>
+                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
+                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle flex items-center justify-center text-ink">Q</div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
+                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
+                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div class="bg-milk/15 flex items-center justify-center text-ink">K</div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col justify-between gap-4 w-full">
+                            <div class="space-y-2 text-xs text-ink-secondary font-mono tabular-nums">
+                                <div class="flex justify-between py-1.5 border-b border-hairline">
+                                    <span>Binding</span>
+                                    <span class="text-ink font-semibold">C++ GDExtension</span>
+                                </div>
+                                <div class="flex justify-between py-1.5 border-b border-hairline">
+                                    <span>Engine</span>
+                                    <span class="text-ink font-semibold">Local Stockfish</span>
+                                </div>
+                                <div class="flex justify-between py-1.5">
+                                    <span>Frame Target</span>
+                                    <span class="text-ink font-semibold">60fps On-Device</span>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-2.5">
+                                <a href="chessgame/" class="btn-outline text-xs py-2 px-3">Chess Engine &rarr;</a>
+                                <a href="two-player-games/" class="btn-outline text-xs py-2 px-3">Arcade Suite &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- Technical Stack Section -->
-        <section id="stack" class="mb-28 scroll-mt-24">
-            <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Stack</h2>
+        <!-- ================================================================
+             EXPERIENCE
+             ================================================================ -->
+        <section id="experience" class="mb-24 scroll-mt-24 reveal-init">
+            <div class="pb-3 mb-8 border-b border-hairline flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Experience</h2>
+                <span class="text-xs font-mono text-ink-muted">Thinkster Math &middot; May &ndash; Jun 2026 &middot; Remote (USA)</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 reveal-init">
-                <div class="project-card">
-                    <h3 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-accent mb-3">Mobile & Multiplatform</h3>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tech-badge">Kotlin</span>
-                        <span class="tech-badge">Jetpack Compose</span>
-                        <span class="tech-badge">Kotlin Multiplatform</span>
-                        <span class="tech-badge">Compose Multiplatform</span>
-                        <span class="tech-badge">Coroutines & Flow</span>
-                        <span class="tech-badge">Hilt</span>
-                        <span class="tech-badge">Room DB</span>
-                        <span class="tech-badge">Retrofit</span>
-                        <span class="tech-badge">Clean Architecture</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-accent mb-3">Backend & Distributed Systems</h3>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tech-badge">Spring Boot 3.5</span>
-                        <span class="tech-badge">PostgreSQL</span>
-                        <span class="tech-badge">Flyway</span>
-                        <span class="tech-badge">ShedLock</span>
-                        <span class="tech-badge">Bucket4j</span>
-                        <span class="tech-badge">Spring Security</span>
-                        <span class="tech-badge">Java NIO Sockets</span>
-                        <span class="tech-badge">Hibernate</span>
-                        <span class="tech-badge">Docker</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-accent mb-3">AI & Automation</h3>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Selenium WebDriver</span>
-                        <span class="tech-badge">LLM APIs</span>
-                        <span class="tech-badge">Vision LLMs</span>
-                        <span class="tech-badge">Prompt Calibration</span>
-                        <span class="tech-badge">MongoDB</span>
-                        <span class="tech-badge">Flask</span>
-                        <span class="tech-badge">PyTorch</span>
-                        <span class="tech-badge">Bash</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-accent mb-3">DevOps & Release Tooling</h3>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tech-badge">GitHub Actions CI/CD</span>
-                        <span class="tech-badge">Fastlane</span>
-                        <span class="tech-badge">AUR Packaging</span>
-                        <span class="tech-badge">SQLite</span>
-                        <span class="tech-badge">jarsigner</span>
-                        <span class="tech-badge">ADB</span>
-                        <span class="tech-badge">Linux Administration</span>
-                        <span class="tech-badge">Git</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education & Credentials -->
-        <section id="education" class="mb-28 scroll-mt-24">
-            <div class="mb-8 pb-3 border-b border-brand-border">
-                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Education</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 reveal-init">
-                <!-- Academic Degree -->
-                <div class="md:col-span-7 project-card">
-                    <div class="flex items-center justify-between gap-2 mb-3">
-                        <span class="tech-badge">B.E. Computer Science</span>
-                        <span class="text-xs font-mono text-emerald-accent font-semibold">2023 – 2027</span>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-1">Government College of Engineering, Srirangam</h3>
-                    <p class="text-xs font-mono text-brand-muted mb-3">CGPA: 7.6 / 10.0 &bull; Trichy, India</p>
-                    <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
-                        Coursework: Operating Systems, Computer Networks, Object-Oriented Programming, Data Structures & Algorithms, Distributed Systems.
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-5 space-y-3">
+                    <h3 class="text-xl font-display font-bold">Thinkster Math</h3>
+                    <p class="text-xs font-mono text-ink-muted">AI Systems &amp; Automation Intern</p>
+                    <p class="text-sm text-ink-secondary">
+                        Replaced manual curriculum QA with an unattended Selenium + Vision LLM verification platform backed by Flask and MongoDB.
+                    </p>
+                    <p class="text-xs font-mono text-ink-muted pt-2">
+                        Python &middot; Selenium &middot; Vision LLMs &middot; Flask &middot; MongoDB
                     </p>
                 </div>
 
-                <!-- Verified Credentials -->
-                <div class="md:col-span-5 project-card">
-                    <h3 class="text-xs font-semibold mb-3 font-mono text-brand-muted uppercase tracking-wider">Certifications</h3>
-                    <ul class="space-y-2.5 text-xs sm:text-sm text-brand-muted">
-                        <li class="flex items-center justify-between pb-2 border-b border-brand-border">
-                            <span class="text-brand-accent font-medium">Mobile App Development using Kotlin</span>
-                            <span class="text-[10px] font-mono text-emerald-accent">Verified</span>
-                        </li>
-                        <li class="flex items-center justify-between pb-2 border-b border-brand-border">
-                            <span class="text-brand-accent font-medium">DevOps Engineering</span>
-                            <span class="text-[10px] font-mono text-emerald-accent">Verified</span>
-                        </li>
-                        <li class="flex items-center justify-between">
-                            <span class="text-brand-accent font-medium">Kubernetes Administration</span>
-                            <span class="text-[10px] font-mono text-emerald-accent">Verified</span>
-                        </li>
-                    </ul>
+                <div class="lg:col-span-7 monograph-frame p-5">
+                    <div class="segmented-track mb-4 flex-wrap" role="tablist" aria-label="Thinkster Math pipeline stages">
+                        <button type="button" role="tab" aria-selected="true" data-exp-tab="harness" class="segmented-tab is-active">01. Selenium Harness</button>
+                        <button type="button" role="tab" aria-selected="false" data-exp-tab="vision" class="segmented-tab">02. Vision LLM QA</button>
+                        <button type="button" role="tab" aria-selected="false" data-exp-tab="batch" class="segmented-tab">03. Thread-Safe API</button>
+                    </div>
+
+                    <div data-exp-panel="harness" class="text-sm text-ink-secondary">
+                        Unattended WebDriver harness managing authenticated sessions, live math question rendering, and frame capture.
+                    </div>
+                    <div data-exp-panel="vision" class="hidden text-sm text-ink-secondary">
+                        Multimodal Vision LLM checks on rendered question frames to verify proof validity, answer keys, and layout defects with deterministic prompt contracts.
+                    </div>
+                    <div data-exp-panel="batch" class="hidden text-sm text-ink-secondary">
+                        Thread-safe execution harness using shared state locks for deadlock-free parallel batches, reporting to a Flask + MongoDB API.
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="scroll-mt-24 reveal-init">
-            <div class="project-card p-6 sm:p-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <!-- ================================================================
+             RESEARCH
+             ================================================================ -->
+        <section id="research" class="mb-24 scroll-mt-24 reveal-init">
+            <div class="pb-3 mb-8 border-b border-hairline flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Research</h2>
+                <span class="text-xs font-mono text-ink-muted">PyTorch Evaluation Suite</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-3">
+                    <h3 class="text-xl font-display font-bold">How Deep Does a Next-Concept Model Need to Run?</h3>
+                    <p class="text-sm text-ink-secondary">
+                        Measured the <strong class="text-ink font-semibold">oracle depth ceiling</strong> across fixed-pass next-concept LMs: <strong class="text-ink font-semibold">37.7%</strong> of passes on XSum are redundant (39.3% &amp; 37.6% across validation splits). Designed an unsupervised entity-saturation exit saving <strong class="text-ink font-semibold">1 in 8 passes</strong> at 0.20 ROUGE-L delta.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-5 monograph-frame p-5 space-y-3 font-mono text-xs tabular-nums">
                     <div>
-                        <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-2">Contact</h2>
-                        <p class="text-sm text-brand-muted leading-relaxed mb-6">
-                            Available for core Android, Kotlin Multiplatform, and systems engineering roles.
-                        </p>
-                        
-                        <div class="relative inline-block max-w-full">
-                            <div class="email-pill group">
-                                <span class="email-pill-bg" aria-hidden="true"></span>
-                                <a href="mailto:barathjack77@gmail.com" class="email-pill-label" aria-label="Send email to barathjack77@gmail.com">
-                                    barathjack77@gmail.com
-                                </a>
-                                <button id="copy-email-btn" class="email-pill-copy-btn" aria-label="Copy email address" title="Copy to clipboard">
-                                    <svg id="copy-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                    <svg id="check-icon" class="w-3.5 h-3.5 hidden text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span id="copy-btn-text">Copy</span>
-                                </button>
-                            </div>
-                            <span id="copy-tooltip" class="absolute -top-9 left-1/2 bg-brand-surface border border-brand-border text-brand-accent text-xs px-2.5 py-1 rounded-full shadow-lg pointer-events-none font-mono" role="status">Copied!</span>
+                        <div class="flex justify-between mb-1"><span class="text-ink-secondary">Oracle Ceiling (XSum)</span><span class="text-ink font-semibold">37.7%</span></div>
+                        <div class="h-1.5 bg-surface-subtle rounded-full overflow-hidden"><div class="h-full bg-milk" style="width: 37.7%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span class="text-ink-secondary">Unsupervised Exit</span><span class="text-ink font-semibold">1 in 8 saved</span></div>
+                        <div class="h-1.5 bg-surface-subtle rounded-full overflow-hidden"><div class="h-full bg-ink/70" style="width: 12.5%"></div></div>
+                    </div>
+                    <div class="pt-2 border-t border-hairline flex justify-between text-ink-muted">
+                        <span>ROUGE-L Delta</span><span class="text-ink font-semibold">0.20</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             STACK & EDUCATION
+             ================================================================ -->
+        <section id="stack" class="mb-20 scroll-mt-24 reveal-init">
+            <div class="pb-3 mb-8 border-b border-hairline">
+                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Stack</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+                <div class="space-y-2">
+                    <h3 class="font-display font-bold text-ink">Mobile &amp; KMP</h3>
+                    <p class="text-ink-secondary">Kotlin &middot; Jetpack Compose &middot; Kotlin Multiplatform &middot; Coroutines &amp; Flow &middot; Hilt &middot; Room</p>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-display font-bold text-ink">Backend &amp; Net</h3>
+                    <p class="text-ink-secondary">Spring Boot 3.5 &middot; PostgreSQL &middot; ShedLock &middot; Bucket4j &middot; Java NIO &middot; Docker</p>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-display font-bold text-ink">AI &amp; Automation</h3>
+                    <p class="text-ink-secondary">Python &middot; Selenium &middot; Vision LLMs &middot; Flask &middot; MongoDB &middot; PyTorch</p>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-display font-bold text-ink">Release &amp; Infra</h3>
+                    <p class="text-ink-secondary">Bash &middot; SQLite &middot; Fastlane &middot; AUR Packaging &middot; GitHub Actions &middot; Linux</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-12 pt-8 border-t border-hairline text-sm">
+                <div class="lg:col-span-7">
+                    <div class="font-mono text-xs text-ink-muted mb-1 tabular-nums">B.E. Computer Science &middot; 2023 &ndash; 2027 &middot; CGPA 7.6</div>
+                    <div class="font-display font-bold text-lg text-ink">Government College of Engineering, Srirangam</div>
+                </div>
+                <div class="lg:col-span-5 text-xs font-mono text-ink-secondary flex flex-wrap items-center lg:justify-end gap-x-3 gap-y-1">
+                    <span>Kotlin Mobile Dev</span>
+                    <span>&middot;</span>
+                    <span>DevOps Engineering</span>
+                    <span>&middot;</span>
+                    <span>Kubernetes Admin</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             CONTACT
+             ================================================================ -->
+        <section id="contact" class="scroll-mt-24 reveal-init">
+            <div class="monograph-frame p-6 sm:p-10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="space-y-3">
+                        <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Contact</h2>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <a href="mailto:barathjack77@gmail.com"
+                                class="px-3.5 py-2 rounded-lg border border-hairline-strong bg-surface-subtle font-mono text-sm text-ink hover:border-milk transition-colors">
+                                barathjack77@gmail.com
+                            </a>
+                            <button id="copy-email-btn" type="button" class="btn-primary text-xs" aria-label="Copy email address">
+                                <span id="copy-btn-text">Copy Email</span>
+                            </button>
+                            <span id="copy-live-status" class="text-xs font-mono text-ink opacity-0 transition-opacity" role="status" aria-live="polite">
+                                Copied
+                            </span>
                         </div>
                     </div>
 
-                    <div class="flex flex-col md:items-end justify-center space-y-2.5 font-mono text-xs">
-                        <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="text-brand-muted hover:text-brand-accent transition-colors flex items-center gap-1.5">
-                            <span>github.com/3DBarath</span>
-                            <span class="text-emerald-accent">&nearr;</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" rel="noopener noreferrer" class="text-brand-muted hover:text-brand-accent transition-colors flex items-center gap-1.5">
-                            <span>linkedin.com/in/3dbarath</span>
-                            <span class="text-emerald-accent">&nearr;</span>
-                        </a>
-                        <a href="tel:+918015931576" class="text-brand-muted hover:text-brand-accent transition-colors">
-                            +91 80159 31576
-                        </a>
-                        <span class="text-brand-muted/70">
-                            Trichy, Tamil Nadu, India
-                        </span>
+                    <div class="flex flex-wrap items-center gap-5 font-mono text-xs text-ink-secondary">
+                        <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">GitHub &nearr;</a>
+                        <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">LinkedIn &nearr;</a>
+                        <a href="tel:+918015931576" class="editorial-link hover:text-ink">+91 80159 31576</a>
                     </div>
                 </div>
 
-                <div class="mt-10 pt-6 border-t border-brand-border flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-brand-muted/70 gap-3">
+                <footer class="mt-8 pt-5 border-t border-hairline flex items-center justify-between text-xs font-mono text-ink-muted">
                     <p>&copy; 2026 Barath B</p>
-                    <a href="#hero" class="top-link hover:text-brand-accent transition-colors">
-                        <span>Top</span> <span class="arrow">&uarr;</span>
-                    </a>
-                </div>
+                    <a href="#hero" class="editorial-link hover:text-ink">Top &uarr;</a>
+                </footer>
             </div>
         </section>
 
     </main>
 
-    <!-- Project Script -->
-    <script src="src/main.js?v=15" type="module"></script>
+    <script src="src/main.js?v=18" type="module"></script>
 </body>
 
 </html>
