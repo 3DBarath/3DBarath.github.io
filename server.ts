@@ -1,36 +1,23 @@
-const server = Bun.serve({
-  port: 3000,
-  async fetch(req) {
-    const url = new URL(req.url);
-    let pathname = decodeURIComponent(url.pathname);
-    if (pathname === "/" || pathname === "") pathname = "/index.html";
-    if (pathname === "/mockup") pathname = "/mockup.html";
+import express from 'express';
+import path from 'path';
 
-    // Handle directory index resolution
-    let filePath = "." + pathname;
-    let file = Bun.file(filePath);
+const app = express();
+const PORT = Number(process.env.PORT) || 3000;
+const HOST = '0.0.0.0';
+const rootDir = process.cwd();
 
-    if (await file.exists()) {
-      // Check if it's a directory
-      const stat = await file.stat();
-      if (stat && stat.isDirectory()) {
-        const indexFile = Bun.file(filePath.replace(/\/?$/, "/index.html"));
-        if (await indexFile.exists()) {
-          return new Response(indexFile);
-        }
-      } else {
-        return new Response(file);
-      }
-    } else {
-      // Check if path with /index.html exists
-      const indexFile = Bun.file(filePath + "/index.html");
-      if (await indexFile.exists()) {
-        return new Response(indexFile);
-      }
-    }
-
-    return new Response("Not Found: " + pathname, { status: 404 });
-  },
+app.get('/mockup', (_req, res, next) => {
+  res.sendFile(path.join(rootDir, 'mockup.html'), (err) => {
+    if (err) next();
+  });
 });
 
-console.log(`Bun server running at http://localhost:${server.port}`);
+app.use(express.static(rootDir, { index: 'index.html' }));
+
+app.use((req, res) => {
+  res.status(404).send(`Not Found: ${req.path}`);
+});
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}`);
+});
