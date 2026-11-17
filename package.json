@@ -2,12 +2,9 @@
   "name": "3dbarath.github.io",
   "private": true,
   "scripts": {
-    "build": "npx @tailwindcss/cli -i src/input.css -o output.css --minify && mkdir -p dist && cp output.css dist/output.css",
-    "dev": "npx @tailwindcss/cli -i src/input.css -o output.css --watch"
-  },
-  "devDependencies": {
-    "@tailwindcss/cli": "4.3.5",
-    "@types/bun": "1.4.4",
-    "tailwindcss": "4.3.5"
+    "dev": "bun --hot server.ts",
+    "start": "bun server.ts",
+    "css": "bunx @tailwindcss/cli@4.3.5 -i src/input.css -o output.css --watch",
+    "build": "bunx @tailwindcss/cli@4.3.5 -i src/input.css -o output.css --minify && mkdir -p dist && cp output.css dist/output.css"
   }
 }
