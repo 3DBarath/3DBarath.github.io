@@ -12,6 +12,7 @@ app.get('/mockup', (_req, res, next) => {
   });
 });
 
+app.use(express.static(path.join(rootDir, 'public')));
 app.use(express.static(rootDir, { index: 'index.html' }));
 
 app.use((req, res) => {

@@ -15,7 +15,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://3dbarath.github.io/">
 
-    <link rel="stylesheet" href="output.css?v=12">
+    <link rel="stylesheet" href="output.css?v=26">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
@@ -59,14 +59,14 @@
 
 <body class="bg-canvas text-ink overflow-x-clip" data-project-page="home">
 
-    <!-- Strict 3-Zone Top Bar -->
+    <!-- Strict 3-Zone Architectural Top Bar -->
     <header class="site-header fixed top-0 inset-x-0 z-40">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-3 md:gap-8">
             <a href="./" class="font-display font-bold text-lg tracking-tight text-ink whitespace-nowrap shrink-0">
                 Barath B
             </a>
 
-            <nav id="desktop-nav" class="relative hidden md:flex items-center gap-7 h-full text-sm font-medium text-ink-secondary" aria-label="Main Navigation">
+            <nav id="desktop-nav" class="relative hidden md:flex items-center gap-8 h-full text-sm font-medium text-ink-secondary" aria-label="Main Navigation">
                 <div id="nav-underline" class="nav-underline-bar" aria-hidden="true"></div>
                 <a href="#work" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Work</a>
                 <a href="#experience" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Experience</a>
@@ -75,9 +75,24 @@
                 <a href="#contact" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Contact</a>
             </nav>
 
-            <div class="flex items-center gap-2.5 shrink-0">
+            <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                <div id="shader-dropdown" class="shader-dropdown">
+                    <button id="shader-dropdown-trigger" type="button"
+                        class="btn-outline shader-dropdown-trigger whitespace-nowrap shrink-0"
+                        aria-haspopup="menu" aria-expanded="false" aria-controls="shader-dropdown-menu"
+                        aria-label="Change background shader: Borealis" title="Change background shader">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15c2.2-2.2 4.4-2.2 6.6 0s4.4 2.2 6.6 0 4.4-2.2 4.8-1.8M3 10c2.2-2.2 4.4-2.2 6.6 0s4.4 2.2 6.6 0 4.4-2.2 4.8-1.8" />
+                        </svg>
+                        <span id="shader-dropdown-label" class="hidden sm:inline">Borealis</span>
+                        <svg class="shader-dropdown-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div id="shader-dropdown-menu" class="shader-dropdown-menu" role="menu" aria-label="Select background shader" aria-hidden="true"></div>
+                </div>
                 <button id="theme-toggle" data-theme-switch type="button"
-                    class="btn-outline p-2 whitespace-nowrap shrink-0"
+                    class="btn-outline !min-h-9 !px-2.5 !py-2 whitespace-nowrap shrink-0"
                     aria-label="Toggle Light or Dark Theme" title="Toggle theme">
                     <svg id="sun-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
@@ -87,8 +102,8 @@
                     </svg>
                 </button>
                 <a href="resume.pdf" target="_blank" rel="noopener noreferrer"
-                    class="btn-primary text-xs py-2 px-4 whitespace-nowrap shrink-0">
-                    Resume PDF
+                    class="btn-primary !min-h-9 text-xs py-2 !px-3 sm:!px-4 whitespace-nowrap shrink-0">
+                    <span>Resume</span><span class="hidden sm:inline">&nbsp;PDF</span>
                 </a>
                 <button id="mobile-menu-toggle"
                     class="md:hidden p-2.5 -mr-2 text-ink-secondary hover:text-ink cursor-pointer rounded-md"
@@ -116,303 +131,362 @@
         <a href="#research" class="text-2xl font-display font-bold text-ink">Research</a>
         <a href="#stack" class="text-2xl font-display font-bold text-ink">Stack</a>
         <a href="#contact" class="text-2xl font-display font-bold text-ink">Contact</a>
-        <div class="pt-6 border-t border-hairline flex items-center justify-between">
-            <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-sm font-mono font-semibold text-ink">Resume PDF &nearr;</a>
-            <button type="button" data-theme-switch class="btn-outline text-xs py-2 px-3">
+        <div class="pt-6 border-t border-hairline flex items-center justify-between gap-4">
+            <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-primary text-xs">Resume PDF &nearr;</a>
+            <button type="button" data-theme-switch class="btn-outline text-xs">
                 Switch Theme
             </button>
         </div>
     </div>
 
-    <main class="max-w-6xl mx-auto px-6 pt-24 pb-20">
+    <main class="max-w-[1320px] mx-auto px-6 sm:px-8 pt-20">
 
         <!-- ================================================================
-             HERO
+             BAND 1 · MONUMENTAL FULL-VIEWPORT EDITORIAL HERO
              ================================================================ -->
-        <section id="hero" class="mb-20">
-            <div class="flex flex-wrap items-center justify-between gap-4 pb-4 mb-7 border-b border-hairline">
-                <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-ink-muted">
-                    <span>Android &amp; Systems Engineer</span>
+        <section id="hero" class="min-h-[calc(100vh-5rem)] flex flex-col justify-between pb-20 mb-16">
+
+            <!-- Architectural Coordinate Strip -->
+            <div class="flex flex-wrap items-center justify-between gap-4 py-4 border-b border-hairline text-xs font-mono text-ink-muted">
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <span class="text-ink">Android &amp; Systems Engineer</span>
                     <span aria-hidden="true">&middot;</span>
                     <span>GCE Srirangam &rsquo;27</span>
                     <span aria-hidden="true">&middot;</span>
                     <span>Trichy, India</span>
                 </div>
+                <div class="hidden sm:flex items-center gap-5">
+                    <span>Open to Android, KMP &amp; Backend roles</span>
+                    <span aria-hidden="true">&middot;</span>
+                    <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="editorial-link text-ink-secondary hover:text-ink">GitHub &nearr;</a>
+                    <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" rel="noopener noreferrer" class="editorial-link text-ink-secondary hover:text-ink">LinkedIn &nearr;</a>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-                <!-- Left: Ultra-Scannable Intro -->
-                <div class="lg:col-span-6 flex flex-col justify-center py-2">
-                    <h1 class="text-4xl sm:text-5xl lg:text-[3.125rem] font-display font-bold leading-[1.08] tracking-tight mb-5 text-balance">
-                        I build Android apps, multi-socket tools, and the systems that ship them.
+            <!-- Monumental Typography + Borderless Floating Hardware Duo -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center py-6 lg:py-8 my-auto">
+                <div class="lg:col-span-7 space-y-7">
+                    <h1 class="hero-display">
+                        Android apps,<br>
+                        multi-socket tools,<br>
+                        <span class="hero-display-muted">&amp; the systems</span> that ship them.
                     </h1>
-                    <p class="text-base text-ink-secondary leading-relaxed max-w-lg mb-7">
+
+                    <p class="text-base sm:text-lg text-ink-secondary leading-relaxed max-w-xl">
                         Starting from a 1,200-student hostel that ran on paper ledgers, I write software designed to hold up under daily load &mdash; across <strong class="text-ink font-semibold">GCES Hostel</strong>, <strong class="text-ink font-semibold">ConnectLnx</strong>, and <strong class="text-ink font-semibold">aztrox-release</strong>.
                     </p>
 
-                    <div class="flex flex-wrap items-center gap-3">
-                        <a href="#work" class="btn-primary">
-                            View Projects
+                    <div class="flex flex-wrap items-center gap-3.5 pt-1">
+                        <a href="#work" class="btn-primary !px-6 !min-h-11">
+                            Explore Work &darr;
                         </a>
-                        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline">
-                            Resume (PDF)
+                        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline !px-5 !min-h-11">
+                            Resume (PDF) &nearr;
                         </a>
-                        <a href="#contact" class="btn-outline">
+                        <a href="#contact" class="btn-outline !px-5 !min-h-11">
                             Contact
                         </a>
                     </div>
-
-                    <div class="mt-8 pt-5 border-t border-hairline flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-ink-muted">
-                        <span>Open to Android, KMP &amp; Backend roles</span>
-                        <div class="flex items-center gap-5">
-                            <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">GitHub &nearr;</a>
-                            <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">LinkedIn &nearr;</a>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Right: Compact Interactive Phone Preview -->
-                <div class="lg:col-span-6 flex flex-col">
-                    <div class="monograph-frame p-5 h-full flex flex-col justify-between">
-                        <div class="flex flex-wrap items-center justify-between gap-3 pb-3.5 border-b border-hairline">
-                            <span class="text-xs font-mono text-ink-muted">Live Artifacts</span>
-                            <div class="segmented-track" role="tablist" aria-label="Featured projects preview">
-                                <button type="button" role="tab" aria-selected="true" data-hero-tab="hostel" class="segmented-tab is-active">
-                                    GCES Hostel
-                                </button>
-                                <button type="button" role="tab" aria-selected="false" data-hero-tab="connectlnx" class="segmented-tab">
-                                    ConnectLnx
-                                </button>
-                                <button type="button" role="tab" aria-selected="false" data-hero-tab="aztrox" class="segmented-tab">
-                                    Aztrox CLI
-                                </button>
+                <!-- Right: Cohesive Darkroom Flagship OLED + Refractive Glass Architecture Plate -->
+                <div class="lg:col-span-5 flex flex-col items-center lg:items-end">
+                    <div class="hero-specimen-stage">
+                        <!-- Floating Refractive Smoked-Glass Systems Plate (Aurora refracts through!) -->
+                        <div class="hero-glass-plate specular-surface hidden sm:flex lg:hidden xl:flex flex-col justify-between" aria-label="Core production systems summary">
+                            <div class="flex items-center justify-between gap-2 pb-3 border-b border-hairline">
+                                <span class="text-[10px] font-mono uppercase tracking-[0.14em] text-ink-muted whitespace-nowrap">Systems Profile</span>
+                                <span class="text-[10px] font-mono text-signal-teal whitespace-nowrap">LIVE &middot; PROD</span>
                             </div>
-                        </div>
 
-                        <!-- Panel 1: GCES Hostel -->
-                        <div data-hero-panel="hostel" class="py-4 min-h-[310px] flex-1 flex flex-col justify-center">
-                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                                <div class="sm:col-span-5 flex justify-center">
-                                    <div class="hardware-phone w-32 cursor-zoom-in" data-img-container>
-                                        <div class="hardware-screen">
-                                            <span class="hardware-camera" aria-hidden="true"></span>
-                                            <span class="hardware-glare" aria-hidden="true"></span>
-                                            <img src="assets/hostelapp/hostel_1.jpg"
-                                                alt="GCES Hostel Android dashboard screen"
-                                                data-lightbox data-project-hero="gceshostel"
-                                                referrerpolicy="no-referrer">
-                                            <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">
-                                                GCES Hostel
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="space-y-2.5 py-3 text-[11px] font-mono">
+                                <div class="flex items-baseline justify-between gap-2.5">
+                                    <span class="text-ink-muted whitespace-nowrap">Transport</span>
+                                    <span class="text-ink font-medium tabular-nums whitespace-nowrap text-right">5&times; Java NIO</span>
                                 </div>
-                                <div class="sm:col-span-7 space-y-2.5">
-                                    <div class="text-xs font-mono text-ink-muted">1,200 DAU &middot; Google Play</div>
-                                    <div class="bg-surface-subtle border border-hairline rounded-lg p-3.5 space-y-2 text-xs">
-                                        <div class="font-display font-semibold text-sm text-ink">GCES Hostel Platform</div>
-                                        <div class="space-y-1.5 font-mono text-[11px] tabular-nums">
-                                            <div class="flex justify-between gap-3 py-1 border-b border-hairline">
-                                                <span class="text-ink-muted">Modules</span>
-                                                <span class="text-ink">:app &middot; :common &middot; :server</span>
-                                            </div>
-                                            <div class="flex justify-between gap-3 py-1 border-b border-hairline">
-                                                <span class="text-ink-muted">Cron Lock</span>
-                                                <span class="text-ink">ShedLock JDBC</span>
-                                            </div>
-                                            <div class="flex justify-between gap-3 pt-1">
-                                                <span class="text-ink-muted">API Latency</span>
-                                                <span class="text-ink">Bucket4j &lt;100ms</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="flex items-baseline justify-between gap-2.5">
+                                    <span class="text-ink-muted whitespace-nowrap">Concurrency</span>
+                                    <span class="text-ink font-medium tabular-nums whitespace-nowrap text-right">ShedLock &lt;100ms</span>
+                                </div>
+                                <div class="flex items-baseline justify-between gap-2.5">
+                                    <span class="text-ink-muted whitespace-nowrap">Research</span>
+                                    <span class="text-ink font-medium tabular-nums whitespace-nowrap text-right">37.7% XSum</span>
+                                </div>
+                                <div class="flex items-baseline justify-between gap-2.5">
+                                    <span class="text-ink-muted whitespace-nowrap">Delivery</span>
+                                    <span class="text-ink font-medium tabular-nums whitespace-nowrap text-right">Bash 5.3 &middot; 4 Env</span>
+                                </div>
+                            </div>
+
+                            <div class="pt-3 border-t border-hairline space-y-2">
+                                <div class="w-full space-y-1.5" aria-hidden="true">
+                                    <div class="tcp-lane"><div class="tcp-packet"></div></div>
+                                    <div class="tcp-lane"><div class="tcp-packet"></div></div>
+                                    <div class="tcp-lane"><div class="tcp-packet"></div></div>
+                                </div>
+                                <div class="flex items-center justify-between gap-2 text-[10px] font-mono text-ink-muted">
+                                    <span class="whitespace-nowrap">KMP &middot; Compose &middot; Spring</span>
+                                    <span class="text-ink whitespace-nowrap tabular-nums">1,200 DAU</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Panel 2: ConnectLnx -->
-                        <div data-hero-panel="connectlnx" class="py-4 min-h-[310px] flex-1 hidden flex-col justify-center">
-                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                                <div class="sm:col-span-5 flex justify-center">
-                                    <div class="hardware-phone w-32 cursor-zoom-in" data-img-container>
-                                        <div class="hardware-screen">
-                                            <span class="hardware-camera" aria-hidden="true"></span>
-                                            <span class="hardware-glare" aria-hidden="true"></span>
-                                            <img src="assets/connectlnx/connectlnx_send.jpg"
-                                                alt="ConnectLnx Android send interface"
-                                                data-lightbox data-project-hero="connectlnx"
-                                                referrerpolicy="no-referrer">
-                                            <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">
-                                                ConnectLnx
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sm:col-span-7 space-y-2.5">
-                                    <div class="text-xs font-mono text-ink-muted">Android &middot; Arch AUR &middot; Windows</div>
-                                    <div class="bg-surface-subtle border border-hairline rounded-lg p-3.5 space-y-2 text-xs">
-                                        <div class="font-display font-semibold text-sm text-ink">ConnectLnx Transfer</div>
-                                        <div class="space-y-1.5 font-mono text-[11px] tabular-nums">
-                                            <div class="flex justify-between gap-3 py-1 border-b border-hairline">
-                                                <span class="text-ink-muted">Shared Core</span>
-                                                <span class="text-ink">Kotlin Multiplatform</span>
-                                            </div>
-                                            <div class="flex justify-between gap-3 py-1 border-b border-hairline">
-                                                <span class="text-ink-muted">Transport</span>
-                                                <span class="text-ink">5&times; Java NIO TCP</span>
-                                            </div>
-                                            <div class="flex justify-between gap-3 pt-1">
-                                                <span class="text-ink-muted">Discovery</span>
-                                                <span class="text-ink">mDNS + ML Kit QR</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <!-- Sculpted Flagship Titanium OLED Device -->
+                        <div class="hero-device-wrap">
+                            <div class="hardware-phone w-[190px] sm:w-[206px] cursor-zoom-in" data-img-container>
+                                <div class="hardware-screen" data-frame-group="hero-device">
+                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                    <img src="assets/hostelapp/hostel_1.jpg"
+                                        alt="GCES Hostel home screen serving 1,200 daily active hostel residents"
+                                        data-frame-index="0"
+                                        class="hardware-layer-base is-active-frame"
+                                        fetchpriority="high"
+                                        data-lightbox data-caption="GCES Hostel — Live on Google Play serving 1,200 daily active hostel residents"
+                                        referrerpolicy="no-referrer">
+                                    <img src="assets/connectlnx/connectlnx_send.jpg"
+                                        alt="ConnectLnx dark-mode multi-socket LAN transfer app"
+                                        data-frame-index="1"
+                                        class="hardware-layer"
+                                        decoding="async"
+                                        data-lightbox data-caption="ConnectLnx — Direct 5-socket Java NIO LAN transfer across Linux, Windows & Android"
+                                        referrerpolicy="no-referrer">
+                                    <img src="assets/smartexpense/expense_3.jpg"
+                                        alt="Expense Tracker 60fps Jetpack Compose Canvas analytics"
+                                        data-frame-index="2"
+                                        class="hardware-layer"
+                                        decoding="async"
+                                        data-lightbox data-caption="Expense Tracker — 60fps custom Jetpack Compose Canvas charts running 100% on-device"
+                                        referrerpolicy="no-referrer">
+                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">GCES Hostel</div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Panel 3: Aztrox Release CLI -->
-                        <div data-hero-panel="aztrox" class="py-4 min-h-[310px] flex-1 hidden flex-col justify-center">
-                            <div class="bg-surface-subtle border border-hairline rounded-lg p-4 space-y-3 font-mono text-xs">
-                                <div class="flex items-center justify-between pb-2.5 border-b border-hairline">
-                                    <span class="text-ink-muted">aztrox-release</span>
-                                    <span class="text-ink font-semibold">9 Products &middot; 4 Surfaces</span>
-                                </div>
-                                <div class="grid grid-cols-2 gap-2.5 text-[11px] text-ink-secondary">
-                                    <div class="p-2.5 rounded bg-surface border border-hairline">Play Store (fastlane)</div>
-                                    <div class="p-2.5 rounded bg-surface border border-hairline">GitHub + Arch AUR</div>
-                                    <div class="p-2.5 rounded bg-surface border border-hairline">Firebase Hosting</div>
-                                    <div class="p-2.5 rounded bg-surface border border-hairline">Render &amp; HF Spaces</div>
-                                </div>
-                                <div class="pt-2.5 border-t border-hairline space-y-1 text-[11px] text-ink-muted">
-                                    <div class="flex justify-between">
-                                        <span>State &amp; Rollbacks</span>
-                                        <span class="text-ink">SQLite history.db (LIFO)</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span>CLI Workflows</span>
-                                        <span class="text-ink">run &middot; remote run &middot; watch</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pt-3.5 border-t border-hairline flex items-center justify-between gap-4 text-xs text-ink-muted">
-                            <span id="hero-stage-caption" class="font-mono truncate">Kotlin &middot; Jetpack Compose &middot; Spring Boot 3.5 &middot; PostgreSQL</span>
-                            <a id="hero-stage-link" href="#work-hostel" class="editorial-link font-semibold text-ink whitespace-nowrap shrink-0">
-                                Inspect &rarr;
-                            </a>
+                    <div class="mt-4 flex items-center gap-3">
+                        <div class="segmented-track" role="tablist" aria-label="Preview shipped Android apps">
+                            <button type="button" role="tab" data-sync-group="hero-device" data-frame-index="0" aria-selected="true" class="segmented-tab is-active !px-2.5 !min-h-7 !text-[11px] font-mono whitespace-nowrap">Hostel</button>
+                            <button type="button" role="tab" data-sync-group="hero-device" data-frame-index="1" aria-selected="false" class="segmented-tab !px-2.5 !min-h-7 !text-[11px] font-mono whitespace-nowrap">ConnectLnx</button>
+                            <button type="button" role="tab" data-sync-group="hero-device" data-frame-index="2" aria-selected="false" class="segmented-tab !px-2.5 !min-h-7 !text-[11px] font-mono whitespace-nowrap">Expense Tracker</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 4-Column Proof Strip -->
-            <div class="mt-10 py-5 border-y border-hairline grid grid-cols-2 lg:grid-cols-4 gap-6">
-                <div>
-                    <div class="text-2xl sm:text-3xl font-display font-bold font-mono tabular-nums text-ink">1,200</div>
-                    <div class="text-xs text-ink-muted mt-0.5">Daily active users &middot; GCES Hostel</div>
+            <!-- Bottom Architectural Proof Strip + Scroll Cue -->
+            <div class="border-y border-hairline py-6 grid grid-cols-2 lg:grid-cols-12 gap-6 items-center">
+                <div class="lg:col-span-3">
+                    <div class="text-2xl sm:text-3xl font-display font-bold tabular-nums text-ink">1,200</div>
+                    <div class="text-xs font-mono text-ink-muted mt-1">Daily active users &middot; GCES Hostel</div>
                 </div>
-                <div>
-                    <div class="text-2xl sm:text-3xl font-display font-bold font-mono tabular-nums text-ink">5&times; TCP</div>
-                    <div class="text-xs text-ink-muted mt-0.5">Parallel NIO sockets &middot; ConnectLnx</div>
+                <div class="lg:col-span-3 lg:border-l lg:border-hairline lg:pl-6">
+                    <div class="text-2xl sm:text-3xl font-display font-bold tabular-nums text-ink">5&times; TCP</div>
+                    <div class="text-xs font-mono text-ink-muted mt-1">Parallel NIO sockets &middot; ConnectLnx</div>
                 </div>
-                <div>
-                    <div class="text-2xl sm:text-3xl font-display font-bold font-mono tabular-nums text-ink">37.7%</div>
-                    <div class="text-xs text-ink-muted mt-0.5">Oracle depth ceiling &middot; XSum</div>
+                <div class="lg:col-span-3 lg:border-l lg:border-hairline lg:pl-6">
+                    <div class="text-2xl sm:text-3xl font-display font-bold tabular-nums text-ink">37.7%</div>
+                    <div class="text-xs font-mono text-ink-muted mt-1">Oracle depth ceiling &middot; XSum</div>
                 </div>
-                <div>
-                    <div class="text-2xl sm:text-3xl font-display font-bold font-mono tabular-nums text-ink">9 Products</div>
-                    <div class="text-xs text-ink-muted mt-0.5">4 release surfaces &middot; aztrox-release</div>
+                <div class="lg:col-span-3 lg:border-l lg:border-hairline lg:pl-6 flex items-center justify-between gap-4">
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-display font-bold tabular-nums text-ink">9 Products</div>
+                        <div class="text-xs font-mono text-ink-muted mt-1">4 surfaces &middot; aztrox-release</div>
+                    </div>
+                    <div class="hidden xl:flex items-center gap-2.5 text-[11px] font-mono text-ink-muted" aria-hidden="true">
+                        <div class="scroll-cue-line"></div>
+                        <span>SCROLL</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- ================================================================
-             PROJECTS (SCROLLYTELLING ARC)
+             BAND 2 · SCROLL-DRIVEN EXHIBITION CINEMA (AUTO-MORPHS ON SCROLL)
              ================================================================ -->
-        <section id="work" class="mb-20 scroll-mt-24">
-
-            <div class="pb-3 mb-6 lg:mb-10 border-b border-hairline flex items-baseline justify-between gap-4">
-                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Selected Work</h2>
-                <span class="text-xs font-mono text-ink-muted">Scroll to step through &middot; 2024 &ndash; 2026</span>
+        <section id="work" class="mb-32 scroll-mt-24">
+            <div class="pb-5 mb-4 border-b border-hairline flex flex-wrap items-baseline justify-between gap-4">
+                <div class="flex items-baseline gap-4">
+                    <h2 class="text-3xl sm:text-4xl font-display font-bold tracking-tight">Selected Work</h2>
+                    <span class="text-xs font-mono text-ink-muted hidden sm:inline">Scroll to step through live systems</span>
+                </div>
+                <span class="text-xs font-mono text-ink-muted">2024 &ndash; 2026 &middot; 05 Production Chapters</span>
             </div>
 
-            <div class="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-stretch lg:items-start">
+            <div id="work-cinema" class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-stretch">
 
-                <!-- Story Beats (Scrolls below pinned stage on mobile, left column on desktop) -->
-                <div class="order-2 lg:order-1 w-full lg:col-span-6 space-y-14 lg:space-y-20 pb-48 lg:pb-[340px] lg:py-4">
+                <!-- LEFT COLUMN: Synchronized Editorial Scroll Beats -->
+                <div class="lg:col-span-5 lg:pr-12">
 
-                    <!-- Beat 01: GCES Hostel Origin -->
-                    <article id="work-hostel" data-story-step="01" class="story-step is-active-beat min-h-[340px] lg:min-h-[380px]">
+                    <!-- BEAT 01A: GCES Hostel Origin -->
+                    <article id="work-hostel" data-cinema-beat="01a" data-cinema-chapter="01" class="cinema-beat is-active">
                         <div class="space-y-4">
-                            <div class="beat-kicker text-xs font-mono text-ink-muted transition-colors">01 &middot; GCES Hostel &middot; Google Play</div>
-                            <h3 class="text-2xl font-display font-bold tracking-tight">
-                                <a href="gceshostel/" class="hover:opacity-75 transition-opacity">Paper mess registers to 1,200 daily users</a>
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="cinema-chapter-num">01</span>
+                                <span class="text-xs font-mono text-ink-muted">GCES Hostel &middot; Google Play</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-[1.75rem] font-display font-bold leading-tight tracking-tight">
+                                <a href="gceshostel/" class="project-heading-link hover:opacity-85">
+                                    <span>Paper mess registers to 1,200 daily users</span><span class="heading-arrow" aria-hidden="true">&nearr;</span>
+                                </a>
                             </h3>
-                            <p class="text-sm text-ink-secondary">
-                                Replaced manual campus logbooks with a multi-module Kotlin Android app and Spring Boot backend tracking daily attendance and kitchen forecasts.
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Replaced manual campus logbooks with a multi-module Kotlin Android app and Spring Boot backend tracking daily attendance, digital menus, and kitchen forecasts.
                             </p>
-                            <div class="story-beats text-xs sm:text-sm text-ink-secondary">
+                            <div class="story-beats text-sm text-ink-secondary">
                                 <div class="story-beat">
-                                    <span class="story-beat-label">Friction</span>
-                                    <span>Paper registers left kitchens guessing daily headcounts across 1,200 residents.</span>
+                                    <span class="story-beat-label">Modules</span>
+                                    <span>Clean separation across <code class="font-mono text-xs text-ink">:app</code>, <code class="font-mono text-xs text-ink">:common</code>, and <code class="font-mono text-xs text-ink">:server</code>.</span>
                                 </div>
                                 <div class="story-beat">
-                                    <span class="story-beat-label">Structure</span>
-                                    <span>Multi-module separation across <code class="font-mono text-xs text-ink">:app</code>, <code class="font-mono text-xs text-ink">:common</code>, and <code class="font-mono text-xs text-ink">:server</code>.</span>
+                                    <span class="story-beat-label">Adoption</span>
+                                    <span>1,200 daily active hostel residents live on Google Play.</span>
                                 </div>
                             </div>
-                        </div>
-                    </article>
 
-                    <!-- Beat 02: GCES Hostel Concurrency & Scale -->
-                    <article id="work-hostel-scale" data-story-step="02" class="story-step min-h-[300px] lg:min-h-[320px]">
-                        <div class="space-y-4">
-                            <div class="beat-kicker text-xs font-mono text-ink-muted transition-colors">02 &middot; Production Concurrency &middot; PostgreSQL</div>
-                            <h3 class="text-2xl font-display font-bold tracking-tight">
-                                Atomic midnight rollovers under meal rush
-                            </h3>
-                            <p class="text-sm text-ink-secondary">
-                                Meal windows spike traffic at once, and scheduled 00:00 resets cannot fire twice across backend instances.
-                            </p>
-                            <div class="story-beats text-xs sm:text-sm text-ink-secondary">
-                                <div class="story-beat">
-                                    <span class="story-beat-label">Locking</span>
-                                    <span>ShedLock JDBC enforces single-node ownership on midnight meal rollovers.</span>
-                                </div>
-                                <div class="story-beat">
-                                    <span class="story-beat-label">Throughput</span>
-                                    <span>Bucket4j token buckets keep PostgreSQL API latency under 100ms.</span>
+                            <!-- Mobile Inline Preview -->
+                            <div class="lg:hidden py-6 flex flex-col items-center gap-3">
+                                <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                                    <div class="hardware-screen">
+                                        <span class="hardware-camera" aria-hidden="true"></span>
+                                        <span class="hardware-glare" aria-hidden="true"></span>
+                                        <img src="assets/hostelapp/hostel_1.jpg" alt="GCES Hostel Dashboard screen" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                        <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">GCES Hostel</div>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="flex flex-wrap items-center gap-3 pt-1">
-                                <a href="gceshostel/" class="btn-primary text-xs">Screens &amp; Specs &rarr;</a>
+                                <a href="gceshostel/" class="btn-primary text-xs">Open Case Study &rarr;</a>
                                 <a href="https://play.google.com/store/apps/details?id=com.barath.gceshostel" target="_blank" rel="noopener noreferrer" class="btn-outline text-xs">Google Play &nearr;</a>
                             </div>
                         </div>
                     </article>
 
-                    <!-- Beat 03: ConnectLnx -->
-                    <article id="work-connectlnx" data-story-step="03" class="story-step min-h-[340px] lg:min-h-[380px]">
+                    <!-- BEAT 01B: GCES Hostel Atomic Midnight Rollover (Morphs Hostel screen to Meal & illuminates Concurrency SVG!) -->
+                    <article id="work-hostel-scale" data-cinema-beat="01b" data-cinema-chapter="01" class="cinema-beat">
                         <div class="space-y-4">
-                            <div class="beat-kicker text-xs font-mono text-ink-muted transition-colors">03 &middot; ConnectLnx &middot; Play Store, Arch AUR &amp; Windows</div>
-                            <h3 class="text-2xl font-display font-bold tracking-tight">
-                                <a href="connectlnx/" class="hover:opacity-75 transition-opacity">Zero-cloud LAN transfer over 5 NIO sockets</a>
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">01.2 &middot; CONCURRENCY</span>
+                                <span class="text-xs font-mono text-ink-muted">Spring Boot 3.5 &middot; PostgreSQL</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Atomic midnight rollovers under meal rush
                             </h3>
-                            <p class="text-sm text-ink-secondary">
-                                Built to move builds and files between Arch Linux, Windows, and Android at full Wi-Fi speed without USB cables or remote relays.
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Meal windows spike traffic simultaneously, and scheduled 00:00 resets acquire a ShedLock JDBC mutex so duplicate cron executions never corrupt next-day kitchen meal counts.
                             </p>
-                            <div class="story-beats text-xs sm:text-sm text-ink-secondary">
+                            <div class="story-beats text-sm text-ink-secondary">
                                 <div class="story-beat">
-                                    <span class="story-beat-label">Transport</span>
-                                    <span>Custom binary frame protocol striping chunks across 5 Java NIO TCP sockets.</span>
+                                    <span class="story-beat-label">Cron Lock</span>
+                                    <span>ShedLock JDBC enforces single-node ownership on 00:00 resets.</span>
                                 </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Throughput</span>
+                                    <span>Bucket4j token buckets hold PostgreSQL P95 latency under 100ms.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 01C: GCES Hostel Weekly Mess Menu (Morphs Hostel screen to Menu) -->
+                    <article id="work-hostel-menu" data-cinema-beat="01c" data-cinema-chapter="01" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">01.3 &middot; LIVE MENU SYNC</span>
+                                <span class="text-xs font-mono text-ink-muted">Room Cache &middot; Zero-Update</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Dynamic weekly menus with offline resilience
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Mess schedule changes publish straight from the warden console to 1,200 devices without Play Store updates, backed by a local Room cache for dead-zone hostel blocks.
+                            </p>
+                            <div class="story-beats text-sm text-ink-secondary">
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Sync</span>
+                                    <span>Diff-based Compose state updates reflect menu edits in seconds.</span>
+                                </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Offline</span>
+                                    <span>Local Room cache preserves today&rsquo;s timetable when campus Wi-Fi drops.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 01D: GCES Hostel Analytics & Demand Forecasting (Morphs Hostel screen to Stats) -->
+                    <article id="work-hostel-stats" data-cinema-beat="01d" data-cinema-chapter="01" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">01.4 &middot; KITCHEN ANALYTICS</span>
+                                <span class="text-xs font-mono text-ink-muted">PostgreSQL Views &middot; Demand</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Live meal ratings &amp; kitchen demand forecasting
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Resident meal feedback and daily opt-in counts aggregate into SQL forecast views, letting kitchen staff cook to actual headcount and cut recurring food waste.
+                            </p>
+                            <div class="story-beats text-sm text-ink-secondary">
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Forecast</span>
+                                    <span>Pre-meal opt-in totals replace guesswork with exact batch counts.</span>
+                                </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Feedback</span>
+                                    <span>Weekly dish ratings surface quality dips across breakfast, lunch, and dinner.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 02A: ConnectLnx Discovery -->
+                    <article id="work-connectlnx" data-cinema-beat="02a" data-cinema-chapter="02" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="cinema-chapter-num">02</span>
+                                <span class="text-xs font-mono text-ink-muted">Play Store &middot; Arch AUR &middot; Windows</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-[1.75rem] font-display font-bold leading-tight tracking-tight">
+                                <a href="connectlnx/" class="project-heading-link hover:opacity-85">
+                                    <span>Zero-cloud LAN transfer over 5 NIO sockets</span><span class="heading-arrow" aria-hidden="true">&nearr;</span>
+                                </a>
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Built to move builds and multi-gigabyte files between Arch Linux, Windows, and Android at full local Wi-Fi speed without USB cables or remote cloud relays.
+                            </p>
+                            <div class="story-beats text-sm text-ink-secondary">
                                 <div class="story-beat">
                                     <span class="story-beat-label">Pairing</span>
                                     <span>Zero-config mDNS peer broadcast with ML Kit QR fallback when Wi-Fi blocks multicast.</span>
                                 </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Packaging</span>
+                                    <span>Shared Kotlin Multiplatform core shipping across Android, Arch AUR, and Windows.</span>
+                                </div>
                             </div>
+
+                            <!-- Mobile Inline Preview -->
+                            <div class="lg:hidden py-6 flex items-center justify-center gap-4">
+                                <div class="hardware-phone w-32 cursor-zoom-in" data-img-container>
+                                    <div class="hardware-screen">
+                                        <span class="hardware-camera" aria-hidden="true"></span>
+                                        <span class="hardware-glare" aria-hidden="true"></span>
+                                        <img src="assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Send screen" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                        <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Send</div>
+                                    </div>
+                                </div>
+                                <div class="hardware-phone w-32 cursor-zoom-in" data-img-container>
+                                    <div class="hardware-screen">
+                                        <span class="hardware-camera" aria-hidden="true"></span>
+                                        <span class="hardware-glare" aria-hidden="true"></span>
+                                        <img src="assets/connectlnx/connectlnx_receive.jpg" alt="ConnectLnx Receive QR screen" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                        <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Receive</div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="flex flex-wrap items-center gap-3 pt-1">
                                 <a href="connectlnx/" class="btn-primary text-xs">Technical Breakdown &rarr;</a>
                                 <a href="https://github.com/3dbarath/ConnectLnx" target="_blank" rel="noopener noreferrer" class="btn-outline text-xs">GitHub &nearr;</a>
@@ -420,432 +494,927 @@
                         </div>
                     </article>
 
-                    <!-- Beat 04: aztrox-release -->
-                    <article id="work-aztrox" data-story-step="04" class="story-step min-h-[280px] lg:min-h-[300px]">
+                    <!-- BEAT 02B: ConnectLnx Binary Frame Handshake (Advances protocol tab to 02. Binary Header) -->
+                    <article id="work-connectlnx-header" data-cinema-beat="02b" data-cinema-chapter="02" class="cinema-beat">
                         <div class="space-y-4">
-                            <div class="beat-kicker text-xs font-mono text-ink-muted transition-colors">04 &middot; aztrox-release &middot; 9 Products &middot; 4 Surfaces</div>
-                            <h3 class="text-2xl font-display font-bold tracking-tight">
-                                One Bash 5.3 engine shipping everything I build
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">02.2 &middot; BINARY HANDSHAKE</span>
+                                <span class="text-xs font-mono text-ink-muted">SHA-256 &middot; Frame Metadata</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Deterministic binary framing &amp; integrity headers
                             </h3>
-                            <p class="text-sm text-ink-secondary">
-                                Releasing GCES Hostel, ConnectLnx, and 7 other tools by hand became the bottleneck &mdash; so I unified builds, signing, and rollbacks into one CLI.
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Before any payload byte moves, peers negotiate a compact binary control frame encoding filenames, byte offsets, chunk tables, and SHA-256 checksums for verified resumption.
                             </p>
-                            <div class="story-beats text-xs sm:text-sm text-ink-secondary">
+                            <div class="story-beats text-sm text-ink-secondary">
                                 <div class="story-beat">
-                                    <span class="story-beat-label">Core + State</span>
-                                    <span>Shared <code class="font-mono text-xs text-ink">lib/</code> with SQLite <code class="font-mono text-xs text-ink">history.db</code>, Play <code class="font-mono text-xs text-ink">versionCode</code> guards, and LIFO rollbacks.</span>
+                                    <span class="story-beat-label">Wire Format</span>
+                                    <span>Fixed-overhead binary header avoids JSON parsing stalls on multi-file batches.</span>
                                 </div>
                                 <div class="story-beat">
-                                    <span class="story-beat-label">Workflows</span>
-                                    <span><code class="font-mono text-xs text-ink">run</code> (ADB), <code class="font-mono text-xs text-ink">remote run</code> (Telegram APKs), and <code class="font-mono text-xs text-ink">dashboard --watch</code>.</span>
+                                    <span class="story-beat-label">Integrity</span>
+                                    <span>Per-chunk SHA-256 digests guarantee bit-identical delivery across OS boundaries.</span>
                                 </div>
                             </div>
                         </div>
                     </article>
 
-                    <!-- Beat 05: Smart Expense Tracker -->
-                    <article id="work-expense" data-story-step="05" class="story-step min-h-[360px] lg:min-h-[400px]">
+                    <!-- BEAT 02C: ConnectLnx 5x NIO Striping (Advances protocol tab to 03. 5x NIO Stream & accelerates lanes) -->
+                    <article id="work-connectlnx-nio" data-cinema-beat="02c" data-cinema-chapter="02" class="cinema-beat">
                         <div class="space-y-4">
-                            <div class="beat-kicker text-xs font-mono text-ink-muted transition-colors">05 &middot; Smart Expense Tracker &middot; Room &amp; Canvas</div>
-                            <h3 class="text-2xl font-display font-bold tracking-tight">
-                                <a href="smart-expense-tracker/" class="hover:opacity-75 transition-opacity">Local-first finance with custom Canvas charts</a>
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">02.3 &middot; PARALLEL TRANSPORT</span>
+                                <span class="text-xs font-mono text-ink-muted">5&times; Java NIO Channels</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Parallel striping across 5 concurrent TCP channels
                             </h3>
-                            <p class="text-sm text-ink-secondary">
-                                Personal expense tracking with zero remote servers: reactive Room Flow queries, custom Compose Canvas visualizations, and WorkManager alerts.
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                A single TCP stream stalls under Wi-Fi jitter. ConnectLnx stripes file chunks simultaneously across 5 non-blocking Java NIO SocketChannels to saturate full local router bandwidth.
                             </p>
-                            <div class="story-beats text-xs sm:text-sm text-ink-secondary">
+                            <div class="story-beats text-sm text-ink-secondary">
                                 <div class="story-beat">
-                                    <span class="story-beat-label">Storage</span>
-                                    <span>Offline SQLite/Room ledger with reactive Flow state updates and biometric lock.</span>
+                                    <span class="story-beat-label">Channels</span>
+                                    <span>5 concurrent non-blocking NIO sockets eliminate single-stream congestion.</span>
                                 </div>
                                 <div class="story-beat">
-                                    <span class="story-beat-label">Rendering</span>
-                                    <span>Custom Compose Canvas charts drawn natively on-device at 60fps.</span>
+                                    <span class="story-beat-label">Zero Relay</span>
+                                    <span>Direct peer-to-peer LAN transfer with zero cloud bandwidth caps.</span>
                                 </div>
                             </div>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 03A: aztrox-release CLI Overview -->
+                    <article id="work-aztrox" data-cinema-beat="03a" data-cinema-chapter="03" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="cinema-chapter-num">03</span>
+                                <span class="text-xs font-mono text-ink-muted">aztrox-release &middot; Bash 5.3</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-[1.75rem] font-display font-bold leading-tight tracking-tight">
+                                One Bash 5.3 engine shipping 9 products across 4 surfaces
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Shipping 9 apps across 6+ private repos with ad-hoc Gradle and fastlane commands caused silent Play <code class="font-mono text-xs text-ink">versionCode</code> clashes. <strong class="text-ink font-semibold">aztrox-release</strong> collapses every pipeline into one local CLI with thin per-product drivers over shared <code class="font-mono text-xs text-ink">lib/</code> libraries.
+                            </p>
+                            <div class="story-beats text-sm text-ink-secondary">
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Architecture</span>
+                                    <span>Shared <code class="font-mono text-xs text-ink">lib/</code> (<code class="font-mono text-xs text-ink">android.sh</code>, <code class="font-mono text-xs text-ink">playstore.sh</code>, <code class="font-mono text-xs text-ink">logger.sh</code>) behind thin <code class="font-mono text-xs text-ink">projects/*/release.sh</code> drivers.</span>
+                                </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">State &amp; TUI</span>
+                                    <span>SQLite <code class="font-mono text-xs text-ink">history.db</code> (136+ runs), HTML logs with Chart.js analytics, and <code class="font-mono text-xs text-ink">dashboard --watch</code> via <code class="font-mono text-xs text-ink">fzf</code> / <code class="font-mono text-xs text-ink">gum</code> / <code class="font-mono text-xs text-ink">glow</code>.</span>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Inline Preview (Real Terminal Screenshot) -->
+                            <div class="lg:hidden py-5">
+                                <div class="aztrox-tui-frame cursor-zoom-in" data-img-container>
+                                    <div class="aztrox-tui-chrome">
+                                        <span class="text-[#e4e8f0] font-medium">aztrox-release &middot; v3.0</span>
+                                        <span>Bash 5.3 &middot; CachyOS</span>
+                                    </div>
+                                    <div class="aztrox-tui-shot-wrap">
+                                        <img src="/assets/aistudio/image_3d9ae119.png"
+                                            alt="aztrox-release v3.0 live terminal dashboard showing 6 tracked projects, 136 SQLite releases, and recent ConnectLnx pipeline runs"
+                                            class="aztrox-tui-shot"
+                                            decoding="async"
+                                            data-lightbox
+                                            data-caption="aztrox-release v3.0 — Live terminal dashboard backed by SQLite history.db (136 releases, 4s watch refresh)"
+                                            referrerpolicy="no-referrer">
+                                        <div class="img-fallback-box aspect-[16/10] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">aztrox-release TUI</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 03B: aztrox-release Parallel Builds & 4-Surface Fan-Out -->
+                    <article id="work-aztrox-pipeline" data-cinema-beat="03b" data-cinema-chapter="03" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">03.2 &middot; MULTI-SURFACE PIPELINE</span>
+                                <span class="text-xs font-mono text-ink-muted">Fastlane &middot; AUR &middot; Firebase &middot; Render</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Parallel builds, Play guards &amp; 4-surface fan-out
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Before mutating a single file, preflight gates validate keystores, git state, and live Play Store <code class="font-mono text-xs text-ink">versionCode</code> ceilings via Ruby&rsquo;s Android Publisher API &mdash; then build <code class="font-mono text-xs text-ink">.deb</code> + <code class="font-mono text-xs text-ink">.aab</code> in parallel, sign with JDK 17 <code class="font-mono text-xs text-ink">jarsigner</code>, and fan out to all 4 targets.
+                            </p>
+                            <div class="story-beats text-sm text-ink-secondary">
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Play &amp; AUR</span>
+                                    <span><code class="font-mono text-xs text-ink">fastlane supply</code> auto-promotes tracks while <code class="font-mono text-xs text-ink">gh release</code> + <code class="font-mono text-xs text-ink">makepkg --printsrcinfo</code> publish Arch AUR.</span>
+                                </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Web &amp; Cloud</span>
+                                    <span>Triggers Firebase Hosting (<code class="font-mono text-xs text-ink">website/release.sh</code>) and Fat JAR deploys across Render &amp; HF Spaces.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 03C: aztrox-release Atomic LIFO Rollbacks & Remote QA -->
+                    <article id="work-aztrox-safety" data-cinema-beat="03c" data-cinema-chapter="03" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">03.3 &middot; SAFETY &amp; REMOTE QA</span>
+                                <span class="text-xs font-mono text-ink-muted">LIFO Exit Trap &middot; Telegram Bot API</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Atomic LIFO exit rollbacks &amp; one-command Telegram QA
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Every destructive mutation registers a compensating command via <code class="font-mono text-xs text-ink">register_rollback</code>; on any non-zero exit, <code class="font-mono text-xs text-ink">trap run_rollbacks EXIT</code> unwinds version files, commits, tags, and branches in reverse order while SQLite <code class="font-mono text-xs text-ink">release_steps</code> lets retries resume mid-pipeline.
+                            </p>
+                            <div class="story-beats text-sm text-ink-secondary">
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Remote APK</span>
+                                    <span><code class="font-mono text-xs text-ink">remote run &lt;app&gt; --release</code> builds R8-shrunk APKs and dispatches them straight to Telegram with commit metadata.</span>
+                                </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Live Ops</span>
+                                    <span><code class="font-mono text-xs text-ink">run</code> (ABI-matched ADB), <code class="font-mono text-xs text-ink">health</code> (keystore expiry), and <code class="font-mono text-xs text-ink">server-status</code> (3-node probes).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 04A: Smart Expense Tracker Ledger -->
+                    <article id="work-expense" data-cinema-beat="04a" data-cinema-chapter="04" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="cinema-chapter-num">04</span>
+                                <span class="text-xs font-mono text-ink-muted">Smart Expense Tracker &middot; Room</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-[1.75rem] font-display font-bold leading-tight tracking-tight">
+                                <a href="smart-expense-tracker/" class="project-heading-link hover:opacity-85">
+                                    <span>Local-first finance with zero remote servers</span><span class="heading-arrow" aria-hidden="true">&nearr;</span>
+                                </a>
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Private personal finance built directly on SQLite and Room Flow: instant reactive ledger updates, biometric app lock, and deterministic WorkManager alerts.
+                            </p>
+                            <div class="story-beats text-sm text-ink-secondary">
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Storage</span>
+                                    <span>Offline Room Flow ledger keeping financial history strictly on-device.</span>
+                                </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Alerts</span>
+                                    <span>WorkManager threshold checks without background cloud telemetry.</span>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Inline Preview -->
+                            <div class="lg:hidden py-6 flex justify-center">
+                                <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                                    <div class="hardware-screen">
+                                        <span class="hardware-camera" aria-hidden="true"></span>
+                                        <span class="hardware-glare" aria-hidden="true"></span>
+                                        <img src="assets/smartexpense/expense_1.jpg" alt="Smart Expense Tracker Balance Ledger" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                        <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Balance Ledger</div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="pt-1">
-                                <a href="smart-expense-tracker/" class="btn-outline text-xs">11-Screen Walkthrough &rarr;</a>
+                                <a href="smart-expense-tracker/" class="btn-primary text-xs">11-Screen Walkthrough &rarr;</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 04B: Smart Expense Tracker Compose Canvas (Auto-rotates 3D Fanned Phones to Charts!) -->
+                    <article id="work-expense-canvas" data-cinema-beat="04b" data-cinema-chapter="04" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">04.2 &middot; CUSTOM RENDERING</span>
+                                <span class="text-xs font-mono text-ink-muted">Jetpack Compose Canvas</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Custom 60fps Jetpack Compose Canvas analytics
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                Instead of heavy third-party charting libraries, every bar graph, net-worth curve, and category ring is drawn natively on Jetpack Compose Canvas with tactile scrub interactions.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 04C: Smart Expense Tracker Categories (Auto-rotates 3D Fanned Phones to Categories!) -->
+                    <article id="work-expense-categories" data-cinema-beat="04c" data-cinema-chapter="04" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="font-mono text-xs font-semibold text-ink">04.3 &middot; SPENDING GUARDRAILS</span>
+                                <span class="text-xs font-mono text-ink-muted">WorkManager &middot; Categories</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold leading-tight tracking-tight">
+                                Category caps &amp; deterministic local budget alerts
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                On-device SQL queries slice expenses across custom categories and trigger deterministic WorkManager budget warnings without syncing a single byte to external servers.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- BEAT 05: Stockfish Interop & Arcade Suite -->
+                    <article id="work-chess" data-cinema-beat="05" data-cinema-chapter="05" class="cinema-beat">
+                        <div class="space-y-4">
+                            <div class="flex items-baseline justify-between gap-4">
+                                <span class="cinema-chapter-num">05</span>
+                                <span class="text-xs font-mono text-ink-muted">C++ GDExtension &middot; Godot Engine</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-[1.75rem] font-display font-bold leading-tight tracking-tight">
+                                <a href="chessgame/" class="project-heading-link hover:opacity-85">
+                                    <span>Stockfish Interop &amp; Arcade Suite</span><span class="heading-arrow" aria-hidden="true">&nearr;</span>
+                                </a>
+                            </h3>
+                            <p class="text-[15px] text-ink-secondary leading-relaxed">
+                                C++ GDExtension bindings embedding the Stockfish chess engine natively inside Godot at 60fps, alongside local multiplayer titles engineered for zero network latency.
+                            </p>
+                            <div class="story-beats text-sm text-ink-secondary">
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Binding</span>
+                                    <span>Native C++ GDExtension bridging Godot scenes directly to Stockfish.</span>
+                                </div>
+                                <div class="story-beat">
+                                    <span class="story-beat-label">Runtime</span>
+                                    <span>Depth 22 local evaluation without blocking the 60fps render loop.</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-3 pt-1">
+                                <a href="chessgame/" class="btn-primary text-xs">Chess Engine &rarr;</a>
+                                <a href="two-player-games/" class="btn-outline text-xs">Arcade Suite &rarr;</a>
                             </div>
                         </div>
                     </article>
 
                 </div>
 
-                <!-- Unified Sticky Scrollytelling Hardware Stage (Mobile Top-Pinned & Desktop Right-Pinned) -->
-                <div id="work-sticky-stage" class="order-1 lg:order-2 w-auto lg:w-full lg:col-span-6 sticky top-16 lg:top-24 z-30 lg:z-10 -mx-6 px-6 py-2 bg-canvas/95 backdrop-blur-md border-b border-hairline lg:mx-0 lg:p-0 lg:bg-transparent lg:backdrop-blur-none lg:border-b-0">
-                    <div class="monograph-frame p-3 lg:p-5 flex flex-col justify-between">
-                        <div class="flex items-center justify-between gap-2 pb-2 lg:pb-3.5">
-                            <span id="stage-kicker" class="text-[11px] lg:text-xs font-mono text-ink-muted truncate">01 &middot; GCES Hostel &middot; Dashboard</span>
-                            <div class="segmented-track shrink-0" role="tablist" aria-label="Jump to story beat">
-                                <button type="button" data-story-nav="01" aria-selected="true" class="segmented-tab is-active !px-2 !py-1 !text-[11px] lg:!px-2.5 lg:!py-1.5 lg:!text-xs">01</button>
-                                <button type="button" data-story-nav="02" aria-selected="false" class="segmented-tab !px-2 !py-1 !text-[11px] lg:!px-2.5 lg:!py-1.5 lg:!text-xs">02</button>
-                                <button type="button" data-story-nav="03" aria-selected="false" class="segmented-tab !px-2 !py-1 !text-[11px] lg:!px-2.5 lg:!py-1.5 lg:!text-xs">03</button>
-                                <button type="button" data-story-nav="04" aria-selected="false" class="segmented-tab !px-2 !py-1 !text-[11px] lg:!px-2.5 lg:!py-1.5 lg:!text-xs">04</button>
-                                <button type="button" data-story-nav="05" aria-selected="false" class="segmented-tab !px-2 !py-1 !text-[11px] lg:!px-2.5 lg:!py-1.5 lg:!text-xs">05</button>
+                <!-- RIGHT COLUMN: Open Borderless Sticky Exhibition Stage (ZERO Nested Card Cage!) -->
+                <div class="hidden lg:block lg:col-span-7">
+                    <div id="cinema-stage" class="cinema-stage" data-chapter="01" data-beat="01a">
+
+                        <!-- Minimal Top Architectural Coordinate Bar -->
+                        <div class="flex items-center justify-between gap-4 pb-4 border-b border-hairline">
+                            <span id="cinema-stage-label" class="text-xs font-mono text-ink-secondary">
+                                01 / 05 &middot; GCES Hostel &middot; Client Dashboard
+                            </span>
+                            <div class="segmented-track" role="tablist" aria-label="Jump to project chapter">
+                                <button type="button" role="tab" data-cinema-nav="01" aria-selected="true" class="segmented-tab is-active !px-2.5 !py-1">01</button>
+                                <button type="button" role="tab" data-cinema-nav="02" aria-selected="false" class="segmented-tab !px-2.5 !py-1">02</button>
+                                <button type="button" role="tab" data-cinema-nav="03" aria-selected="false" class="segmented-tab !px-2.5 !py-1">03</button>
+                                <button type="button" role="tab" data-cinema-nav="04" aria-selected="false" class="segmented-tab !px-2.5 !py-1">04</button>
+                                <button type="button" role="tab" data-cinema-nav="05" aria-selected="false" class="segmented-tab !px-2.5 !py-1">05</button>
                             </div>
                         </div>
 
-                        <div class="sticky-subprogress" aria-hidden="true">
-                            <div id="stage-subprogress" class="sticky-subprogress-fill"></div>
-                        </div>
+                        <!-- Open Floating Darkroom Exhibition Viewport -->
+                        <div class="cinema-viewport">
+                            <div class="cinema-spotlight" aria-hidden="true"></div>
 
-                        <div class="device-well mt-2.5 lg:my-4 p-3 lg:p-5 min-h-[172px] lg:min-h-[395px] flex items-center justify-center">
-                            <!-- View 01: GCES Hostel Dashboard (Pre-mounted Layers for 0ms Switch) -->
-                            <div data-stage-view="01" class="w-full flex flex-row lg:flex-col items-center justify-center gap-4 stage-view-enter">
-                                <div class="hardware-phone w-[78px] sm:w-20 lg:w-40 shrink-0 cursor-zoom-in" data-img-container>
-                                    <div class="hardware-screen" data-frame-group="hostel">
-                                        <span class="hardware-camera" aria-hidden="true"></span>
-                                        <span class="hardware-glare" aria-hidden="true"></span>
-                                        <img src="assets/hostelapp/hostel_1.jpg" alt="GCES Hostel Dashboard screen" data-frame-index="0" class="hardware-layer-base is-active-frame" fetchpriority="high" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                        <img src="assets/hostelapp/hostel_4.jpg" alt="GCES Hostel Weekly Mess Menu" data-frame-index="1" class="hardware-layer" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                        <img src="assets/hostelapp/hostel_6.jpg" alt="GCES Hostel Weekly Food Analytics" data-frame-index="2" class="hardware-layer" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                        <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">GCES Hostel</div>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col items-start lg:items-center gap-2 min-w-0">
-                                    <span class="lg:hidden text-[11px] font-mono text-ink-muted">1,200 DAU &middot; Screens</span>
-                                    <div class="segmented-track bg-surface flex-col items-stretch lg:flex-row lg:items-center" role="tablist" aria-label="GCES Hostel screens">
-                                        <button type="button" data-sync-group="hostel" data-frame-index="0" aria-selected="true" class="segmented-tab is-active text-left lg:text-center">Dashboard</button>
-                                        <button type="button" data-sync-group="hostel" data-frame-index="1" aria-selected="false" class="segmented-tab text-left lg:text-center">Menu</button>
-                                        <button type="button" data-sync-group="hostel" data-frame-index="2" aria-selected="false" class="segmented-tab text-left lg:text-center">Analytics</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- View 02: GCES Hostel Concurrency & Attendance -->
-                            <div data-stage-view="02" class="hidden w-full grid-cols-12 gap-3 lg:gap-5 items-center">
-                                <div class="col-span-4 lg:col-span-6 flex justify-center">
-                                    <div class="hardware-phone w-[78px] sm:w-20 lg:w-36 cursor-zoom-in" data-img-container>
-                                        <div class="hardware-screen">
-                                            <span class="hardware-camera" aria-hidden="true"></span>
-                                            <span class="hardware-glare" aria-hidden="true"></span>
-                                            <img src="assets/hostelapp/hostel_3.jpg" alt="GCES Hostel Attendance & Meal Planner" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                            <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Attendance</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-span-8 lg:col-span-6 bg-surface border border-hairline rounded-lg p-2.5 lg:p-4 space-y-1.5 lg:space-y-2.5 font-mono text-[10px] lg:text-[11px]">
-                                    <div class="text-ink font-semibold text-[11px] lg:text-xs pb-1.5 lg:pb-2 border-b border-hairline">Spring Boot 3.5 Runtime</div>
-                                    <div class="flex justify-between py-0.5 lg:py-1 border-b border-hairline"><span class="text-ink-muted">Cron Lock</span><span class="text-ink">ShedLock JDBC</span></div>
-                                    <div class="flex justify-between py-0.5 lg:py-1 border-b border-hairline"><span class="text-ink-muted">Rate Limit</span><span class="text-ink">Bucket4j</span></div>
-                                    <div class="flex justify-between py-0.5 lg:py-1 border-b border-hairline"><span class="text-ink-muted">Database</span><span class="text-ink">PostgreSQL</span></div>
-                                    <div class="flex justify-between pt-0.5 lg:pt-1"><span class="text-ink-muted">P95 Latency</span><span class="text-ink">&lt;100ms</span></div>
-                                </div>
-                            </div>
-
-                            <!-- View 03: ConnectLnx Dual Phones + Protocol -->
-                            <div data-stage-view="03" class="hidden w-full flex-col items-center gap-2.5 lg:gap-4">
-                                <div class="flex items-center justify-center gap-2.5 lg:gap-4">
-                                    <div class="flex flex-col items-center">
-                                        <div class="hardware-phone w-[58px] sm:w-16 lg:w-32 cursor-zoom-in" data-img-container>
-                                            <div class="hardware-screen">
+                            <!-- PANEL 01: GCES Hostel 4-Screen Phone + Animated Concurrency Topology -->
+                            <div data-cinema-panel="01" class="cinema-panel is-active w-full" aria-hidden="false">
+                                <div class="w-full grid grid-cols-12 gap-7 items-center">
+                                    <div class="col-span-5 flex flex-col items-center gap-4">
+                                        <div class="hardware-phone w-[186px] shrink-0 cursor-zoom-in" data-img-container>
+                                            <div class="hardware-screen" data-frame-group="hostel">
                                                 <span class="hardware-camera" aria-hidden="true"></span>
                                                 <span class="hardware-glare" aria-hidden="true"></span>
-                                                <img src="assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Send interface" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Send</div>
+                                                <img src="assets/hostelapp/hostel_1.jpg" alt="GCES Hostel Dashboard screen" data-frame-index="0" class="hardware-layer-base is-active-frame" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                                <img src="assets/hostelapp/hostel_3.jpg" alt="GCES Hostel Attendance and Meal Planner screen" data-frame-index="1" class="hardware-layer" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                                <img src="assets/hostelapp/hostel_4.jpg" alt="GCES Hostel Weekly Mess Menu screen" data-frame-index="2" class="hardware-layer" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                                <img src="assets/hostelapp/hostel_6.jpg" alt="GCES Hostel Weekly Food Analytics screen" data-frame-index="3" class="hardware-layer" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">GCES Hostel</div>
                                             </div>
                                         </div>
-                                        <span class="hidden lg:inline text-[11px] font-mono text-ink-muted mt-1.5">Send</span>
-                                    </div>
-
-                                    <div class="w-8 lg:w-10 flex flex-col items-center gap-1 shrink-0" aria-hidden="true">
-                                        <span class="text-[9px] lg:text-[10px] font-mono text-ink-muted">5&times;TCP</span>
-                                        <div class="packet-bridge w-full"><div class="packet-pulse"></div></div>
-                                    </div>
-
-                                    <div class="flex flex-col items-center">
-                                        <div class="hardware-phone w-[58px] sm:w-16 lg:w-32 cursor-zoom-in" data-img-container>
-                                            <div class="hardware-screen">
-                                                <span class="hardware-camera" aria-hidden="true"></span>
-                                                <span class="hardware-glare" aria-hidden="true"></span>
-                                                <img src="assets/connectlnx/connectlnx_receive.jpg" alt="ConnectLnx Receive QR interface" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Receive</div>
-                                            </div>
+                                        <div class="segmented-track" role="tablist" aria-label="GCES Hostel screens">
+                                            <button type="button" role="tab" data-sync-group="hostel" data-frame-index="0" aria-selected="true" class="segmented-tab is-active !px-2.5">Home</button>
+                                            <button type="button" role="tab" data-sync-group="hostel" data-frame-index="1" aria-selected="false" class="segmented-tab !px-2.5">Meal</button>
+                                            <button type="button" role="tab" data-sync-group="hostel" data-frame-index="2" aria-selected="false" class="segmented-tab !px-2.5">Menu</button>
+                                            <button type="button" role="tab" data-sync-group="hostel" data-frame-index="3" aria-selected="false" class="segmented-tab !px-2.5">Stats</button>
                                         </div>
-                                        <span class="hidden lg:inline text-[11px] font-mono text-ink-muted mt-1.5">Receive</span>
                                     </div>
-                                </div>
 
-                                <div class="w-full bg-surface border border-hairline rounded-lg p-2.5 lg:p-3">
-                                    <div class="segmented-track mb-1.5 lg:mb-2 flex-wrap" role="tablist" aria-label="ConnectLnx protocol steps">
-                                        <button type="button" data-sync-group="connectlnx" data-protocol-index="0" aria-selected="true" class="segmented-tab is-active !px-2 !py-1 !text-[11px] lg:!px-2.5 lg:!py-1.5 lg:!text-xs">1. mDNS / QR</button>
-                                        <button type="button" data-sync-group="connectlnx" data-protocol-index="1" aria-selected="false" class="segmented-tab !px-2 !py-1 !text-[11px] lg:!px-2.5 lg:!py-1.5 lg:!text-xs">2. Binary Header</button>
-                                        <button type="button" data-sync-group="connectlnx" data-protocol-index="2" aria-selected="false" class="segmented-tab !px-2 !py-1 !text-[11px] lg:!px-2.5 lg:!py-1.5 lg:!text-xs">3. 5&times; Stream</button>
+                                    <div class="col-span-7 hostel-topo-panel">
+                                        <svg viewBox="0 0 330 356" class="w-full h-auto" role="img" aria-label="Spring Boot concurrency architecture: 1,200 Campus Devices through Bucket4j Token Gate and ShedLock JDBC Mutex into PostgreSQL Primary">
+                                            <line x1="165" y1="56" x2="165" y2="88" stroke="var(--hairline-strong)" stroke-width="1.5" />
+                                            <line x1="165" y1="56" x2="165" y2="88" stroke="var(--signal-teal)" stroke-width="1.75" class="topo-flow-dash" />
+
+                                            <line x1="165" y1="146" x2="165" y2="178" stroke="var(--hairline-strong)" stroke-width="1.5" />
+                                            <line x1="165" y1="146" x2="165" y2="178" stroke="var(--signal-teal)" stroke-width="1.75" class="topo-flow-dash" />
+
+                                            <line x1="165" y1="236" x2="165" y2="268" stroke="var(--hairline-strong)" stroke-width="1.5" />
+                                            <line x1="165" y1="236" x2="165" y2="268" stroke="var(--signal)" stroke-width="1.75" class="topo-flow-dash" />
+
+                                            <rect x="10" y="4" width="310" height="52" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1" />
+                                            <circle cx="28" cy="30" r="3.5" fill="var(--signal-teal)" />
+                                            <text x="42" y="26" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">1,200 Campus Devices</text>
+                                            <text x="42" y="42" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">Simultaneous meal-window check-ins</text>
+
+                                            <rect x="10" y="90" width="310" height="56" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1" />
+                                            <circle cx="28" cy="118" r="3.5" fill="var(--signal)" />
+                                            <text x="42" y="114" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">Bucket4j Token Gate</text>
+                                            <text x="42" y="130" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">Burst shaping &middot; Spring Boot 3.5 API</text>
+                                            <text x="306" y="115" text-anchor="end" fill="var(--signal-teal)" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600">&lt;100ms</text>
+
+                                            <rect x="10" y="180" width="310" height="56" rx="8" fill="none" stroke="var(--signal-teal)" stroke-opacity="0.6" stroke-width="1.25" />
+                                            <circle cx="28" cy="208" r="3.5" fill="var(--signal-teal)" />
+                                            <text x="42" y="204" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">ShedLock JDBC Mutex</text>
+                                            <text x="42" y="220" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">Single-node 00:00 rollover guarantee</text>
+                                            <text x="306" y="205" text-anchor="end" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">00:00 IST</text>
+
+                                            <rect x="10" y="270" width="310" height="56" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1" />
+                                            <circle cx="28" cy="298" r="3.5" fill="var(--ink)" />
+                                            <text x="42" y="294" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">PostgreSQL Primary</text>
+                                            <text x="42" y="310" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">ACID ledger &middot; kitchen forecast views</text>
+                                            <text x="306" y="295" text-anchor="end" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">ACID</text>
+
+                                            <text x="10" y="348" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">Multi-module Kotlin :app / :common / :server</text>
+                                        </svg>
                                     </div>
-                                    <p id="protocol-step-detail" data-protocol-detail="connectlnx" class="text-[11px] lg:text-xs text-ink-secondary line-clamp-2 lg:line-clamp-none">
-                                        Zero-config mDNS peer discovery with ML Kit QR pairing fallback on restricted networks.
-                                    </p>
                                 </div>
                             </div>
 
-                            <!-- View 04: aztrox-release Architecture -->
-                            <div data-stage-view="04" class="hidden w-full bg-surface border border-hairline rounded-lg p-3 lg:p-5 space-y-2.5 lg:space-y-4 font-mono text-xs">
-                                <div class="flex items-center justify-between pb-2 lg:pb-3 border-b border-hairline">
-                                    <span class="text-ink font-semibold text-[11px] lg:text-xs">aztrox-release &middot; 4 Surfaces</span>
-                                    <span class="text-ink-muted text-[11px] lg:text-xs">CachyOS / Arch</span>
-                                </div>
-                                <div class="grid grid-cols-2 gap-2 lg:gap-3 text-[10px] lg:text-[11px]">
-                                    <div class="p-2 lg:p-3 rounded-lg bg-surface-subtle border border-hairline">
-                                        <div class="text-ink font-semibold">Google Play</div>
-                                        <div class="text-ink-muted mt-0.5 lg:mt-1 truncate">fastlane + API</div>
+                            <!-- PANEL 02: ConnectLnx Dual Phones + 3-Phase Reactive Transport Bridge -->
+                            <div data-cinema-panel="02" class="cinema-panel w-full" aria-hidden="true">
+                                <div id="connectlnx-stage" data-proto-phase="0" class="w-full space-y-7">
+                                    <div class="flex items-center justify-center gap-6">
+                                        <div class="flex flex-col items-center gap-2 shrink-0 connectlnx-sender">
+                                            <div class="hardware-phone w-40 xl:w-44 cursor-zoom-in" data-img-container>
+                                                <div class="hardware-screen">
+                                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                                    <img src="assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Android Send interface" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Send</div>
+                                                </div>
+                                            </div>
+                                            <span class="text-xs font-mono text-ink-muted">Sender Node</span>
+                                        </div>
+
+                                        <div class="flex-1 max-w-[162px] flex flex-col items-center gap-3 connectlnx-bridge" aria-hidden="true">
+                                            <span id="connectlnx-bridge-top" class="text-[11px] font-mono text-ink-muted uppercase tracking-wider whitespace-nowrap">mDNS / QR PAIR</span>
+                                            <div class="w-full space-y-3 connectlnx-lanes">
+                                                <div class="tcp-lane" data-lane="0"><div class="tcp-packet"></div></div>
+                                                <div class="tcp-lane" data-lane="1"><div class="tcp-packet"></div></div>
+                                                <div class="tcp-lane" data-lane="2"><div class="tcp-packet"></div></div>
+                                                <div class="tcp-lane" data-lane="3"><div class="tcp-packet"></div></div>
+                                                <div class="tcp-lane" data-lane="4"><div class="tcp-packet"></div></div>
+                                            </div>
+                                            <span id="connectlnx-bridge-bottom" class="text-[11px] font-mono text-ink-muted whitespace-nowrap">Zero-Config LAN</span>
+                                        </div>
+
+                                        <div class="flex flex-col items-center gap-2 shrink-0 connectlnx-receiver">
+                                            <div class="hardware-phone w-40 xl:w-44 cursor-zoom-in" data-img-container>
+                                                <div class="hardware-screen">
+                                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                                    <img src="assets/connectlnx/connectlnx_receive.jpg" alt="ConnectLnx Android Receive QR interface" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Receive</div>
+                                                </div>
+                                            </div>
+                                            <span class="text-xs font-mono text-ink-muted">Receiver Node</span>
+                                        </div>
                                     </div>
-                                    <div class="p-2 lg:p-3 rounded-lg bg-surface-subtle border border-hairline">
-                                        <div class="text-ink font-semibold">GitHub + AUR</div>
-                                        <div class="text-ink-muted mt-0.5 lg:mt-1 truncate">.deb / .msi / PKGBUILD</div>
+
+                                    <div class="pt-5 border-t border-hairline space-y-3">
+                                        <div class="segmented-track flex-wrap" role="tablist" aria-label="ConnectLnx protocol phases">
+                                            <button type="button" role="tab" data-sync-group="connectlnx" data-protocol-index="0" aria-selected="true" class="segmented-tab is-active">01. mDNS / QR</button>
+                                            <button type="button" role="tab" data-sync-group="connectlnx" data-protocol-index="1" aria-selected="false" class="segmented-tab">02. Binary Header</button>
+                                            <button type="button" role="tab" data-sync-group="connectlnx" data-protocol-index="2" aria-selected="false" class="segmented-tab">03. 5&times; NIO Stream</button>
+                                        </div>
+                                        <p data-protocol-detail="connectlnx" class="text-sm text-ink-secondary leading-relaxed min-h-[2.75rem]">
+                                            Zero-config mDNS peer discovery across local subnets, falling back to ML Kit QR pairing when campus Wi-Fi isolates multicast.
+                                        </p>
                                     </div>
-                                    <div class="p-2 lg:p-3 rounded-lg bg-surface-subtle border border-hairline">
-                                        <div class="text-ink font-semibold">Firebase</div>
-                                        <div class="text-ink-muted mt-0.5 lg:mt-1 truncate">ConnectLnx deploys</div>
-                                    </div>
-                                    <div class="p-2 lg:p-3 rounded-lg bg-surface-subtle border border-hairline">
-                                        <div class="text-ink font-semibold">Render &amp; HF</div>
-                                        <div class="text-ink-muted mt-0.5 lg:mt-1 truncate">Fat JAR + probes</div>
-                                    </div>
-                                </div>
-                                <div class="pt-2 lg:pt-3 border-t border-hairline flex justify-between text-[10px] lg:text-[11px] text-ink-muted">
-                                    <span>SQLite history.db &middot; LIFO</span>
-                                    <span>fzf &middot; gum &middot; glow</span>
                                 </div>
                             </div>
 
-                            <!-- View 05: Smart Expense Tracker (Pre-mounted Layers, Balance Ledger FIRST) -->
-                            <div data-stage-view="05" class="hidden w-full flex-row lg:flex-col items-center justify-center gap-4">
-                                <div class="hardware-phone w-[78px] sm:w-20 lg:w-40 shrink-0 cursor-zoom-in" data-img-container>
-                                    <div class="hardware-screen" data-frame-group="expense">
-                                        <span class="hardware-camera" aria-hidden="true"></span>
-                                        <span class="hardware-glare" aria-hidden="true"></span>
-                                        <img src="assets/smartexpense/expense_1.jpg" alt="Smart Expense Tracker Balance Ledger dashboard" data-frame-index="0" class="hardware-layer-base is-active-frame" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                        <img src="assets/smartexpense/expense_3.jpg" alt="Smart Expense Tracker Compose Canvas analytics" data-frame-index="1" class="hardware-layer" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                        <img src="assets/smartexpense/expense_4.jpg" alt="Smart Expense Tracker Category Breakdown" data-frame-index="2" class="hardware-layer" decoding="async" data-lightbox referrerpolicy="no-referrer">
-                                        <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Balance Ledger</div>
+                            <!-- PANEL 03: aztrox-release 3-View Interactive Exhibition (Real TUI · 4-Surface Pipeline SVG · Safety & Remote) -->
+                            <div data-cinema-panel="03" class="cinema-panel w-full" aria-hidden="true">
+                                <div id="aztrox-stage" data-aztrox-view="0" class="aztrox-stage">
+
+                                    <div class="aztrox-display-area">
+                                        <!-- VIEW 0: Real Live Terminal Dashboard Screenshot -->
+                                        <div data-aztrox-panel="0" class="w-full stage-view-enter">
+                                            <div class="aztrox-tui-frame">
+                                                <div class="aztrox-tui-chrome">
+                                                    <span class="text-[#e4e8f0] font-medium">aztrox-release &middot; v3.0</span>
+                                                    <span>CachyOS &middot; Bash 5.3 &middot; Click to zoom</span>
+                                                </div>
+                                                <div class="aztrox-tui-shot-wrap cursor-zoom-in" data-img-container>
+                                                    <img src="/assets/aistudio/image_3d9ae119.png"
+                                                        alt="aztrox-release v3.0 live terminal dashboard showing tracked products GCESHostel, ConnectLnx, FreshOla, BloodLine, ExtraCam, SmartExpense, 136 SQLite releases, and recent pipeline runs"
+                                                        class="aztrox-tui-shot"
+                                                        decoding="async"
+                                                        data-lightbox
+                                                        data-caption="aztrox-release v3.0 — Real terminal dashboard on CachyOS backed by ~/.aztrox-release/history.db (136 releases, 4s watch refresh)"
+                                                        referrerpolicy="no-referrer">
+                                                    <div class="img-fallback-box aspect-[16/10] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">aztrox-release v3.0 Live Dashboard</div>
+                                                </div>
+                                                <div class="aztrox-tui-metrics tabular-nums">
+                                                    <div class="aztrox-tui-metric">
+                                                        <div class="text-sm font-semibold text-white">136</div>
+                                                        <div class="text-[10px] text-[#8e97aa]">SQLite Runs</div>
+                                                    </div>
+                                                    <div class="aztrox-tui-metric">
+                                                        <div class="text-sm font-semibold text-white">9</div>
+                                                        <div class="text-[10px] text-[#8e97aa]">Products</div>
+                                                    </div>
+                                                    <div class="aztrox-tui-metric">
+                                                        <div class="text-sm font-semibold text-[#34d399]">4</div>
+                                                        <div class="text-[10px] text-[#8e97aa]">Surfaces</div>
+                                                    </div>
+                                                    <div class="aztrox-tui-metric">
+                                                        <div class="text-sm font-semibold text-[#22c1d6]">4s</div>
+                                                        <div class="text-[10px] text-[#8e97aa]">Live Watch</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- VIEW 1: Architectural 4-Surface Pipeline Fan-Out SVG -->
+                                        <div data-aztrox-panel="1" class="hidden w-full">
+                                            <svg viewBox="0 0 620 356" class="w-full h-auto" role="img" aria-label="aztrox-release multi-surface pipeline: Preflight and Play versionCode Guard into Parallel Gradle builds and JDK 17 jarsigner fanning out to Google Play, GitHub and Arch AUR, Firebase Hosting, and Render plus HF Spaces, backed by SQLite history.db and LIFO exit rollbacks">
+                                                <!-- Vertical Spine & 4-Way Fan-Out Paths -->
+                                                <line x1="310" y1="54" x2="310" y2="88" stroke="var(--hairline-strong)" stroke-width="1.5" />
+                                                <line x1="310" y1="54" x2="310" y2="88" stroke="var(--signal-teal)" stroke-width="1.75" class="topo-flow-dash" />
+
+                                                <path d="M 310 146 L 310 166 L 78 166 L 78 192" fill="none" stroke="var(--hairline-strong)" stroke-width="1.4" />
+                                                <path d="M 310 146 L 310 166 L 78 166 L 78 192" fill="none" stroke="var(--signal-emerald)" stroke-width="1.6" class="topo-flow-dash" />
+
+                                                <path d="M 310 146 L 310 166 L 233 166 L 233 192" fill="none" stroke="var(--hairline-strong)" stroke-width="1.4" />
+                                                <path d="M 310 146 L 310 166 L 233 166 L 233 192" fill="none" stroke="var(--signal)" stroke-width="1.6" class="topo-flow-dash" />
+
+                                                <path d="M 310 146 L 310 166 L 388 166 L 388 192" fill="none" stroke="var(--hairline-strong)" stroke-width="1.4" />
+                                                <path d="M 310 146 L 310 166 L 388 166 L 388 192" fill="none" stroke="var(--signal-teal)" stroke-width="1.6" class="topo-flow-dash" />
+
+                                                <path d="M 310 146 L 310 166 L 542 166 L 542 192" fill="none" stroke="var(--hairline-strong)" stroke-width="1.4" />
+                                                <path d="M 310 146 L 310 166 L 542 166 L 542 192" fill="none" stroke="var(--signal)" stroke-width="1.6" class="topo-flow-dash" />
+
+                                                <!-- Convergence to SQLite & Rollback Rail -->
+                                                <line x1="78" y1="264" x2="78" y2="292" stroke="var(--hairline-strong)" stroke-width="1.2" stroke-dasharray="3 4" />
+                                                <line x1="233" y1="264" x2="233" y2="292" stroke="var(--hairline-strong)" stroke-width="1.2" stroke-dasharray="3 4" />
+                                                <line x1="388" y1="264" x2="388" y2="292" stroke="var(--hairline-strong)" stroke-width="1.2" stroke-dasharray="3 4" />
+                                                <line x1="542" y1="264" x2="542" y2="292" stroke="var(--hairline-strong)" stroke-width="1.2" stroke-dasharray="3 4" />
+
+                                                <!-- Stage 1: Preflight & Play Store versionCode Guard -->
+                                                <rect x="64" y="4" width="492" height="50" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1.1" />
+                                                <circle cx="84" cy="29" r="3.5" fill="var(--signal-teal)" />
+                                                <text x="98" y="25" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">01 &middot; Preflight &amp; Play versionCode Guard</text>
+                                                <text x="98" y="41" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">health &middot; check_git_clean &middot; keytool expiry &middot; fastlane auto-bump</text>
+                                                <text x="542" y="26" text-anchor="end" fill="var(--signal-teal)" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">lib/checks.sh</text>
+
+                                                <!-- Stage 2: Parallel Gradle & JDK 17 Signing -->
+                                                <rect x="64" y="90" width="492" height="56" rx="8" fill="none" stroke="var(--signal-emerald)" stroke-opacity="0.65" stroke-width="1.25" />
+                                                <circle cx="84" cy="118" r="3.5" fill="var(--signal-emerald)" />
+                                                <text x="98" y="113" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">02 &middot; Parallel Builds &amp; JDK 17 Signing</text>
+                                                <text x="98" y="131" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">log_exec_bg (.deb + .aab) &middot; godot --headless &middot; jarsigner SHA256withRSA</text>
+                                                <text x="542" y="114" text-anchor="end" fill="var(--signal-emerald)" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">lib/android.sh</text>
+
+                                                <!-- Stage 3: 4 Distribution Surfaces -->
+                                                <rect x="8" y="194" width="140" height="70" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1.1" />
+                                                <circle cx="23" cy="214" r="3" fill="var(--signal-emerald)" />
+                                                <text x="33" y="218" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">Google Play</text>
+                                                <text x="20" y="236" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">fastlane supply</text>
+                                                <text x="20" y="251" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">track promote</text>
+
+                                                <rect x="163" y="194" width="140" height="70" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1.1" />
+                                                <circle cx="178" cy="214" r="3" fill="var(--signal)" />
+                                                <text x="188" y="218" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">GitHub + AUR</text>
+                                                <text x="175" y="236" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">gh release create</text>
+                                                <text x="175" y="251" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">PKGBUILD &middot; .SRCINFO</text>
+
+                                                <rect x="318" y="194" width="140" height="70" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1.1" />
+                                                <circle cx="333" cy="214" r="3" fill="var(--signal-teal)" />
+                                                <text x="343" y="218" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">Firebase Web</text>
+                                                <text x="330" y="236" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">website/release.sh</text>
+                                                <text x="330" y="251" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">firebase deploy</text>
+
+                                                <rect x="472" y="194" width="140" height="70" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1.1" />
+                                                <circle cx="487" cy="214" r="3" fill="var(--signal)" />
+                                                <text x="497" y="218" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">Render + HF</text>
+                                                <text x="484" y="236" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">Fat JAR deploy.sh</text>
+                                                <text x="484" y="251" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">3x health probes</text>
+
+                                                <!-- Stage 4: Persistence & Rollback Safety Net -->
+                                                <rect x="8" y="294" width="604" height="54" rx="8" fill="none" stroke="var(--hairline-strong)" stroke-width="1.1" />
+                                                <circle cx="28" cy="321" r="3.5" fill="var(--ink)" />
+                                                <text x="42" y="317" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600">SQLite history.db + HTML Logs (Chart.js) + LIFO Exit Trap</text>
+                                                <text x="42" y="334" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">release_steps resume checkpoints &middot; trap run_rollbacks EXIT &middot; notify-send</text>
+                                                <text x="598" y="318" text-anchor="end" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="10">~/.aztrox-release</text>
+                                            </svg>
+                                        </div>
+
+                                        <!-- VIEW 2: Real LIFO Rollback, SQLite Resume & Remote Telegram QA -->
+                                        <div data-aztrox-panel="2" class="hidden w-full">
+                                            <div class="aztrox-safety-surface font-mono text-[12px] leading-relaxed">
+                                                <div class="aztrox-tui-chrome">
+                                                    <span class="text-[#e4e8f0] font-medium">lib/logger.sh &middot; lib/remote.sh &middot; lib/gcesjar.sh</span>
+                                                    <span>set -euo pipefail</span>
+                                                </div>
+
+                                                <!-- Top Pane: Automatic LIFO Rollback & SQLite Checkpoint Resume -->
+                                                <div class="p-4 sm:p-5 space-y-2 border-b border-white/10">
+                                                    <div class="flex items-center justify-between text-[11px] text-[#8e97aa]">
+                                                        <span class="text-[#f4f5f7] font-semibold">01 &middot; Atomic LIFO Rollback &amp; Resume</span>
+                                                        <span>trap run_rollbacks EXIT</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="text-[#34d399]">&gt;</span>
+                                                        <span class="text-[#f4f5f7]"> ./aztrox-release connectlnxApp --track internal,production</span>
+                                                    </div>
+                                                    <div class="text-[#8e97aa] space-y-1 pl-2">
+                                                        <div>[rollback] registered: <span class="text-[#cbd5e1]">mv gradle.properties.bak gradle.properties</span></div>
+                                                        <div>[rollback] registered: <span class="text-[#cbd5e1]">git tag -d v3.6.0 &amp;&amp; git reset --hard HEAD~1</span></div>
+                                                        <div>[sqlite] &nbsp; <span class="text-[#22c1d6]">find_resumable_release</span> skips completed <span class="text-[#cbd5e1]">release_steps</span> on retry</div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Bottom Pane: Remote Telegram APK Dispatch & 3-Node Health Probes -->
+                                                <div class="p-4 sm:p-5 space-y-2">
+                                                    <div class="flex items-center justify-between text-[11px] text-[#8e97aa]">
+                                                        <span class="text-[#f4f5f7] font-semibold">02 &middot; Remote Telegram QA &amp; Server Probes</span>
+                                                        <span>curl &middot; /api/debug/version</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="text-[#34d399]">&gt;</span>
+                                                        <span class="text-[#f4f5f7]"> ./aztrox-release remote run connectlnx --release</span>
+                                                    </div>
+                                                    <div class="space-y-1 pl-2 text-[#cbd5e1]">
+                                                        <div class="flex items-center justify-between gap-3">
+                                                            <span><span class="text-[#34d399]">&#10003;</span> R8 APK &rarr; Telegram <span class="text-[#8e97aa]">sendDocument</span></span>
+                                                            <span class="text-[#8e97aa] tabular-nums">version + commit caption</span>
+                                                        </div>
+                                                        <div class="flex items-center justify-between gap-3">
+                                                            <span><span class="text-[#34d399]">&#10003;</span> <span class="text-white">server-status</span> <span class="text-[#8e97aa]">Render (2x) + HF Spaces</span></span>
+                                                            <span class="text-[#34d399] tabular-nums">3/3 synced</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="pt-1 text-[#22c1d6]">
+                                                        Tip: ./aztrox-release health &middot; dashboard --watch &middot; diff gceshostel<span class="terminal-cursor" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Synced Bottom Segmented Switcher (Matches Panels 01, 02 & 04) -->
+                                    <div class="pt-4 border-t border-hairline flex flex-wrap items-center justify-between gap-3">
+                                        <div class="segmented-track" role="tablist" aria-label="aztrox-release showcase views">
+                                            <button type="button" role="tab" data-sync-group="aztrox" data-aztrox-index="0" aria-selected="true" class="segmented-tab is-active">01. Live TUI</button>
+                                            <button type="button" role="tab" data-sync-group="aztrox" data-aztrox-index="1" aria-selected="false" class="segmented-tab">02. Pipeline</button>
+                                            <button type="button" role="tab" data-sync-group="aztrox" data-aztrox-index="2" aria-selected="false" class="segmented-tab">03. Safety &amp; Remote</button>
+                                        </div>
+                                        <span id="aztrox-stage-detail" class="text-xs font-mono text-ink-muted">
+                                            Real CachyOS dashboard &middot; 136 runs in history.db
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- PANEL 04: Floating 3-Phone Perspective Fan Stage (Smart Expense Tracker) -->
+                            <div data-cinema-panel="04" class="cinema-panel w-full" aria-hidden="true">
+                                <div class="w-full space-y-5">
+                                    <div id="expense-fan-stage" class="expense-fan-stage">
+                                        <div data-fan-card="0" class="fan-card fan-center">
+                                            <div class="hardware-phone" data-img-container>
+                                                <div class="hardware-screen">
+                                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                                    <img src="assets/smartexpense/expense_1.jpg" alt="Smart Expense Tracker Balance Ledger dashboard" decoding="async" data-lightbox data-caption="Smart Expense Tracker — Reactive Room Flow Balance Ledger" referrerpolicy="no-referrer">
+                                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Balance Ledger</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div data-fan-card="1" class="fan-card fan-right">
+                                            <div class="hardware-phone" data-img-container>
+                                                <div class="hardware-screen">
+                                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                                    <img src="assets/smartexpense/expense_3.jpg" alt="Smart Expense Tracker Compose Canvas analytics" decoding="async" data-lightbox data-caption="Smart Expense Tracker — 60fps Jetpack Compose Canvas Charts" referrerpolicy="no-referrer">
+                                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Canvas Charts</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div data-fan-card="2" class="fan-card fan-left">
+                                            <div class="hardware-phone" data-img-container>
+                                                <div class="hardware-screen">
+                                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                                    <img src="assets/smartexpense/expense_4.jpg" alt="Smart Expense Tracker Category Breakdown" decoding="async" data-lightbox data-caption="Smart Expense Tracker — On-Device Category Distribution" referrerpolicy="no-referrer">
+                                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-3 text-center text-xs font-mono text-ink-muted bg-surface">Categories</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-4 border-t border-hairline flex items-center justify-between gap-4">
+                                        <div class="segmented-track" role="tablist" aria-label="Smart Expense Tracker screens">
+                                            <button type="button" role="tab" data-fan-select="0" aria-selected="true" class="segmented-tab is-active">Ledger</button>
+                                            <button type="button" role="tab" data-fan-select="1" aria-selected="false" class="segmented-tab">Charts</button>
+                                            <button type="button" role="tab" data-fan-select="2" aria-selected="false" class="segmented-tab">Categories</button>
+                                        </div>
+                                        <span id="expense-fan-caption" class="text-xs font-mono text-ink-muted">
+                                            Room Flow reactive balance &amp; daily limits
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="flex flex-col items-start lg:items-center gap-2 min-w-0">
-                                    <span class="lg:hidden text-[11px] font-mono text-ink-muted">Room + Flow &middot; Screens</span>
-                                    <div class="segmented-track bg-surface flex-col items-stretch lg:flex-row lg:items-center" role="tablist" aria-label="Smart Expense screens">
-                                        <button type="button" data-sync-group="expense" data-frame-index="0" aria-selected="true" class="segmented-tab is-active text-left lg:text-center">Ledger</button>
-                                        <button type="button" data-sync-group="expense" data-frame-index="1" aria-selected="false" class="segmented-tab text-left lg:text-center">Charts</button>
-                                        <button type="button" data-sync-group="expense" data-frame-index="2" aria-selected="false" class="segmented-tab text-left lg:text-center">Categories</button>
+                            </div>
+
+                            <!-- PANEL 05: Sculptural Stockfish Tactical Chessboard + Metrics -->
+                            <div data-cinema-panel="05" class="cinema-panel w-full" aria-hidden="true">
+                                <div class="w-full grid grid-cols-12 gap-8 items-center">
+                                    <div class="col-span-6 flex justify-center">
+                                        <div class="w-64 h-64 rounded-xl border border-hairline-strong overflow-hidden grid grid-cols-8 grid-rows-8 text-xl leading-none select-none shadow-2xl" role="img" aria-label="Tactical Stockfish chess position Re8 checkmate preview">
+                                            <div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-signal/40 flex items-center justify-center text-ink font-semibold">&#9814;</div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65 flex items-center justify-center text-ink">&#9818;</div><div class="bg-canvas/75"></div>
+                                            <div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65 flex items-center justify-center text-ink-secondary">&#9823;</div><div class="bg-canvas/75 flex items-center justify-center text-ink-secondary">&#9823;</div><div class="bg-surface-subtle/65 flex items-center justify-center text-ink-secondary">&#9823;</div>
+                                            <div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div>
+                                            <div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65 flex items-center justify-center text-ink-secondary">&#9819;</div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div>
+                                            <div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div>
+                                            <div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75 flex items-center justify-center text-ink">&#9813;</div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div>
+                                            <div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-signal/15"></div><div class="bg-canvas/75 flex items-center justify-center text-ink">&#9817;</div><div class="bg-surface-subtle/65 flex items-center justify-center text-ink">&#9817;</div><div class="bg-canvas/75"></div>
+                                            <div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75"></div><div class="bg-surface-subtle/65"></div><div class="bg-canvas/75 flex items-center justify-center text-ink">&#9812;</div><div class="bg-surface-subtle/65"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-span-6 space-y-3 font-mono text-xs tabular-nums">
+                                        <div class="text-ink font-semibold text-sm pb-2 border-b border-hairline">Stockfish C++ Runtime</div>
+                                        <div class="flex justify-between py-2 border-b border-hairline"><span class="text-ink-muted">Binding</span><span class="text-ink font-semibold">C++ GDExtension</span></div>
+                                        <div class="flex justify-between py-2 border-b border-hairline"><span class="text-ink-muted">Search Eval</span><span class="text-ink font-semibold">Re8# &middot; Depth 22</span></div>
+                                        <div class="flex justify-between py-2 border-b border-hairline"><span class="text-ink-muted">Engine Loop</span><span class="text-ink font-semibold">60fps Non-Blocking</span></div>
+                                        <div class="flex justify-between py-2"><span class="text-ink-muted">Arcade Mode</span><span class="text-ink font-semibold">Zero-Latency Local</span></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="hidden lg:flex pt-3 border-t border-hairline items-center justify-between gap-4 text-xs text-ink-muted">
-                            <span id="stage-caption" class="font-mono truncate">Kotlin &middot; Jetpack Compose &middot; Spring Boot 3.5 &middot; PostgreSQL</span>
-                            <a id="stage-link" href="gceshostel/" class="editorial-link font-semibold text-ink whitespace-nowrap shrink-0">
+                        <!-- Minimal Bottom Architectural Action Bar -->
+                        <div class="pt-4 border-t border-hairline flex items-center justify-between gap-4 text-xs">
+                            <span id="cinema-stage-caption" class="font-mono text-ink-muted">
+                                Kotlin Multi-Module &middot; Jetpack Compose &middot; 1,200 DAU
+                            </span>
+                            <a id="cinema-stage-cta" href="gceshostel/" class="editorial-link font-semibold text-ink whitespace-nowrap shrink-0">
                                 Open Case Study &rarr;
                             </a>
                         </div>
+
                     </div>
                 </div>
 
             </div>
-
-            <!-- 06: Stockfish Interop & Arcade Suite -->
-            <article class="mt-16 pt-12 border-t border-hairline reveal-init">
-                <div class="monograph-frame p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <div class="lg:col-span-7 space-y-4">
-                        <div class="text-xs font-mono text-ink-muted">06 &middot; C++ GDExtension &middot; Godot Engine</div>
-                        <h3 class="text-xl sm:text-2xl font-display font-bold tracking-tight">
-                            <a href="chessgame/" class="hover:opacity-75 transition-opacity">Stockfish Interop &amp; Arcade Suite</a>
-                        </h3>
-                        <p class="text-sm text-ink-secondary max-w-xl">
-                            C++ GDExtension bindings embedding the Stockfish chess engine natively inside Godot at 60fps, alongside local multiplayer titles built for zero network latency.
-                        </p>
-                        <div class="flex flex-wrap items-center gap-3 pt-1">
-                            <a href="chessgame/" class="btn-outline text-xs">Chess Engine &rarr;</a>
-                            <a href="two-player-games/" class="btn-outline text-xs">Arcade Suite &rarr;</a>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 flex flex-col sm:flex-row items-center gap-5 bg-surface-subtle border border-hairline rounded-xl p-4">
-                        <div class="w-32 h-32 shrink-0 rounded-lg border border-hairline bg-surface p-2" aria-label="Stockfish board preview">
-                            <div class="grid grid-cols-8 grid-rows-8 w-full h-full border border-hairline rounded overflow-hidden font-mono text-[8px] font-bold">
-                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle flex items-center justify-center text-ink">k</div><div></div>
-                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
-                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
-                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div class="bg-milk/20 flex items-center justify-center text-ink">q</div><div class="bg-surface-subtle"></div>
-                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
-                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle flex items-center justify-center text-ink">Q</div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
-                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
-                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div class="bg-milk/15 flex items-center justify-center text-ink">K</div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
-                            </div>
-                        </div>
-
-                        <div class="w-full space-y-1.5 text-xs text-ink-secondary font-mono tabular-nums">
-                            <div class="flex justify-between py-1 border-b border-hairline"><span>Binding</span><span class="text-ink font-semibold">C++ GDExtension</span></div>
-                            <div class="flex justify-between py-1 border-b border-hairline"><span>Engine</span><span class="text-ink font-semibold">Local Stockfish</span></div>
-                            <div class="flex justify-between py-1"><span>Target</span><span class="text-ink font-semibold">60fps On-Device</span></div>
-                        </div>
-                    </div>
-                </div>
-            </article>
         </section>
 
         <!-- ================================================================
-             EXPERIENCE
+             BAND 3 · EXPERIENCE (OPEN ARCHITECTURAL PIPELINE — ZERO SAAS BOX!)
              ================================================================ -->
-        <section id="experience" class="mb-20 scroll-mt-24 reveal-init">
-            <div class="pb-3 mb-8 border-b border-hairline flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Experience</h2>
+        <section id="experience" class="mb-32 scroll-mt-24 reveal-init">
+            <div class="pb-5 mb-10 border-b border-hairline flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                <h2 class="text-3xl sm:text-4xl font-display font-bold tracking-tight">Experience</h2>
                 <span class="text-xs font-mono text-ink-muted">Thinkster Math &middot; May &ndash; Jun 2026 &middot; Remote (USA)</span>
             </div>
 
-            <div id="experience-runway" class="min-h-[640px] lg:min-h-[440px]">
-                <div id="experience-sticky" class="sticky top-20 lg:top-28 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
-                    <div class="lg:col-span-5 space-y-2.5 lg:space-y-3">
-                        <div class="text-xs font-mono text-ink-muted">07 &middot; Automated QA</div>
-                        <h3 class="text-xl font-display font-bold">Thinkster Math</h3>
-                        <p class="text-xs font-mono text-ink-muted">AI Systems &amp; Automation Intern</p>
-                        <p class="text-sm text-ink-secondary">
-                            Manual QA couldn&rsquo;t keep up with math curriculum updates &mdash; so I automated visual verification with Selenium, Vision LLMs, and thread-safe Flask workers.
-                        </p>
-                        <p class="text-xs font-mono text-ink-muted pt-1 lg:pt-2">
-                            Python &middot; Selenium &middot; Vision LLMs &middot; Flask &middot; MongoDB
-                        </p>
-                    </div>
-
-                    <div class="lg:col-span-7 monograph-frame p-4 lg:p-5">
-                        <div class="segmented-track mb-3 flex-wrap" role="tablist" aria-label="Thinkster Math pipeline stages">
-                            <button type="button" role="tab" aria-selected="true" data-exp-tab="harness" class="segmented-tab is-active !px-2.5 !py-1.5 !text-[11px] sm:!text-xs">01. Selenium Harness</button>
-                            <button type="button" role="tab" aria-selected="false" data-exp-tab="vision" class="segmented-tab !px-2.5 !py-1.5 !text-[11px] sm:!text-xs">02. Vision LLM QA</button>
-                            <button type="button" role="tab" aria-selected="false" data-exp-tab="batch" class="segmented-tab !px-2.5 !py-1.5 !text-[11px] sm:!text-xs">03. Thread-Safe API</button>
-                        </div>
-
-                        <div class="sticky-subprogress mb-3.5" aria-hidden="true">
-                            <div id="exp-subprogress" class="sticky-subprogress-fill"></div>
-                        </div>
-
-                        <div data-exp-panel="harness" class="text-sm text-ink-secondary">
-                            Unattended WebDriver harness managing authenticated sessions, live math question rendering, and frame capture.
-                        </div>
-                        <div data-exp-panel="vision" class="hidden text-sm text-ink-secondary">
-                            Multimodal Vision LLM checks on rendered question frames to verify proof validity, answer keys, and layout defects with deterministic prompt contracts.
-                        </div>
-                        <div data-exp-panel="batch" class="hidden text-sm text-ink-secondary">
-                            Thread-safe execution harness using shared state locks for deadlock-free parallel batches, reporting to a Flask + MongoDB API.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================================================================
-             RESEARCH
-             ================================================================ -->
-        <section id="research" class="mb-20 scroll-mt-24 reveal-init">
-            <div class="pb-3 mb-8 border-b border-hairline flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Research</h2>
-                <span class="text-xs font-mono text-ink-muted">PyTorch Evaluation Suite</span>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12">
                 <div class="lg:col-span-7 space-y-3">
-                    <div class="text-xs font-mono text-ink-muted">08 &middot; Model Compute Efficiency</div>
-                    <h3 class="text-xl font-display font-bold">How Deep Does a Next-Concept Model Need to Run?</h3>
-                    <p class="text-sm text-ink-secondary">
-                        Questioned why fixed-pass language models run every layer on easy tokens. Measured a <strong class="text-ink font-semibold">37.7%</strong> oracle depth redundancy on XSum (39.3% &amp; 37.6% across splits), then built an unsupervised entity-saturation exit saving <strong class="text-ink font-semibold">1 in 8 passes</strong> at 0.20 ROUGE-L delta.
+                    <div class="text-xs font-mono text-ink-muted">AI Systems &amp; Automation Intern</div>
+                    <h3 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Thinkster Math &mdash; Automated Visual QA Pipeline</h3>
+                    <p class="text-[15px] text-ink-secondary leading-relaxed max-w-2xl">
+                        Manual QA couldn&rsquo;t keep pace with math curriculum updates &mdash; so I engineered an unattended verification pipeline combining Selenium rendering, multimodal Vision LLMs, and thread-safe Flask workers.
                     </p>
                 </div>
+                <div class="lg:col-span-5 lg:text-right text-xs font-mono text-ink-muted">
+                    Python &middot; Selenium &middot; Vision LLMs &middot; Flask &middot; MongoDB
+                </div>
+            </div>
 
-                <div class="lg:col-span-5 monograph-frame p-5 space-y-3 font-mono text-xs tabular-nums">
-                    <div>
-                        <div class="flex justify-between mb-1"><span class="text-ink-secondary">Oracle Ceiling (XSum)</span><span class="text-ink font-semibold">37.7%</span></div>
-                        <div class="h-1.5 bg-surface-subtle rounded-full overflow-hidden"><div class="h-full bg-milk" style="width: 37.7%"></div></div>
+            <ol class="border-y border-hairline grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-hairline">
+                <li class="py-8 lg:pr-10 space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono text-ink-muted">
+                        <span class="text-ink font-semibold">01 / CAPTURE</span>
+                        <span>WebDriver</span>
                     </div>
-                    <div>
-                        <div class="flex justify-between mb-1"><span class="text-ink-secondary">Unsupervised Exit</span><span class="text-ink font-semibold">1 in 8 saved</span></div>
-                        <div class="h-1.5 bg-surface-subtle rounded-full overflow-hidden"><div class="h-full bg-ink/70" style="width: 12.5%"></div></div>
+                    <h4 class="font-display font-bold text-xl text-ink">Selenium Harness</h4>
+                    <p class="text-sm text-ink-secondary leading-relaxed">
+                        Unattended browser harness managing authenticated student sessions, live curriculum math rendering, and deterministic viewport frame capture.
+                    </p>
+                </li>
+                <li class="py-8 lg:px-10 space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono text-ink-muted">
+                        <span class="text-ink font-semibold">02 / VERIFY</span>
+                        <span>Multimodal</span>
                     </div>
-                    <div class="pt-2 border-t border-hairline flex justify-between text-ink-muted">
-                        <span>ROUGE-L Delta</span><span class="text-ink font-semibold">0.20</span>
+                    <h4 class="font-display font-bold text-xl text-ink">Vision LLM QA</h4>
+                    <p class="text-sm text-ink-secondary leading-relaxed">
+                        Structured multimodal Vision LLM checks on rendered question frames validating mathematical proofs, answer keys, and visual layout regressions.
+                    </p>
+                </li>
+                <li class="py-8 lg:pl-10 space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono text-ink-muted">
+                        <span class="text-ink font-semibold">03 / PERSIST</span>
+                        <span>Thread-Safe</span>
                     </div>
+                    <h4 class="font-display font-bold text-xl text-ink">Flask &amp; MongoDB API</h4>
+                    <p class="text-sm text-ink-secondary leading-relaxed">
+                        Concurrent worker pool coordinated with shared state locks for deadlock-free parallel batch execution and audit reporting into MongoDB.
+                    </p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- ================================================================
+             BAND 4 · RESEARCH (OPEN MONOGRAPH SPREAD + 16-LAYER SVG CHART)
+             ================================================================ -->
+        <section id="research" class="mb-32 scroll-mt-24 reveal-init">
+            <div class="pb-5 mb-12 border-b border-hairline flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                <h2 class="text-3xl sm:text-4xl font-display font-bold tracking-tight">Research</h2>
+                <span class="text-xs font-mono text-ink-muted">PyTorch Evaluation Suite &middot; XSum Benchmark</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-5">
+                    <div class="text-xs font-mono text-ink-muted">Model Compute Efficiency</div>
+                    <h3 class="text-2xl sm:text-3xl font-display font-bold tracking-tight leading-tight">
+                        How Deep Does a Next-Concept Model Need to Run?
+                    </h3>
+                    <p class="text-[15px] text-ink-secondary leading-relaxed">
+                        Questioned why fixed-pass language models run every transformer block on low-entropy tokens. Measured a <strong class="text-ink font-semibold">37.7%</strong> oracle depth redundancy on XSum (39.3% &amp; 37.6% across splits), then built an unsupervised entity-saturation exit saving <strong class="text-ink font-semibold">1 in 8 passes</strong> at 0.20 ROUGE-L delta.
+                    </p>
+
+                    <div class="story-beats text-sm text-ink-secondary tabular-nums">
+                        <div class="story-beat">
+                            <span class="story-beat-label">Oracle</span>
+                            <span><strong class="text-ink font-semibold">37.7%</strong> redundant upper-layer depth ceiling on XSum.</span>
+                        </div>
+                        <div class="story-beat">
+                            <span class="story-beat-label">Exit Gain</span>
+                            <span><strong class="text-ink font-semibold">1 in 8 passes</strong> saved via unsupervised entity saturation.</span>
+                        </div>
+                        <div class="story-beat">
+                            <span class="story-beat-label">Quality</span>
+                            <span><strong class="text-ink font-semibold">0.20</strong> ROUGE-L delta against full-depth baseline.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Open Hairline Exhibition Chart (No rounded box wrapper!) -->
+                <div class="lg:col-span-7 border-y border-hairline py-6">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-5 mb-4 border-b border-hairline">
+                        <span class="text-xs font-mono text-ink-muted">Layerwise Representation Saturation (L1 &ndash; L16)</span>
+                        <span class="text-xs font-mono text-ink tabular-nums">ROUGE-L &Delta; 0.20</span>
+                    </div>
+
+                    <svg viewBox="0 0 560 232" class="w-full h-auto" role="img" aria-label="16-layer Transformer compute depth chart showing active layers L1 through L10 reaching the Entity-Saturation Exit threshold and layers L11 through L16 representing 37.7 percent oracle depth redundancy">
+                        <defs>
+                            <pattern id="skipped-hatch" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                                <line x1="0" y1="0" x2="0" y2="6" stroke="var(--ink-muted)" stroke-opacity="0.34" stroke-width="1.5" />
+                            </pattern>
+                        </defs>
+
+                        <line x1="36" y1="24" x2="544" y2="24" stroke="var(--hairline)" stroke-width="1" />
+                        <line x1="36" y1="74" x2="544" y2="74" stroke="var(--hairline)" stroke-width="1" />
+                        <line x1="36" y1="124" x2="544" y2="124" stroke="var(--hairline)" stroke-width="1" />
+                        <line x1="36" y1="174" x2="544" y2="174" stroke="var(--hairline-strong)" stroke-width="1" />
+
+                        <text x="28" y="28" text-anchor="end" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">1.0</text>
+                        <text x="28" y="78" text-anchor="end" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">0.7</text>
+                        <text x="28" y="128" text-anchor="end" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">0.4</text>
+                        <text x="28" y="178" text-anchor="end" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9.5">0.0</text>
+
+                        <rect x="48" y="144" width="22" height="30" rx="3" fill="var(--signal)" fill-opacity="0.48" />
+                        <rect x="79" y="130" width="22" height="44" rx="3" fill="var(--signal)" fill-opacity="0.54" />
+                        <rect x="110" y="114" width="22" height="60" rx="3" fill="var(--signal)" fill-opacity="0.60" />
+                        <rect x="141" y="99" width="22" height="75" rx="3" fill="var(--signal)" fill-opacity="0.66" />
+                        <rect x="172" y="86" width="22" height="88" rx="3" fill="var(--signal)" fill-opacity="0.72" />
+                        <rect x="203" y="74" width="22" height="100" rx="3" fill="var(--signal)" fill-opacity="0.78" />
+                        <rect x="234" y="64" width="22" height="110" rx="3" fill="var(--signal)" fill-opacity="0.84" />
+                        <rect x="265" y="55" width="22" height="119" rx="3" fill="var(--signal)" fill-opacity="0.90" />
+                        <rect x="296" y="48" width="22" height="126" rx="3" fill="var(--signal)" fill-opacity="0.95" />
+                        <rect x="327" y="42" width="22" height="132" rx="3" fill="var(--signal)" />
+
+                        <rect x="358" y="40" width="22" height="134" rx="3" fill="url(#skipped-hatch)" stroke="var(--hairline-strong)" stroke-width="1" />
+                        <rect x="389" y="38" width="22" height="136" rx="3" fill="url(#skipped-hatch)" stroke="var(--hairline-strong)" stroke-width="1" />
+                        <rect x="420" y="37" width="22" height="137" rx="3" fill="url(#skipped-hatch)" stroke="var(--hairline-strong)" stroke-width="1" />
+                        <rect x="451" y="36" width="22" height="138" rx="3" fill="url(#skipped-hatch)" stroke="var(--hairline-strong)" stroke-width="1" />
+                        <rect x="482" y="35" width="22" height="139" rx="3" fill="url(#skipped-hatch)" stroke="var(--hairline-strong)" stroke-width="1" />
+                        <rect x="513" y="35" width="22" height="139" rx="3" fill="url(#skipped-hatch)" stroke="var(--hairline-strong)" stroke-width="1" />
+
+                        <line x1="36" y1="42" x2="544" y2="42" stroke="var(--signal-teal)" stroke-width="1.25" stroke-dasharray="4 4" />
+                        <line x1="353.5" y1="18" x2="353.5" y2="174" stroke="var(--ink)" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="3 3" />
+
+                        <text x="346" y="14" text-anchor="end" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">Entity-Saturation Exit</text>
+                        <text x="362" y="14" fill="var(--signal-teal)" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">37.7% Oracle Redundancy</text>
+
+                        <text x="59" y="192" text-anchor="middle" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9">L1</text>
+                        <text x="121" y="192" text-anchor="middle" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9">L3</text>
+                        <text x="183" y="192" text-anchor="middle" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9">L5</text>
+                        <text x="245" y="192" text-anchor="middle" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9">L7</text>
+                        <text x="307" y="192" text-anchor="middle" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9">L9</text>
+                        <text x="338" y="192" text-anchor="middle" fill="var(--ink)" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">L10</text>
+                        <text x="400" y="192" text-anchor="middle" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9">L12</text>
+                        <text x="462" y="192" text-anchor="middle" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9">L14</text>
+                        <text x="524" y="192" text-anchor="middle" fill="var(--ink-muted)" font-family="JetBrains Mono, monospace" font-size="9">L16</text>
+
+                        <rect x="48" y="212" width="10" height="10" rx="2" fill="var(--signal)" />
+                        <text x="64" y="220" fill="var(--ink-secondary)" font-family="JetBrains Mono, monospace" font-size="10">Active Forward Pass</text>
+
+                        <rect x="210" y="212" width="10" height="10" rx="2" fill="url(#skipped-hatch)" stroke="var(--hairline-strong)" stroke-width="1" />
+                        <text x="226" y="220" fill="var(--ink-secondary)" font-family="JetBrains Mono, monospace" font-size="10">Prunable Upper Layers (1 in 8 Passes Saved)</text>
+                    </svg>
                 </div>
             </div>
         </section>
 
         <!-- ================================================================
-             STACK & EDUCATION
+             BAND 5 · STACK & EDUCATION
              ================================================================ -->
-        <section id="stack" class="mb-20 scroll-mt-24 reveal-init">
-            <div class="pb-3 mb-8 border-b border-hairline">
-                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Stack</h2>
+        <section id="stack" class="mb-28 scroll-mt-24 reveal-init">
+            <div class="pb-5 mb-10 border-b border-hairline flex flex-wrap items-baseline justify-between gap-2">
+                <h2 class="text-3xl sm:text-4xl font-display font-bold tracking-tight">Stack &amp; Education</h2>
+                <span class="text-xs font-mono text-ink-muted">Core Production Tooling</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
-                <div class="space-y-2">
-                    <h3 class="font-display font-bold text-ink">Mobile &amp; KMP</h3>
-                    <p class="text-ink-secondary">Kotlin &middot; Jetpack Compose &middot; Kotlin Multiplatform &middot; Coroutines &amp; Flow &middot; Hilt &middot; Room</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="space-y-2.5">
+                    <h3 class="font-display font-bold text-base text-ink">Mobile &amp; KMP</h3>
+                    <p class="text-sm text-ink-secondary leading-relaxed">Kotlin &middot; Jetpack Compose &middot; Kotlin Multiplatform &middot; Coroutines &amp; Flow &middot; Hilt &middot; Room</p>
                 </div>
-                <div class="space-y-2">
-                    <h3 class="font-display font-bold text-ink">Backend &amp; Net</h3>
-                    <p class="text-ink-secondary">Spring Boot 3.5 &middot; PostgreSQL &middot; ShedLock &middot; Bucket4j &middot; Java NIO &middot; Docker</p>
+                <div class="space-y-2.5">
+                    <h3 class="font-display font-bold text-base text-ink">Backend &amp; Net</h3>
+                    <p class="text-sm text-ink-secondary leading-relaxed">Spring Boot 3.5 &middot; PostgreSQL &middot; ShedLock &middot; Bucket4j &middot; Java NIO &middot; Docker</p>
                 </div>
-                <div class="space-y-2">
-                    <h3 class="font-display font-bold text-ink">AI &amp; Automation</h3>
-                    <p class="text-ink-secondary">Python &middot; Selenium &middot; Vision LLMs &middot; Flask &middot; MongoDB &middot; PyTorch</p>
+                <div class="space-y-2.5">
+                    <h3 class="font-display font-bold text-base text-ink">AI &amp; Automation</h3>
+                    <p class="text-sm text-ink-secondary leading-relaxed">Python &middot; Selenium &middot; Vision LLMs &middot; Flask &middot; MongoDB &middot; PyTorch</p>
                 </div>
-                <div class="space-y-2">
-                    <h3 class="font-display font-bold text-ink">Release &amp; Infra</h3>
-                    <p class="text-ink-secondary">Bash &middot; SQLite &middot; Fastlane &middot; AUR Packaging &middot; GitHub Actions &middot; Linux</p>
+                <div class="space-y-2.5">
+                    <h3 class="font-display font-bold text-base text-ink">Release &amp; Infra</h3>
+                    <p class="text-sm text-ink-secondary leading-relaxed">Bash &middot; SQLite &middot; Fastlane &middot; AUR Packaging &middot; GitHub Actions &middot; Linux</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-10 pt-8 border-t border-hairline text-sm">
                 <div class="lg:col-span-7">
                     <div class="font-mono text-xs text-ink-muted mb-1 tabular-nums">B.E. Computer Science &middot; 2023 &ndash; 2027 &middot; CGPA 7.6</div>
-                    <div class="font-display font-bold text-lg text-ink">Government College of Engineering, Srirangam</div>
+                    <div class="font-display font-bold text-xl text-ink">Government College of Engineering, Srirangam</div>
                 </div>
                 <div class="lg:col-span-5 text-xs font-mono text-ink-secondary flex flex-wrap items-center lg:justify-end gap-x-3 gap-y-1">
                     <span>Kotlin Mobile Dev</span>
-                    <span>&middot;</span>
+                    <span aria-hidden="true">&middot;</span>
                     <span>DevOps Engineering</span>
-                    <span>&middot;</span>
+                    <span aria-hidden="true">&middot;</span>
                     <span>Kubernetes Admin</span>
                 </div>
             </div>
         </section>
 
         <!-- ================================================================
-             CONTACT
+             BAND 6 · MONUMENTAL BORDERLESS CONTACT FINALE
              ================================================================ -->
-        <section id="contact" class="scroll-mt-24 reveal-init">
-            <div class="monograph-frame p-6 sm:p-10">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div class="space-y-3">
-                        <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Contact</h2>
-                        <div class="flex flex-wrap items-center gap-3">
-                            <a href="mailto:barathjack77@gmail.com"
-                                class="px-3.5 py-2 rounded-lg border border-hairline-strong bg-surface-subtle font-mono text-xs text-ink hover:border-milk transition-colors">
-                                barathjack77@gmail.com
-                            </a>
-                            <button id="copy-email-btn" type="button" class="btn-primary text-xs py-2 px-4" aria-label="Copy email address">
-                                <span id="copy-btn-text">Copy Email</span>
-                            </button>
-                            <span id="copy-live-status" class="text-xs font-mono text-ink opacity-0 transition-opacity" role="status" aria-live="polite">
-                                Copied
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-5 font-mono text-xs text-ink-secondary">
-                        <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">GitHub &nearr;</a>
-                        <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">LinkedIn &nearr;</a>
-                        <a href="tel:+918015931576" class="editorial-link hover:text-ink">+91 80159 31576</a>
+        <section id="contact" class="relative py-20 border-t border-hairline overflow-hidden scroll-mt-24 reveal-init">
+            <div class="contact-aura" aria-hidden="true"></div>
+            <div class="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+                <div class="space-y-5 max-w-2xl">
+                    <div class="text-xs font-mono text-ink-muted">Contact &middot; Open to Engineering Roles</div>
+                    <h2 class="text-3xl sm:text-5xl font-display font-bold tracking-tight leading-[1.06]">
+                        Let&rsquo;s build systems that hold up under daily load.
+                    </h2>
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a href="mailto:barathjack77@gmail.com"
+                            class="editorial-link font-mono text-base sm:text-lg font-medium text-ink">
+                            barathjack77@gmail.com
+                        </a>
+                        <button id="copy-email-btn" type="button" class="btn-primary text-xs py-2.5 px-5" aria-label="Copy email address">
+                            <span id="copy-btn-text">Copy Email</span>
+                        </button>
+                        <span id="copy-live-status" class="text-xs font-mono text-ink opacity-0 transition-opacity" role="status" aria-live="polite">
+                            Copied
+                        </span>
                     </div>
                 </div>
 
-                <footer class="mt-8 pt-5 border-t border-hairline flex items-center justify-between text-xs font-mono text-ink-muted">
-                    <p>&copy; 2026 Barath B</p>
-                    <a href="#hero" class="editorial-link hover:text-ink">Top &uarr;</a>
-                </footer>
+                <div class="flex flex-wrap items-center gap-6 font-mono text-xs text-ink-secondary">
+                    <a href="https://github.com/3DBarath" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">GitHub &nearr;</a>
+                    <a href="https://www.linkedin.com/in/3dbarath/" target="_blank" rel="noopener noreferrer" class="editorial-link hover:text-ink">LinkedIn &nearr;</a>
+                    <a href="tel:+918015931576" class="editorial-link hover:text-ink">+91 80159 31576</a>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <script src="src/main.js?v=20" type="module"></script>
+    <footer class="max-w-[1320px] mx-auto px-6 sm:px-8 pb-12">
+        <div class="pt-6 border-t border-hairline flex items-center justify-between text-xs font-mono text-ink-muted">
+            <p>&copy; 2026 Barath B &middot; Android &amp; Systems Engineering</p>
+            <a href="#hero" class="editorial-link text-ink-secondary hover:text-ink">Top &uarr;</a>
+        </div>
+    </footer>
+
+    <script src="src/main.js?v=26" type="module"></script>
 </body>
 
 </html>

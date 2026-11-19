@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConnectLnx | KMP File Transfer App: Barath</title>
+    <title>ConnectLnx — KMP File Transfer App | Barath B</title>
     <meta name="description" content="ConnectLnx is a high-performance cross-platform file transfer utility built with Kotlin Multiplatform and native Android/Linux integration.">
     <link rel="canonical" href="https://3dbarath.github.io/connectlnx/">
-    <meta property="og:title" content="ConnectLnx | High-Performance File Transfer by Barath">
+    <meta property="og:title" content="ConnectLnx | High-Performance File Transfer by Barath B">
     <meta property="og:description" content="Cross-platform file transfer utility built with KMP core and native Android/Linux integration.">
     <meta property="og:url" content="https://3dbarath.github.io/connectlnx/">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://3dbarath.github.io/assets/connectlnx.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ConnectLnx | File Transfer by Barath">
+    <meta name="twitter:title" content="ConnectLnx | File Transfer by Barath B">
     <meta name="twitter:description" content="KMP-powered cross-platform file transfer. Android & Linux native integration.">
-    <link rel="stylesheet" href="../output.css">
+    <link rel="stylesheet" href="../output.css?v=23">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon-192.png">
@@ -29,11 +29,11 @@
       "name": "ConnectLnx",
       "description": "High-performance cross-platform file transfer utility with KMP core and native Android/Linux integration.",
       "url": "https://3dbarath.github.io/connectlnx/",
-      "operatingSystem": "Android, Linux",
+      "operatingSystem": "Android, Linux, Windows",
       "applicationCategory": "UtilitiesApplication",
       "author": {
         "@type": "Person",
-        "name": "Barath",
+        "name": "Barath B",
         "url": "https://3dbarath.github.io/"
       }
     }
@@ -44,131 +44,174 @@
         }
     </script>
 </head>
-<body class="bg-brand-dark text-brand-accent overflow-x-hidden" data-project-page="connectlnx">
+<body class="bg-canvas text-ink overflow-x-clip" data-project-page="connectlnx">
 
-    <!-- Navigation -->
-    <header class="fixed top-0 w-full z-40 nav-blur">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="../" class="flex items-center gap-2 font-display font-semibold text-base tracking-tight hover:text-brand-accent transition-colors" aria-label="Back to Portfolio">
-                <span class="text-emerald-accent">&larr;</span>
-                <span>Barath</span>
+    <!-- Unified 3-Zone Top Bar -->
+    <header class="site-header fixed top-0 inset-x-0 z-40">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+            <a href="../" class="font-display font-bold text-lg tracking-tight text-ink whitespace-nowrap shrink-0 flex items-center gap-2" aria-label="Back to Portfolio">
+                <span class="font-mono text-sm text-ink-muted" aria-hidden="true">&larr;</span>
+                <span>Barath B</span>
             </a>
-            <div class="flex items-center space-x-2">
-                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus-visible:outline-2 focus-visible:outline-emerald-accent cursor-pointer rounded-md" aria-label="Toggle Theme">
-                    <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+
+            <nav id="desktop-nav" class="relative hidden md:flex items-center gap-7 h-full text-sm font-medium text-ink-secondary" aria-label="Main Navigation">
+                <div id="nav-underline" class="nav-underline-bar" aria-hidden="true"></div>
+                <a href="../#work" class="nav-link is-current hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Work</a>
+                <a href="../#experience" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Experience</a>
+                <a href="../#research" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Research</a>
+                <a href="../#stack" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Stack</a>
+                <a href="../#contact" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-2.5 shrink-0">
+                <button id="theme-toggle" data-theme-switch type="button"
+                    class="btn-outline !min-h-9 !px-2.5 !py-2 whitespace-nowrap shrink-0"
+                    aria-label="Toggle Light or Dark Theme" title="Toggle theme">
+                    <svg id="sun-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
                     </svg>
-                    <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg id="moon-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-                <button id="mobile-menu-toggle" class="md:hidden p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Open Navigation Menu" aria-expanded="false">
+                <a href="../resume.pdf" target="_blank" rel="noopener noreferrer"
+                    class="btn-primary !min-h-9 text-xs py-2 px-4 whitespace-nowrap shrink-0">
+                    Resume PDF
+                </a>
+                <button id="mobile-menu-toggle"
+                    class="md:hidden p-2.5 -mr-2 text-ink-secondary hover:text-ink cursor-pointer rounded-md"
+                    aria-label="Open Navigation Menu" aria-expanded="false">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
             </div>
         </div>
+        <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
     </header>
 
-    <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-brand-dark/98 backdrop-blur-xl hidden flex-col justify-center px-8 space-y-6">
-        <button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Close Navigation Menu">
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="flex-col justify-center px-8 space-y-6" aria-hidden="true">
+        <button id="mobile-menu-close"
+            class="absolute top-5 right-6 p-2.5 text-ink-secondary hover:text-ink cursor-pointer"
+            aria-label="Close Navigation Menu">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <a href="../" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Home</a>
-        <a href="../#projects" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Projects</a>
-        <a href="../#experience" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Experience</a>
-        <a href="../#research" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Research</a>
-        <a href="../resume.pdf" target="_blank" rel="noopener noreferrer" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors inline-flex items-center gap-1.5">Resume &nearr;</a>
-        <a href="../#contact" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Contact</a>
+        <a href="../" class="text-2xl font-display font-bold text-ink">Home</a>
+        <a href="../#work" class="text-2xl font-display font-bold text-ink">Work</a>
+        <a href="../#experience" class="text-2xl font-display font-bold text-ink">Experience</a>
+        <a href="../#research" class="text-2xl font-display font-bold text-ink">Research</a>
+        <a href="../#contact" class="text-2xl font-display font-bold text-ink">Contact</a>
+        <div class="pt-6 border-t border-hairline flex items-center justify-between gap-4">
+            <a href="../resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-primary text-xs">Resume PDF &nearr;</a>
+            <button type="button" data-theme-switch class="btn-outline text-xs">Switch Theme</button>
+        </div>
     </div>
 
-    <main class="pt-24 sm:pt-28 px-6 sm:px-8 pb-24">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-                <div class="lg:col-span-7 animate-reveal">
-                    <span class="text-xs font-mono text-emerald-accent tracking-wider uppercase mb-3 block">01 PROJECT / KMP</span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-4 tracking-tight leading-tight">ConnectLnx</h1>
-                    <p class="text-base sm:text-lg text-brand-muted mb-8 leading-relaxed max-w-xl">
-                        Bridging the gap between Linux desktops and Android devices without the friction of cloud services, third-party relays, or proprietary cables.
-                    </p>
-                    
-                    <div class="space-y-6 mb-8 border-y border-brand-border py-8">
-                        <div class="flex items-start gap-6">
-                            <span class="text-xs font-mono text-emerald-accent pt-1">01</span>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-1.5 tracking-tight">Lightning Fast Throughput</h3>
-                                <p class="text-sm text-brand-muted leading-relaxed">Custom binary protocol with multiplexed parallel TCP socket streaming for maximum local network transfer speed.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-6">
-                            <span class="text-xs font-mono text-emerald-accent pt-1">02</span>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-1.5 tracking-tight">Secure &amp; Zero-Trust</h3>
-                                <p class="text-sm text-brand-muted leading-relaxed">Direct device-to-device local network transfers with no external servers, cloud tracking, or telemetry.</p>
-                            </div>
-                        </div>
-                    </div>
+    <main class="max-w-6xl mx-auto px-6 pt-24 pb-16">
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <div class="lg:col-span-6 space-y-6">
+                <div class="text-xs font-mono text-ink-muted">03 &middot; Kotlin Multiplatform &middot; Play Store, Arch AUR &amp; Windows</div>
+                <h1 class="text-4xl sm:text-5xl font-display font-bold tracking-tight leading-[1.08]">ConnectLnx</h1>
+                <p class="text-base text-ink-secondary leading-relaxed max-w-xl">
+                    Bridging Linux desktops, Windows machines, and Android phones over local Wi-Fi at full line rate &mdash; without cloud servers, third-party relays, or proprietary cables.
+                </p>
 
-                    <div class="flex flex-col md:flex-row flex-wrap gap-4 mt-8">
-                        <a href="https://play.google.com/store/apps/details?id=org.barath.connectlnxkmp" target="_blank" class="btn btn-primary w-full md:w-auto">Get on Play Store &nearr;</a>
-                        <a href="https://connectlnx.web.app/" target="_blank" class="btn btn-outline w-full md:w-auto">Visit Website &nearr;</a>
+                <div class="story-beats text-sm text-ink-secondary">
+                    <div class="story-beat">
+                        <span class="story-beat-label">Transport</span>
+                        <span>Custom binary framing stripes chunks across 5 parallel Java NIO TCP SocketChannels to saturate local Wi-Fi bandwidth.</span>
                     </div>
-
-                    <!-- Tech Stack Ticker -->
-                    <div class="mt-10 pt-6 border-t border-brand-border grayscale group overflow-hidden">
-                        <p class="text-[10px] uppercase tracking-[0.25em] font-mono text-brand-muted mb-4 group-hover:text-brand-accent transition-colors">
-                            System Stack</p>
-                        <div class="ticker-wrapper relative flex overflow-hidden min-h-[50px] items-center">
-                            <div class="ticker-content flex items-center gap-x-16 whitespace-nowrap text-xs font-mono text-brand-muted">
-                                <span>KOTLIN MULTIPLATFORM</span>
-                                <span>JETPACK COMPOSE</span>
-                                <span>LINUX KERNEL</span>
-                                <span>TCP/UDP SOCKETS</span>
-                                <span>ZERO-TRUST SECURITY</span>
-                                <span>COROUTINES</span>
-                                <span>MULTI-MODULE ARCH</span>
-                                <!-- Duplicate -->
-                                <span>KOTLIN MULTIPLATFORM</span>
-                                <span>JETPACK COMPOSE</span>
-                                <span>LINUX KERNEL</span>
-                                <span>TCP/UDP SOCKETS</span>
-                                <span>ZERO-TRUST SECURITY</span>
-                                <span>COROUTINES</span>
-                                <span>MULTI-MODULE ARCH</span>
-                            </div>
-                        </div>
+                    <div class="story-beat">
+                        <span class="story-beat-label">Discovery</span>
+                        <span>Zero-config mDNS peer discovery with ML Kit QR pairing fallback when campus or corporate Wi-Fi isolates multicast traffic.</span>
+                    </div>
+                    <div class="story-beat">
+                        <span class="story-beat-label">Zero-Trust</span>
+                        <span>Direct peer-to-peer LAN transfers with SHA checksum header verification and zero external telemetry.</span>
                     </div>
                 </div>
-                
-                <div class="lg:col-span-5 flex items-center gap-4">
-                    <!-- Send Interface Screenshot -->
-                    <div class="card p-2 overflow-hidden border border-brand-border rounded-xl group flex-1 max-h-[440px] flex items-center justify-center bg-brand-surface/40">
-                        <img src="../assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Send Interface" data-lightbox data-project-hero="connectlnx" class="max-h-[420px] w-auto max-w-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-[1.02] cursor-zoom-in">
+
+                <div class="flex flex-wrap items-center gap-3 pt-1">
+                    <a href="https://play.google.com/store/apps/details?id=org.barath.connectlnxkmp" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        Get on Google Play &nearr;
+                    </a>
+                    <a href="https://connectlnx.web.app/" target="_blank" rel="noopener noreferrer" class="btn-outline">
+                        Visit Website &nearr;
+                    </a>
+                    <a href="https://github.com/3dbarath/ConnectLnx" target="_blank" rel="noopener noreferrer" class="btn-outline">
+                        GitHub &nearr;
+                    </a>
+                </div>
+
+                <div class="pt-5 border-t border-hairline text-xs font-mono text-ink-muted leading-relaxed">
+                    Kotlin Multiplatform &middot; Jetpack Compose &middot; Java NIO TCP &middot; mDNS &middot; ML Kit QR &middot; Arch AUR &middot; Coroutines
+                </div>
+            </div>
+
+            <div class="lg:col-span-6">
+                <div class="monograph-frame p-6 space-y-5">
+                    <div class="device-well py-8 px-4 flex items-center justify-center gap-4 sm:gap-6">
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="hardware-phone w-36 sm:w-40 cursor-zoom-in" data-img-container>
+                                <div class="hardware-screen">
+                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                    <img src="../assets/connectlnx/connectlnx_send.jpg" alt="ConnectLnx Send Interface" data-lightbox data-project-hero="connectlnx" referrerpolicy="no-referrer">
+                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Send</div>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-ink-muted">Send</span>
+                        </div>
+
+                        <div class="w-10 sm:w-12 flex flex-col items-center gap-1.5 shrink-0" aria-hidden="true">
+                            <span class="text-xs font-mono text-ink-muted">5&times;TCP</span>
+                            <div class="packet-bridge w-full"><div class="packet-pulse"></div></div>
+                        </div>
+
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="hardware-phone w-36 sm:w-40 cursor-zoom-in" data-img-container>
+                                <div class="hardware-screen">
+                                    <span class="hardware-camera" aria-hidden="true"></span>
+                                    <span class="hardware-glare" aria-hidden="true"></span>
+                                    <img src="../assets/connectlnx/connectlnx_receive.jpg" alt="ConnectLnx Receive QR Interface" data-lightbox referrerpolicy="no-referrer">
+                                    <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Receive</div>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-ink-muted">Receive</span>
+                        </div>
                     </div>
-                    <!-- Arrow -->
-                    <div class="flex-shrink-0 text-brand-muted">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                        </svg>
-                    </div>
-                    <!-- Receive Interface Screenshot -->
-                    <div class="card p-2 overflow-hidden border border-brand-border rounded-xl group flex-1 max-h-[440px] flex items-center justify-center bg-brand-surface/40">
-                        <img src="../assets/connectlnx/connectlnx_receive.jpg" alt="ConnectLnx Receive Interface" data-lightbox class="max-h-[420px] w-auto max-w-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-[1.02] cursor-zoom-in">
+
+                    <div class="border-t border-hairline pt-4">
+                        <ol class="space-y-2.5 text-sm text-ink-secondary">
+                            <li class="flex gap-3">
+                                <span class="font-mono text-xs text-ink-muted shrink-0 pt-0.5">01.</span>
+                                <span><strong class="text-ink font-medium">mDNS / QR Handshake:</strong> Peers broadcast over local subnet or pair directly via QR payload.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="font-mono text-xs text-ink-muted shrink-0 pt-0.5">02.</span>
+                                <span><strong class="text-ink font-medium">Binary Header:</strong> Negotiates file metadata, chunk offsets, and SHA checksums.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="font-mono text-xs text-ink-muted shrink-0 pt-0.5">03.</span>
+                                <span><strong class="text-ink font-medium">5&times; NIO Stream:</strong> Stripes concurrent TCP sockets in parallel for peak LAN throughput.</span>
+                            </li>
+                        </ol>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <footer class="py-16 border-t border-brand-border text-center text-xs font-mono text-brand-muted">
-        &copy; 2026 Barath &middot; Systems & Android Engineering
+    <footer class="max-w-6xl mx-auto px-6 pb-12">
+        <div class="pt-6 border-t border-hairline flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-ink-muted">
+            <p>&copy; 2026 Barath B &middot; Android &amp; Systems Engineering</p>
+            <a href="../#work" class="editorial-link text-ink-secondary hover:text-ink">&larr; Back to Selected Work</a>
+        </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="../src/main.js?v=15"></script>
+    <script src="../src/main.js?v=23" type="module"></script>
 </body>
 </html>

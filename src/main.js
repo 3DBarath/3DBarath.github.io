@@ -1,18 +1,26 @@
 /**
- * Barath B — Obsidian & White-Milk Portfolio Script
+ * Barath B — Android & Systems Engineer Portfolio Script
+ * Scroll-Driven Exhibition Choreography + Interactive Engineering Artifacts
  */
 
+import { initAtmosphere, setAtmosphereChapter } from './visual-modes.js';
+
+let setExpenseFanFocus = null;
+let activateConnectLnxStep = null;
+let activateAztroxView = null;
+
 document.addEventListener('DOMContentLoaded', () => {
+  initAtmosphere();
   initThemeToggle();
   initNavUnderline();
   initScrollProgressAndSpy();
   initMobileMenu();
   preloadPortfolioFrames();
-  initHeroArtifactStage();
-  initScrollytellingStage();
   initGallerySwitchers();
-  initConnectLnxProtocolStepper();
-  initExperienceTraceTabs();
+  activateConnectLnxStep = initConnectLnxProtocolStepper();
+  activateAztroxView = initAztroxStageSwitcher();
+  setExpenseFanFocus = initExpenseFanStage();
+  initScrollCinema();
   initScrollObserver();
   initEmailCopy();
   initImageFallbacks();
@@ -80,7 +88,7 @@ function initThemeToggle() {
               ],
             },
             {
-              duration: 460,
+              duration: 420,
               easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
               fill: 'both',
               pseudoElement: '::view-transition-new(root)',
@@ -127,7 +135,9 @@ function initScrollProgressAndSpy() {
   const navLinks = Array.from(document.querySelectorAll('#desktop-nav .nav-link'));
   const sections = navLinks
     .map((link) => {
-      const id = link.getAttribute('href')?.replace('#', '');
+      const href = link.getAttribute('href') || '';
+      if (!href.startsWith('#')) return null;
+      const id = href.slice(1);
       const el = id ? document.getElementById(id) : null;
       return el ? { link, el } : null;
     })
@@ -145,7 +155,7 @@ function initScrollProgressAndSpy() {
     }
 
     if (sections.length) {
-      const marker = window.scrollY + 140;
+      const marker = window.scrollY + 160;
       let activeLink = null;
       for (const item of sections) {
         if (item.el.offsetTop <= marker) activeLink = item.link;
@@ -202,52 +212,6 @@ function initMobileMenu() {
   });
 }
 
-function initHeroArtifactStage() {
-  const tabs = document.querySelectorAll('[data-hero-tab]');
-  const panels = document.querySelectorAll('[data-hero-panel]');
-  const caption = document.getElementById('hero-stage-caption');
-  const link = document.getElementById('hero-stage-link');
-  if (!tabs.length || !panels.length) return;
-
-  const meta = {
-    hostel: {
-      caption: 'Kotlin · Jetpack Compose · Spring Boot 3.5 · PostgreSQL',
-      href: '#work-hostel',
-    },
-    connectlnx: {
-      caption: 'Kotlin Multiplatform · Java NIO · mDNS · ML Kit QR',
-      href: '#work-connectlnx',
-    },
-    aztrox: {
-      caption: 'Bash 5.3 · JDK 17 · fastlane · SQLite · gh · ShellCheck',
-      href: '#work-aztrox',
-    },
-  };
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-hero-tab');
-
-      tabs.forEach((t) => {
-        const active = t === tab;
-        t.classList.toggle('is-active', active);
-        t.setAttribute('aria-selected', String(active));
-      });
-
-      panels.forEach((panel) => {
-        const match = panel.getAttribute('data-hero-panel') === target;
-        panel.classList.toggle('hidden', !match);
-        panel.classList.toggle('flex', match);
-      });
-
-      if (target && meta[target]) {
-        if (caption) caption.textContent = meta[target].caption;
-        if (link) link.setAttribute('href', meta[target].href);
-      }
-    });
-  });
-}
-
 const _decodedFrameCache = new Set();
 
 function preloadPortfolioFrames() {
@@ -263,6 +227,7 @@ function preloadPortfolioFrames() {
         'assets/smartexpense/expense_1.jpg',
         'assets/smartexpense/expense_3.jpg',
         'assets/smartexpense/expense_4.jpg',
+        '/assets/aistudio/image_3d9ae119.png',
       ]
     : [];
 
@@ -272,7 +237,6 @@ function preloadPortfolioFrames() {
 
   const uniqueUrls = Array.from(new Set([...priorityUrls, ...domUrls])).filter(Boolean);
 
-  // Warm browser fetch + GPU bitmap decode immediately after initial paint
   const warmAll = () => {
     uniqueUrls.forEach((url) => {
       if (_decodedFrameCache.has(url)) return;
@@ -293,14 +257,6 @@ function preloadPortfolioFrames() {
   }
 }
 
-const HOSTEL_LABELS = ['Dashboard', 'Weekly Menu', 'Food Analytics'];
-const EXPENSE_LABELS = ['Balance Ledger', 'Canvas Charts', 'Categories'];
-const CONNECTLNX_DESCRIPTIONS = [
-  'Zero-config mDNS peer discovery with ML Kit QR pairing fallback on restricted networks.',
-  'Compact binary frame negotiates metadata, SHA checksum headers, and chunk offsets.',
-  'Payload stripes across 5 concurrent Java NIO SocketChannels over local LAN.',
-];
-
 function activateFrameGroup(group, index) {
   const idxStr = String(index);
 
@@ -316,213 +272,9 @@ function activateFrameGroup(group, index) {
     btn.classList.toggle('is-active', active);
     btn.setAttribute('aria-selected', String(active));
   });
-
-  const kicker = document.getElementById('stage-kicker');
-  const activeStep = document.querySelector('.story-step.is-active-beat')?.getAttribute('data-story-step');
-  if (kicker && group === 'hostel' && activeStep === '01') {
-    kicker.textContent = `01 · GCES Hostel · ${HOSTEL_LABELS[index] || 'Dashboard'}`;
-  }
-  if (kicker && group === 'expense' && activeStep === '05') {
-    kicker.textContent = `05 · Smart Expense Tracker · ${EXPENSE_LABELS[index] || 'Balance Ledger'}`;
-  }
-}
-
-function activateConnectLnxStep(index) {
-  const idx = Math.max(0, Math.min(CONNECTLNX_DESCRIPTIONS.length - 1, Number(index) || 0));
-  const idxStr = String(idx);
-
-  document.querySelectorAll('[data-sync-group="connectlnx"][data-protocol-index]').forEach((btn) => {
-    const active = btn.getAttribute('data-protocol-index') === idxStr;
-    btn.classList.toggle('is-active', active);
-    btn.setAttribute('aria-selected', String(active));
-  });
-
-  document.querySelectorAll('[data-protocol-detail="connectlnx"]').forEach((detail) => {
-    if (detail.textContent.trim() === CONNECTLNX_DESCRIPTIONS[idx]) return;
-    detail.textContent = CONNECTLNX_DESCRIPTIONS[idx];
-    detail.classList.remove('stage-view-enter');
-    void detail.offsetWidth;
-    detail.classList.add('stage-view-enter');
-  });
-}
-
-function initScrollytellingStage() {
-  const steps = Array.from(document.querySelectorAll('[data-story-step]'));
-  const navButtons = Array.from(document.querySelectorAll('[data-story-nav]'));
-  const views = Array.from(document.querySelectorAll('[data-stage-view]'));
-  const stageWrap = document.getElementById('work-sticky-stage');
-  const subProgressBar = document.getElementById('stage-subprogress');
-  const kicker = document.getElementById('stage-kicker');
-  const caption = document.getElementById('stage-caption');
-  const link = document.getElementById('stage-link');
-  if (!steps.length || !views.length) return;
-
-  const meta = {
-    '01': {
-      kicker: '01 · GCES Hostel · Dashboard',
-      caption: 'Kotlin · Jetpack Compose · :app / :common / :server',
-      href: 'gceshostel/',
-      label: 'Open Case Study →',
-      display: 'flex',
-    },
-    '02': {
-      kicker: '02 · Production Scale · Midnight & Rush',
-      caption: 'Spring Boot 3.5 · ShedLock JDBC · Bucket4j · PostgreSQL',
-      href: 'gceshostel/',
-      label: 'Screens & Specs →',
-      display: 'grid',
-    },
-    '03': {
-      kicker: '03 · ConnectLnx · 5× Java NIO TCP',
-      caption: 'Kotlin Multiplatform · mDNS · ML Kit QR Pairing',
-      href: 'connectlnx/',
-      label: 'Technical Breakdown →',
-      display: 'flex',
-    },
-    '04': {
-      kicker: '04 · aztrox-release · 9 Products',
-      caption: 'Bash 5.3 · fastlane · SQLite history.db · LIFO Rollbacks',
-      href: '',
-      label: '',
-      display: 'block',
-    },
-    '05': {
-      kicker: '05 · Smart Expense Tracker · Balance Ledger',
-      caption: 'Room + Flow · Compose Canvas · WorkManager',
-      href: 'smart-expense-tracker/',
-      label: '11-Screen Walkthrough →',
-      display: 'flex',
-    },
-  };
-
-  let currentId = null;
-
-  function setStage(id) {
-    if (!id || id === currentId) return;
-    currentId = id;
-
-    steps.forEach((step) => {
-      step.classList.toggle('is-active-beat', step.getAttribute('data-story-step') === id);
-    });
-
-    navButtons.forEach((btn) => {
-      const active = btn.getAttribute('data-story-nav') === id;
-      btn.classList.toggle('is-active', active);
-      btn.setAttribute('aria-selected', String(active));
-    });
-
-    views.forEach((view) => {
-      const match = view.getAttribute('data-stage-view') === id;
-      const mode = meta[id]?.display || 'flex';
-      view.classList.toggle('hidden', !match);
-      view.classList.remove('flex', 'grid', 'block', 'stage-view-enter');
-      if (match) {
-        view.classList.add(mode, 'stage-view-enter');
-      }
-    });
-
-    if (meta[id]) {
-      if (kicker) kicker.textContent = meta[id].kicker;
-      if (caption) caption.textContent = meta[id].caption;
-      if (link) {
-        link.classList.toggle('hidden', !meta[id].href);
-        if (meta[id].href) {
-          link.setAttribute('href', meta[id].href);
-          link.textContent = meta[id].label;
-        }
-      }
-    }
-  }
-
-  const lastSubBucket = {};
-
-  function activateSubStep(id, bucket) {
-    if (lastSubBucket[id] === bucket) return;
-    lastSubBucket[id] = bucket;
-
-    if (id === '01') activateFrameGroup('hostel', bucket);
-    if (id === '03') activateConnectLnxStep(bucket);
-    if (id === '05') activateFrameGroup('expense', bucket);
-  }
-
-  let ticking = false;
-  function updateByScroll() {
-    ticking = false;
-    const isDesktop = window.innerWidth >= 1024;
-    let focalY;
-
-    if (isDesktop) {
-      focalY = window.innerHeight * 0.42;
-    } else {
-      const stageBottom = stageWrap ? stageWrap.getBoundingClientRect().bottom : 290;
-      const readingSpace = Math.max(120, window.innerHeight - stageBottom);
-      focalY = stageBottom + Math.min(110, readingSpace * 0.30);
-    }
-
-    let closest = steps[0];
-    let closestDist = Infinity;
-
-    for (const step of steps) {
-      const rect = step.getBoundingClientRect();
-      const center = rect.top + rect.height * 0.35;
-      const dist = Math.abs(center - focalY);
-      if (dist < closestDist) {
-        closestDist = dist;
-        closest = step;
-      }
-    }
-
-    if (closest) {
-      const id = closest.getAttribute('data-story-step');
-      setStage(id);
-
-      const rect = closest.getBoundingClientRect();
-      const progress = Math.min(0.999, Math.max(0, (focalY - rect.top) / Math.max(1, rect.height)));
-      if (subProgressBar) {
-        subProgressBar.style.transform = `scaleX(${progress.toFixed(3)})`;
-      }
-
-      if (id === '01' || id === '03' || id === '05') {
-        const bucket = progress < 0.34 ? 0 : progress < 0.67 ? 1 : 2;
-        activateSubStep(id, bucket);
-      }
-    }
-  }
-
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(updateByScroll);
-      }
-    },
-    { passive: true }
-  );
-
-  navButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const id = btn.getAttribute('data-story-nav');
-      const targetStep = steps.find((s) => s.getAttribute('data-story-step') === id);
-      if (targetStep) {
-        const isDesktop = window.innerWidth >= 1024;
-        const clearance = isDesktop ? 104 : (stageWrap ? stageWrap.offsetHeight : 230) + 74;
-        const y = targetStep.getBoundingClientRect().top + window.scrollY - clearance;
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-        setStage(id);
-      }
-    });
-  });
-
-  setStage('01');
-  updateByScroll();
-  if (window.location.hash) {
-    requestAnimationFrame(updateByScroll);
-  }
 }
 
 function initGallerySwitchers() {
-  // Primary zero-latency synced layered switchers
   document.querySelectorAll('[data-sync-group][data-frame-index]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const group = btn.getAttribute('data-sync-group');
@@ -530,106 +282,421 @@ function initGallerySwitchers() {
       if (group) activateFrameGroup(group, idx);
     });
   });
-
-  // Legacy fallback for subpages if any use data-gallery-target
-  document.querySelectorAll('[data-gallery-target]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-gallery-target');
-      const imgSrc = btn.getAttribute('data-img');
-      const imgAlt = btn.getAttribute('data-alt');
-      if (!target || !imgSrc) return;
-
-      const stageImg = document.getElementById(`${target}-stage-img`);
-      if (stageImg && stageImg.getAttribute('src') !== imgSrc) {
-        stageImg.src = imgSrc;
-        if (imgAlt) stageImg.alt = imgAlt;
-        stageImg.closest('[data-img-container]')?.classList.remove('img-fallback-active');
-      }
-
-      document.querySelectorAll(`[data-gallery-target="${target}"]`).forEach((sibling) => {
-        sibling.classList.toggle('is-active', sibling === btn);
-      });
-    });
-  });
 }
+
+const CONNECTLNX_PHASES = [
+  {
+    top: 'mDNS / QR PAIR',
+    bottom: 'Zero-Config LAN',
+    detail: 'Zero-config mDNS peer discovery across local subnets, falling back to ML Kit QR pairing when campus Wi-Fi isolates multicast.',
+  },
+  {
+    top: 'HDR · 0xC1 FRAME',
+    bottom: 'SHA-256 Checksum',
+    detail: 'Compact binary frame negotiates file metadata, SHA-256 checksum headers, and chunk offsets before opening data lanes.',
+  },
+  {
+    top: '5× NIO TCP',
+    bottom: 'Parallel Striping',
+    detail: 'Payload stripes across 5 concurrent Java NIO SocketChannels, saturating full local Wi-Fi bandwidth with zero cloud relay.',
+  },
+];
 
 function initConnectLnxProtocolStepper() {
-  document.querySelectorAll('[data-sync-group="connectlnx"][data-protocol-index]').forEach((btn) => {
+  const buttons = document.querySelectorAll('[data-sync-group="connectlnx"][data-protocol-index]');
+  if (!buttons.length) return () => {};
+
+  const stageEl = document.getElementById('connectlnx-stage');
+  const topLabel = document.getElementById('connectlnx-bridge-top');
+  const bottomLabel = document.getElementById('connectlnx-bridge-bottom');
+
+  function setStep(idx) {
+    const safeIdx = Math.max(0, Math.min(CONNECTLNX_PHASES.length - 1, Number(idx) || 0));
+    const idxStr = String(safeIdx);
+    const phase = CONNECTLNX_PHASES[safeIdx];
+
+    if (stageEl) stageEl.setAttribute('data-proto-phase', idxStr);
+    if (topLabel) topLabel.textContent = phase.top;
+    if (bottomLabel) bottomLabel.textContent = phase.bottom;
+
+    buttons.forEach((b) => {
+      const active = b.getAttribute('data-protocol-index') === idxStr;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', String(active));
+    });
+
+    document.querySelectorAll('[data-protocol-detail="connectlnx"]').forEach((detail) => {
+      detail.textContent = phase.detail;
+      detail.classList.remove('stage-view-enter');
+      void detail.offsetWidth;
+      detail.classList.add('stage-view-enter');
+    });
+  }
+
+  buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const idx = Number(btn.getAttribute('data-protocol-index') || 0);
-      activateConnectLnxStep(idx);
+      setStep(Number(btn.getAttribute('data-protocol-index') || 0));
     });
   });
+
+  setStep(0);
+  return setStep;
 }
 
-function initExperienceTraceTabs() {
-  const tabs = Array.from(document.querySelectorAll('[data-exp-tab]'));
-  const panels = Array.from(document.querySelectorAll('[data-exp-panel]'));
-  if (!tabs.length || !panels.length) return;
+/* ==========================================================================
+   Interactive 3-View Stage Switcher (aztrox-release CLI Exhibition)
+   ========================================================================== */
+const AZTROX_VIEWS = [
+  'Real CachyOS dashboard · 136 runs in history.db',
+  'Preflight · Parallel Gradle · 4-surface fan-out',
+  'LIFO EXIT rollbacks · Telegram QA · 3-node probes',
+];
 
-  function selectExpTab(tab) {
-    const target = tab.getAttribute('data-exp-tab');
+function initAztroxStageSwitcher() {
+  const stage = document.getElementById('aztrox-stage');
+  const tabs = document.querySelectorAll('[data-sync-group="aztrox"][data-aztrox-index]');
+  const panels = document.querySelectorAll('[data-aztrox-panel]');
+  const detailEl = document.getElementById('aztrox-stage-detail');
+  if (!tabs.length || !panels.length) return () => {};
 
-    tabs.forEach((t) => {
-      const active = t === tab;
-      t.classList.toggle('is-active', active);
-      t.setAttribute('aria-selected', String(active));
+  function setView(idx) {
+    const safeIdx = Math.max(0, Math.min(AZTROX_VIEWS.length - 1, Number(idx) || 0));
+    const idxStr = String(safeIdx);
+
+    if (stage) stage.setAttribute('data-aztrox-view', idxStr);
+
+    tabs.forEach((tab) => {
+      const active = tab.getAttribute('data-aztrox-index') === idxStr;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', String(active));
     });
 
     panels.forEach((panel) => {
-      const match = panel.getAttribute('data-exp-panel') === target;
+      const match = panel.getAttribute('data-aztrox-panel') === idxStr;
       panel.classList.toggle('hidden', !match);
-      panel.classList.remove('stage-view-enter');
       if (match) {
+        panel.classList.remove('stage-view-enter');
         void panel.offsetWidth;
         panel.classList.add('stage-view-enter');
       }
     });
+
+    if (detailEl && AZTROX_VIEWS[safeIdx]) {
+      detailEl.textContent = AZTROX_VIEWS[safeIdx];
+    }
   }
 
   tabs.forEach((tab) => {
-    tab.addEventListener('click', () => selectExpTab(tab));
+    tab.addEventListener('click', () => {
+      setView(Number(tab.getAttribute('data-aztrox-index') || 0));
+    });
   });
 
-  const runway = document.getElementById('experience-runway');
-  const stickyEl = document.getElementById('experience-sticky');
-  const expProgress = document.getElementById('exp-subprogress');
-  if (!runway || !stickyEl) return;
+  setView(0);
+  return setView;
+}
 
-  let lastExpBucket = 0;
-  let ticking = false;
+/* ==========================================================================
+   Interactive 3-Screen Fanned Hardware Stage (Smart Expense Tracker)
+   ========================================================================== */
+function initExpenseFanStage() {
+  const stage = document.getElementById('expense-fan-stage');
+  if (!stage) return () => {};
 
-  const updateExpScroll = () => {
-    ticking = false;
-    const rRect = runway.getBoundingClientRect();
-    const stickyTop = window.innerWidth >= 1024 ? 112 : 80;
-    const travel = Math.max(1, runway.offsetHeight - stickyEl.offsetHeight);
-    const progress = Math.min(0.999, Math.max(0, (stickyTop - rRect.top) / travel));
-
-    if (expProgress) {
-      expProgress.style.transform = `scaleX(${progress.toFixed(3)})`;
-    }
-
-    const bucket = progress < 0.33 ? 0 : progress < 0.66 ? 1 : 2;
-
-    if (bucket !== lastExpBucket) {
-      lastExpBucket = bucket;
-      const targetTab = tabs[bucket];
-      if (targetTab) selectExpTab(targetTab);
-    }
+  const cards = Array.from(stage.querySelectorAll('[data-fan-card]'));
+  const captionEl = document.getElementById('expense-fan-caption');
+  const captions = {
+    '0': 'Room Flow reactive balance & daily limits',
+    '1': '60fps Jetpack Compose Canvas analytics',
+    '2': 'On-device spending breakdown by category',
   };
+
+  function setFocus(focusIdx) {
+    stage.setAttribute('data-center', String(focusIdx));
+    cards.forEach((card) => {
+      const idx = Number(card.getAttribute('data-fan-card'));
+      card.classList.remove('fan-left', 'fan-center', 'fan-right');
+      if (idx === focusIdx) {
+        card.classList.add('fan-center');
+      } else if ((idx + 1) % 3 === focusIdx) {
+        card.classList.add('fan-left');
+      } else {
+        card.classList.add('fan-right');
+      }
+    });
+
+    if (captionEl && captions[String(focusIdx)]) {
+      captionEl.textContent = captions[String(focusIdx)];
+    }
+
+    document.querySelectorAll('[data-fan-select]').forEach((btn) => {
+      const active = Number(btn.getAttribute('data-fan-select')) === focusIdx;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', String(active));
+    });
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      const idx = Number(card.getAttribute('data-fan-card'));
+      if (!card.classList.contains('fan-center')) {
+        e.stopPropagation();
+        e.preventDefault();
+        setFocus(idx);
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-fan-select]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setFocus(Number(btn.getAttribute('data-fan-select') || 0));
+    });
+  });
+
+  setFocus(0);
+  return setFocus;
+}
+
+/* ==========================================================================
+   Scroll-Driven Cinema Exhibition Controller
+   Automatically morphs exhibition panels, hardware screens, active tabs,
+   and WebGL shader hue as the reader scrolls through work chapters.
+   ========================================================================== */
+function initScrollCinema() {
+  const cinemaRoot = document.getElementById('work-cinema');
+  const stage = document.getElementById('cinema-stage');
+  const beats = Array.from(document.querySelectorAll('[data-cinema-beat]'));
+  const panels = Array.from(document.querySelectorAll('[data-cinema-panel]'));
+  const navButtons = Array.from(document.querySelectorAll('[data-cinema-nav]'));
+  const labelEl = document.getElementById('cinema-stage-label');
+  const captionEl = document.getElementById('cinema-stage-caption');
+  const ctaEl = document.getElementById('cinema-stage-cta');
+
+  if (!cinemaRoot || !stage || !beats.length || !panels.length) return;
+
+  const BEAT_CONFIG = {
+    '01a': {
+      chapter: '01',
+      label: '01 / 05 · GCES Hostel · Home Dashboard',
+      caption: 'Kotlin Multi-Module · Jetpack Compose · 1,200 DAU',
+      href: 'gceshostel/',
+      cta: 'Open Case Study →',
+      onEnter: () => activateFrameGroup('hostel', 0),
+    },
+    '01b': {
+      chapter: '01',
+      label: '01 / 05 · GCES Hostel · Meal Planner & Rollover',
+      caption: 'Spring Boot 3.5 · ShedLock JDBC · Bucket4j <100ms P95',
+      href: 'gceshostel/',
+      cta: 'Open Case Study →',
+      onEnter: () => activateFrameGroup('hostel', 1),
+    },
+    '01c': {
+      chapter: '01',
+      label: '01 / 05 · GCES Hostel · Live Mess Menu',
+      caption: 'Offline Room Cache · Zero-Update Weekly Schedule Sync',
+      href: 'gceshostel/',
+      cta: 'Open Case Study →',
+      onEnter: () => activateFrameGroup('hostel', 2),
+    },
+    '01d': {
+      chapter: '01',
+      label: '01 / 05 · GCES Hostel · Food & Demand Stats',
+      caption: 'PostgreSQL Forecast Views · Real-Time Kitchen Headcounts',
+      href: 'gceshostel/',
+      cta: 'Open Case Study →',
+      onEnter: () => activateFrameGroup('hostel', 3),
+    },
+    '02a': {
+      chapter: '02',
+      label: '02 / 05 · ConnectLnx · 01. mDNS & QR Discovery',
+      caption: 'Kotlin Multiplatform · Play Store, Arch AUR & Windows',
+      href: 'connectlnx/',
+      cta: 'Technical Breakdown →',
+      onEnter: () => activateConnectLnxStep?.(0),
+    },
+    '02b': {
+      chapter: '02',
+      label: '02 / 05 · ConnectLnx · 02. Binary Header Handshake',
+      caption: 'Compact Binary Framing · Chunk Map & SHA-256 Digests',
+      href: 'connectlnx/',
+      cta: 'Technical Breakdown →',
+      onEnter: () => activateConnectLnxStep?.(1),
+    },
+    '02c': {
+      chapter: '02',
+      label: '02 / 05 · ConnectLnx · 03. 5× Java NIO Stream',
+      caption: 'Parallel Striping Across 5 Non-Blocking TCP Channels',
+      href: 'connectlnx/',
+      cta: 'Technical Breakdown →',
+      onEnter: () => activateConnectLnxStep?.(2),
+    },
+    '03a': {
+      chapter: '03',
+      label: '03 / 05 · aztrox-release · Live TUI Dashboard',
+      caption: 'Bash 5.3 · 9 Products · 136 Runs in SQLite history.db',
+      href: '#work-aztrox-pipeline',
+      cta: 'Inspect Pipeline ↓',
+      onEnter: () => activateAztroxView?.(0),
+    },
+    '03b': {
+      chapter: '03',
+      label: '03 / 05 · aztrox-release · 4-Surface Pipeline',
+      caption: 'Play Store · GitHub + Arch AUR · Firebase · Render & HF',
+      href: '#work-aztrox-safety',
+      cta: 'Safety & Remote QA ↓',
+      onEnter: () => activateAztroxView?.(1),
+    },
+    '03c': {
+      chapter: '03',
+      label: '03 / 05 · aztrox-release · Rollbacks & Remote QA',
+      caption: 'LIFO EXIT Trap · SQLite Resume · Telegram Bot API',
+      href: '#work-expense',
+      cta: 'Next: Expense Tracker ↓',
+      onEnter: () => activateAztroxView?.(2),
+    },
+    '04a': {
+      chapter: '04',
+      label: '04 / 05 · Smart Expense · Room Flow Ledger',
+      caption: '100% On-Device SQLite · Biometric Lock · Zero Cloud',
+      href: 'smart-expense-tracker/',
+      cta: '11-Screen Walkthrough →',
+      onEnter: () => setExpenseFanFocus?.(0),
+    },
+    '04b': {
+      chapter: '04',
+      label: '04 / 05 · Smart Expense · Compose Canvas Charts',
+      caption: '60fps Custom Native Drawing · Tactile Scrub Analytics',
+      href: 'smart-expense-tracker/',
+      cta: '11-Screen Walkthrough →',
+      onEnter: () => setExpenseFanFocus?.(1),
+    },
+    '04c': {
+      chapter: '04',
+      label: '04 / 05 · Smart Expense · Category Guardrails',
+      caption: 'On-Device Category Breakdown · WorkManager Budget Alerts',
+      href: 'smart-expense-tracker/',
+      cta: '11-Screen Walkthrough →',
+      onEnter: () => setExpenseFanFocus?.(2),
+    },
+    '05': {
+      chapter: '05',
+      label: '05 / 05 · Stockfish Interop & Arcade Suite',
+      caption: 'C++ GDExtension · Godot Engine · Depth 22 at 60fps',
+      href: 'chessgame/',
+      cta: 'Chess Engine Case Study →',
+      onEnter: () => {},
+    },
+  };
+
+  let currentBeatId = null;
+  let currentChapter = null;
+
+  function activateBeat(beatId, { force = false } = {}) {
+    if (!force && beatId === currentBeatId) return;
+    const cfg = BEAT_CONFIG[beatId];
+    if (!cfg) return;
+
+    currentBeatId = beatId;
+    const chapterChanged = cfg.chapter !== currentChapter;
+    currentChapter = cfg.chapter;
+
+    stage.setAttribute('data-beat', beatId);
+    stage.setAttribute('data-chapter', cfg.chapter);
+
+    beats.forEach((beat) => {
+      beat.classList.toggle('is-active', beat.getAttribute('data-cinema-beat') === beatId);
+    });
+
+    navButtons.forEach((btn) => {
+      const active = btn.getAttribute('data-cinema-nav') === cfg.chapter;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', String(active));
+    });
+
+    if (chapterChanged || force) {
+      panels.forEach((panel) => {
+        const match = panel.getAttribute('data-cinema-panel') === cfg.chapter;
+        panel.classList.toggle('is-active', match);
+        panel.setAttribute('aria-hidden', String(!match));
+      });
+    }
+
+    if (labelEl) labelEl.textContent = cfg.label;
+    if (captionEl) captionEl.textContent = cfg.caption;
+    if (ctaEl) {
+      ctaEl.setAttribute('href', cfg.href);
+      ctaEl.textContent = cfg.cta;
+    }
+
+    cfg.onEnter?.();
+
+    // Update ambient WebGL contour hue if user is inside work section
+    const cinemaRect = cinemaRoot.getBoundingClientRect();
+    if (cinemaRect.top < window.innerHeight * 0.65 && cinemaRect.bottom > window.innerHeight * 0.25) {
+      setAtmosphereChapter(cfg.chapter);
+    }
+  }
+
+  // Click chapter tabs in sticky stage header to jump smoothly + activate immediately
+  navButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const ch = btn.getAttribute('data-cinema-nav');
+      const targetBeat = beats.find((b) => b.getAttribute('data-cinema-chapter') === ch);
+      if (targetBeat) {
+        const beatId = targetBeat.getAttribute('data-cinema-beat');
+        if (beatId) activateBeat(beatId, { force: true });
+        targetBeat.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+
+  // Scroll-linked beat resolution (rAF throttled, zero jank)
+  let rafPending = false;
+  function evaluateScroll() {
+    rafPending = false;
+    const cinemaRect = cinemaRoot.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    // Reset shader tint back to Hero sapphire when scrolled to top
+    if (window.scrollY < vh * 0.45) {
+      setAtmosphereChapter('hero');
+    } else if (cinemaRect.bottom < vh * 0.25) {
+      setAtmosphereChapter('02');
+    }
+
+    const focusY = vh * 0.44;
+    let closestBeat = beats[0];
+    let minDist = Infinity;
+
+    for (const beat of beats) {
+      const rect = beat.getBoundingClientRect();
+      const beatCenter = rect.top + rect.height * 0.45;
+      const dist = Math.abs(beatCenter - focusY);
+      if (dist < minDist) {
+        minDist = dist;
+        closestBeat = beat;
+      }
+    }
+
+    const beatId = closestBeat?.getAttribute('data-cinema-beat');
+    if (beatId) activateBeat(beatId);
+  }
 
   window.addEventListener(
     'scroll',
     () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(updateExpScroll);
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(evaluateScroll);
       }
     },
     { passive: true }
   );
-  updateExpScroll();
+
+  // Initialize immediately
+  activateBeat('01a', { force: true });
+  evaluateScroll();
 }
 
 function initScrollObserver() {
@@ -653,7 +720,7 @@ function initScrollObserver() {
         }
       });
     },
-    { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    { threshold: 0.06, rootMargin: '0px 0px -24px 0px' }
   );
 
   revealElements.forEach((el) => observer.observe(el));
@@ -698,16 +765,21 @@ function initLightbox() {
   const images = document.querySelectorAll('[data-lightbox]');
   if (!images.length) return;
 
+  let lastTrigger = null;
   let overlay = document.getElementById('site-lightbox');
+
   if (!overlay) {
     overlay = document.createElement('div');
     overlay.id = 'site-lightbox';
     overlay.className = 'site-lightbox-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Enlarged screenshot preview');
     overlay.innerHTML = `
       <div class="site-lightbox-content relative max-w-4xl max-h-[90vh] flex flex-col items-center">
-        <button id="lightbox-close-btn" type="button" class="absolute -top-10 right-0 text-white/85 hover:text-white text-sm font-mono p-2 cursor-pointer transition-colors" aria-label="Close preview">Close &times;</button>
-        <img id="lightbox-img" src="" alt="Enlarged project preview" referrerpolicy="no-referrer" class="max-w-full max-h-[82vh] rounded-xl border border-white/15 shadow-2xl object-contain">
-        <p id="lightbox-caption" class="text-xs text-white/75 font-mono mt-3 text-center max-w-xl"></p>
+        <button id="lightbox-close-btn" type="button" class="absolute -top-11 right-0 text-white/90 hover:text-white text-sm font-mono py-2 px-3 cursor-pointer transition-colors" aria-label="Close preview">Close &times;</button>
+        <img id="lightbox-img" alt="Enlarged project preview" referrerpolicy="no-referrer" class="hidden max-w-full max-h-[80vh] rounded-xl border border-white/15 shadow-2xl object-contain">
+        <p id="lightbox-caption" class="text-xs text-white/85 font-mono mt-3 text-center max-w-xl"></p>
       </div>
     `;
     document.body.appendChild(overlay);
@@ -715,6 +787,14 @@ function initLightbox() {
     function closeLightbox() {
       overlay.classList.remove('active');
       document.body.style.overflow = '';
+      const targetImg = document.getElementById('lightbox-img');
+      if (targetImg) {
+        targetImg.classList.add('hidden');
+        targetImg.removeAttribute('src');
+      }
+      if (lastTrigger && typeof lastTrigger.focus === 'function') {
+        lastTrigger.focus();
+      }
     }
 
     overlay.addEventListener('click', (e) => {
@@ -728,16 +808,40 @@ function initLightbox() {
     });
   }
 
+  function openLightbox(img) {
+    lastTrigger = img;
+    const src = img.getAttribute('data-large') || img.src;
+    const caption = img.getAttribute('data-caption') || img.alt || '';
+    const targetImg = document.getElementById('lightbox-img');
+    const targetCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('lightbox-close-btn');
+    if (targetImg) {
+      targetImg.src = src;
+      targetImg.classList.remove('hidden');
+    }
+    if (targetCaption) targetCaption.textContent = caption;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+
   images.forEach((img) => {
-    img.addEventListener('click', () => {
-      const src = img.getAttribute('data-large') || img.src;
-      const caption = img.alt || '';
-      const targetImg = document.getElementById('lightbox-img');
-      const targetCaption = document.getElementById('lightbox-caption');
-      if (targetImg) targetImg.src = src;
-      if (targetCaption) targetCaption.textContent = caption;
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
+    if (!img.hasAttribute('tabindex')) {
+      img.setAttribute('tabindex', '0');
+    }
+    img.addEventListener('click', (e) => {
+      const fanParent = img.closest('[data-fan-card]');
+      if (fanParent && !fanParent.classList.contains('fan-center')) {
+        return;
+      }
+      e.stopPropagation();
+      openLightbox(img);
+    });
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(img);
+      }
     });
   });
 }

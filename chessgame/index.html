@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Chess | Strategic Systems: Barath</title>
-    <meta name="description" content="A premium, privacy-first chess experience built with native mathematical logic and minimalist design.">
-    <link rel="stylesheet" href="../output.css">
+    <title>Ultimate Chess — Stockfish GDExtension | Barath B</title>
+    <meta name="description" content="C++ GDExtension bindings embedding the Stockfish chess engine natively inside Godot for 60fps on-device strategic play.">
+    <link rel="stylesheet" href="../output.css?v=23">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,134 +16,137 @@
         }
     </script>
 </head>
-<body class="bg-brand-dark text-brand-accent overflow-x-hidden" data-project-page="chessgame">
+<body class="bg-canvas text-ink overflow-x-clip" data-project-page="chessgame">
 
-    <!-- Navigation -->
-    <header class="fixed top-0 w-full z-40 nav-blur">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="../" class="flex items-center gap-2 font-display font-semibold text-base tracking-tight hover:text-brand-accent transition-colors" aria-label="Back to Portfolio">
-                <span class="text-emerald-accent">&larr;</span>
-                <span>Barath</span>
+    <!-- Unified 3-Zone Top Bar -->
+    <header class="site-header fixed top-0 inset-x-0 z-40">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+            <a href="../" class="font-display font-bold text-lg tracking-tight text-ink whitespace-nowrap shrink-0 flex items-center gap-2" aria-label="Back to Portfolio">
+                <span class="font-mono text-sm text-ink-muted" aria-hidden="true">&larr;</span>
+                <span>Barath B</span>
             </a>
-            <div class="flex items-center space-x-2">
-                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus-visible:outline-2 focus-visible:outline-emerald-accent cursor-pointer rounded-md" aria-label="Toggle Theme">
-                    <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+
+            <nav id="desktop-nav" class="relative hidden md:flex items-center gap-7 h-full text-sm font-medium text-ink-secondary" aria-label="Main Navigation">
+                <div id="nav-underline" class="nav-underline-bar" aria-hidden="true"></div>
+                <a href="../#work" class="nav-link is-current hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Work</a>
+                <a href="../#experience" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Experience</a>
+                <a href="../#research" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Research</a>
+                <a href="../#stack" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Stack</a>
+                <a href="../#contact" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-2.5 shrink-0">
+                <button id="theme-toggle" data-theme-switch type="button"
+                    class="btn-outline !min-h-9 !px-2.5 !py-2 whitespace-nowrap shrink-0"
+                    aria-label="Toggle Light or Dark Theme" title="Toggle theme">
+                    <svg id="sun-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
                     </svg>
-                    <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg id="moon-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-                <button id="mobile-menu-toggle" class="md:hidden p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Open Navigation Menu" aria-expanded="false">
+                <a href="../resume.pdf" target="_blank" rel="noopener noreferrer"
+                    class="btn-primary !min-h-9 text-xs py-2 px-4 whitespace-nowrap shrink-0">
+                    Resume PDF
+                </a>
+                <button id="mobile-menu-toggle"
+                    class="md:hidden p-2.5 -mr-2 text-ink-secondary hover:text-ink cursor-pointer rounded-md"
+                    aria-label="Open Navigation Menu" aria-expanded="false">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
             </div>
         </div>
+        <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
     </header>
 
-    <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-brand-dark/98 backdrop-blur-xl hidden flex-col justify-center px-8 space-y-6">
-        <button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Close Navigation Menu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="flex-col justify-center px-8 space-y-6" aria-hidden="true">
+        <button id="mobile-menu-close"
+            class="absolute top-5 right-6 p-2.5 text-ink-secondary hover:text-ink cursor-pointer"
+            aria-label="Close Navigation Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <a href="../" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Home</a>
-        <a href="../#projects" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Projects</a>
-        <a href="../#experience" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Experience</a>
-        <a href="../#research" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Research</a>
-        <a href="../resume.pdf" target="_blank" rel="noopener noreferrer" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors inline-flex items-center gap-1.5">Resume &nearr;</a>
-        <a href="../#contact" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Contact</a>
+        <a href="../" class="text-2xl font-display font-bold text-ink">Home</a>
+        <a href="../#work" class="text-2xl font-display font-bold text-ink">Work</a>
+        <a href="../#experience" class="text-2xl font-display font-bold text-ink">Experience</a>
+        <a href="../#research" class="text-2xl font-display font-bold text-ink">Research</a>
+        <a href="../#contact" class="text-2xl font-display font-bold text-ink">Contact</a>
+        <div class="pt-6 border-t border-hairline flex items-center justify-between gap-4">
+            <a href="../resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-primary text-xs">Resume PDF &nearr;</a>
+            <button type="button" data-theme-switch class="btn-outline text-xs">Switch Theme</button>
+        </div>
     </div>
 
-    <main class="pt-24 sm:pt-28 px-6 sm:px-8 pb-24">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-                <div class="lg:col-span-7 animate-reveal">
-                    <span class="text-xs font-mono text-emerald-accent tracking-wider uppercase mb-3 block">05 PROJECT / GAME ENGINE</span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-4 tracking-tight leading-tight">Ultimate Chess</h1>
-                    <p class="text-base sm:text-lg text-brand-muted mb-8 leading-relaxed max-w-xl">
-                        Strategic warfare on a minimal canvas. Built with local computation, C++ GDExtension bindings to the Stockfish engine, and native 60fps performance.
-                    </p>
-                    
-                    <div class="space-y-6 mb-8 border-y border-brand-border py-8">
-                        <div class="flex items-start gap-6">
-                            <span class="text-xs font-mono text-emerald-accent pt-1">01</span>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-1.5 tracking-tight">On-Device Logic</h3>
-                                <p class="text-sm text-brand-muted leading-relaxed">Pure mathematical game state management. No cloud latency, no server-side processing.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-6">
-                            <span class="text-xs font-mono text-emerald-accent pt-1">02</span>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-1.5 tracking-tight">Privacy First</h3>
-                                <p class="text-sm text-brand-muted leading-relaxed">Zero data collection. Your strategies and games belong strictly to your device.</p>
-                            </div>
-                        </div>
-                    </div>
+    <main class="max-w-6xl mx-auto px-6 pt-24 pb-16">
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="text-xs font-mono text-ink-muted">06 &middot; C++ GDExtension &middot; Godot Engine</div>
+                <h1 class="text-4xl sm:text-5xl font-display font-bold tracking-tight leading-[1.08]">Ultimate Chess</h1>
+                <p class="text-base text-ink-secondary leading-relaxed max-w-xl">
+                    Strategic play on a minimal canvas. Embeds the Stockfish engine natively inside Godot via C++ GDExtension bindings for local computation and consistent 60fps performance.
+                </p>
 
-                    <div class="flex flex-col md:flex-row flex-wrap items-center gap-4 mt-8">
-                        <a href="#" class="btn btn-outline w-full md:w-auto cursor-not-allowed opacity-50">Under Development</a>
-                        <a href="privacy-policy.html" class="text-xs font-mono text-brand-muted hover:text-brand-accent transition-colors">Privacy Policy &rarr;</a>
+                <div class="story-beats text-sm text-ink-secondary">
+                    <div class="story-beat">
+                        <span class="story-beat-label">On-Device</span>
+                        <span>Pure local engine evaluation with zero cloud latency or server-side move roundtrips.</span>
                     </div>
-
-                    <!-- Tech Stack Ticker -->
-                    <div class="mt-10 pt-6 border-t border-brand-border grayscale group overflow-hidden">
-                        <p class="text-[10px] uppercase tracking-[0.25em] font-mono text-brand-muted mb-4 group-hover:text-brand-accent transition-colors">
-                            System Stack</p>
-                        <div class="ticker-wrapper relative flex overflow-hidden min-h-[50px] items-center">
-                            <div class="ticker-content flex items-center gap-x-16 whitespace-nowrap text-xs font-mono text-brand-muted">
-                                <span>GODOT ENGINE</span>
-                                <span>GDSCRIPT</span>
-                                <span>MATHEMATICAL LOGIC</span>
-                                <span>VECTOR MATH</span>
-                                <span>BITBOARD TECH</span>
-                                <span>MINIMAX / ALPHA-BETA</span>
-                                <span>NATIVE SHADERS</span>
-                                <!-- Duplicate -->
-                                <span>GODOT ENGINE</span>
-                                <span>GDSCRIPT</span>
-                                <span>MATHEMATICAL LOGIC</span>
-                                <span>VECTOR MATH</span>
-                                <span>BITBOARD TECH</span>
-                                <span>MINIMAX / ALPHA-BETA</span>
-                                <span>NATIVE SHADERS</span>
-                            </div>
-                        </div>
+                    <div class="story-beat">
+                        <span class="story-beat-label">Privacy</span>
+                        <span>Zero telemetry or account tracking &mdash; all games and move histories stay strictly on your device.</span>
                     </div>
                 </div>
-                
-                <div class="lg:col-span-5 relative reveal-on-scroll card p-0 overflow-hidden">
-                    <div class="aspect-square bg-brand-surface/20 flex items-center justify-center relative">
-                         <!-- Chess Visual -->
-                         <div class="grid grid-cols-8 grid-rows-8 w-64 h-64 border border-brand-accent/20 opacity-20">
-                            <!-- Generate a small chess board visual -->
-                            <div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div>
-                            <div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div>
-                            <div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div>
-                            <div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div>
-                            <div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div>
-                            <div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div>
-                            <div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div>
-                            <div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div><div></div><div class="bg-brand-accent/5"></div>
-                         </div>
-                         <div class="absolute inset-0 flex items-center justify-center">
-                             <span class=" uppercase tracking-[0.5em] text-brand-muted italic">COMING SOON</span>
-                         </div>
+
+                <div class="flex flex-wrap items-center gap-4 pt-1">
+                    <a href="../two-player-games/" class="btn-primary">Explore Arcade Suite &rarr;</a>
+                    <a href="privacy-policy.html" class="btn-outline">Privacy Policy &rarr;</a>
+                    <span class="text-xs font-mono text-ink-muted">Active development</span>
+                </div>
+
+                <div class="pt-5 border-t border-hairline text-xs font-mono text-ink-muted leading-relaxed">
+                    C++ GDExtension &middot; Godot Engine &middot; Stockfish UCI &middot; GDScript &middot; Bitboards &middot; Alpha-Beta Search
+                </div>
+            </div>
+
+            <div class="lg:col-span-5">
+                <div class="monograph-frame p-6 space-y-5">
+                    <div class="device-well p-6 flex items-center justify-center">
+                        <div class="w-56 h-56 rounded-lg border border-hairline bg-surface p-2.5" aria-label="Stockfish chess position preview">
+                            <div class="grid grid-cols-8 grid-rows-8 w-full h-full border border-hairline rounded overflow-hidden font-mono text-xs font-bold">
+                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle flex items-center justify-center text-ink">k</div><div></div>
+                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
+                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
+                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div class="bg-milk/20 flex items-center justify-center text-ink">q</div><div class="bg-surface-subtle"></div>
+                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
+                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle flex items-center justify-center text-ink">Q</div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
+                                <div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div></div>
+                                <div></div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div><div class="bg-milk/15 flex items-center justify-center text-ink">K</div><div class="bg-surface-subtle"></div><div></div><div class="bg-surface-subtle"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 text-xs font-mono tabular-nums">
+                        <div class="flex justify-between py-1.5 border-b border-hairline"><span class="text-ink-muted">Bridge</span><span class="text-ink font-semibold">C++ GDExtension</span></div>
+                        <div class="flex justify-between py-1.5 border-b border-hairline"><span class="text-ink-muted">Engine</span><span class="text-ink font-semibold">Embedded Stockfish</span></div>
+                        <div class="flex justify-between py-1.5"><span class="text-ink-muted">Frame Target</span><span class="text-ink font-semibold">60fps Native</span></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <footer class="py-16 border-t border-brand-border text-center text-xs font-mono text-brand-muted">
-        &copy; 2026 Barath &middot; Systems & Android Engineering
+    <footer class="max-w-6xl mx-auto px-6 pb-12">
+        <div class="pt-6 border-t border-hairline flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-ink-muted">
+            <p>&copy; 2026 Barath B &middot; Android &amp; Systems Engineering</p>
+            <a href="../#work" class="editorial-link text-ink-secondary hover:text-ink">&larr; Back to Selected Work</a>
+        </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="../src/main.js?v=15"></script>
+    <script src="../src/main.js?v=23" type="module"></script>
 </body>
 </html>

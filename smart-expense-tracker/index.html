@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Expense Tracker | Privacy-First Finance</title>
-    <meta name="description" content="A modern, privacy-focused financial tracking application that manages your data locally with sophisticated UI/UX design.">
-    <link rel="stylesheet" href="../output.css">
+    <title>Smart Expense Tracker — Privacy-First Finance | Barath B</title>
+    <meta name="description" content="A local-first financial tracking Android application using Room + Flow and custom Jetpack Compose Canvas charts with zero cloud syncing.">
+    <link rel="stylesheet" href="../output.css?v=23">
     <link rel="icon" type="image/png" href="../assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,238 +16,330 @@
         }
     </script>
 </head>
-<body class="bg-brand-dark text-brand-accent overflow-x-hidden" data-project-page="smartexpense">
+<body class="bg-canvas text-ink overflow-x-clip" data-project-page="smartexpense">
 
-    <!-- Navigation -->
-    <header class="fixed top-0 w-full z-40 nav-blur">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="../" class="flex items-center gap-2 font-display font-semibold text-base tracking-tight hover:text-brand-accent transition-colors" aria-label="Back to Portfolio">
-                <span class="text-emerald-accent">&larr;</span>
-                <span>Barath</span>
+    <!-- Unified 3-Zone Top Bar -->
+    <header class="site-header fixed top-0 inset-x-0 z-40">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+            <a href="../" class="font-display font-bold text-lg tracking-tight text-ink whitespace-nowrap shrink-0 flex items-center gap-2" aria-label="Back to Portfolio">
+                <span class="font-mono text-sm text-ink-muted" aria-hidden="true">&larr;</span>
+                <span>Barath B</span>
             </a>
-            <div class="flex items-center space-x-2">
-                <button id="theme-toggle" class="p-2 text-brand-muted hover:text-brand-accent transition-colors focus-visible:outline-2 focus-visible:outline-emerald-accent cursor-pointer rounded-md" aria-label="Toggle Theme">
-                    <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+
+            <nav id="desktop-nav" class="relative hidden md:flex items-center gap-7 h-full text-sm font-medium text-ink-secondary" aria-label="Main Navigation">
+                <div id="nav-underline" class="nav-underline-bar" aria-hidden="true"></div>
+                <a href="../#work" class="nav-link is-current hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Work</a>
+                <a href="../#experience" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Experience</a>
+                <a href="../#research" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Research</a>
+                <a href="../#stack" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Stack</a>
+                <a href="../#contact" class="nav-link hover:text-ink transition-colors whitespace-nowrap shrink-0 py-2">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-2.5 shrink-0">
+                <button id="theme-toggle" data-theme-switch type="button"
+                    class="btn-outline !min-h-9 !px-2.5 !py-2 whitespace-nowrap shrink-0"
+                    aria-label="Toggle Light or Dark Theme" title="Toggle theme">
+                    <svg id="sun-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
                     </svg>
-                    <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg id="moon-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-                <button id="mobile-menu-toggle" class="md:hidden p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Open Navigation Menu" aria-expanded="false">
+                <a href="../resume.pdf" target="_blank" rel="noopener noreferrer"
+                    class="btn-primary !min-h-9 text-xs py-2 px-4 whitespace-nowrap shrink-0">
+                    Resume PDF
+                </a>
+                <button id="mobile-menu-toggle"
+                    class="md:hidden p-2.5 -mr-2 text-ink-secondary hover:text-ink cursor-pointer rounded-md"
+                    aria-label="Open Navigation Menu" aria-expanded="false">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
             </div>
         </div>
+        <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
     </header>
 
-    <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-brand-dark/98 backdrop-blur-xl hidden flex-col justify-center px-8 space-y-6">
-        <button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-brand-muted hover:text-brand-accent transition-colors focus:outline-none cursor-pointer" aria-label="Close Navigation Menu">
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="flex-col justify-center px-8 space-y-6" aria-hidden="true">
+        <button id="mobile-menu-close"
+            class="absolute top-5 right-6 p-2.5 text-ink-secondary hover:text-ink cursor-pointer"
+            aria-label="Close Navigation Menu">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <a href="../" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Home</a>
-        <a href="../#projects" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Projects</a>
-        <a href="../#experience" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Experience</a>
-        <a href="../#research" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Research</a>
-        <a href="../resume.pdf" target="_blank" rel="noopener noreferrer" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors inline-flex items-center gap-1.5">Resume &nearr;</a>
-        <a href="../#contact" class="text-2xl font-display font-semibold text-brand-accent hover:text-emerald-accent transition-colors">Contact</a>
+        <a href="../" class="text-2xl font-display font-bold text-ink">Home</a>
+        <a href="../#work" class="text-2xl font-display font-bold text-ink">Work</a>
+        <a href="../#experience" class="text-2xl font-display font-bold text-ink">Experience</a>
+        <a href="../#research" class="text-2xl font-display font-bold text-ink">Research</a>
+        <a href="../#contact" class="text-2xl font-display font-bold text-ink">Contact</a>
+        <div class="pt-6 border-t border-hairline flex items-center justify-between gap-4">
+            <a href="../resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-primary text-xs">Resume PDF &nearr;</a>
+            <button type="button" data-theme-switch class="btn-outline text-xs">Switch Theme</button>
+        </div>
     </div>
 
-    <main class="pt-24 sm:pt-28 px-6 sm:px-8 pb-24">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-                <div class="lg:col-span-7 animate-reveal">
-                    <span class="text-xs font-mono text-emerald-accent tracking-wider uppercase mb-3 block">02 PROJECT / LOCAL DATA</span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-4 tracking-tight leading-tight">Smart Expense Tracker</h1>
-                    <p class="text-base sm:text-lg text-brand-muted mb-8 leading-relaxed max-w-xl">
-                        Privacy-first financial utility with complete local data ownership. Zero cloud syncing, zero background tracking: hardware-accelerated analytics entirely on-device.
-                    </p>
-                    
-                    <div class="space-y-6 mb-8 border-y border-brand-border py-8">
-                        <div class="flex items-start gap-6">
-                            <span class="text-xs font-mono text-emerald-accent pt-1">01</span>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-1.5 tracking-tight">Zero Cloud Reliance</h3>
-                                <p class="text-sm text-brand-muted leading-relaxed">Proof that powerful financial analytics tools don't need remote servers to provide value. All data stays offline in SQLite/Room.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-6">
-                            <span class="text-xs font-mono text-emerald-accent pt-1">02</span>
-                            <div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-1.5 tracking-tight">Hardware-Accelerated Analytics</h3>
-                                <p class="text-sm text-brand-muted leading-relaxed">Sophisticated charting and categorized spending distributions drawn natively on Jetpack Compose Canvas.</p>
-                            </div>
-                        </div>
+    <main class="max-w-6xl mx-auto px-6 pt-24 pb-16">
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="text-xs font-mono text-ink-muted">05 &middot; Local-First Android &middot; Room &amp; Compose Canvas</div>
+                <h1 class="text-4xl sm:text-5xl font-display font-bold tracking-tight leading-[1.08]">Smart Expense Tracker</h1>
+                <p class="text-base text-ink-secondary leading-relaxed max-w-xl">
+                    Privacy-first financial utility with complete local data ownership. Zero cloud syncing, zero background tracking: reactive Room ledger queries and hardware-accelerated charts drawn entirely on-device.
+                </p>
+
+                <div class="story-beats text-sm text-ink-secondary">
+                    <div class="story-beat">
+                        <span class="story-beat-label">Local Storage</span>
+                        <span>Offline SQLite/Room ledger with reactive Flow state, biometric app lock, CSV export, and local backup/restore.</span>
                     </div>
-
-                    <a href="#" class="btn btn-outline w-full md:w-auto cursor-not-allowed opacity-50">Coming Soon to Store</a>
-
-                    <!-- Tech Stack Ticker -->
-                    <div class="mt-10 pt-6 border-t border-brand-border grayscale group overflow-hidden">
-                        <p class="text-[10px] uppercase tracking-[0.25em] font-mono text-brand-muted mb-4 group-hover:text-brand-accent transition-colors">
-                            System Stack</p>
-                        <div class="ticker-wrapper relative flex overflow-hidden min-h-[50px] items-center">
-                            <div class="ticker-content flex items-center gap-x-16 whitespace-nowrap text-xs font-mono text-brand-muted">
-                                <span>KOTLIN</span>
-                                <span>JETPACK COMPOSE</span>
-                                <span>ROOM DATABASE</span>
-                                <span>MVVM ARCHITECTURE</span>
-                                <span>MATERIAL YOU</span>
-                                <span>COROUTINES</span>
-                                <span>BIO-METRIC AUTH</span>
-                                <!-- Duplicate -->
-                                <span>KOTLIN</span>
-                                <span>JETPACK COMPOSE</span>
-                                <span>ROOM DATABASE</span>
-                                <span>MVVM ARCHITECTURE</span>
-                                <span>MATERIAL YOU</span>
-                                <span>COROUTINES</span>
-                                <span>BIO-METRIC AUTH</span>
-                            </div>
-                        </div>
+                    <div class="story-beat">
+                        <span class="story-beat-label">Canvas Charts</span>
+                        <span>Custom Jetpack Compose Canvas spending breakdowns and timeframe analytics rendered natively at 60fps.</span>
+                    </div>
+                    <div class="story-beat">
+                        <span class="story-beat-label">Reminders</span>
+                        <span>WorkManager recurring payment schedules, savings goal progress, and multi-wallet transfer tracking.</span>
                     </div>
                 </div>
-                
-                <div class="lg:col-span-5 card p-2 overflow-hidden border border-brand-border rounded-xl max-h-[460px] flex items-center justify-center bg-brand-surface/40">
-                    <img src="../assets/smartexpense/expense_1.jpg" alt="Smart Expense Tracker Dashboard" data-lightbox class="max-h-[440px] w-auto max-w-full object-contain rounded-lg transition-transform duration-300 hover:scale-[1.02] cursor-zoom-in">
+
+                <div class="flex flex-wrap items-center gap-4 pt-1">
+                    <a href="#walkthrough" class="btn-primary">
+                        Explore 11 Screens &darr;
+                    </a>
+                    <span class="text-xs font-mono text-ink-muted">Play Store release planned</span>
+                </div>
+
+                <div class="pt-5 border-t border-hairline text-xs font-mono text-ink-muted leading-relaxed">
+                    Kotlin &middot; Jetpack Compose &middot; Room Database &middot; Coroutines &amp; Flow &middot; WorkManager &middot; Biometric Auth &middot; Material You
                 </div>
             </div>
 
-            <!-- Expanded Screenshots Gallery -->
-            <div class="mt-16 sm:mt-20 pt-12 sm:pt-16 border-t border-brand-border">
-                <div class="mb-10">
-                    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-3">Application Interface Walkthrough</h2>
-                    <p class="text-brand-muted text-sm sm:text-base max-w-xl leading-relaxed">
-                        A comprehensive tour of the privacy-first mobile client, showcasing offline budget allocation, category configuration, secure biometric lock systems, and deep analytical charting.
-                    </p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Expense 1 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 1;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_1.jpg" alt="Dashboard Overview" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Dashboard Overview</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Home screen showcasing the total balance card with monthly comparisons, daily budget tracking, and real-time recent activity logs.</p>
+            <div class="lg:col-span-5">
+                <div class="monograph-frame p-6 flex flex-col items-center gap-4">
+                    <div class="device-well w-full py-8 flex items-center justify-center">
+                        <div class="hardware-phone w-48 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_1.jpg" alt="Smart Expense Tracker Dashboard" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Dashboard</div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Expense 2 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 2;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_2.jpg" alt="Profile Settings Screen" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Profile & Settings</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Centralized settings menu offering theme toggles, App Lock security, and data management options to export CSV, create backups, or restore data.</p>
-                        </div>
-                    </div>
-                    <!-- Expense 3 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 3;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_3.jpg" alt="Analytics Overview" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Timeframe Analytics</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Deep analytics view demonstrating net worth tracking, customizable timeframe tabs (Week/Month/Year), and interactive aggregated monthly spending charts.</p>
-                        </div>
-                    </div>
-                    <!-- Expense 4 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 4;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_4.jpg" alt="Spend Breakdown" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Spend Breakdown</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Interactive spending charts displaying clean category percentage distributions (e.g., Fees and Food divisions).</p>
-                        </div>
-                    </div>
-                    <!-- Expense 5 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 5;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_5.jpg" alt="Category Manager" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Category Manager</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Simple interface to view, configure, and customize unique spending and income categories.</p>
-                        </div>
-                    </div>
-                    <!-- Expense 6 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 6;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_6.jpg" alt="Recurring Payments" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Recurring Payments</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Track periodic subscription schedules and monthly financial commitments with interactive status toggles.</p>
-                        </div>
-                    </div>
-                    <!-- Expense 7 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 7;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_7.jpg" alt="Savings Goals" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Savings Goals</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Define precise target dates and visually track progress percentages for long-term savings goals.</p>
-                        </div>
-                    </div>
-                    <!-- Expense 8 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 8;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_8.jpg" alt="Accounts & Wallet" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Accounts & Wallet</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Manage local accounts (SBI, Cash) and keep track of active personal debts and loans (I Owe / Owes Me).</p>
-                        </div>
-                    </div>
-                    <!-- Expense 9 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 9;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_9.jpg" alt="Log Expense Modal" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Log Expense Modal</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Intuitive bottom-sheet calculator to quickly input transactional expenses with specific categories, dates, and accounts.</p>
-                        </div>
-                    </div>
-                    <!-- Expense 10 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 10;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_10.jpg" alt="Log Transfer Modal" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Log Transfer Modal</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Streamlined bottom sheet to easily log balance transfers between distinct local wallets (e.g. Cash to SBI).</p>
-                        </div>
-                    </div>
-                    <!-- Expense 11 -->
-                    <div class="group relative card p-0 overflow-hidden border border-brand-accent/10 rounded-2xl reveal-on-scroll" style="--stagger-index: 11;">
-                        <div class="aspect-[9/20] bg-brand-accent/5 overflow-hidden">
-                            <img src="../assets/smartexpense/expense_11.jpg" alt="Transactions Ledger" class="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="p-6 border-t border-brand-accent/5">
-                            <h4 class="text-md font-bold mb-1">Transactions Ledger</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">Comprehensive historical search list showing detailed dates, times, and routing details for all past movements.</p>
-                        </div>
-                    </div>
+                    <span class="text-xs font-mono text-ink-muted">Click any screen to enlarge</span>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Expanded 11-Screen Walkthrough -->
+        <section id="walkthrough" class="mt-20 pt-12 border-t border-hairline scroll-mt-24">
+            <div class="pb-3 mb-8 border-b border-hairline flex flex-wrap items-baseline justify-between gap-4">
+                <h2 class="text-2xl sm:text-3xl font-display font-bold tracking-tight">Interface Walkthrough</h2>
+                <span class="text-xs font-mono text-ink-muted">11 Screens &middot; Click to zoom</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_1.jpg" alt="Dashboard Overview" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Dashboard</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Dashboard Overview</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Total balance card with monthly comparisons, daily budget tracking, and recent activity logs.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_2.jpg" alt="Profile & Settings" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Settings</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Profile &amp; Settings</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Theme toggles, biometric App Lock security, CSV export, and local backup/restore controls.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_3.jpg" alt="Timeframe Analytics" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Analytics</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Timeframe Analytics</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Net worth tracking with Week/Month/Year tabs and custom Canvas spending charts.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_4.jpg" alt="Spend Breakdown" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Breakdown</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Spend Breakdown</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Interactive category distribution chart highlighting top expense divisions.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_5.jpg" alt="Category Manager" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Categories</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Category Manager</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Create, edit, and organize custom income and expense categories.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_6.jpg" alt="Recurring Payments" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Recurring</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Recurring Payments</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Track periodic subscriptions and monthly commitments with interactive status toggles.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_7.jpg" alt="Savings Goals" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Goals</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Savings Goals</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Define target dates and track percentage progress toward long-term savings milestones.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_8.jpg" alt="Accounts & Wallet" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Accounts</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Accounts &amp; Wallet</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Manage local wallets (SBI, Cash) alongside personal debt and loan balances (I Owe / Owes Me).</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_9.jpg" alt="Log Expense Modal" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Log Expense</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Log Expense Modal</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Bottom-sheet calculator for rapid transaction entry with category, date, and wallet selection.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_10.jpg" alt="Log Transfer Modal" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Log Transfer</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Log Transfer Modal</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Streamlined sheet for logging direct balance transfers between distinct local accounts.</p>
+                    </div>
+                </article>
+
+                <article class="monograph-frame p-5 flex flex-col gap-4 reveal-init">
+                    <div class="device-well py-6 flex justify-center">
+                        <div class="hardware-phone w-44 cursor-zoom-in" data-img-container>
+                            <div class="hardware-screen">
+                                <span class="hardware-camera" aria-hidden="true"></span>
+                                <span class="hardware-glare" aria-hidden="true"></span>
+                                <img src="../assets/smartexpense/expense_11.jpg" alt="Transactions Ledger" loading="lazy" decoding="async" data-lightbox referrerpolicy="no-referrer">
+                                <div class="img-fallback-box aspect-[9/19] items-center justify-center p-4 text-center text-xs font-mono text-ink-muted bg-surface">Ledger</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-base font-display font-bold text-ink">Transactions Ledger</h3>
+                        <p class="text-sm text-ink-secondary leading-relaxed">Searchable chronological history showing exact timestamps and routing details for every movement.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
     </main>
 
-    <footer class="py-16 border-t border-brand-border text-center text-xs font-mono text-brand-muted">
-        &copy; 2026 Barath &middot; Systems & Android Engineering
+    <footer class="max-w-6xl mx-auto px-6 pb-12">
+        <div class="pt-6 border-t border-hairline flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-ink-muted">
+            <p>&copy; 2026 Barath B &middot; Android &amp; Systems Engineering</p>
+            <a href="../#work" class="editorial-link text-ink-secondary hover:text-ink">&larr; Back to Selected Work</a>
+        </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="../src/main.js?v=15"></script>
+    <script src="../src/main.js?v=23" type="module"></script>
 </body>
 </html>
