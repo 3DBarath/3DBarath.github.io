@@ -2,6 +2,7 @@
 @custom-variant dark (&:where(.dark, .dark *, :not(.light-theme) *));
 @source "../index.html";
 @source "../**/*.html";
+@source "../src/**/*.js";
 
 /* ==========================================================================
    Barath B — Editorial Monograph & Scroll-Driven Exhibition System

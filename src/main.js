@@ -3,7 +3,7 @@
  * Scroll-Driven Exhibition Choreography + Interactive Engineering Artifacts
  */
 
-import { initAtmosphere, setAtmosphereChapter } from './visual-modes.js';
+import { initAtmosphere, setAtmosphereChapter } from './visual-modes.js?v=27';
 
 let setExpenseFanFocus = null;
 let activateConnectLnxStep = null;
@@ -227,7 +227,7 @@ function preloadPortfolioFrames() {
         'assets/smartexpense/expense_1.jpg',
         'assets/smartexpense/expense_3.jpg',
         'assets/smartexpense/expense_4.jpg',
-        '/assets/aistudio/image_3d9ae119.png',
+        'assets/aztrox/aztrox_tui.png',
       ]
     : [];
 
